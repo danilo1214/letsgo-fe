@@ -7,14 +7,15 @@ export default (Vue) => {
 
     return new Vuex.Store({
         state: {
-            token: ""
+            token: "",
+            user: null
         },
         mutations: {
-            SET_TOKEN(token) {
-                this.token = token;
+            SET_TOKEN(state,token) {
+                state.token = token;
             },
-            SET_USER(user) {
-                this.user = user;
+            SET_USER(state,user) {
+                state.user = user;
             }
         },
         getters: {
@@ -42,7 +43,7 @@ export default (Vue) => {
                     commit("SET_USER", data);
                     commit("SET_TOKEN", token);
                 }).catch(err=>{
-                    console.log(err);
+                    console.log(err.message);
 
                     commit("SET_USER", null);
                     commit("SET_TOKEN", null);
