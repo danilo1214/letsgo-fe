@@ -20,19 +20,21 @@ export default {
   components: {NavBar},
   data(){
     return {
-      loggedIn: false,
       loaded: false
     }
   },
   computed: {
-    ...mapGetters(["getToken"])
+    ...mapGetters(["loggedIn"])
   },
   methods: {
     ...mapActions(["checkAuth"]),
     async init(){
      await this.checkAuth();
-     const {getToken} = this;
-     this.loggedIn = !!getToken;
+     const {loggedIn} = this;
+     console.log(loggedIn);
+     if(!loggedIn){
+       await this.$router.replace({name: "login-banner"});
+     }
      this.loaded = true;
     }
   },

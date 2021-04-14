@@ -19,8 +19,8 @@ export default (Vue) => {
             }
         },
         getters: {
-            getToken: state => {
-                return state.token;
+            loggedIn: state => {
+                return !!state.token;
             }
         },
         actions: {
