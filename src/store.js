@@ -1,6 +1,7 @@
 import Vuex from "vuex";
 import axios from "@/axios";
 
+console.log(axios);
 export default (Vue) => {
     Vue.use(Vuex);
 
@@ -11,6 +12,9 @@ export default (Vue) => {
         mutations: {
             SET_TOKEN(token) {
                 this.token = token;
+            },
+            SET_USER(user) {
+                this.user = user;
             }
         },
         getters: {
@@ -31,7 +35,18 @@ export default (Vue) => {
             },
             checkAuth: ({commit}) => {
                 const token = localStorage.getItem("trvl-jwt");
-                commit("SET_TOKEN", token);
+                axios.setToken(token);
+                return axios.getUrl("/user/authenticate").then(result => {
+                    const {data} = result;
+
+                    commit("SET_USER", data);
+                    commit("SET_TOKEN", token);
+                }).catch(err=>{
+                    console.log(err);
+
+                    commit("SET_USER", null);
+                    commit("SET_TOKEN", null);
+                })
             }
         }
     });

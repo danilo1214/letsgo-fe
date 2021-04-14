@@ -5,11 +5,17 @@ export default class Axios {
         this.instance = axios.create(options);
     }
 
-    getUrl(path, options){
-        return this.instance.get(path, options);
+    getUrl(path){
+        return this.instance.get(path);
     }
 
-    postUrl(path, data, options) {
-        return this.instance.post(path, data, options);
+    postUrl(path, data) {
+        return this.instance.post(path, data);
     }
+
+    setToken(token){
+        this.instance.defaults.headers["Authorization"] = `Bearer ${token}`;
+    }
+
+
 }
