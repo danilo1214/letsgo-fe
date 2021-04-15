@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue';
-import About from "../views/About.vue";
+import Home from '@/views/Home.vue';
+import About from "@/views/About.vue";
 import LoginBanner from "@/views/LoginBanner";
+import Login from "@/views/Login";
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: "/login-banner",
     name: "login-banner",
     component: LoginBanner
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   }
 ]
 
