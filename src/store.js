@@ -32,6 +32,9 @@ export default (Vue) => {
                     const {token} = response.data;
                     commit("SET_TOKEN", token);
                     localStorage.setItem("trvl-jwt", token);
+                    return token;
+                }).catch(err=>{
+                    throw err;
                 })
             },
             checkAuth: ({commit}) => {
