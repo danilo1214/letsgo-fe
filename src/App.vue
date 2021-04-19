@@ -20,19 +20,24 @@ export default {
   components: {NavBar},
   data(){
     return {
-      loaded: false
+      loaded: false,
+      publicRoutes: ["home", "login", "register"]
     }
   },
   computed: {
-    ...mapGetters(["loggedIn"])
+    ...mapGetters(["loggedIn"]),
+    isPublicRoute(){
+      const {name} = this.$route;
+      return this.publicRoutes.includes(name);
+    }
   },
   methods: {
     ...mapActions(["checkAuth"]),
     async init(){
      await this.checkAuth();
-     const {loggedIn} = this;
-     console.log(loggedIn);
-     if(!loggedIn){
+     const {loggedIn, isPublicRoute} = this;
+
+     if(!loggedIn && !isPublicRoute){
        await this.$router.replace({name: "login-banner"});
      }
      this.loaded = true;
