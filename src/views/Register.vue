@@ -56,10 +56,20 @@
           @change="setDate"
       ></v-date-picker>
     </v-menu>
-    <br/>
 
+    <v-text-field
+        v-model="user.email"
+        :rules="rules.emailRules"
+        label="E-mail"
+        required
+    ></v-text-field>
 
-
+    <v-text-field
+        v-model="user.password"
+        :rules="required('Password')"
+        label="Password"
+        required
+    ></v-text-field>
 
     <v-btn
         :disabled="!valid"
