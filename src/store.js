@@ -24,6 +24,17 @@ export default (Vue) => {
             }
         },
         actions: {
+            register: ({commit}, {user}) => {
+                return axios.postUrl("/user", user)
+                    .then(response => {
+                    const {token} = response.data;
+                    commit("SET_TOKEN", token);
+                    localStorage.setItem("letsgo-jwt", token);
+                    return token;
+                }).catch(err=>{
+                    throw err;
+                })
+            },
             login: ({commit}, {email, password}) => {
                 return axios.postUrl("/user/login", {
                     email,
@@ -31,14 +42,14 @@ export default (Vue) => {
                 }).then(response => {
                     const {token} = response.data;
                     commit("SET_TOKEN", token);
-                    localStorage.setItem("trvl-jwt", token);
+                    localStorage.setItem("letsgo-jwt", token);
                     return token;
                 }).catch(err=>{
                     throw err;
                 })
             },
             checkAuth: ({commit}) => {
-                const token = localStorage.getItem("trvl-jwt");
+                const token = localStorage.getItem("letsgo-jwt");
                 axios.setToken(token);
                 return axios.getUrl("/user/authenticate").then(result => {
                     const {data} = result;

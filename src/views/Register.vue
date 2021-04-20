@@ -6,14 +6,14 @@
       lazy-validation
   >
     <v-text-field
-        v-model="user.firstName"
+        v-model="user.first_name"
         :rules="required('First name')"
         label="First Name"
         required
     ></v-text-field>
 
     <v-text-field
-        v-model="user.lastName"
+        v-model="user.last_name"
         :rules="required('Last name')"
         label="Last Name"
         required
@@ -79,20 +79,27 @@
     >
       Submit
     </v-btn>
+
+    <v-alert class="mt-15" type="error" v-if="error">
+      {{error}}
+    </v-alert>
   </v-form>
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "Register",
   data() {
     return {
+      error: "",
       valid: false,
       sexes: ["Male", "Female"],
       user: {
-        firstName: "",
-        lastName: "",
-        photo_url: "",
+        first_name: "",
+        last_name: "",
+        photo_url: "...",
         sex: "Male",
         birth_date: "",
         email: "",
@@ -108,6 +115,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["register"]),
     setDate(date) {
       this.$refs.menu.save(date);
     },
@@ -116,11 +124,18 @@ export default {
     },
     onSubmit(){
       const valid = this.$refs.form.validate();
+      const {user} = this;
 
       if(!valid){
         return;
       }
-      console.log("submittt");
+
+      this.register({user}).then(()=>{
+        this.$router.replace({name: "home"});
+      }).catch(err=>{
+        this.error = err.response.data.error;
+      });
+
     }
   }
 }
