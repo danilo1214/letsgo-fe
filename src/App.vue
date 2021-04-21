@@ -1,11 +1,10 @@
 <template>
   <v-app>
-    <nav-bar v-if="loggedIn"/>
+    <nav-bar />
+
+    <side-bar v-if="loggedIn"/>
 
 
-    <v-app-bar app>
-      <!-- -->
-    </v-app-bar>
 
     <v-main>
       <router-view></router-view>
@@ -14,10 +13,11 @@
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
+import SideBar from "@/components/SideBar";
 import NavBar from "@/components/NavBar";
 export default {
   name: "App",
-  components: {NavBar},
+  components: { SideBar, NavBar},
   data(){
     return {
       loaded: false,

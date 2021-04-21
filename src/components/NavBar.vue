@@ -1,58 +1,60 @@
 <template>
-  <v-navigation-drawer
-      absolute
-      app
-      v-model="drawer"
-      :mini-variant.sync="mini"
-      permanent
-  >
-    <v-list-item class="px-2">
-      <v-list-item-avatar>
-        <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
-      </v-list-item-avatar>
+  <v-app-bar app color="blue" dark>
+    <v-toolbar-title>Letsgo</v-toolbar-title>
 
-      <v-list-item-title>John Leider</v-list-item-title>
+    <v-spacer></v-spacer>
+    <v-text-field v-model="search" placeholder="Search Plans..."></v-text-field>
 
-      <v-btn
-          icon
-          @click.stop="mini = !mini"
-      >
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
-    </v-list-item>
+    <v-menu         ref="menu"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-text-field
+            v-model="formatDates"
+            prepend-icon="mdi-calendar"
+            readonly
+            v-bind="attrs"
+            v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker
+          ref="picker"
+          v-model="dates"
+          range
+          :max="new Date().toISOString().substr(0, 10)"
+          min="1950-01-01"
+          @change="setDate"
+      ></v-date-picker>
+    </v-menu>
 
-    <v-divider></v-divider>
 
-    <v-list dense>
-      <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-      >
-        <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
+    <v-btn icon>
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
+  </v-app-bar>
 
-        <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-  </v-navigation-drawer>
 </template>
 
 <script>
 export default {
   name: "NavBar",
-  data() {
+  data(){
     return {
-      drawer: true,
-      items: [
-        { title: 'Home', icon: 'mdi-home-city' },
-        { title: 'My Account', icon: 'mdi-account' },
-        { title: 'Users', icon: 'mdi-account-group-outline' },
-      ],
-      mini: true,
+      search: "",
+      dates: []
+    }
+  },
+  computed: {
+    formatDates(){
+      return this.dates.join(" - ");
+    }
+  },
+  methods: {
+    setDate(dates){
+      this.$refs.menu.save(dates)
     }
   }
 }
