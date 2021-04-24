@@ -1,7 +1,7 @@
 <template>
-  <v-app-bar app height="140">
+  <v-app-bar app>
 
-    <v-text-field rounded filled dense clearable class="mr-5 mt-5" prepend-icon="mdi-magnify" v-model="search" placeholder="Search Plans..."></v-text-field>
+    <v-text-field rounded filled dense clearable class="mt-5" prepend-icon="mdi-magnify" v-model="search" placeholder="Search Plans..."></v-text-field>
 
 
     <v-menu
@@ -16,7 +16,7 @@
             v-bind="attrs"
             v-on="on"
         >
-          <v-icon>mdi-dots-vertical</v-icon>
+          <v-icon>mdi-filter</v-icon>
         </v-btn>
       </template>
 
@@ -80,7 +80,7 @@
     </v-menu>
 
 
-    <v-btn color="primary">
+    <v-btn color="primary" @click="onSearch">
       Search
     </v-btn>
   </v-app-bar>
@@ -93,7 +93,6 @@ export default {
   data() {
     return {
       menu: false,
-      search: "",
       dates: [],
       priceRange: [0,0]
     }
@@ -109,6 +108,34 @@ export default {
     },
     formatPrice(value) {
       return `$${value}`;
+    },
+    onSearch(){
+      const {dates, priceRange, search} = this;
+      let startPrice = undefined;
+      let endPrice = undefined;
+      let startDate  = undefined;
+      let endDate = undefined;
+
+      if(dates.length !== 0){
+        startDate = dates[0];
+        endDate = dates[1];
+      }
+
+      if(priceRange.length !== 0 && !(priceRange[0] === 0 && priceRange[1] === 0)){
+        startPrice = priceRange[0];
+        endPrice = priceRange[1];
+      }
+
+      this.$router.push({
+        name: "plans",
+        query: {
+          startDate,
+          endDate,
+          search,
+          startPrice,
+          endPrice
+        }
+      })
     }
   }
 }

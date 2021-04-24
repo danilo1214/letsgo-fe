@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue';
+import Plans from '@/views/Plans.vue';
 import About from "@/views/About.vue";
 import LoginBanner from "@/views/LoginBanner";
 import Login from "@/views/Login";
@@ -33,6 +34,16 @@ const routes = [
     path: "/register",
     name: "register",
     component: Register
+  },
+  {
+    path: "/plans/:search?" +
+        ":startPrice?" +
+        ":endPrice?" +
+        ":startDate?" +
+        ":endDate?",
+
+    name: "plans",
+    component: Plans
   }
 ]
 

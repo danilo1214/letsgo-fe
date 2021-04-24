@@ -8,7 +8,8 @@ export default (Vue) => {
     return new Vuex.Store({
         state: {
             token: "",
-            user: null
+            user: null,
+            plans: []
         },
         mutations: {
             SET_TOKEN(state,token) {
@@ -16,12 +17,16 @@ export default (Vue) => {
             },
             SET_USER(state,user) {
                 state.user = user;
+            },
+            SET_PLANS(state, plans) {
+                state.plans = plans;
             }
         },
         getters: {
             loggedIn: state => {
                 return !!state.token;
-            }
+            },
+            plans: state => state.plans
         },
         actions: {
             register: ({commit}, {user}) => {
@@ -62,6 +67,19 @@ export default (Vue) => {
                     commit("SET_USER", null);
                     commit("SET_TOKEN", null);
                 })
+            },
+            loadPlans: ({commit}, {query}) => {
+                console.log(query)
+                return axios.getUrl("/plan", {
+                    params: {
+                        ...query
+                    }
+                } ).then(result => {
+                    const {data} = result;
+
+                    commit("SET_PLANS", data);
+                    return data;
+                });
             }
         }
     });

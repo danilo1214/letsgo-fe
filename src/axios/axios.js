@@ -5,8 +5,11 @@ export default class Axios {
         this.instance = axios.create(options);
     }
 
-    getUrl(path){
-        return this.instance.get(path);
+    getUrl(path, options){
+        console.log(options);
+        return this.instance.get(path, {
+            ...options
+        });
     }
 
     postUrl(path, data) {
