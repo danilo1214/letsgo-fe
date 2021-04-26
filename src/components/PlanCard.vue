@@ -1,9 +1,9 @@
 <template>
   <v-card
-      class="mx-auto"
+      class="mx-auto ma-10"
   >
     <v-card-title>
-      <span class="title font-weight-light">{{ plan.caption }}</span>
+      <span class="title">{{ plan.caption }}</span>
     </v-card-title>
 
 
