@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    hi
+    Home page
   </v-container>
 </template>
 

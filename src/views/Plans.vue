@@ -1,15 +1,19 @@
 <template>
-<div>
+<v-container fluid>
 
-  <div v-for="plan in plans" :key="plan._id">{{plan}}</div>
-</div>
+  <plan-card v-for="plan in plans" :key="plan._id" :plan="plan">
+
+  </plan-card>
+</v-container>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import PlanCard from "@/components/PlanCard";
 
 export default {
   name: "Events",
+  components: {PlanCard},
   computed: {
     ...mapGetters(["plans"])
   },
@@ -29,7 +33,9 @@ export default {
       this.loadPlans({query: {
           caption: search,
           dateFrom: startDate,
-          dateTo: endDate
+          dateTo: endDate,
+          priceFrom: Number(startPrice) || undefined,
+          priceTo: Number(endPrice) || undefined
         }})
     },
   },

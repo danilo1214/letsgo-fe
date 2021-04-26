@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app>
 
-    <v-text-field rounded filled dense clearable class="mt-5" prepend-icon="mdi-magnify" v-model="search" placeholder="Search Plans..."></v-text-field>
+    <v-text-field @input="onChange" rounded filled dense clearable class="mt-5" prepend-icon="mdi-magnify" v-model.lazy="search" placeholder="Search Plans..."></v-text-field>
 
 
     <v-menu
@@ -32,6 +32,7 @@
         <v-list>
           <v-list-item>
             <v-range-slider
+                @change="onChange"
                 v-model="priceRange"
                 label="Price($)"
                 thumb-label="always"
@@ -80,7 +81,7 @@
     </v-menu>
 
 
-    <v-btn color="primary" @click="onSearch">
+    <v-btn color="primary" @click="onSearch" :disabled="!isChanged">
       Search
     </v-btn>
   </v-app-bar>
@@ -94,6 +95,7 @@ export default {
     return {
       menu: false,
       dates: [],
+      isChanged: false,
       priceRange: [0,0]
     }
   },
@@ -103,8 +105,12 @@ export default {
     }
   },
   methods: {
+    onChange(){
+      this.isChanged = true;
+    },
     setDate(dates) {
-      this.$refs.menu.save(dates)
+      this.$refs.menu.save(dates);
+      this.onChange();
     },
     formatPrice(value) {
       return `$${value}`;
@@ -131,11 +137,12 @@ export default {
         query: {
           startDate,
           endDate,
-          search,
+          search: search? search : undefined,
           startPrice,
           endPrice
         }
-      })
+      });
+      this.isChanged = false;
     }
   }
 }
