@@ -48,32 +48,9 @@
           </v-list-item>
 
           <v-list-item>
-            <v-menu ref="menu"
-                    :close-on-content-click="false"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                    class="mr-5"
-                    v-model="formatDates"
-                    prepend-icon="mdi-calendar"
-                    placeholder="Select Dates..."
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                  ref="picker"
-                  v-model="dates"
-                  range
-                  :max="new Date().toISOString().substr(0, 10)"
-                  min="1950-01-01"
-                  @change="setDate"
-              ></v-date-picker>
-            </v-menu>
+            <date-picker :range="true" :format-date="formatDates" @update="setDate">
+
+            </date-picker>
 
           </v-list-item>
         </v-list>
@@ -84,13 +61,27 @@
     <v-btn color="primary" @click="onSearch" :disabled="!isChanged">
       Search
     </v-btn>
+
+    <v-spacer></v-spacer>
+
+    <v-btn color="info" v-if="loggedIn" to="/new">
+      Create
+    </v-btn>
+
+    <v-btn color="success" v-else to="/login">
+      Sign in
+    </v-btn>
   </v-app-bar>
 
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+import DatePicker from "@/components/DatePicker";
+
 export default {
   name: "NavBar",
+  components: {DatePicker},
   data() {
     return {
       menu: false,
@@ -100,6 +91,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(["loggedIn"]),
     formatDates() {
       return this.dates.join(" - ");
     }
@@ -109,7 +101,7 @@ export default {
       this.isChanged = true;
     },
     setDate(dates) {
-      this.$refs.menu.save(dates);
+      this.dates = dates;
       this.onChange();
     },
     formatPrice(value) {

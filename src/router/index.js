@@ -6,6 +6,7 @@ import About from "@/views/About.vue";
 import LoginBanner from "@/views/LoginBanner";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
+import NewPlan from "@/views/NewPlan";
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,11 @@ const routes = [
 
     name: "plans",
     component: Plans
+  },
+  {
+    path: "/new",
+    name: "new-plan",
+    component: NewPlan
   }
 ]
 
