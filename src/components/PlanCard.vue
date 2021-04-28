@@ -14,11 +14,11 @@
 
     <v-card-actions>
 
-        <v-icon class="mr-1">
+        <v-icon class="mr-1" dark color="blue">
           mdi-calendar
         </v-icon>
         <span class="subheading mr-2">{{ formatDate }}</span>
-        <v-icon class="mr-1">
+        <v-icon class="mr-1" color="blue" medium>
           mdi-cash-multiple
         </v-icon>
         <span class="subheading">${{ plan.cost_lower }} - ${{plan.cost_upper}}</span>

@@ -48,7 +48,7 @@
           </v-list-item>
 
           <v-list-item>
-            <date-picker :range="true" :format-date="formatDates" @update="setDate">
+            <date-picker :range="true" :format-date="formatDates" @update="setDate" :placeholder="'Select dates...'">
 
             </date-picker>
 

@@ -11,7 +11,7 @@
           v-model="formatDate"
           :rules="rules"
           prepend-icon="mdi-calendar"
-          placeholder="Select Dates..."
+          :placeholder="placeholder"
           readonly
           v-bind="attrs"
           v-on="on"
@@ -21,7 +21,6 @@
         ref="picker"
         v-model="date"
         :range="range"
-        :max="new Date().toISOString().substr(0, 10)"
         min="1950-01-01"
         @change="setDate"
     ></v-date-picker>
@@ -31,7 +30,7 @@
 <script>
 export default {
   name: "DatePicker",
-  props: ["range", "formatDate", "rules"],
+  props: ["range", "formatDate", "rules", "placeholder"],
   data(){
     return {
       date: null

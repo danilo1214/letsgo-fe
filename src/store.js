@@ -29,6 +29,9 @@ export default (Vue) => {
             plans: state => state.plans
         },
         actions: {
+            createPlan:(commit, {plan}) => {
+              return axios.postUrl("/plan", plan);
+            },
             register: ({commit}, {user}) => {
                 return axios.postUrl("/user", user)
                     .then(response => {
