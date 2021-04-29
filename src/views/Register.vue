@@ -68,21 +68,23 @@
         v-model="user.password"
         :rules="required('Password')"
         label="Password"
+        type="password"
         required
     ></v-text-field>
+    <v-alert type="error" v-if="error">
+      {{error}}
+    </v-alert>
 
     <v-btn
         :disabled="!valid"
-        color="success"
-        class="mr-4"
+        color="info darken-1"
+        class="mr-4 mt-10"
         @click="onSubmit"
     >
       Submit
     </v-btn>
 
-    <v-alert class="mt-15" type="error" v-if="error">
-      {{error}}
-    </v-alert>
+
   </v-form>
 </template>
 

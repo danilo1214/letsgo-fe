@@ -24,7 +24,7 @@ export default (Vue) => {
         },
         getters: {
             loggedIn: state => {
-                return !!state.token;
+                return !!state.user;
             },
             plans: state => state.plans
         },

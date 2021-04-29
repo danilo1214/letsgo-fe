@@ -16,7 +16,7 @@
             v-bind="attrs"
             v-on="on"
         >
-          <v-icon>mdi-filter</v-icon>
+          <v-icon>mdi-filter-variant</v-icon>
         </v-btn>
       </template>
 
@@ -48,7 +48,7 @@
           </v-list-item>
 
           <v-list-item>
-            <date-picker :range="true" :format-date="formatDates" @update="setDate" :placeholder="'Select dates...'">
+            <date-picker :range="true" :format-date="formatDates" @update="setDate" :placeholder="'Select dates...'" :initial-date="dates">
 
             </date-picker>
 
@@ -68,7 +68,7 @@
       Create
     </v-btn>
 
-    <v-btn color="success" v-else to="/login">
+    <v-btn color="info" v-else to="/login">
       Sign in
     </v-btn>
   </v-app-bar>
@@ -86,6 +86,7 @@ export default {
     return {
       menu: false,
       dates: [],
+      search: "",
       isChanged: false,
       priceRange: [0,0]
     }
@@ -97,6 +98,13 @@ export default {
     }
   },
   methods: {
+    init(){
+      const {search, costFrom, costTo, dateFrom, dateTo} = this.$route.query;
+
+      this.search = search || "";
+      this.priceRange = [costFrom || 0, costTo || costFrom || 0];
+      this.dates = dateFrom && dateTo? [dateFrom, dateTo] : [];
+    },
     onChange(){
       this.isChanged = true;
     },
@@ -109,32 +117,36 @@ export default {
     },
     onSearch(){
       const {dates, priceRange, search} = this;
-      let startPrice = undefined;
-      let endPrice = undefined;
-      let startDate  = undefined;
-      let endDate = undefined;
+
+      const query = {}
 
       if(dates.length !== 0){
-        startDate = dates[0];
-        endDate = dates[1];
+        query.dateFrom = dates[0];
+        query.dateTo = dates[1];
       }
 
       if(priceRange.length !== 0 && !(priceRange[0] === 0 && priceRange[1] === 0)){
-        startPrice = priceRange[0];
-        endPrice = priceRange[1];
+        query.costFrom = priceRange[0];
+        query.costTo = priceRange[1];
+      }
+
+      if(search && search.length !== 0){
+        query.search = search
       }
 
       this.$router.push({
         name: "plans",
-        query: {
-          startDate,
-          endDate,
-          search: search? search : undefined,
-          startPrice,
-          endPrice
-        }
+        query
       });
       this.isChanged = false;
+    }
+  },
+  created() {
+    this.init();
+  },
+  watch: {
+    $route(){
+      this.init();
     }
   }
 }

@@ -20,23 +20,10 @@ export default {
   methods: {
     ...mapActions(["loadPlans"]),
     init() {
-      const {
-        startDate,
-        endDate,
-        search,
-        startPrice,
-        endPrice
-      } = this.$route.query;
-
-      console.log(startDate,endDate,search,startPrice, endPrice);
-
-      this.loadPlans({query: {
-          caption: search,
-          dateFrom: startDate,
-          dateTo: endDate,
-          priceFrom: Number(startPrice) || undefined,
-          priceTo: Number(endPrice) || undefined
-        }})
+      const {query} = this.$route;
+      this.loadPlans({
+        query
+      })
     },
   },
   created() {

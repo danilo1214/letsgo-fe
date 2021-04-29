@@ -1,6 +1,7 @@
 <template>
   <v-form
-      class="ma-10"
+
+      class="ma-10 w-200"
       ref="form"
       lazy-validation
   >
@@ -16,19 +17,27 @@
         type="password"
         required
     ></v-text-field>
-
+    <v-alert type="error" v-if="error">
+      {{error}}
+    </v-alert>
+    <v-alert
+        icon="mdi-account"
+        prominent
+        text
+        type="info"
+    >
+      Don't have an account? Sign up  <router-link to="/register" color="primary">here</router-link>
+    </v-alert>
 
     <v-btn
-        color="success"
-        class="mr-4"
+        color="info"
+        class="mr-4 mt-10"
         @click="onLogin"
     >
       Sign in
     </v-btn>
 
-    <v-alert class="mt-15" type="error" v-if="error">
-      {{error}}
-    </v-alert>
+
 
 
   </v-form>

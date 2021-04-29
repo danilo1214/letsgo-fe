@@ -45,6 +45,11 @@ export default {
   },
   created(){
     this.init();
+  },
+  watch: {
+    $route(){
+      this.init();
+    }
   }
 }
 </script>

@@ -38,10 +38,10 @@ const routes = [
   },
   {
     path: "/plans/:search?" +
-        ":startPrice?" +
-        ":endPrice?" +
-        ":startDate?" +
-        ":endDate?",
+        ":costFrom?" +
+        ":costTo?" +
+        ":dateFrom?" +
+        ":dateTo?",
 
     name: "plans",
     component: Plans
