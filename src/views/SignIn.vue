@@ -26,7 +26,7 @@
         text
         type="info"
     >
-      Don't have an account? Sign up  <router-link to="/sign-up" color="primary">here</router-link>
+      Don't have an account?<v-btn plain small to="/sign-up" color="primary">Sign up</v-btn>
     </v-alert>
 
     <v-btn
