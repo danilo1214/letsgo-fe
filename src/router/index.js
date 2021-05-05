@@ -3,9 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue';
 import Plans from '@/views/Plans.vue';
 import About from "@/views/About.vue";
-import LoginBanner from "@/views/LoginBanner";
-import Login from "@/views/Login";
-import Register from "@/views/Register";
+import SignInBanner from "@/views/SignInBanner";
+import SignIn from "@/views/SignIn";
+import SignUp from "@/views/SignUp";
 import NewPlan from "@/views/NewPlan";
 
 Vue.use(VueRouter)
@@ -22,19 +22,23 @@ const routes = [
     component: About
   },
   {
-    path: "/login-banner",
-    name: "login-banner",
-    component: LoginBanner
+    path: "/sign-in-banner",
+    name: "sign-in-banner",
+    component: SignInBanner
   },
   {
-    path: "/login",
-    name: "login",
-    component: Login
+    path: "/sign-in",
+    name: "sign-in",
+    component: SignIn
   },
   {
-    path: "/register",
-    name: "register",
-    component: Register
+    path: "/sign-up",
+    name: "sign-up",
+    component: SignUp
+  },
+  {
+    path: "/sign-out",
+    name: "sign-out"
   },
   {
     path: "/plans/:search?" +

@@ -92,7 +92,7 @@
 import {mapActions} from "vuex";
 
 export default {
-  name: "Register",
+  name: "SignUp",
   data() {
     return {
       error: "",
@@ -117,7 +117,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["register"]),
+    ...mapActions(["signUp"]),
     setDate(date) {
       this.$refs.menu.save(date);
     },
@@ -132,7 +132,7 @@ export default {
         return;
       }
 
-      this.register({user}).then(()=>{
+      this.signUp({user}).then(()=>{
         this.$router.replace({name: "home"});
       }).catch(err=>{
         this.error = err.response.data.error;

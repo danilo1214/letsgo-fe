@@ -23,7 +23,7 @@ export default (Vue) => {
             }
         },
         getters: {
-            loggedIn: state => {
+            signedIn: state => {
                 return !!state.user;
             },
             plans: state => state.plans
@@ -32,18 +32,26 @@ export default (Vue) => {
             createPlan:(commit, {plan}) => {
               return axios.postUrl("/plan", plan);
             },
-            register: ({commit}, {user}) => {
+            signOut: ({commit}) => {
+              axios.setToken("");
+              localStorage.setItem("letsgo-jwt", null);
+              commit("SET_TOKEN", "");
+              commit("SET_USER", null);
+            },
+            signUp: ({commit}, {user}) => {
                 return axios.postUrl("/user", user)
                     .then(response => {
                     const {token} = response.data;
                     commit("SET_TOKEN", token);
                     localStorage.setItem("letsgo-jwt", token);
+                    axios.setToken(token);
+
                     return token;
                 }).catch(err=>{
                     throw err;
                 })
             },
-            login: ({commit}, {email, password}) => {
+            signIn: ({commit}, {email, password}) => {
                 return axios.postUrl("/user/login", {
                     email,
                     password
@@ -51,6 +59,8 @@ export default (Vue) => {
                     const {token} = response.data;
                     commit("SET_TOKEN", token);
                     localStorage.setItem("letsgo-jwt", token);
+                    axios.setToken(token);
+
                     return token;
                 }).catch(err=>{
                     throw err;

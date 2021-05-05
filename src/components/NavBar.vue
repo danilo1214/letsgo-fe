@@ -64,11 +64,11 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn color="info" v-if="loggedIn" to="/new">
+    <v-btn color="info" v-if="signedIn" to="/new">
       Create
     </v-btn>
 
-    <v-btn color="info" v-else to="/login">
+    <v-btn color="info" v-else to="/sign-in">
       Sign in
     </v-btn>
   </v-app-bar>
@@ -92,7 +92,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["loggedIn"]),
+    ...mapGetters(["signedIn"]),
     formatDates() {
       return this.dates.join(" - ");
     }

@@ -26,13 +26,13 @@
         text
         type="info"
     >
-      Don't have an account? Sign up  <router-link to="/register" color="primary">here</router-link>
+      Don't have an account? Sign up  <router-link to="/sign-up" color="primary">here</router-link>
     </v-alert>
 
     <v-btn
         color="info"
         class="mr-4 mt-10"
-        @click="onLogin"
+        @click="onSignIn"
     >
       Sign in
     </v-btn>
@@ -46,7 +46,7 @@
 <script>
 import {mapActions} from "vuex";
 export default {
-  name: "Login",
+  name: "SignIn",
   data(){
     return {
       email: "",
@@ -55,10 +55,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["login"]),
-    async onLogin() {
+    ...mapActions(["signIn"]),
+    async onSignIn() {
       const {email, password} = this;
-      this.login({email, password}).then(()=>{
+      this.signIn({email, password}).then(()=>{
         this.$router.replace({name: "home"});
       }).catch(err=>{
         this.error = err.response.data.error;

@@ -2,7 +2,7 @@
   <v-app>
     <nav-bar />
 
-    <side-bar v-if="loggedIn"/>
+    <side-bar v-if="signedIn"/>
 
 
 
@@ -21,25 +21,32 @@ export default {
   data(){
     return {
       loaded: false,
-      publicRoutes: ["home", "login", "register"]
+      publicRoutes: ["home", "sign-in", "sign-up", "plans"]
     }
   },
   computed: {
-    ...mapGetters(["loggedIn"]),
+    ...mapGetters(["signedIn"]),
     isPublicRoute(){
       const {name} = this.$route;
-      return this.publicRoutes.includes(name);
+      return name? this.publicRoutes.includes(name): false;
     }
   },
   methods: {
-    ...mapActions(["checkAuth"]),
+    ...mapActions(["checkAuth", "signOut"]),
     async init(){
      await this.checkAuth();
-     const {loggedIn, isPublicRoute} = this;
+     const {signedIn, isPublicRoute, $route} = this;
 
-     if(!loggedIn && !isPublicRoute){
-       await this.$router.replace({name: "login-banner"});
+     if(!signedIn && !isPublicRoute){
+       await this.$router.replace({name: "sign-in-banner"});
      }
+
+      if($route.name === 'sign-out'){
+        console.log("hi");
+        this.signOut();
+        this.$router.replace({name: "home"});
+      }
+
      this.loaded = true;
     }
   },
