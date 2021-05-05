@@ -47,7 +47,7 @@ export default {
   name: "SignInBanner",
   methods: {
     goBack(){
-      this.$router.push(".");
+      this.$router.go(-1);
     },
     onSignIn(){
       this.$router.replace({name: "sign-in"});
