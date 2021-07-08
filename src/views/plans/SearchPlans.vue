@@ -1,19 +1,15 @@
 <template>
-<v-container fluid>
-
-  <plan-card v-for="plan in plans" :key="plan._id" :plan="plan">
-
-  </plan-card>
-</v-container>
+    <Plans :plans="plans">
+    </Plans>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import PlanCard from "@/components/PlanCard";
+import Plans from "@/components/Plans";
 
 export default {
-  name: "Events",
-  components: {PlanCard},
+  name: "search-plans",
+  components: {Plans},
   computed: {
     ...mapGetters(["plans"])
   },

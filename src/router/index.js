@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue';
-import Plans from '@/views/Plans.vue';
+import SearchPlans from '@/views/plans/SearchPlans.vue';
+import MyPlans from '@/views/plans/MyPlans.vue';
+
 import About from "@/views/About.vue";
 import SignInBanner from "@/views/SignInBanner";
 import SignIn from "@/views/SignIn";
 import SignUp from "@/views/SignUp";
-import NewPlan from "@/views/NewPlan";
+import NewPlan from "@/views/plans/NewPlan";
 
 Vue.use(VueRouter)
 
@@ -48,7 +50,12 @@ const routes = [
         ":dateTo?",
 
     name: "plans",
-    component: Plans
+    component: SearchPlans
+  },
+  {
+    path: "/my-plans",
+    name: "my-plans",
+    component: MyPlans
   },
   {
     path: "/new",

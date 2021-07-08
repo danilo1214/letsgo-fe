@@ -5,6 +5,10 @@ export default class Axios {
         this.instance = axios.create(options);
     }
 
+    deleteUrl(path, id) {
+        return this.instance.delete(`url/${id}`);
+    }
+
     getUrl(path, options){
         console.log(options);
         return this.instance.get(path, {

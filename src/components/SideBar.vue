@@ -48,7 +48,8 @@ export default {
         { title: 'Home', icon: 'mdi-home-city', link: "/" },
         { title: 'My Account', icon: 'mdi-account', link: "/account" },
         { title: 'Friends', icon: 'mdi-account-group-outline', link: "/friends" },
-        {title: 'Sign out', icon: 'mdi-logout', link: "/sign-out"}
+        {title: 'Sign out', icon: 'mdi-logout', link: "/sign-out"},
+        {title: 'My Plans', icon: 'mdi-calendar', link: "/my-plans"}
       ],
       mini: true,
     }

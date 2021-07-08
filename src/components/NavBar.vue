@@ -20,7 +20,7 @@
         </v-btn>
       </template>
 
-      <v-card class="pa-5">
+      <v-card class="pa-3">
         <v-list>
           <v-list-item-title>
             Filters
@@ -34,7 +34,7 @@
             <v-range-slider
                 @change="onChange"
                 v-model="priceRange"
-                label="Price($)"
+                prepend-icon="mdi-currency-usd"
                 thumb-label="always"
                 class="mr-5"
                 max="100"

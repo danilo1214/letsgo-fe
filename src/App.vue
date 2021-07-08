@@ -7,7 +7,7 @@
 
 
     <v-main>
-      <router-view></router-view>
+      <router-view v-if="loaded"></router-view>
     </v-main>
   </v-app>
 </template>
