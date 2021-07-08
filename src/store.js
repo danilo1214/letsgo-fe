@@ -93,6 +93,14 @@ export default (Vue) => {
                     commit("SET_PLANS", data);
                     return data;
                 });
+            },
+            deletePlan: ({commit, getters}, {id}) => {
+                return axios.deleteUrl(`/plan/${id}`).then(()=> {
+                    const {plans} = getters;
+                    const newPlans = plans.filter(plan => plan._id !== id);
+
+                    commit("SET_PLANS", newPlans);
+                })
             }
         }
     });

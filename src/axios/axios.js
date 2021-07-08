@@ -5,8 +5,8 @@ export default class Axios {
         this.instance = axios.create(options);
     }
 
-    deleteUrl(path, id) {
-        return this.instance.delete(`url/${id}`);
+    deleteUrl(path) {
+        return this.instance.delete(path);
     }
 
     getUrl(path, options){

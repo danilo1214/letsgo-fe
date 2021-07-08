@@ -58,6 +58,7 @@
 <script>
 import moment from "moment"
 import DeleteDialog from "./DeleteDialog";
+import {mapActions} from "vuex";
 export default {
   name: "PlanCard",
   components: {DeleteDialog},
@@ -75,7 +76,11 @@ export default {
     }
   },
   methods: {
-    onDelete(){
+    ...mapActions(["deletePlan"]),
+    async onDelete(){
+      const {_id: id} = this.plan;
+      await this.deletePlan({id});
+      console.log("deleted i guess");
       this.showDelete = false;
     },
     onCancel(){
