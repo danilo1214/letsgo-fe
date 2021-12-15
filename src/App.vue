@@ -7,6 +7,12 @@
 
 
     <v-main>
+      <v-progress-circular
+          class="spinner-main"
+          v-if="!loaded"
+          indeterminate
+          color="primary" />
+
       <router-view v-if="loaded"></router-view>
     </v-main>
   </v-app>
@@ -60,4 +66,13 @@ export default {
   }
 }
 </script>
+
+<style>
+.spinner-main {
+  width: 100px !important;
+  height: 100px !important;
+  margin: 200px auto;
+  display: block;
+}
+</style>
 

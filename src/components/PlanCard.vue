@@ -57,7 +57,7 @@
 
 <script>
 import moment from "moment"
-import DeleteDialog from "./DeleteDialog";
+import DeleteDialog from "./generic/DeleteDialog";
 import {mapActions} from "vuex";
 export default {
   name: "PlanCard",

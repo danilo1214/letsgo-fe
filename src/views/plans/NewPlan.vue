@@ -43,7 +43,7 @@
     </v-range-slider>
 
 
-    <date-picker :placeholder="'Select Date...'" :range="false" :format-date="formatDate" @update="v=>plan.time =v"
+    <date-picker :placeholder="'Select Date...'" :range="false" :format-date="formatDate" v-model="plan.time"
                  :rules="required('Date')">
 
     </date-picker>
@@ -65,7 +65,7 @@
 
 <script>
 import moment from "moment";
-import DatePicker from "@/components/DatePicker";
+import DatePicker from "@/components/generic/DatePicker";
 import {mapActions, mapState} from "vuex";
 
 export default {

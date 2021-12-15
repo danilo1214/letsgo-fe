@@ -77,7 +77,7 @@
 
 <script>
 import {mapGetters} from "vuex";
-import DatePicker from "@/components/DatePicker";
+import DatePicker from "@/components/generic/DatePicker";
 
 export default {
   name: "NavBar",
