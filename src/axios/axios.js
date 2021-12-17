@@ -1,28 +1,25 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default class Axios {
-    constructor(options) {
-        this.instance = axios.create(options);
-    }
+  constructor(options) {
+    this.instance = axios.create(options);
+  }
 
-    deleteUrl(path) {
-        return this.instance.delete(path);
-    }
+  deleteUrl(path) {
+    return this.instance.delete(path);
+  }
 
-    getUrl(path, options){
-        console.log(options);
-        return this.instance.get(path, {
-            ...options
-        });
-    }
+  getUrl(path, options) {
+    return this.instance.get(path, {
+      ...options,
+    });
+  }
 
-    postUrl(path, data) {
-        return this.instance.post(path, data);
-    }
+  postUrl(path, data) {
+    return this.instance.post(path, data);
+  }
 
-    setToken(token){
-        this.instance.defaults.headers["Authorization"] = `Bearer ${token}`;
-    }
-
-
+  setToken(token) {
+    this.instance.defaults.headers['Authorization'] = `Bearer ${token}`;
+  }
 }

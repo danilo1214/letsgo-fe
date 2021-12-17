@@ -1,38 +1,35 @@
 <template>
-    <Plans :plans="plans">
-    </Plans>
+  <Plans :plans="plans"> </Plans>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
-import Plans from "@/components/Plans";
+import { mapActions, mapGetters } from 'vuex';
+import Plans from '@/components/Plans';
 
 export default {
-  name: "search-plans",
-  components: {Plans},
+  name: 'search-plans',
+  components: { Plans },
   computed: {
-    ...mapGetters(["plans"])
+    ...mapGetters(['plans']),
   },
   methods: {
-    ...mapActions(["loadPlans"]),
+    ...mapActions(['loadPlans']),
     init() {
-      const {query} = this.$route;
+      const { query } = this.$route;
       this.loadPlans({
-        query
-      })
+        query,
+      });
     },
   },
   created() {
     this.init();
   },
   watch: {
-    $route(){
+    $route() {
       this.init();
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

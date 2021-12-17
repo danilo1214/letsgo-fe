@@ -1,17 +1,13 @@
 <template>
-  <v-container fluid>
-    Home page
-  </v-container>
+  <v-container fluid> Home page </v-container>
 </template>
 
 <script>
-  export default {
-    name: 'HelloWorld',
+export default {
+  name: 'HelloWorld',
 
-    data(){
-      return {
-
-      }
-    }
-  }
+  data() {
+    return {};
+  },
+};
 </script>

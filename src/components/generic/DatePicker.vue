@@ -1,54 +1,69 @@
 <template>
-  <v-menu ref="menu"
-          :close-on-content-click="false"
-          transition="scale-transition"
-          offset-y
-          min-width="auto"
+  <v-menu
+    ref="menu"
+    :close-on-content-click="false"
+    transition="scale-transition"
+    offset-y
+    min-width="auto"
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-          class="mr-5"
-          v-model="formatDate"
-          :rules="rules"
-          prepend-icon="mdi-calendar"
-          :placeholder="placeholder"
-          readonly
-          v-bind="attrs"
-          v-on="on"
+        class="mr-5"
+        v-model="dateFormated"
+        :rules="rules"
+        prepend-icon="mdi-calendar"
+        :placeholder="placeholder"
+        readonly
+        v-bind="attrs"
+        v-on="on"
       ></v-text-field>
     </template>
+
     <v-date-picker
-        ref="picker"
-        v-model="date"
-        :range="range"
-        min="1950-01-01"
-        @change="setDate"
+      ref="picker"
+      :value="value"
+      :range="range"
+      min="1950-01-01"
+      @input="setDate"
     ></v-date-picker>
   </v-menu>
 </template>
 
 <script>
 export default {
-  name: "DatePicker",
-  props: ["range", "formatDate", "rules", "placeholder"],
-  data(){
-    return {
-      date: null
-    }
+  name: 'DatePicker',
+  props: {
+    value: {
+      type: [Date, String, Array],
+      default: null,
+    },
+    range: {
+      type: Boolean,
+      default: false,
+    },
+    formatDate: {
+      type: Function,
+      default: (date) => date,
+    },
+    rules: {
+      type: Array,
+    },
+    placeholder: {
+      type: String,
+      default: 'Select Date',
+    },
+  },
+  computed: {
+    dateFormated() {
+      return this.formatDate(this.value);
+    },
   },
   methods: {
     setDate(date) {
-      this.$refs.menu.save(date);
-      this.$emit("update", date)
+      this.$emit('input', date);
     },
   },
-  created(){
-    const {range} = this;
-    this.date = range? [] : "";
-  }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

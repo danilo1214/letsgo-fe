@@ -2,69 +2,67 @@
   <v-app>
     <nav-bar />
 
-    <side-bar v-if="signedIn"/>
-
-
+    <side-bar v-if="signedIn" />
 
     <v-main>
       <v-progress-circular
-          class="spinner-main"
-          v-if="!loaded"
-          indeterminate
-          color="primary" />
+        class="spinner-main"
+        v-if="!loaded"
+        indeterminate
+        color="primary"
+      />
 
       <router-view v-if="loaded"></router-view>
     </v-main>
   </v-app>
 </template>
 <script>
-import {mapActions, mapGetters} from "vuex";
-import SideBar from "@/components/SideBar";
-import NavBar from "@/components/NavBar";
+import { mapActions, mapGetters } from 'vuex';
+import SideBar from '@/components/SideBar';
+import NavBar from '@/components/navbar/NavBar';
 export default {
-  name: "App",
-  components: { SideBar, NavBar},
-  data(){
+  name: 'App',
+  components: { SideBar, NavBar },
+  data() {
     return {
       loaded: false,
-      publicRoutes: ["home", "sign-in", "sign-up", "plans"]
-    }
+      publicRoutes: ['home', 'sign-in', 'sign-up', 'plans'],
+    };
   },
   computed: {
-    ...mapGetters(["signedIn"]),
-    isPublicRoute(){
-      const {name} = this.$route;
-      return name? this.publicRoutes.includes(name): false;
-    }
+    ...mapGetters(['signedIn']),
+    isPublicRoute() {
+      const { name } = this.$route;
+      return name ? this.publicRoutes.includes(name) : false;
+    },
   },
   methods: {
-    ...mapActions(["checkAuth", "signOut"]),
-    async init(){
-     await this.checkAuth();
-     const {signedIn, isPublicRoute, $route} = this;
+    ...mapActions(['checkAuth', 'signOut']),
+    async init() {
+      await this.checkAuth();
+      const { signedIn, isPublicRoute, $route } = this;
 
-     if(!signedIn && !isPublicRoute){
-       await this.$router.replace({name: "sign-in-banner"});
-     }
-
-      if($route.name === 'sign-out'){
-        console.log("hi");
-        this.signOut();
-        this.$router.replace({name: "home"});
+      if (!signedIn && !isPublicRoute) {
+        await this.$router.replace({ name: 'sign-in-banner' });
       }
 
-     this.loaded = true;
-    }
+      if ($route.name === 'sign-out') {
+        this.signOut();
+        this.$router.replace({ name: 'home' });
+      }
+
+      this.loaded = true;
+    },
   },
-  created(){
+  created() {
     this.init();
   },
   watch: {
-    $route(){
+    $route() {
       this.init();
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
@@ -75,4 +73,3 @@ export default {
   display: block;
 }
 </style>
-

@@ -4,12 +4,12 @@ import App from './App.vue';
 import vuetify from './plugins/vuetify';
 import router from './router';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 const store = new Store(Vue);
 
 new Vue({
-    vuetify,
-    store,
-    router,
-    render: h => h(App)
-}).$mount('#app')
+  vuetify,
+  store,
+  router,
+  render: (h) => h(App),
+}).$mount('#app');
