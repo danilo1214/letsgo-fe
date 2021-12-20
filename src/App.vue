@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <nav-bar />
+    <nav-bar @toggle="onToggle" />
 
-    <side-bar v-if="signedIn" />
+    <side-bar v-if="signedIn" v-model="showSideBar" />
 
     <v-main>
       <v-progress-circular
@@ -18,7 +18,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import SideBar from '@/components/SideBar';
+import SideBar from '@/components/navbar/SideBar';
 import NavBar from '@/components/navbar/NavBar';
 export default {
   name: 'App',
@@ -26,6 +26,7 @@ export default {
   data() {
     return {
       loaded: false,
+      showSideBar: true,
       publicRoutes: ['home', 'sign-in', 'sign-up', 'plans'],
     };
   },
@@ -38,6 +39,9 @@ export default {
   },
   methods: {
     ...mapActions(['checkAuth', 'signOut']),
+    onToggle() {
+      this.showSideBar = !this.showSideBar;
+    },
     async init() {
       await this.checkAuth();
       const { signedIn, isPublicRoute, $route } = this;

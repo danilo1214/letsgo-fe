@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import PlanCard from '@/components/PlanCard';
+import PlanCard from '@/components/plans/PlanCard';
 
 export default {
   name: 'Plans',

@@ -1,9 +1,13 @@
 <template>
   <div>
-    <v-card class="mx-auto ma-10">
+    <v-card class="mx-auto ma-10 plan-card">
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
       </v-card-title>
+
+      <v-img
+        :src="getPlanImage"
+      ></v-img>
 
       <v-card-text>
         {{ plan.description }}
@@ -45,9 +49,9 @@
 
 <script>
 import moment from 'moment';
-import ConfirmDialog from './generic/ConfirmDialog';
+import ConfirmDialog from '../generic/ConfirmDialog';
 import { mapActions } from 'vuex';
-import Button from './generic/Button';
+import Button from '../generic/Button';
 export default {
   name: 'PlanCard',
   components: { Button, ConfirmDialog },
@@ -75,6 +79,9 @@ export default {
       const { plan } = this;
       return moment(plan.time).format('MM/DD/YYYY HH:mm a');
     },
+    getPlanImage() {
+      return this.plan.photo_url || '../../assets/default.jpg'
+    }
   },
   methods: {
     ...mapActions(['deletePlan']),
@@ -90,4 +97,23 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@media screen and (max-width: 600px) {
+  .plan-card {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .plan-card {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .plan-card {
+    width: 600px;
+  }
+}
+
+</style>

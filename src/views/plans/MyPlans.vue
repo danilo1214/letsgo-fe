@@ -4,7 +4,7 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
-import Plans from '@/components/Plans';
+import Plans from '@/components/plans/Plans';
 
 export default {
   name: 'my-plans',

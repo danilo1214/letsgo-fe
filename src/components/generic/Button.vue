@@ -2,7 +2,7 @@
   <v-btn
     v-bind="$attrs"
     :color="color"
-    @click="e => $emit('click', e)"
+    @click="(e) => $emit('click', e)"
     :disabled="disabled"
   >
     <v-icon v-if="iconLeft" dark left>{{ iconLeft }}</v-icon>

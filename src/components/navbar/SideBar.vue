@@ -1,5 +1,9 @@
 <template>
-  <v-navigation-drawer absolute app v-model="drawer" permanent>
+  <v-navigation-drawer
+    app
+    :value="value"
+    @input="(v) => $emit('input', v)"
+  >
     <v-list-item class="px-2">
       <v-list-item-avatar>
         <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
@@ -28,9 +32,14 @@
 import { mapState } from 'vuex';
 export default {
   name: 'SideBar',
+  props: {
+    value: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {
-      drawer: true,
       items: [
         { title: 'Home', icon: 'mdi-home-city', link: '/' },
         { title: 'My Account', icon: 'mdi-account', link: '/account' },
@@ -42,7 +51,6 @@ export default {
         { title: 'Sign out', icon: 'mdi-logout', link: '/sign-out' },
         { title: 'My Plans', icon: 'mdi-calendar', link: '/my-plans' },
       ],
-      mini: true,
     };
   },
   computed: {

@@ -1,5 +1,7 @@
 <template>
   <v-app-bar app>
+    <v-app-bar-nav-icon @click="$emit('toggle')"></v-app-bar-nav-icon>
+
     <v-text-field
       rounded
       filled

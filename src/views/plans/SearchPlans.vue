@@ -1,10 +1,10 @@
 <template>
-  <Plans :plans="plans"> </Plans>
+  <Plans :plans="plans" :editable="false" :deletable="false"> </Plans>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import Plans from '@/components/Plans';
+import Plans from '@/components/plans/Plans';
 
 export default {
   name: 'search-plans',
