@@ -40,9 +40,13 @@
     >
     </date-picker>
 
-    <v-btn :disabled="!valid" color="primary" class="mr-4" @click="onSubmit">
-      Create
-    </v-btn>
+    <Button
+      :disabled="!valid"
+      class="mr-4"
+      @click="onSubmit"
+      label="Make Plan"
+      icon-left="mdi-calendar-plus"
+    />
 
     <v-alert class="mt-15" type="error" v-if="error">
       {{ error }}
@@ -54,10 +58,11 @@
 import DatePicker from '@/components/generic/DatePicker';
 import { mapActions, mapState } from 'vuex';
 import Slider from '../../components/generic/Slider';
+import Button from '../../components/generic/Button';
 
 export default {
   name: 'NewPlan',
-  components: { Slider, DatePicker },
+  components: { Button, Slider, DatePicker },
   data() {
     return {
       valid: true,

@@ -74,22 +74,23 @@
       {{ error }}
     </v-alert>
 
-    <v-btn
+    <Button
       :disabled="!valid"
-      color="info darken-1"
       class="mr-4 mt-10"
       @click="onSubmit"
-    >
-      Submit
-    </v-btn>
+      icon-left="mdi-account-plus-outline"
+      label="Sign Up"
+    />
   </v-form>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+import Button from '../components/generic/Button';
 
 export default {
   name: 'SignUp',
+  components: { Button },
   data() {
     return {
       error: '',

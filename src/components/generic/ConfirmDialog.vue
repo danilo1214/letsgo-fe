@@ -12,17 +12,18 @@
       <v-card-actions>
         <v-spacer></v-spacer>
 
-        <v-btn text @click="$emit('cancel')"> Cancel </v-btn>
-
-        <v-btn color="primary" text @click="$emit('delete')"> Delete </v-btn>
+        <Button text @click="$emit('cancel')" label="Cancel" />
+        <Button text @click="$emit('delete')" label="Delete" />
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import Button from './Button';
 export default {
   name: 'ConfirmDialog',
+  components: { Button },
   props: {
     action: {
       type: String,

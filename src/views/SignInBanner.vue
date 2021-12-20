@@ -15,18 +15,24 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn depressed color="blue-grey" text @click="goBack">
-          Go Back
-        </v-btn>
-        <v-btn color="blue" text @click="onSignIn"> Sign in </v-btn>
+        <Button
+          depressed
+          color="blue-grey"
+          text
+          @click="goBack"
+          label="Go Back"
+        />
+        <Button color="blue" text @click="onSignIn" label="Sign in" />
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import Button from '../components/generic/Button';
 export default {
   name: 'SignInBanner',
+  components: { Button },
   methods: {
     goBack() {
       this.$router.go(-1);

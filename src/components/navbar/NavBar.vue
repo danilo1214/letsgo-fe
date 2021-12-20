@@ -6,7 +6,6 @@
       dense
       clearable
       class="mt-5"
-      prepend-icon="mdi-magnify"
       v-model.lazy="form.search"
       placeholder="Search Plans..."
     ></v-text-field>
@@ -40,7 +39,7 @@
             range
             :format-date="formatDates"
             v-model="form.dates"
-            placeholder="'Select dates...'"
+            placeholder="Select dates..."
           >
           </date-picker>
         </v-list>
@@ -57,7 +56,7 @@
     <v-spacer></v-spacer>
 
     <Button v-if="signedIn" label="Plan" icon-left="mdi-plus" to="/new" />
-    <Button v-else to="/sign-in" label="Sign in" />
+    <Button v-else to="/sign-in" label="Sign in" icon-left="mdi-import" />
   </v-app-bar>
 </template>
 

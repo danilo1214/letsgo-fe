@@ -1,30 +1,43 @@
 <template>
   <v-form class="ma-10 w-200" ref="form" lazy-validation>
     <v-text-field v-model="email" label="Email" required></v-text-field>
-
     <v-text-field
       v-model="password"
       label="Password"
       type="password"
       required
     ></v-text-field>
+
     <v-alert type="error" v-if="error">
       {{ error }}
     </v-alert>
-    <v-alert icon="mdi-account" prominent text type="info">
-      Don't have an account?<v-btn plain small to="/sign-up" color="primary"
-        >Sign up</v-btn
-      >
+
+    <v-alert dark text type="info">
+      Don't have an account?<Button
+        plain
+        small
+        to="/sign-up"
+        color="primary"
+        label="Sign Up"
+      />
     </v-alert>
 
-    <v-btn color="info" class="mr-4 mt-10" @click="onSignIn"> Sign in </v-btn>
+    <Button
+      class="mr-4 mt-10"
+      color="info"
+      icon-left="mdi-import"
+      label="Sign in"
+      @click="onSignIn"
+    />
   </v-form>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+import Button from '../components/generic/Button';
 export default {
   name: 'SignIn',
+  components: { Button },
   data() {
     return {
       email: '',

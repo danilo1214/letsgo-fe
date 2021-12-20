@@ -19,17 +19,15 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn color="primary" rounded text v-if="editable"> Edit </v-btn>
-
-        <v-btn
-          v-if="deletable"
-          color="error"
+        <Button rounded text v-if="editable" label="Edit" />
+        <Button
           rounded
+          color="error"
           text
+          v-if="deletable"
           @click.stop="showDelete = true"
-        >
-          Delete
-        </v-btn>
+          label="Delete"
+        />
       </v-card-actions>
     </v-card>
 
@@ -49,10 +47,24 @@
 import moment from 'moment';
 import ConfirmDialog from './generic/ConfirmDialog';
 import { mapActions } from 'vuex';
+import Button from './generic/Button';
 export default {
   name: 'PlanCard',
-  components: { ConfirmDialog },
-  props: ['plan', 'editable', 'deletable'],
+  components: { Button, ConfirmDialog },
+  props: {
+    plan: {
+      type: Object,
+      required: true,
+    },
+    editable: {
+      type: Boolean,
+      required: true,
+    },
+    deletable: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {
       showDelete: false,
