@@ -5,21 +5,21 @@
         <span class="title">{{ plan.caption }}</span>
       </v-card-title>
 
-      <v-img
-        :src="getPlanImage"
-      ></v-img>
+      <v-img :src="getPlanImage"></v-img>
 
       <v-card-text>
         {{ plan.description }}
       </v-card-text>
 
       <v-card-text>
-        <v-icon class="mr-1" dark color="blue"> mdi-calendar </v-icon>
-        <span class="subheading mr-2">{{ formatDate }}</span>
-        <v-icon class="mr-1" color="blue" medium> mdi-cash-multiple </v-icon>
-        <span class="subheading"
-          >${{ plan.cost_lower }} - ${{ plan.cost_upper }}</span
+        <v-icon class="mr-1" dark color="primary darken-2">
+          mdi-calendar</v-icon
         >
+        <span class="subheading mr-2">{{ formatDate }}</span>
+        <v-icon class="mr-1" color="primary darken-2" medium>
+          mdi-cash-multiple</v-icon
+        >
+        <span class="subheading">{{ cost }}</span>
       </v-card-text>
 
       <v-card-actions>
@@ -52,6 +52,7 @@ import moment from 'moment';
 import ConfirmDialog from '../generic/ConfirmDialog';
 import { mapActions } from 'vuex';
 import Button from '../generic/Button';
+
 export default {
   name: 'PlanCard',
   components: { Button, ConfirmDialog },
@@ -80,8 +81,14 @@ export default {
       return moment(plan.time).format('MM/DD/YYYY HH:mm a');
     },
     getPlanImage() {
-      return this.plan.photo_url || '../../assets/default.jpg'
-    }
+      return this.plan.photo_url || '../../assets/default.jpg';
+    },
+    cost() {
+      const { cost_lower, cost_upper } = this.plan;
+      if (cost_lower === 0 && cost_upper === 0) return 'Free';
+      else if (cost_upper === cost_lower) return `$${cost_upper}`;
+      return `$${cost_lower} - $${cost_upper}`;
+    },
   },
   methods: {
     ...mapActions(['deletePlan']),
@@ -115,5 +122,4 @@ export default {
     width: 600px;
   }
 }
-
 </style>

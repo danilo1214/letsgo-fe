@@ -1,18 +1,23 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="290">
+  <v-dialog v-model="dialog" max-width="290">
     <v-card>
-      <v-card-title class="text-h5">
-        {{ action.toUpperCase() }} {{ entity }}
-      </v-card-title>
+      <v-toolbar color="primary" dark>
+        <v-toolbar-title>{{ capitalize(action) }} {{ entity }}</v-toolbar-title>
+      </v-toolbar>
 
-      <v-card-text>
+      <v-card-text class="mt-5">
         Are you sure you want to {{ action }} the {{ entity }} '{{ name }}'?
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
 
-        <Button text @click="$emit('cancel')" label="Cancel" />
+        <Button
+          text
+          @click="$emit('cancel')"
+          label="Cancel"
+          color="secondary"
+        />
         <Button text @click="$emit('delete')" label="Delete" />
       </v-card-actions>
     </v-card>
@@ -21,6 +26,8 @@
 
 <script>
 import Button from './Button';
+import { capitalize } from '../../helpers';
+
 export default {
   name: 'ConfirmDialog',
   components: { Button },
@@ -51,6 +58,9 @@ export default {
       const { data, nameKey } = this;
       return data[nameKey];
     },
+  },
+  methods: {
+    capitalize,
   },
 };
 </script>

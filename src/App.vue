@@ -2,15 +2,10 @@
   <v-app>
     <nav-bar @toggle="onToggle" />
 
-    <side-bar v-if="signedIn" v-model="showSideBar" />
+    <side-bar v-model="showSideBar" />
 
     <v-main>
-      <v-progress-circular
-        class="spinner-main"
-        v-if="!loaded"
-        indeterminate
-        color="primary"
-      />
+      <Loader v-if="!loaded" />
 
       <router-view v-if="loaded"></router-view>
     </v-main>
@@ -20,9 +15,10 @@
 import { mapActions, mapGetters } from 'vuex';
 import SideBar from '@/components/navbar/SideBar';
 import NavBar from '@/components/navbar/NavBar';
+import Loader from './components/generic/Loader';
 export default {
   name: 'App',
-  components: { SideBar, NavBar },
+  components: { Loader, SideBar, NavBar },
   data() {
     return {
       loaded: false,
@@ -70,10 +66,8 @@ export default {
 </script>
 
 <style>
-.spinner-main {
+.v-progress-circular > svg {
   width: 100px !important;
   height: 100px !important;
-  margin: 200px auto;
-  display: block;
 }
 </style>

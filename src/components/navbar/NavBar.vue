@@ -7,7 +7,7 @@
       filled
       dense
       clearable
-      class="mt-5"
+      class="mt-5 search-text"
       v-model.lazy="form.search"
       placeholder="Search Plans..."
     ></v-text-field>
@@ -53,12 +53,8 @@
       icon-left="mdi-magnify"
       @click="onSearch"
       label="Search"
+      color="primary darken-1"
     />
-
-    <v-spacer></v-spacer>
-
-    <Button v-if="signedIn" label="Plan" icon-left="mdi-plus" to="/new" />
-    <Button v-else to="/sign-in" label="Sign in" icon-left="mdi-import" />
   </v-app-bar>
 </template>
 
@@ -153,4 +149,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.search-text {
+  min-width: 100px;
+}
+</style>
