@@ -9,24 +9,40 @@
 
       <router-view v-if="loaded"></router-view>
     </v-main>
+
+    <confirm-dialog
+      v-if="signedIn"
+      :dialog="showSignOut"
+      entity="user"
+      name-key="email"
+      icon="mdi-export"
+      action="sign out"
+      :data="user"
+      @ok="onSignOut"
+      @cancel="onCancelSignOut"
+    ></confirm-dialog>
   </v-app>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import SideBar from '@/components/navbar/SideBar';
 import NavBar from '@/components/navbar/NavBar';
 import Loader from './components/generic/Loader';
+import ConfirmDialog from "./components/generic/ConfirmDialog";
+
 export default {
   name: 'App',
-  components: { Loader, SideBar, NavBar },
+  components: { ConfirmDialog, Loader, SideBar, NavBar },
   data() {
     return {
       loaded: false,
       showSideBar: true,
+      showSignOut: false,
       publicRoutes: ['home', 'sign-in', 'sign-up', 'plans'],
     };
   },
   computed: {
+    ...mapState(['user']),
     ...mapGetters(['signedIn']),
     isPublicRoute() {
       const { name } = this.$route;
@@ -38,6 +54,14 @@ export default {
     onToggle() {
       this.showSideBar = !this.showSideBar;
     },
+    onCancelSignOut() {
+      this.showSignOut = false;
+      this.$router.go(-1);
+    },
+    onSignOut() {
+      this.signOut();
+      this.$router.replace({ name: 'home' });
+    },
     async init() {
       await this.checkAuth();
       const { signedIn, isPublicRoute, $route } = this;
@@ -47,8 +71,7 @@ export default {
       }
 
       if ($route.name === 'sign-out') {
-        this.signOut();
-        this.$router.replace({ name: 'home' });
+        this.showSignOut = true;
       }
 
       this.loaded = true;

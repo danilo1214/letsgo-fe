@@ -17,14 +17,12 @@
         plain
         small
         to="/sign-up"
-        color="primary"
         label="Sign Up"
       />
     </v-alert>
 
     <Button
       class="mr-4 mt-10"
-      color="info"
       icon-left="mdi-import"
       label="Sign in"
       @click="onSignIn"

@@ -39,9 +39,10 @@
       :dialog="showDelete"
       entity="plan"
       name-key="caption"
+      icon="mdi-delete"
       action="delete"
       :data="plan"
-      @delete="onDelete"
+      @ok="onDelete"
       @cancel="onCancel"
     ></confirm-dialog>
   </div>

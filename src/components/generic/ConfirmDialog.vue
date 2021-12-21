@@ -1,11 +1,14 @@
 <template>
   <v-dialog v-model="dialog" max-width="290">
     <v-card>
-      <v-toolbar color="primary" dark>
+      <v-toolbar color="primary" dark class="text-center">
+        <v-toolbar-title><v-icon light color="white" x-large class="ml-auto mr-auto">{{ icon }}</v-icon></v-toolbar-title>
         <v-toolbar-title>{{ capitalize(action) }} {{ entity }}</v-toolbar-title>
       </v-toolbar>
+      <v-card-title class="text-center" v-if="icon">
+      </v-card-title>
 
-      <v-card-text class="mt-5">
+      <v-card-text>
         Are you sure you want to {{ action }} the {{ entity }} '{{ name }}'?
       </v-card-text>
 
@@ -18,7 +21,7 @@
           label="Cancel"
           color="secondary"
         />
-        <Button text @click="$emit('delete')" label="Delete" />
+        <Button text @click="$emit('ok')" :label="capitalize(action)" />
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -32,6 +35,10 @@ export default {
   name: 'ConfirmDialog',
   components: { Button },
   props: {
+    icon: {
+      type: String,
+      default: ''
+    },
     action: {
       type: String,
       required: true,
