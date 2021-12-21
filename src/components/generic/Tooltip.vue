@@ -16,8 +16,8 @@ export default {
     },
     color: {
       type: String,
-      default: 'secondary'
-    }
+      default: 'secondary',
+    },
   },
   name: 'Tooltip',
 };

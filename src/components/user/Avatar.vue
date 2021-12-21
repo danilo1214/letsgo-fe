@@ -8,11 +8,13 @@
     </template>
 
     <v-avatar size="40">
-
       <Tooltip :text="verifiedText" :color="verifiedColor">
-        <v-img :src="user.photo_url"  slot-scope="{activator}"
-               v-on="activator.on"
-               v-bind="activator.attrs"/>
+        <v-img
+          :src="user.photo_url"
+          slot-scope="{ activator }"
+          v-on="activator.on"
+          v-bind="activator.attrs"
+        />
       </Tooltip>
     </v-avatar>
   </v-badge>
@@ -40,7 +42,7 @@ export default {
     },
     verifiedText() {
       return this.isVerified ? 'Account verified' : 'Account not verified';
-    }
+    },
   },
 };
 </script>
