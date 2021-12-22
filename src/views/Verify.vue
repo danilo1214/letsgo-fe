@@ -52,7 +52,7 @@
     <v-alert type="error" v-if="error" class="mt-10 mx-5">
       {{ error }}
     </v-alert>
-    <v-alert type="success" class="mt-10 mx-5">
+    <v-alert type="success" class="mt-10 mx-5" v-if="isVerified">
       Successfully verified account
     </v-alert>
 
@@ -125,6 +125,7 @@ export default {
       await this.verifySelfie({ formData })
         .then(() => {
           this.isLoading = false;
+          this.error = '';
           this.loadUser();
         })
         .catch((err) => {
