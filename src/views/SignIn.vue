@@ -13,12 +13,7 @@
     </v-alert>
 
     <v-alert dark text type="info">
-      Don't have an account?<Button
-        plain
-        small
-        to="/sign-up"
-        label="Sign Up"
-      />
+      Don't have an account?<Button plain small to="/sign-up" label="Sign Up" />
     </v-alert>
 
     <Button

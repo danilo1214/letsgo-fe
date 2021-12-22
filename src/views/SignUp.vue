@@ -99,7 +99,6 @@ export default {
       user: {
         first_name: '',
         last_name: '',
-        photo_url: '...',
         sex: 'Male',
         birth_date: '',
         email: '',

@@ -98,7 +98,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState({ user: (state) => state.auth.user }),
     admin() {
       return this.user.id;
     },

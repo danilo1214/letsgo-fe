@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['signedIn']),
     name() {
       const { user } = this;

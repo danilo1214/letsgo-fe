@@ -28,7 +28,7 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 import SideBar from '@/components/navbar/SideBar';
 import NavBar from '@/components/navbar/NavBar';
 import Loader from './components/generic/Loader';
-import ConfirmDialog from "./components/generic/ConfirmDialog";
+import ConfirmDialog from './components/generic/ConfirmDialog';
 
 export default {
   name: 'App',
@@ -42,7 +42,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['user']),
+    ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['signedIn']),
     isPublicRoute() {
       const { name } = this.$route;
@@ -60,6 +60,7 @@ export default {
     },
     onSignOut() {
       this.signOut();
+      this.showSignOut = false;
       this.$router.replace({ name: 'home' });
     },
     async init() {

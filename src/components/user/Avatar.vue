@@ -2,15 +2,15 @@
   <v-badge :color="verifiedColor" avatar bottom bordered overlap>
     <template v-slot:badge>
       <v-avatar>
-        <v-icon v-if="isVerified">mdi-checkbox-marked-circle </v-icon>
+        <v-icon v-if="isVerified">mdi-checkbox-marked-circle</v-icon>
         <v-icon v-else>mdi-alert-circle</v-icon>
       </v-avatar>
     </template>
 
-    <v-avatar size="40">
+    <v-avatar :size="size">
       <Tooltip :text="verifiedText" :color="verifiedColor">
         <v-img
-          :src="user.photo_url"
+          :src="photo"
           slot-scope="{ activator }"
           v-on="activator.on"
           v-bind="activator.attrs"
@@ -30,6 +30,10 @@ export default {
       type: Object,
       required: true,
     },
+    size: {
+      type: Number,
+      default: 40,
+    },
   },
   name: 'Avatar',
   computed: {
@@ -43,8 +47,19 @@ export default {
     verifiedText() {
       return this.isVerified ? 'Account verified' : 'Account not verified';
     },
+    photo() {
+      return this.user.photo_url || '../../../assets/default-profile.png';
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style>
+span.v-badge__badge.error {
+  inset: 75% auto auto 75% !important;
+}
+
+span.v-badge__badge.primary {
+  inset: 75% auto auto 75% !important;
+}
+</style>

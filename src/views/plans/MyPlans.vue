@@ -11,7 +11,7 @@ export default {
   components: { Plans },
   computed: {
     ...mapGetters(['plans']),
-    ...mapState(['user']),
+    ...mapState({ user: (state) => state.auth.user }),
   },
   methods: {
     ...mapActions(['loadPlans']),

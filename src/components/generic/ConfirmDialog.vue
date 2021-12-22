@@ -1,12 +1,15 @@
 <template>
-  <v-dialog v-model="dialog" max-width="290">
+  <v-dialog persistent v-model="dialog" max-width="290">
     <v-card>
       <v-toolbar color="primary" dark class="text-center">
-        <v-toolbar-title><v-icon light color="white" x-large class="ml-auto mr-auto">{{ icon }}</v-icon></v-toolbar-title>
+        <v-toolbar-title
+          ><v-icon light color="white" x-large class="ml-auto mr-auto">{{
+            icon
+          }}</v-icon></v-toolbar-title
+        >
         <v-toolbar-title>{{ capitalize(action) }} {{ entity }}</v-toolbar-title>
       </v-toolbar>
-      <v-card-title class="text-center" v-if="icon">
-      </v-card-title>
+      <v-card-title class="text-center" v-if="icon"> </v-card-title>
 
       <v-card-text>
         Are you sure you want to {{ action }} the {{ entity }} '{{ name }}'?
@@ -37,7 +40,7 @@ export default {
   props: {
     icon: {
       type: String,
-      default: ''
+      default: '',
     },
     action: {
       type: String,

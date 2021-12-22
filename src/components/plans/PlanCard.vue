@@ -82,7 +82,7 @@ export default {
       return moment(plan.time).format('MM/DD/YYYY HH:mm a');
     },
     getPlanImage() {
-      return this.plan.photo_url || '../../assets/default.jpg';
+      return this.plan.photo_url || '../../../assets/default.jpg';
     },
     cost() {
       const { cost_lower, cost_upper } = this.plan;
