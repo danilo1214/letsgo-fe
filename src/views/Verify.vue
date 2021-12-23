@@ -42,6 +42,8 @@
                 label="Verify selfie"
                 v-model="file"
                 filled
+                capture="user"
+                accept="image/*"
                 prepend-icon="mdi-camera"
               ></v-file-input>
             </v-col>

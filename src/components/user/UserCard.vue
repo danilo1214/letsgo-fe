@@ -1,9 +1,9 @@
 <template>
-  <v-card class="mx-auto ma-10 t">
-    <v-card-title>{{ name }}</v-card-title>
+  <v-card class="mx-auto ma-10">
+    <v-subheader class="title text-right">{{ name }}</v-subheader>
     <Avatar class="ml-5" :size="150" :user="user" />
-    <v-divider class="mt-10"></v-divider>
-    <v-list class="mt-10">
+    <v-divider class="mt-2"></v-divider>
+    <v-list>
       <v-list-item>
         <v-list-item-action>
           <v-icon color="primary darken-1">mdi-email</v-icon>
