@@ -61,8 +61,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import DatePicker from '@/components/generic/DatePicker';
-import Slider from '../generic/Slider';
-import Button from '../generic/Button';
+import Slider from '@/components/generic/Slider';
+import Button from '@/components/generic/Button';
 import lodash from 'lodash';
 
 export default {

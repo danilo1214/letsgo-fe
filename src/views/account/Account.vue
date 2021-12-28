@@ -1,34 +1,39 @@
 <template>
   <div class="pa-10">
     <UserCard :user="user">
-      <Button @click="onDelete" color="error" label="Delete" icon-left="mdi-trash-can"/>
+      <Button
+        @click="onDelete"
+        color="error"
+        label="Delete"
+        icon-left="mdi-trash-can"
+      />
     </UserCard>
     <VerifyBanner class="mx-auto" v-if="!isVerified" @verify="onVerify" />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-import VerifyBanner from "../../components/user/VerifyBanner";
-import UserCard from "../../components/user/UserCard";
-import Button from "../../components/generic/Button";
+import { mapState } from 'vuex';
+import VerifyBanner from '@/components/user/VerifyBanner';
+import UserCard from '@/components/user/UserCard';
+import Button from '@/components/generic/Button';
 
 export default {
-  name: "Account",
+  name: 'Account',
   components: { Button, UserCard, VerifyBanner },
   computed: {
     ...mapState({
-      user: (state) => state.auth.user
+      user: (state) => state.auth.user,
     }),
     isVerified() {
       return this.user.email_verified && this.user.photo_verified;
-    }
+    },
   },
   methods: {
     onVerify() {
-      this.$router.push("/verify");
-    }
-  }
+      this.$router.push('/verify');
+    },
+  },
 };
 </script>
 

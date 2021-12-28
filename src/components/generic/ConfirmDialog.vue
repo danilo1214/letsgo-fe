@@ -1,5 +1,5 @@
 <template>
-  <v-dialog persistent v-model="dialog" max-width="290">
+  <v-dialog persistent :value="dialog" max-width="290">
     <v-card>
       <v-toolbar color="primary" dark class="text-center">
         <v-toolbar-title
@@ -32,7 +32,7 @@
 
 <script>
 import Button from './Button';
-import { capitalize } from '../../helpers';
+import { capitalize } from '@/helpers/format';
 
 export default {
   name: 'ConfirmDialog',

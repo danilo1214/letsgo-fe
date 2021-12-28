@@ -37,6 +37,15 @@ export const plan = {
         commit('SET_PLANS', newPlans);
       });
     },
+    updatePlan: ({ commit, getters }, { id, plan }) => {
+      return axios.patchUrl(`/plan/${id}`, plan).then((result) => {
+        const { plans } = getters;
+        const newPlans = plans.map((obj) =>
+          obj._id === id ? result.data : obj
+        );
+        commit('SET_PLANS', newPlans);
+      });
+    },
   },
   getters: {
     plans: (state) => state.plans,

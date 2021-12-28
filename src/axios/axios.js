@@ -15,6 +15,10 @@ export default class Axios {
     });
   }
 
+  patchUrl(path, data) {
+    return this.instance.patch(path, data);
+  }
+
   postUrl(path, data) {
     return this.instance.post(path, data);
   }

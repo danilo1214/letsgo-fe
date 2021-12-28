@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Tooltip from '../generic/Tooltip';
+import Tooltip from '@/components/generic/Tooltip';
 
 export default {
   components: { Tooltip },

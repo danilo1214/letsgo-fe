@@ -27,16 +27,28 @@
     </template>
 
     <div class="mt-5">
-      <Button v-if="signedIn" class="ml-5" label="Plan" icon-left="mdi-plus" to="/new" />
-      <Button v-else class="ml-5" to="/sign-in" label="Sign in" icon-left="mdi-import" />
+      <Button
+        v-if="signedIn"
+        class="ml-5"
+        label="Plan"
+        icon-left="mdi-plus"
+        to="/new"
+      />
+      <Button
+        v-else
+        class="ml-5"
+        to="/sign-in"
+        label="Sign in"
+        icon-left="mdi-import"
+      />
     </div>
   </v-navigation-drawer>
 </template>
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import Button from '../generic/Button';
-import Avatar from '../user/Avatar';
+import Button from '@/components/generic/Button';
+import Avatar from '@/components/user/Avatar';
 
 export default {
   name: 'SideBar',
