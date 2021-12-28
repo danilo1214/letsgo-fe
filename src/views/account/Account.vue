@@ -14,9 +14,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import VerifyBanner from '../../components/user/VerifyBanner';
-import UserCard from '../../components/user/UserCard';
-import Button from '../../components/generic/Button';
+import VerifyBanner from '@/components/user/VerifyBanner';
+import UserCard from '@/components/user/UserCard';
+import Button from '@/components/generic/Button';
 
 export default {
   name: 'Account',

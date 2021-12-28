@@ -73,8 +73,10 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import moment from 'moment';
-import Button from '../components/generic/Button';
-import Loader from '../components/generic/Loader';
+
+import { getError } from '@/helpers/requests';
+import Button from '@/components/generic/Button';
+import Loader from '@/components/generic/Loader';
 
 export default {
   name: 'Verify',
@@ -127,7 +129,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          this.error = err.response.data.error;
+          this.error = getError(err);
           this.isLoading = false;
         });
     },

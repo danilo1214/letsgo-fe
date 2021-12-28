@@ -27,7 +27,10 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Button from '../components/generic/Button';
+
+import Button from '@/components/generic/Button';
+import { getError } from '@/helpers/requests';
+
 export default {
   name: 'SignIn',
   components: { Button },
@@ -47,7 +50,7 @@ export default {
           this.$router.replace({ name: 'home' });
         })
         .catch((err) => {
-          this.error = err.response.data.error;
+          this.error = getError(err);
         });
     },
   },

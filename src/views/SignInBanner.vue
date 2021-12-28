@@ -6,7 +6,7 @@
     max-width="600"
   >
     <v-card>
-      <v-toolbar color="primary darken-3" dark
+      <v-toolbar color="warning" dark
         ><v-icon class="mr-5">mdi-account-plus</v-icon>You are not signed in
       </v-toolbar>
       <v-card-text>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Button from '../components/generic/Button';
+import Button from '@/components/generic/Button';
 export default {
   name: 'SignInBanner',
   components: { Button },

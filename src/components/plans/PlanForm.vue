@@ -77,10 +77,10 @@
 </template>
 
 <script>
-import Button from '../generic/Button';
-import DatePicker from '../generic/DatePicker';
-import Slider from '../generic/Slider';
-import Loader from '../generic/Loader';
+import Button from '@/components/generic/Button';
+import DatePicker from '@/components/generic/DatePicker';
+import Slider from '@/components/generic/Slider';
+import Loader from '@/components/generic/Loader';
 import moment from 'moment';
 
 export default {

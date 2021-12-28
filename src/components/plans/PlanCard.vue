@@ -69,10 +69,12 @@
 
 <script>
 import moment from 'moment';
-import ConfirmDialog from '../generic/ConfirmDialog';
 import { mapActions } from 'vuex';
-import Button from '../generic/Button';
-import Dialog from '../generic/Dialog';
+
+import { getError } from '@/helpers/requests';
+import ConfirmDialog from '@/components/generic/ConfirmDialog';
+import Button from '@/components/generic/Button';
+import Dialog from '@/components/generic/Dialog';
 import PlanForm from './PlanForm';
 
 export default {
@@ -123,7 +125,7 @@ export default {
           this.showEdit = false;
         })
         .catch((err) => {
-          this.error = err.response.data.error;
+          this.error = getError(err);
         });
     },
     async onDelete() {

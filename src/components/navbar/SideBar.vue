@@ -47,8 +47,8 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import Button from '../generic/Button';
-import Avatar from '../user/Avatar';
+import Button from '@/components/generic/Button';
+import Avatar from '@/components/user/Avatar';
 
 export default {
   name: 'SideBar',

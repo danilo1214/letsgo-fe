@@ -9,8 +9,8 @@ import SignInBanner from '@/views/SignInBanner';
 import SignIn from '@/views/SignIn';
 import SignUp from '@/views/SignUp';
 import NewPlan from '@/views/plans/NewPlan';
-import Account from '../views/account/Account';
-import Verify from '../views/Verify';
+import Account from '@/views/account/Account';
+import Verify from '@/views/Verify';
 
 Vue.use(VueRouter);
 

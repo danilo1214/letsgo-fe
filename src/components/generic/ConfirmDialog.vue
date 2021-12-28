@@ -32,7 +32,7 @@
 
 <script>
 import Button from './Button';
-import { capitalize } from '../../helpers';
+import { capitalize } from '@/helpers/format';
 
 export default {
   name: 'ConfirmDialog',

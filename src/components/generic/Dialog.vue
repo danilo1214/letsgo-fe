@@ -1,6 +1,6 @@
 <template>
   <v-dialog @input="(v) => $emit('input', v)" :value="value">
-    <v-card class="mx-auto ma-10 plan-card">
+    <v-card class="mx-auto">
       <v-toolbar color="primary" dark class="text-center">
         <v-toolbar-title
           ><v-icon light color="white" x-large class="ml-auto mr-auto">{{

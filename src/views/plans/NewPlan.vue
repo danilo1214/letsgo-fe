@@ -11,7 +11,9 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import PlanForm from '../../components/plans/PlanForm';
+
+import { getError } from '@/helpers/requests';
+import PlanForm from '@/components/plans/PlanForm';
 
 export default {
   name: 'NewPlan',
@@ -49,7 +51,7 @@ export default {
         })
         .catch((err) => {
           this.isLoading = false;
-          this.error = err.response.data.error;
+          this.error = getError(err);
         });
     },
   },
