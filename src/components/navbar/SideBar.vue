@@ -27,8 +27,20 @@
     </template>
 
     <div class="mt-5">
-      <Button v-if="signedIn" class="ml-5" label="Plan" icon-left="mdi-plus" to="/new" />
-      <Button v-else class="ml-5" to="/sign-in" label="Sign in" icon-left="mdi-import" />
+      <Button
+        v-if="signedIn"
+        class="ml-5"
+        label="Plan"
+        icon-left="mdi-plus"
+        to="/new"
+      />
+      <Button
+        v-else
+        class="ml-5"
+        to="/sign-in"
+        label="Sign in"
+        icon-left="mdi-import"
+      />
     </div>
   </v-navigation-drawer>
 </template>

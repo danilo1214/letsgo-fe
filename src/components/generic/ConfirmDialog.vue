@@ -1,5 +1,5 @@
 <template>
-  <v-dialog persistent v-model="dialog" max-width="290">
+  <v-dialog persistent :value="dialog" max-width="290">
     <v-card>
       <v-toolbar color="primary" dark class="text-center">
         <v-toolbar-title

@@ -58,12 +58,7 @@
       Successfully verified account
     </v-alert>
 
-    <Button
-      class="mt-10 ml-10"
-      label="Back"
-      color="secondary"
-      @click="back"
-    />
+    <Button class="mt-10 ml-10" label="Back" color="secondary" @click="back" />
     <Button
       v-if="!isVerified"
       class="mt-10 ml-10"

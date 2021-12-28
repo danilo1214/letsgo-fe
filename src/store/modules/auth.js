@@ -60,7 +60,7 @@ export const auth = {
           throw err;
         });
     },
-    verifySelfie: (commit, {formData}) => {
+    verifySelfie: (commit, { formData }) => {
       return axios.postUrl('/user/photo', formData);
     },
     checkAuth: ({ commit }) => {

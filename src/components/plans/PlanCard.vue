@@ -23,7 +23,13 @@
       </v-card-text>
 
       <v-card-actions>
-        <Button rounded text v-if="editable" label="Edit" />
+        <Button
+          rounded
+          text
+          v-if="editable"
+          label="Edit"
+          @click.stop="showEdit = true"
+        />
         <Button
           rounded
           color="error"
@@ -35,6 +41,19 @@
       </v-card-actions>
     </v-card>
 
+    <Dialog
+      v-model="showEdit"
+      v-if="editable"
+      title="Edit plan"
+      icon="mdi-pencil"
+    >
+      <plan-form
+        :initial="plan"
+        :error="error"
+        @cancel="onCancelEdit"
+        @submit="onEdit"
+      />
+    </Dialog>
     <confirm-dialog
       :dialog="showDelete"
       entity="plan"
@@ -43,7 +62,7 @@
       action="delete"
       :data="plan"
       @ok="onDelete"
-      @cancel="onCancel"
+      @cancel="onCancelDelete"
     ></confirm-dialog>
   </div>
 </template>
@@ -53,10 +72,12 @@ import moment from 'moment';
 import ConfirmDialog from '../generic/ConfirmDialog';
 import { mapActions } from 'vuex';
 import Button from '../generic/Button';
+import Dialog from '../generic/Dialog';
+import PlanForm from './PlanForm';
 
 export default {
   name: 'PlanCard',
-  components: { Button, ConfirmDialog },
+  components: { PlanForm, Dialog, Button, ConfirmDialog },
   props: {
     plan: {
       type: Object,
@@ -73,13 +94,15 @@ export default {
   },
   data() {
     return {
+      error: '',
       showDelete: false,
+      showEdit: false,
     };
   },
   computed: {
     formatDate() {
-      const { plan } = this;
-      return moment(plan.time).format('MM/DD/YYYY HH:mm a');
+      const { date, time } = this.plan;
+      return `${moment(date).format('DD.MM.YYYY')} ${time || ''}`;
     },
     getPlanImage() {
       return this.plan.photo_url || '../../../assets/default.jpg';
@@ -92,14 +115,27 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['deletePlan']),
+    ...mapActions(['deletePlan', 'updatePlan']),
+    onEdit(plan) {
+      const { _id: id } = plan;
+      this.updatePlan({ id, plan })
+        .then(() => {
+          this.showEdit = false;
+        })
+        .catch((err) => {
+          this.error = err.response.data.error;
+        });
+    },
     async onDelete() {
       const { _id: id } = this.plan;
       await this.deletePlan({ id });
       this.showDelete = false;
     },
-    onCancel() {
+    onCancelDelete() {
       this.showDelete = false;
+    },
+    onCancelEdit() {
+      this.showEdit = false;
     },
   },
 };
