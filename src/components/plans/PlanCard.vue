@@ -7,8 +7,9 @@
       </v-card-title>
 
         <v-img v-if="editable" :src="getPlanImage" @mouseenter="hover=true" @mouseleave="hover=false">
-              <div :class="getHoverWrapperClass">
+              <div :class="getHoverWrapperClass" @click.stop.prevent>
                 <v-file-input
+                  @click.stop
                   dark
                   v-model="image"
                   @change="onImageChange"
@@ -49,14 +50,14 @@
           text
           v-if="editable"
           label="Edit"
-          @click.stop="showEdit = true"
+          @click.stop.prevent="showEdit = true"
         />
         <Button
           rounded
           color="error"
           text
           v-if="deletable"
-          @click.stop="showDelete = true"
+          @click.stop.prevent="showDelete = true"
           label="Delete"
         />
       </v-card-actions>

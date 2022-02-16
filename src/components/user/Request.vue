@@ -1,8 +1,8 @@
 <template>
   <user-card class='mt-8' :user='user'>
     <v-card-actions>
-      <Button label='Accept' color='success' icon-left='mdi-check' rounded/>
-      <Button label='Decline' color='error' icon-left='mdi-cancel' text rounded/>
+      <Button label='Accept' color='success' icon-left='mdi-check'/>
+      <Button label='Decline' color='error' icon-left='mdi-cancel' text/>
     </v-card-actions>
   </user-card>
 </template>
