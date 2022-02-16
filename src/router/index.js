@@ -11,6 +11,7 @@ import SignUp from '@/views/SignUp';
 import NewPlan from '@/views/plans/NewPlan';
 import Account from '@/views/account/Account';
 import Verify from '@/views/account/Verify';
+import PlanDetails from '@/views/plans/PlanDetails';
 
 Vue.use(VueRouter);
 
@@ -57,9 +58,13 @@ const routes = [
   {
     path:
       '/plans/:search?' + ':costFrom?' + ':costTo?' + ':dateFrom?' + ':dateTo?',
-
     name: 'plans',
     component: SearchPlans,
+  },
+  {
+    path: '/plan/:id',
+    name: 'plan-details',
+    component: PlanDetails
   },
   {
     path: '/my-plans',

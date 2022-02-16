@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="mx-auto ma-10 plan-card">
+    <v-card class="mx-auto ma-10 plan-card" :to='`/plan/${plan._id}`'>
       <Loader v-if="isLoading" />
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>

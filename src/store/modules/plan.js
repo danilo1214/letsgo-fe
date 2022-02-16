@@ -12,8 +12,11 @@ export const plan = {
       }
     },
     actions: {
-      createPlan: (commit, { plan }) => {
+      createPlan: (store, { plan }) => {
         return axios.postUrl("/plan", plan);
+      },
+      getPlan: (store, {id}) => {
+        return axios.getUrl(`plan/${id}`, {});
       },
       loadPlans: ({ commit }, { query }) => {
         return axios
