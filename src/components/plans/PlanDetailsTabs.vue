@@ -35,7 +35,7 @@
       <v-tab-item
         value="2">
         <v-card flat>
-          2
+          <request class='mt-8' v-for='request in plan.requests' :key='request._id' :user='request' />
         </v-card>
       </v-tab-item>
 
@@ -51,9 +51,10 @@
 
 <script>
 import UserCard from '../user/UserCard';
+import Request from '../user/Request';
 export default {
   name: 'PlanDetailsTabs',
-  components: { UserCard },
+  components: { Request, UserCard },
   props: {
     plan: {
       type: Object,
