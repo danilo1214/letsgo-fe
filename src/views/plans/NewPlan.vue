@@ -48,6 +48,11 @@ export default {
         .then(() => {
           this.isLoading = false;
           this.$router.replace({ name: 'plans' });
+          this.$notify({
+            group: 'main',
+            title: 'Success',
+            text: 'Successfuly updated plan'
+          });
         })
         .catch((err) => {
           this.isLoading = false;
