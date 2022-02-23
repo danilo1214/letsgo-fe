@@ -40,6 +40,8 @@
         <v-card flat>
           <request
             class="mt-8"
+            @accept="(user) => $emit('accept', user)"
+            @decline="(user) => $emit('decline', user)"
             v-for="request in plan.requests"
             :key="request._id"
             :user="request"

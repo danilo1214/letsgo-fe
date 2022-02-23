@@ -1,8 +1,19 @@
 <template>
   <user-card class="mt-8" :user="user">
     <v-card-actions>
-      <Button label="Accept" color="success" icon-left="mdi-check" />
-      <Button label="Decline" color="error" icon-left="mdi-cancel" text />
+      <Button
+        label="Accept"
+        color="success"
+        icon-left="mdi-check"
+        @click="$emit('accept', user._id)"
+      />
+      <Button
+        label="Decline"
+        color="error"
+        icon-left="mdi-cancel"
+        text
+        @click="$emit('decline', user._id)"
+      />
     </v-card-actions>
   </user-card>
 </template>

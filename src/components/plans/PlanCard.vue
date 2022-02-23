@@ -24,7 +24,7 @@
           />
         </div>
       </v-img>
-      <v-img v-else-if='!editable' :src="getPlanImage" />
+      <v-img v-else-if="!editable" :src="getPlanImage" />
       <v-card-text>
         {{ plan.description }}
       </v-card-text>

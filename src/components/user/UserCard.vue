@@ -21,7 +21,7 @@
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title>
-            {{ user.email }}
+            {{ user.email || '?' }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -32,7 +32,7 @@
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title>
-            {{ user.sex }}
+            {{ user.sex || '?' }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -65,14 +65,23 @@ export default {
     },
   },
   computed: {
+    userHidden() {
+      return !this.user._id;
+    },
     name() {
-      return `${this.user.first_name} ${this.user.last_name}`;
+      return this.userHidden
+        ? 'Hidden'
+        : `${this.user.first_name} ${this.user.last_name}`;
     },
     age() {
-      return moment().diff(moment(this.user.birth_date), 'years');
+      return this.userHidden
+        ? '?'
+        : moment().diff(moment(this.user.birth_date), 'years');
     },
     date() {
-      return moment(this.user.birth_date).format('YYYY-MM-DD');
+      return this.userHidden
+        ? '?'
+        : moment(this.user.birth_date).format('YYYY-MM-DD');
     },
     photo() {
       return this.user.photo_url || '../../assets/default.jpg';

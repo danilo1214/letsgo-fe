@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import modules from './modules';
-const { plan, auth } = modules;
+const { plan, auth, request } = modules;
 
 export default (Vue) => {
   Vue.use(Vuex);
@@ -9,6 +9,7 @@ export default (Vue) => {
     modules: {
       auth,
       plan,
+      request
     },
   });
 };
