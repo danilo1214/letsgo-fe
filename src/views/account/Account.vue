@@ -1,12 +1,7 @@
 <template>
   <div class="pa-10">
     <UserCard :user="user">
-      <Button
-        @click="onDelete"
-        color="error"
-        label="Delete"
-        icon-left="mdi-trash-can"
-      />
+      <Button color="error" label="Delete" icon-left="mdi-trash-can" />
     </UserCard>
     <VerifyBanner class="mx-auto mt-10" v-if="!isVerified" @verify="onVerify" />
   </div>

@@ -1,8 +1,8 @@
 <template>
-  <user-card class='mt-8' :user='user'>
+  <user-card class="mt-8" :user="user">
     <v-card-actions>
-      <Button label='Accept' color='success' icon-left='mdi-check'/>
-      <Button label='Decline' color='error' icon-left='mdi-cancel' text/>
+      <Button label="Accept" color="success" icon-left="mdi-check" />
+      <Button label="Decline" color="error" icon-left="mdi-cancel" text />
     </v-card-actions>
   </user-card>
 </template>
@@ -16,12 +16,10 @@ export default {
   props: {
     user: {
       required: true,
-      type: Object
-    }
-  }
+      type: Object,
+    },
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

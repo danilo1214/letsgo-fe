@@ -64,7 +64,7 @@ const routes = [
   {
     path: '/plan/:id',
     name: 'plan-details',
-    component: PlanDetails
+    component: PlanDetails,
   },
   {
     path: '/my-plans',

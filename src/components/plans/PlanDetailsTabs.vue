@@ -1,8 +1,8 @@
 <template>
-  <div class='mt-10'>
+  <div class="mt-10">
     <v-tabs
       v-model="tab"
-      class='rounded'
+      class="rounded"
       background-color="primary accent-4"
       centered
       dark
@@ -11,12 +11,12 @@
       <v-tabs-slider></v-tabs-slider>
 
       <v-tab href="#1">
-        Members ({{plan.members.length}})
+        Members ({{ plan.members.length }})
         <v-icon>mdi-account-supervisor</v-icon>
       </v-tab>
 
       <v-tab href="#2">
-        Requests ({{plan.requests.length}})
+        Requests ({{ plan.requests.length }})
         <v-icon>mdi-account-alert</v-icon>
       </v-tab>
 
@@ -26,24 +26,29 @@
       </v-tab>
     </v-tabs>
 
-    <v-tabs-items v-model="tab" class='tab-items'>
-      <v-tab-item
-        value="1">
-            <user-card class='mt-8' v-for='member in plan.members' :key='member._id' :user='member' />
+    <v-tabs-items v-model="tab" class="tab-items">
+      <v-tab-item value="1">
+        <user-card
+          class="mt-8"
+          v-for="member in plan.members"
+          :key="member._id"
+          :user="member"
+        />
       </v-tab-item>
 
-      <v-tab-item
-        value="2">
+      <v-tab-item value="2">
         <v-card flat>
-          <request class='mt-8' v-for='request in plan.requests' :key='request._id' :user='request' />
+          <request
+            class="mt-8"
+            v-for="request in plan.requests"
+            :key="request._id"
+            :user="request"
+          />
         </v-card>
       </v-tab-item>
 
-      <v-tab-item
-        value="3">
-        <v-card flat>
-          3
-        </v-card>
+      <v-tab-item value="3">
+        <v-card flat> 3 </v-card>
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -58,14 +63,14 @@ export default {
   props: {
     plan: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      tab: '#2'
-    }
-  }
+      tab: '#2',
+    };
+  },
 };
 </script>
 

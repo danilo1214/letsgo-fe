@@ -132,6 +132,12 @@ export default {
       this.signUp({ user })
         .then(() => {
           this.$router.replace({ name: 'home' });
+          this.$notify({
+            group: 'main',
+            title: 'Signed up',
+            text: 'You have successfully signed up to Letsgo',
+            type: 'success',
+          });
         })
         .catch((err) => {
           this.error = getError(err);

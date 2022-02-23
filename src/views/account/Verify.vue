@@ -125,6 +125,12 @@ export default {
         .then(() => {
           this.isLoading = false;
           this.error = '';
+          this.$notify({
+            group: 'main',
+            title: 'Verified',
+            text: 'Successfully verified selfie',
+            type: 'success',
+          });
           this.loadUser();
         })
         .catch((err) => {

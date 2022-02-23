@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <notifications group='main' />
+    <notifications group="main" />
     <nav-bar @toggle="onToggle" />
 
     <side-bar v-model="showSideBar" />
