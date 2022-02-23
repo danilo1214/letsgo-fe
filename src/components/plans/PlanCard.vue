@@ -188,7 +188,7 @@ export default {
           text: 'Successfully requested to join this plan.',
           type: 'success',
         });
-        this.$emit('join');
+        this.$emit('join', this.plan._id);
       }).catch(err => {
         const error = getError(err);
         this.$notify({

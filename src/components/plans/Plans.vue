@@ -4,6 +4,7 @@
       v-for="plan in plans"
       :key="plan._id"
       :plan="plan"
+      @join="onPlanJoin"
     >
     </plan-card>
   </v-container>
@@ -16,6 +17,12 @@ export default {
   name: 'Plans',
   components: { PlanCard },
   props: ['plans'],
+  methods: {
+    onPlanJoin(id) {
+      console.log(id);
+      this.$router.push(`/plan/${id}`);
+    }
+  }
 };
 </script>
 
