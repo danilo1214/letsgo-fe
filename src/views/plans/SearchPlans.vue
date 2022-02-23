@@ -1,5 +1,5 @@
 <template>
-  <Plans :plans="plans" :editable="false" :deletable="false"> </Plans>
+  <Plans :plans="plans" />
 </template>
 
 <script>

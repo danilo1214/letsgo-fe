@@ -51,7 +51,8 @@ export default {
           this.$notify({
             group: 'main',
             title: 'Success',
-            text: 'Successfuly updated plan',
+            text: 'Successfully created plan',
+            type: 'success'
           });
         })
         .catch((err) => {

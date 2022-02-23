@@ -4,10 +4,24 @@
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
       </v-card-title>
+      <v-banner two-line v-if='showJoinBanner'>
+        <v-avatar slot="icon" color="primary darken-1" size="40">
+          <v-icon icon="mdi-lock" color="white">
+            mdi-account
+          </v-icon>
+        </v-avatar>
+
+        Request to join this plan.
+
+        <template v-slot:actions>
+          <v-btn text color="primary" @click.stop.prevent='onRequestJoin'> Request Join </v-btn>
+        </template>
+      </v-banner>
+
       <v-skeleton-loader v-if="isLoading" type="image"> </v-skeleton-loader>
 
       <v-img
-        v-if="editable && !isLoading"
+        v-if="isAdmin && !isLoading"
         :src="getPlanImage"
         @mouseenter="hover = true"
         @mouseleave="hover = false"
@@ -24,7 +38,7 @@
           />
         </div>
       </v-img>
-      <v-img v-else-if="!editable" :src="getPlanImage" />
+      <v-img v-else-if="!isAdmin" :src="getPlanImage" />
       <v-card-text>
         {{ plan.description }}
       </v-card-text>
@@ -54,7 +68,7 @@
         <Button
           rounded
           text
-          v-if="editable"
+          v-if="isAdmin"
           label="Edit"
           @click.stop.prevent="showEdit = true"
         />
@@ -62,7 +76,7 @@
           rounded
           color="error"
           text
-          v-if="deletable"
+          v-if="isAdmin"
           @click.stop.prevent="showDelete = true"
           label="Delete"
         />
@@ -71,7 +85,7 @@
 
     <Dialog
       v-model="showEdit"
-      v-if="editable"
+      v-if="isAdmin"
       title="Edit plan"
       icon="mdi-pencil"
     >
@@ -97,7 +111,7 @@
 
 <script>
 import moment from 'moment';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import { getError } from '@/helpers/requests';
 import ConfirmDialog from '@/components/generic/ConfirmDialog';
@@ -112,15 +126,7 @@ export default {
     plan: {
       type: Object,
       required: true,
-    },
-    editable: {
-      type: Boolean,
-      required: true,
-    },
-    deletable: {
-      type: Boolean,
-      required: true,
-    },
+    }
   },
   data() {
     return {
@@ -133,6 +139,19 @@ export default {
     };
   },
   computed: {
+    ...mapState({ user: (state) => state.auth.user }),
+    isAdmin() {
+      return this.plan && this.user && (this.plan.admin === this.user._id || (this.plan.admin && this.plan.admin._id === this.user._id));
+    },
+    isMember() {
+      return this.user && this.user._id && this.plan.members.some(member => member === this.user._id || member._id === this.user._id);
+    },
+    hasRequested() {
+      return this.user && this.user._id && this.plan.requests.some(request => request === this.user._id || request._id === this.user._id);
+    },
+    showJoinBanner() {
+      return this.user && this.user._id && !this.isMember && !this.hasRequested && !this.isAdmin;
+    },
     getHoverWrapperClass() {
       const { hover } = this;
       return {
@@ -160,7 +179,26 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['deletePlan', 'updatePlan', 'uploadPlanImage']),
+    ...mapActions(['deletePlan', 'updatePlan', 'uploadPlanImage', 'createRequest']),
+    onRequestJoin() {
+      this.createRequest({plan: this.plan._id}).then(() => {
+        this.$notify({
+          group: 'main',
+          title: 'Sent join request',
+          text: 'Successfully requested to join this plan.',
+          type: 'success',
+        });
+        this.$emit('join');
+      }).catch(err => {
+        const error = getError(err);
+        this.$notify({
+          group: 'main',
+          title: 'Failed to send join request',
+          text: error,
+          type: 'error',
+        });
+      });
+    },
     async onImageChange() {
       if (!this.image) {
         return;
@@ -181,7 +219,7 @@ export default {
           this.$notify({
             group: 'main',
             title: 'Success',
-            text: 'Successfuly updated plan',
+            text: 'Successfully updated plan',
             type: 'success',
           });
         })
@@ -204,6 +242,7 @@ export default {
           text: 'Successfully deleted plan',
           type: 'success',
         });
+        this.$router.replace({name: 'my-plans'});
       });
       this.showDelete = false;
     },

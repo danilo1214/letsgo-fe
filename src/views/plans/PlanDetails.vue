@@ -1,10 +1,9 @@
 <template>
-  <v-container fluid>
+  <v-container fluid v-if='plan._id'>
     <plan-card
       class="mt-10"
       :plan="plan"
-      :editable="isAdmin"
-      :deletable="isAdmin"
+      @join='init'
     />
 
     <plan-details-tabs @accept="onAccept" @decline="onDecline" :plan="plan" />
@@ -30,10 +29,7 @@ export default {
     ...mapState({ user: (state) => state.auth.user }),
     id() {
       return this.$route.params.id;
-    },
-    isAdmin() {
-      return this.plan && this.user && this.plan.admin === this.user._id;
-    },
+    }
   },
   methods: {
     ...mapActions(['getPlan', 'acceptRequest', 'declineRequest']),
@@ -65,7 +61,29 @@ export default {
         });
       })
     },
-    onDecline() {},
+    onDecline(user) {
+      const {plan} = this;
+      this.declineRequest({
+        plan: plan._id,
+        user
+      }).then((plan) =>{
+        this.plan = getData(plan);
+        this.$notify({
+          group: 'main',
+          title: 'Success',
+          text: 'Successfuly declined plan request',
+          type: 'success',
+        });
+      }).catch(error => {
+        this.error = getError(error);
+        this.$notify({
+          group: 'main',
+          title: 'Failed to update plan',
+          text: this.error,
+          type: 'error',
+        });
+      });
+    },
   },
   watch: {
     $route() {

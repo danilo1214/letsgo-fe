@@ -4,8 +4,6 @@
       v-for="plan in plans"
       :key="plan._id"
       :plan="plan"
-      :editable="editable"
-      :deletable="deletable"
     >
     </plan-card>
   </v-container>
@@ -17,7 +15,7 @@ import PlanCard from '@/components/plans/PlanCard';
 export default {
   name: 'Plans',
   components: { PlanCard },
-  props: ['plans', 'editable', 'deletable'],
+  props: ['plans'],
 };
 </script>
 
