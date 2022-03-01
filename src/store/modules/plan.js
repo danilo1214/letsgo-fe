@@ -1,4 +1,5 @@
 import axios from '@/axios';
+import moment from 'moment';
 
 export const plan = {
   state() {
@@ -17,6 +18,13 @@ export const plan = {
     },
     getPlan: (store, { id }) => {
       return axios.getUrl(`plan/${id}`, {});
+    },
+    sendMessage: (store, { id, text }) => {
+      const date = moment().format("YYYY-MM-DD HH:mm");
+      return axios.postUrl(`plan/${id}/message`, {
+        date,
+        text
+      });
     },
     loadPlans: ({ commit }, { query }) => {
       return axios

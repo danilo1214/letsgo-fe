@@ -50,7 +50,7 @@
       </v-tab-item>
 
       <v-tab-item value="3">
-        <v-card flat> 3 </v-card>
+          <chat :plan="plan" @send="e => $emit('send', e)"/>
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -59,9 +59,11 @@
 <script>
 import UserCard from '../user/UserCard';
 import Request from '../user/Request';
+import Chat from './Chat';
+
 export default {
   name: 'PlanDetailsTabs',
-  components: { Request, UserCard },
+  components: { Chat, Request, UserCard },
   props: {
     plan: {
       type: Object,
@@ -70,9 +72,9 @@ export default {
   },
   data() {
     return {
-      tab: '#2',
+      tab: '#2'
     };
-  },
+  }
 };
 </script>
 

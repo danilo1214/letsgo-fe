@@ -6,7 +6,7 @@
       @join='init'
     />
 
-    <plan-details-tabs @accept="onAccept" @decline="onDecline" :plan="plan" />
+    <plan-details-tabs @accept="onAccept" @decline="onDecline" :plan="plan" @send='send'/>
   </v-container>
 </template>
 
@@ -32,7 +32,23 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getPlan', 'acceptRequest', 'declineRequest']),
+    ...mapActions(['getPlan', 'acceptRequest', 'declineRequest', 'sendMessage']),
+    send(text) {
+      this.sendMessage({
+        id: this.plan._id,
+        text,
+      }).then(() => {
+        // TODO: this.plan = getData(data);
+        this.init();
+      }).catch((err) => {
+        this.$notify({
+          group: 'main',
+          title: 'Failed to update plan',
+          text: getError(err),
+          type: 'error',
+        });
+      });
+    },
     init() {
       this.getPlan({ id: this.id }).then((plan) => {
         this.plan = getData(plan);
