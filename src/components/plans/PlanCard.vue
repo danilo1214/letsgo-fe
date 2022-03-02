@@ -4,17 +4,17 @@
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
       </v-card-title>
-      <v-banner two-line v-if='showJoinBanner'>
+      <v-banner two-line v-if="showJoinBanner">
         <v-avatar slot="icon" color="primary darken-1" size="40">
-          <v-icon icon="mdi-lock" color="white">
-            mdi-account
-          </v-icon>
+          <v-icon icon="mdi-lock" color="white"> mdi-account </v-icon>
         </v-avatar>
 
         Request to join this plan.
 
         <template v-slot:actions>
-          <v-btn text color="primary" @click.stop.prevent='onRequestJoin'> Request Join </v-btn>
+          <v-btn text color="primary" @click.stop.prevent="onRequestJoin">
+            Request Join
+          </v-btn>
         </template>
       </v-banner>
 
@@ -126,7 +126,7 @@ export default {
     plan: {
       type: Object,
       required: true,
-    }
+    },
   },
   data() {
     return {
@@ -141,16 +141,40 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     isAdmin() {
-      return this.plan && this.user && (this.plan.admin === this.user._id || (this.plan.admin && this.plan.admin._id === this.user._id));
+      return (
+        this.plan &&
+        this.user &&
+        (this.plan.admin === this.user._id ||
+          (this.plan.admin && this.plan.admin._id === this.user._id))
+      );
     },
     isMember() {
-      return this.user && this.user._id && this.plan.members.some(member => member === this.user._id || member._id === this.user._id);
+      return (
+        this.user &&
+        this.user._id &&
+        this.plan.members.some(
+          (member) => member === this.user._id || member._id === this.user._id
+        )
+      );
     },
     hasRequested() {
-      return this.user && this.user._id && this.plan.requests.some(request => request === this.user._id || request._id === this.user._id);
+      return (
+        this.user &&
+        this.user._id &&
+        this.plan.requests.some(
+          (request) =>
+            request === this.user._id || request._id === this.user._id
+        )
+      );
     },
     showJoinBanner() {
-      return this.user && this.user._id && !this.isMember && !this.hasRequested && !this.isAdmin;
+      return (
+        this.user &&
+        this.user._id &&
+        !this.isMember &&
+        !this.hasRequested &&
+        !this.isAdmin
+      );
     },
     getHoverWrapperClass() {
       const { hover } = this;
@@ -179,25 +203,32 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['deletePlan', 'updatePlan', 'uploadPlanImage', 'createRequest']),
+    ...mapActions([
+      'deletePlan',
+      'updatePlan',
+      'uploadPlanImage',
+      'createRequest',
+    ]),
     onRequestJoin() {
-      this.createRequest({plan: this.plan._id}).then(() => {
-        this.$notify({
-          group: 'main',
-          title: 'Sent join request',
-          text: 'Successfully requested to join this plan.',
-          type: 'success',
+      this.createRequest({ plan: this.plan._id })
+        .then(() => {
+          this.$notify({
+            group: 'main',
+            title: 'Sent join request',
+            text: 'Successfully requested to join this plan.',
+            type: 'success',
+          });
+          this.$emit('join', this.plan._id);
+        })
+        .catch((err) => {
+          const error = getError(err);
+          this.$notify({
+            group: 'main',
+            title: 'Failed to send join request',
+            text: error,
+            type: 'error',
+          });
         });
-        this.$emit('join', this.plan._id);
-      }).catch(err => {
-        const error = getError(err);
-        this.$notify({
-          group: 'main',
-          title: 'Failed to send join request',
-          text: error,
-          type: 'error',
-        });
-      });
     },
     async onImageChange() {
       if (!this.image) {
@@ -242,7 +273,7 @@ export default {
           text: 'Successfully deleted plan',
           type: 'success',
         });
-        this.$router.replace({name: 'my-plans'});
+        this.$router.replace({ name: 'my-plans' });
       });
       this.showDelete = false;
     },

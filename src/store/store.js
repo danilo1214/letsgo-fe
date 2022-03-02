@@ -9,7 +9,7 @@ export default (Vue) => {
     modules: {
       auth,
       plan,
-      request
+      request,
     },
   });
 };

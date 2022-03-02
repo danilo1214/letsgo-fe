@@ -134,7 +134,6 @@ export default {
           this.loadUser();
         })
         .catch((err) => {
-          console.log(err);
           this.error = getError(err);
           this.isLoading = false;
         });

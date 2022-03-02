@@ -49,8 +49,8 @@
         </v-card>
       </v-tab-item>
 
-      <v-tab-item value="3">
-          <chat :plan="plan" @send="e => $emit('send', e)"/>
+      <v-tab-item value="3" class="fill-height">
+        <chat :plan="plan" @send="(e) => $emit('send', e)" />
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -72,9 +72,9 @@ export default {
   },
   data() {
     return {
-      tab: '#2'
+      tab: '#2',
     };
-  }
+  },
 };
 </script>
 

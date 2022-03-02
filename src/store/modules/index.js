@@ -5,5 +5,5 @@ import { request } from './request';
 export default {
   plan,
   auth,
-  request
+  request,
 };

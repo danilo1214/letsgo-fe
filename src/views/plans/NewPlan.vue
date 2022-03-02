@@ -52,7 +52,7 @@ export default {
             group: 'main',
             title: 'Success',
             text: 'Successfully created plan',
-            type: 'success'
+            type: 'success',
           });
         })
         .catch((err) => {

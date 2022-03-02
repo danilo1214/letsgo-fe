@@ -1,12 +1,13 @@
 <template>
-  <v-container fluid v-if='plan._id'>
-    <plan-card
-      class="mt-10"
-      :plan="plan"
-      @join='init'
-    />
+  <v-container fluid v-if="plan._id">
+    <plan-card class="mt-10" :plan="plan" @join="init" />
 
-    <plan-details-tabs @accept="onAccept" @decline="onDecline" :plan="plan" @send='send'/>
+    <plan-details-tabs
+      @accept="onAccept"
+      @decline="onDecline"
+      :plan="plan"
+      @send="send"
+    />
   </v-container>
 </template>
 
@@ -29,25 +30,32 @@ export default {
     ...mapState({ user: (state) => state.auth.user }),
     id() {
       return this.$route.params.id;
-    }
+    },
   },
   methods: {
-    ...mapActions(['getPlan', 'acceptRequest', 'declineRequest', 'sendMessage']),
+    ...mapActions([
+      'getPlan',
+      'acceptRequest',
+      'declineRequest',
+      'sendMessage',
+    ]),
     send(text) {
       this.sendMessage({
         id: this.plan._id,
         text,
-      }).then(() => {
-        // TODO: this.plan = getData(data);
-        this.init();
-      }).catch((err) => {
-        this.$notify({
-          group: 'main',
-          title: 'Failed to update plan',
-          text: getError(err),
-          type: 'error',
+      })
+        .then(() => {
+          // TODO: this.plan = getData(data);
+          this.init();
+        })
+        .catch((err) => {
+          this.$notify({
+            group: 'main',
+            title: 'Failed to update plan',
+            text: getError(err),
+            type: 'error',
+          });
         });
-      });
     },
     init() {
       this.getPlan({ id: this.id }).then((plan) => {
@@ -55,50 +63,54 @@ export default {
       });
     },
     onAccept(user) {
-      const {plan} = this;
+      const { plan } = this;
       this.acceptRequest({
         plan: plan._id,
-        user
-      }).then((plan) =>{
-        this.plan = getData(plan);
-        this.$notify({
-          group: 'main',
-          title: 'Success',
-          text: 'Successfuly accepted plan request',
-          type: 'success',
-        });
-      }).catch(error => {
-        this.error = getError(error);
-        this.$notify({
-          group: 'main',
-          title: 'Failed to update plan',
-          text: this.error,
-          type: 'error',
-        });
+        user,
       })
+        .then((plan) => {
+          this.plan = getData(plan);
+          this.$notify({
+            group: 'main',
+            title: 'Success',
+            text: 'Successfuly accepted plan request',
+            type: 'success',
+          });
+        })
+        .catch((error) => {
+          this.error = getError(error);
+          this.$notify({
+            group: 'main',
+            title: 'Failed to update plan',
+            text: this.error,
+            type: 'error',
+          });
+        });
     },
     onDecline(user) {
-      const {plan} = this;
+      const { plan } = this;
       this.declineRequest({
         plan: plan._id,
-        user
-      }).then((plan) =>{
-        this.plan = getData(plan);
-        this.$notify({
-          group: 'main',
-          title: 'Success',
-          text: 'Successfuly declined plan request',
-          type: 'success',
+        user,
+      })
+        .then((plan) => {
+          this.plan = getData(plan);
+          this.$notify({
+            group: 'main',
+            title: 'Success',
+            text: 'Successfuly declined plan request',
+            type: 'success',
+          });
+        })
+        .catch((error) => {
+          this.error = getError(error);
+          this.$notify({
+            group: 'main',
+            title: 'Failed to update plan',
+            text: this.error,
+            type: 'error',
+          });
         });
-      }).catch(error => {
-        this.error = getError(error);
-        this.$notify({
-          group: 'main',
-          title: 'Failed to update plan',
-          text: this.error,
-          type: 'error',
-        });
-      });
     },
   },
   watch: {

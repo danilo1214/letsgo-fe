@@ -2,8 +2,7 @@ import axios from '@/axios';
 
 export const request = {
   state() {
-    return {
-    };
+    return {};
   },
   actions: {
     createRequest: (store, { plan }) => {
@@ -17,6 +16,6 @@ export const request = {
     },
     deleteRequest: (store, { plan }) => {
       return axios.postUrl(`plan/${plan}/request/delete`, plan);
-    }
-  }
+    },
+  },
 };

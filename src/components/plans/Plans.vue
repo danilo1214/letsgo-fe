@@ -19,10 +19,9 @@ export default {
   props: ['plans'],
   methods: {
     onPlanJoin(id) {
-      console.log(id);
       this.$router.push(`/plan/${id}`);
-    }
-  }
+    },
+  },
 };
 </script>
 
