@@ -3,6 +3,27 @@
     <v-subheader class="title text-right"
       >{{ name }} <span class="font-italic pl-2">({{ age }})</span></v-subheader
     >
+    <v-row class="pl-6 pt-3" v-if='showThumbOptions'>
+      <Button
+        color="success"
+        rounded
+        prepe
+        label="Good"
+        icon-left="mdi-thumb-up"
+        @click="$emit('thumb-up', user._id)"
+      />
+      <Button
+        color="error lighten-2"
+        rounded
+        class="ml-3"
+        label="Bad"
+        icon-left="mdi-thumb-down"
+        @click="$emit('thumb-down', user._id)"
+      />
+    </v-row>
+    <v-row class='pt-3 pl-6'>
+      <v-progress-linear color='success' background-color='error' :value='likedPercentage' height='25' dark> {{likedPercentage}}% <span class='font-weight-light ml-2'>liked this user</span></v-progress-linear>
+    </v-row>
     <v-row>
       <v-col>
         <Avatar class="ml-5" :size="150" :user="user" />
@@ -54,10 +75,12 @@
 <script>
 import Avatar from './Avatar';
 import moment from 'moment';
+import Button from '../generic/Button';
+import { mapState } from 'vuex';
 
 export default {
   name: 'UserCard',
-  components: { Avatar },
+  components: { Button, Avatar },
   props: {
     user: {
       type: Object,
@@ -65,6 +88,22 @@ export default {
     },
   },
   computed: {
+    ...mapState({ currentUser: (state) => state.auth.user }),
+    likedPercentage() {
+      if(!this.user._id) return 0;
+      const thumbsUp = this.user.thumbsUp.length;
+      const thumbsDown = this.user.thumbsDown.length;
+      return (100*thumbsUp) / (thumbsUp + thumbsDown)
+    },
+    showThumbOptions() {
+      return (
+        this.currentUser &&
+        this.user._id &&
+        this.user._id !== this.currentUser._id &&
+        !this.user.thumbsUp.includes(this.currentUser._id) &&
+        !this.user.thumbsDown.includes(this.currentUser._id)
+      );
+    },
     userHidden() {
       return !this.user._id;
     },

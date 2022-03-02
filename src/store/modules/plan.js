@@ -66,6 +66,12 @@ export const plan = {
         commit('SET_PLANS', newPlans);
       });
     },
+    thumbUp: (store, { plan, user }) => {
+      return axios.postUrl(`plan/${plan}/thumb-up/${user}`);
+    },
+    thumbDown: (store, { plan, user }) => {
+      return axios.postUrl(`plan/${plan}/thumb-up/${user}`);
+    },
   },
   getters: {
     plans: (state) => state.plans,

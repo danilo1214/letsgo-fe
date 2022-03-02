@@ -35,7 +35,13 @@
           v-model.lazy="currentMessage"
           placeholder="Send message..."
         ></v-text-field>
-        <Button class="mt-5 ml-5" label="Send" rounded @click="onSend" />
+        <Button
+          class="mt-5 ml-5"
+          label="Send"
+          rounded
+          @click="onSend"
+          :disabled="!currentMessage"
+        />
       </template>
     </v-row>
   </v-card>

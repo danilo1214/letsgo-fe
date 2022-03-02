@@ -15,12 +15,12 @@
         <v-icon>mdi-account-supervisor</v-icon>
       </v-tab>
 
-      <v-tab href="#2">
+      <v-tab href="#2" v-if="isMember">
         Requests ({{ plan.requests.length }})
         <v-icon>mdi-account-alert</v-icon>
       </v-tab>
 
-      <v-tab href="#3">
+      <v-tab href="#3" v-if="isMember">
         Chat
         <v-icon>mdi-chat</v-icon>
       </v-tab>
@@ -30,13 +30,15 @@
       <v-tab-item value="1">
         <user-card
           class="mt-8"
+          @thumb-up="(user) => $emit('thumb-up', user)"
+          @thumb-down="(user) => $emit('thumb-down', user)"
           v-for="member in plan.members"
           :key="member._id"
           :user="member"
         />
       </v-tab-item>
 
-      <v-tab-item value="2">
+      <v-tab-item value="2" v-if="isMember">
         <v-card flat>
           <request
             class="mt-8"
@@ -49,7 +51,7 @@
         </v-card>
       </v-tab-item>
 
-      <v-tab-item value="3" class="fill-height">
+      <v-tab-item value="3" class="fill-height" v-if="isMember">
         <chat :plan="plan" @send="(e) => $emit('send', e)" />
       </v-tab-item>
     </v-tabs-items>
@@ -65,6 +67,10 @@ export default {
   name: 'PlanDetailsTabs',
   components: { Chat, Request, UserCard },
   props: {
+    isMember: {
+      type: Boolean,
+      required: true,
+    },
     plan: {
       type: Object,
       required: true,
