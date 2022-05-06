@@ -10,6 +10,7 @@
       @decline="onDecline"
       :plan="plan"
       @send="send"
+      @message="addMessage"
     />
   </v-container>
 </template>
@@ -54,6 +55,10 @@ export default {
       'thumbUp',
       'thumbDown',
     ]),
+    addMessage(message) {
+      console.log(message);
+      this.plan.messages.push(message);
+    },
     onThumbUp(user) {
       this.thumbUp({
         user,

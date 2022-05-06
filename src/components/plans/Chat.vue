@@ -65,14 +65,14 @@ export default {
   data() {
     return {
       currentMessage: '',
-      socket: null
+      socket: null,
     };
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
   },
   methods: {
-    ...mapActions(["newSocket", "addMessage"]),
+    ...mapActions(['newSocket', 'addMessage']),
     myMessage(message) {
       return message.user._id === this.user._id;
     },
@@ -84,13 +84,15 @@ export default {
       return message.date ? moment(message.date).fromNow() : 'No date';
     },
     async initSocket() {
-      this.socket = await this.newSocket({id: this.plan._id});
-      this.socket.on('message', message => {
-        if(!this.myMessage(message)){
-          this.addMessage({ id: this.plan._id, message });
+      this.socket = await this.newSocket({ id: this.plan._id });
+      this.socket.on('message', (message) => {
+        if (!this.myMessage(message)) {
+          console.log('not mine');
+          // this.addMessage({ id: this.plan._id, message });
+          this.$emit('message', message);
         }
-      })
-    }
+      });
+    },
   },
   mounted() {
     this.$refs.chat.scrollTop =

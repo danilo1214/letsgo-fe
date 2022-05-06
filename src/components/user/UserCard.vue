@@ -23,7 +23,7 @@
     </v-row>
     <v-row class="pt-3 pl-6">
       <v-progress-linear
-        class='liked-percentage'
+        class="liked-percentage"
         rounded
         color="success"
         background-color="error"
@@ -106,7 +106,7 @@ export default {
       if (!this.user._id) return 0;
       const thumbsUp = this.user.thumbsUp.length;
       const thumbsDown = this.user.thumbsDown.length;
-      if(thumbsUp === 0 && thumbsDown === 0) return 0;
+      if (thumbsUp === 0 && thumbsDown === 0) return 0;
       return (100 * thumbsUp) / (thumbsUp + thumbsDown);
     },
     showThumbOptions() {

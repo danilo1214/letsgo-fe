@@ -31,6 +31,7 @@ export const plan = {
       const newPlans = plans.map((obj) =>
         obj._id === id ? { ...obj, messages: [...obj.messages, message] } : obj
       );
+      console.log(newPlans);
       commit('SET_PLANS', newPlans);
     },
     loadPlans: ({ commit }, { query }) => {
