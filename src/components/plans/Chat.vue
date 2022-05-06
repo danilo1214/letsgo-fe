@@ -51,7 +51,7 @@
 import Avatar from '../user/Avatar';
 import Button from '../generic/Button';
 import moment from 'moment';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'Chat',
@@ -65,12 +65,14 @@ export default {
   data() {
     return {
       currentMessage: '',
+      socket: null
     };
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
   },
   methods: {
+    ...mapActions(["newSocket", "addMessage"]),
     myMessage(message) {
       return message.user._id === this.user._id;
     },
@@ -81,10 +83,23 @@ export default {
     formatDate(message) {
       return message.date ? moment(message.date).fromNow() : 'No date';
     },
+    async initSocket() {
+      this.socket = await this.newSocket({id: this.plan._id});
+      this.socket.on('message', message => {
+        if(!this.myMessage(message)){
+          this.addMessage({ id: this.plan._id, message });
+        }
+      })
+    }
   },
   mounted() {
     this.$refs.chat.scrollTop =
       this.$refs.chat.scrollHeight + this.$refs.chat.offsetHeight;
+    this.initSocket();
+  },
+  beforeDestroy() {
+    this.socket.disconnect();
+    this.socket = null;
   },
   updated() {
     this.$refs.chat.scrollTop =

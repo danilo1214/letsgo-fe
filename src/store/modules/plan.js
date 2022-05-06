@@ -26,6 +26,13 @@ export const plan = {
         text,
       });
     },
+    addMessage: ({ commit, getters }, { id, message }) => {
+      const { plans } = getters;
+      const newPlans = plans.map((obj) =>
+        obj._id === id ? { ...obj, messages: [...obj.messages, message] } : obj
+      );
+      commit('SET_PLANS', newPlans);
+    },
     loadPlans: ({ commit }, { query }) => {
       return axios
         .getUrl('/plan', {

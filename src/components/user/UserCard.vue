@@ -3,7 +3,7 @@
     <v-subheader class="title text-right"
       >{{ name }} <span class="font-italic pl-2">({{ age }})</span></v-subheader
     >
-    <v-row class="pl-6 pt-3" v-if='showThumbOptions'>
+    <v-row class="pl-6 pt-3" v-if="showThumbOptions">
       <Button
         color="success"
         rounded
@@ -21,8 +21,21 @@
         @click="$emit('thumb-down', user._id)"
       />
     </v-row>
-    <v-row class='pt-3 pl-6'>
-      <v-progress-linear color='success' background-color='error' :value='likedPercentage' height='25' dark> {{likedPercentage}}% <span class='font-weight-light ml-2'>liked this user</span></v-progress-linear>
+    <v-row class="pt-3 pl-6">
+      <v-progress-linear
+        class='liked-percentage'
+        rounded
+        color="success"
+        background-color="error"
+        :value="likedPercentage"
+        height="25"
+        dark
+      >
+        {{ likedPercentage }}%
+        <span class="font-weight-light ml-2"
+          >liked this user</span
+        ></v-progress-linear
+      >
     </v-row>
     <v-row>
       <v-col>
@@ -90,10 +103,11 @@ export default {
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
     likedPercentage() {
-      if(!this.user._id) return 0;
+      if (!this.user._id) return 0;
       const thumbsUp = this.user.thumbsUp.length;
       const thumbsDown = this.user.thumbsDown.length;
-      return (100*thumbsUp) / (thumbsUp + thumbsDown)
+      if(thumbsUp === 0 && thumbsDown === 0) return 0;
+      return (100 * thumbsUp) / (thumbsUp + thumbsDown);
     },
     showThumbOptions() {
       return (
@@ -129,4 +143,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.liked-percentage {
+  width: 200px;
+}
+</style>

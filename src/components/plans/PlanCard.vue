@@ -152,6 +152,7 @@ export default {
       return (
         this.user &&
         this.user._id &&
+        this.plan.members &&
         this.plan.members.some(
           (member) => member === this.user._id || member._id === this.user._id
         )
