@@ -5,17 +5,31 @@ export const request = {
     return {};
   },
   actions: {
-    createRequest: (store, { plan }) => {
-      return axios.postUrl(`plan/${plan}/request`, plan);
+    createRequest: ({ commit }, { plan }) => {
+      return axios.postUrl(`plan/${plan}/request`, plan).then((result) => {
+        commit('UPDATE_PLAN', { id: result._id, data: result.data });
+      });
     },
-    acceptRequest: (store, { plan, user }) => {
-      return axios.postUrl(`plan/${plan}/request/${user}/accept`, plan);
+    acceptRequest: ({ commit }, { plan, user }) => {
+      return axios
+        .postUrl(`plan/${plan}/request/${user}/accept`, plan)
+        .then((result) => {
+          commit('UPDATE_PLAN', { id: result._id, data: result.data });
+        });
     },
-    declineRequest: (store, { plan, user }) => {
-      return axios.postUrl(`plan/${plan}/request/${user}/decline`, plan);
+    declineRequest: ({ commit }, { plan, user }) => {
+      return axios
+        .postUrl(`plan/${plan}/request/${user}/decline`, plan)
+        .then((result) => {
+          commit('UPDATE_PLAN', { id: result._id, data: result.data });
+        });
     },
-    deleteRequest: (store, { plan }) => {
-      return axios.postUrl(`plan/${plan}/request/delete`, plan);
+    deleteRequest: ({ commit }, { plan }) => {
+      return axios
+        .postUrl(`plan/${plan}/request/delete`, plan)
+        .then((result) => {
+          commit('UPDATE_PLAN', { id: result._id, data: result.data });
+        });
     },
   },
 };
