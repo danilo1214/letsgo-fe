@@ -10,15 +10,13 @@
       @decline="onDecline"
       :plan="plan"
       @send="send"
-      @message="addMessage"
     />
   </v-container>
 </template>
 
 <script>
 import PlanCard from '../../components/plans/PlanCard';
-import { mapState, mapActions } from 'vuex';
-import { getData } from '@/helpers/requests';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import PlanDetailsTabs from '../../components/plans/PlanDetailsTabs';
 import { getError } from '../../helpers/requests';
 
@@ -27,13 +25,16 @@ export default {
   components: { PlanDetailsTabs, PlanCard },
   data() {
     return {
-      plan: {},
     };
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
+    ...mapGetters(['plans']),
     id() {
       return this.$route.params.id;
+    },
+    plan() {
+      return this.plans? this.plans.find(p => p._id === this.id) || {} : {};
     },
     isMember() {
       return (
@@ -55,18 +56,11 @@ export default {
       'thumbUp',
       'thumbDown',
     ]),
-    addMessage(message) {
-      console.log(message);
-      this.plan.messages.push(message);
-    },
     onThumbUp(user) {
       this.thumbUp({
         user,
-        plan: this.plan._id,
+        plan: this.id,
       })
-        .then(() => {
-          this.init();
-        })
         .catch((err) => {
           this.$notify({
             group: 'main',
@@ -79,11 +73,8 @@ export default {
     onThumbDown(user) {
       this.thumbDown({
         user,
-        plan: this.plan._id,
+        plan: this.id,
       })
-        .then(() => {
-          this.init();
-        })
         .catch((err) => {
           this.$notify({
             group: 'main',
@@ -95,13 +86,9 @@ export default {
     },
     send(text) {
       this.sendMessage({
-        id: this.plan._id,
+        id: this.id,
         text,
       })
-        .then(() => {
-          // TODO: this.plan = getData(data);
-          this.init();
-        })
         .catch((err) => {
           this.$notify({
             group: 'main',
@@ -112,18 +99,14 @@ export default {
         });
     },
     init() {
-      this.getPlan({ id: this.id }).then((plan) => {
-        this.plan = getData(plan);
-      });
+      this.getPlan({ id: this.id });
     },
     onAccept(user) {
-      const { plan } = this;
       this.acceptRequest({
-        plan: plan._id,
+        plan: this.id,
         user,
       })
-        .then((plan) => {
-          this.plan = getData(plan);
+        .then(() => {
           this.$notify({
             group: 'main',
             title: 'Success',
@@ -142,13 +125,11 @@ export default {
         });
     },
     onDecline(user) {
-      const { plan } = this;
       this.declineRequest({
-        plan: plan._id,
+        plan: this.id,
         user,
       })
-        .then((plan) => {
-          this.plan = getData(plan);
+        .then(() => {
           this.$notify({
             group: 'main',
             title: 'Success',

@@ -55,7 +55,6 @@
         <chat
           :plan="plan"
           @send="(e) => $emit('send', e)"
-          @message="(message) => $emit('message', message)"
         />
       </v-tab-item>
     </v-tabs-items>

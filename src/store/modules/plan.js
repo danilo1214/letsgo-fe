@@ -11,13 +11,24 @@ export const plan = {
     SET_PLANS(state, plans) {
       state.plans = plans;
     },
+    UPDATE_PLAN(state, { id, data }) {
+      state.plans = state.plans.map((obj) => (obj._id === id ? data : obj));
+    },
+    ADD_PLAN(state, plan) {
+      state.plans.push(plan);
+    },
+    DELETE_PLAN(state, id) {
+      state.plans = state.plans.filter((plan) => plan._id !== id);
+    },
   },
   actions: {
     createPlan: (store, { plan }) => {
       return axios.postUrl('/plan', plan);
     },
-    getPlan: (store, { id }) => {
-      return axios.getUrl(`plan/${id}`, {});
+    getPlan: ({ commit }, { id }) => {
+      return axios.getUrl(`plan/${id}`, {}).then((result) => {
+        commit('ADD_PLAN', result.data);
+      });
     },
     sendMessage: (store, { id, text }) => {
       const date = moment().format('YYYY-MM-DD HH:mm');
@@ -28,18 +39,19 @@ export const plan = {
     },
     addMessage: ({ commit, getters }, { id, message }) => {
       const { plans } = getters;
-      const newPlans = plans.map((obj) =>
-        obj._id === id ? { ...obj, messages: [...obj.messages, message] } : obj
-      );
-      console.log(newPlans);
-      commit('SET_PLANS', newPlans);
+      const plan = plans.find((p) => p._id === id);
+      commit('UPDATE_PLAN', {
+        id,
+        data: {
+          ...plan,
+          messages: [...plan.messages, message],
+        },
+      });
     },
     loadPlans: ({ commit }, { query }) => {
       return axios
         .getUrl('/plan', {
-          params: {
-            ...query,
-          },
+          params: query,
         })
         .then((result) => {
           const { data } = result;
@@ -48,37 +60,30 @@ export const plan = {
           return data;
         });
     },
-    deletePlan: ({ commit, getters }, { id }) => {
+    deletePlan: ({ commit }, { id }) => {
       return axios.deleteUrl(`/plan/${id}`).then(() => {
-        const { plans } = getters;
-        const newPlans = plans.filter((plan) => plan._id !== id);
-
-        commit('SET_PLANS', newPlans);
+        commit('DELETE_PLAN', id);
       });
     },
-    uploadPlanImage: ({ commit, getters }, { id, formData }) => {
+    uploadPlanImage: ({ commit }, { id, formData }) => {
       return axios.postUrl(`/plan/${id}/photo`, formData).then((result) => {
-        const { plans } = getters;
-        const newPlans = plans.map((obj) =>
-          obj._id === id ? result.data : obj
-        );
-        commit('SET_PLANS', newPlans);
+        commit('UPDATE_PLAN', { id, data: result.data });
       });
     },
-    updatePlan: ({ commit, getters }, { id, plan }) => {
+    updatePlan: ({ commit }, { id, plan }) => {
       return axios.patchUrl(`/plan/${id}`, plan).then((result) => {
-        const { plans } = getters;
-        const newPlans = plans.map((obj) =>
-          obj._id === id ? result.data : obj
-        );
-        commit('SET_PLANS', newPlans);
+        commit('UPDATE_PLAN', { id, data: result.data });
       });
     },
-    thumbUp: (store, { plan, user }) => {
-      return axios.postUrl(`plan/${plan}/thumb-up/${user}`);
+    thumbUp: ({ commit }, { plan, user }) => {
+      return axios.postUrl(`plan/${plan}/thumb/up/${user}`).then((result) => {
+        commit('UPDATE_PLAN', { id: result.id, data: result.data });
+      });
     },
-    thumbDown: (store, { plan, user }) => {
-      return axios.postUrl(`plan/${plan}/thumb-up/${user}`);
+    thumbDown: ({ commit }, { plan, user }) => {
+      return axios.postUrl(`plan/${plan}/thumb/down/${user}`).then((result) => {
+        commit('UPDATE_PLAN', { id: result.id, data: result.data });
+      });
     },
   },
   getters: {

@@ -86,11 +86,7 @@ export default {
     async initSocket() {
       this.socket = await this.newSocket({ id: this.plan._id });
       this.socket.on('message', (message) => {
-        if (!this.myMessage(message)) {
-          console.log('not mine');
-          // this.addMessage({ id: this.plan._id, message });
-          this.$emit('message', message);
-        }
+          this.addMessage({ id: this.plan._id, message });
       });
     },
   },
