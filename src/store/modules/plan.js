@@ -78,12 +78,12 @@ export const plan = {
     },
     thumbUp: ({ commit }, { plan, user }) => {
       return axios.postUrl(`plan/${plan}/thumb/up/${user}`).then((result) => {
-        commit('UPDATE_PLAN', { id: result._id, data: result.data });
+        commit('UPDATE_PLAN', { id: result.data._id, data: result.data });
       });
     },
     thumbDown: ({ commit }, { plan, user }) => {
       return axios.postUrl(`plan/${plan}/thumb/down/${user}`).then((result) => {
-        commit('UPDATE_PLAN', { id: result._id, data: result.data });
+        commit('UPDATE_PLAN', { id: result.data._id, data: result.data });
       });
     },
   },

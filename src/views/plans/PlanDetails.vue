@@ -25,6 +25,7 @@ export default {
   components: { PlanDetailsTabs, PlanCard },
   data() {
     return {
+      socket: null
     };
   },
   computed: {
@@ -52,10 +53,15 @@ export default {
       'getPlan',
       'acceptRequest',
       'declineRequest',
+      'addMessage',
+      'newSocket',
       'sendMessage',
       'thumbUp',
       'thumbDown',
     ]),
+    async initSocket() {
+
+    },
     onThumbUp(user) {
       this.thumbUp({
         user,
@@ -100,6 +106,7 @@ export default {
     },
     init() {
       this.getPlan({ id: this.id });
+      this.initSocket();
     },
     onAccept(user) {
       this.acceptRequest({
@@ -155,6 +162,10 @@ export default {
   },
   mounted() {
     this.init();
+  },
+  beforeDestroy() {
+    this.socket.disconnect();
+    this.socket = null;
   },
 };
 </script>
