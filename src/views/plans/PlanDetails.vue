@@ -68,7 +68,6 @@ export default {
         this.addMessage({ id, message });
       });
       this.socket.on('update', (plan) => {
-        console.log(plan, id);
         this.updatePlanLocal({id, plan})
       })
     },
