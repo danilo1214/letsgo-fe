@@ -71,6 +71,9 @@ export const plan = {
         commit('UPDATE_PLAN', { id, data: result.data });
       });
     },
+    updatePlanLocal: ({ commit }, { id, plan }) => {
+      commit('UPDATE_PLAN', { id, data: plan });
+    },
     updatePlan: ({ commit }, { id, plan }) => {
       return axios.patchUrl(`/plan/${id}`, plan).then((result) => {
         commit('UPDATE_PLAN', { id, data: result.data });

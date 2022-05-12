@@ -58,9 +58,18 @@ export default {
       'sendMessage',
       'thumbUp',
       'thumbDown',
+      'updatePlanLocal'
     ]),
     async initSocket() {
+      const {id} = this;
 
+      this.socket = await this.newSocket({ id });
+      this.socket.on('message', (message) => {
+        this.addMessage({ id, message });
+      });
+      this.socket.on('new-request', plan => {
+        this.updatePlanLocal({id, plan})
+      })
     },
     onThumbUp(user) {
       this.thumbUp({
