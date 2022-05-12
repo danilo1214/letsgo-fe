@@ -25,7 +25,6 @@ export default {
   components: { PlanDetailsTabs, PlanCard },
   data() {
     return {
-      socket: null
     };
   },
   computed: {
@@ -54,23 +53,11 @@ export default {
       'acceptRequest',
       'declineRequest',
       'addMessage',
-      'newSocket',
       'sendMessage',
       'thumbUp',
       'thumbDown',
       'updatePlanLocal'
     ]),
-    async initSocket() {
-      const {id} = this;
-
-      this.socket = await this.newSocket({ id });
-      this.socket.on('message', (message) => {
-        this.addMessage({ id, message });
-      });
-      this.socket.on('update', (plan) => {
-        this.updatePlanLocal({id, plan})
-      })
-    },
     onThumbUp(user) {
       this.thumbUp({
         user,
@@ -115,7 +102,6 @@ export default {
     },
     init() {
       this.getPlan({ id: this.id });
-      this.initSocket();
     },
     onAccept(user) {
       this.acceptRequest({
@@ -171,11 +157,7 @@ export default {
   },
   mounted() {
     this.init();
-  },
-  beforeDestroy() {
-    this.socket.disconnect();
-    this.socket = null;
-  },
+  }
 };
 </script>
 

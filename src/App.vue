@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       loaded: false,
+      socket: null,
       showSideBar: true,
       showSignOut: false,
       publicRoutes: ['home', 'sign-in', 'sign-up', 'plans'],
@@ -51,7 +52,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['checkAuth', 'signOut']),
+    ...mapActions(['checkAuth', 'signOut', 'newSocket', 'updatePlanLocal', 'addMessage']),
     onToggle() {
       this.showSideBar = !this.showSideBar;
     },
@@ -63,6 +64,16 @@ export default {
       this.signOut();
       this.showSignOut = false;
       this.$router.replace({ name: 'home' });
+    },
+    async initSocket() {
+      console.log(this.user);
+      this.socket = await this.newSocket();
+      this.socket.on('plan-message', ({ id, message }) => {
+        this.addMessage({ id, message });
+      });
+      this.socket.on('plan-update', ({ id, plan }) => {
+        this.updatePlanLocal({id, plan})
+      });
     },
     async init() {
       await this.checkAuth();
@@ -76,6 +87,10 @@ export default {
         this.showSignOut = true;
       }
 
+      if(this.user && this.socket === null) {
+        await this.initSocket();
+      }
+
       this.loaded = true;
     },
   },
@@ -87,6 +102,10 @@ export default {
       this.init();
     },
   },
+  beforeDestroy() {
+    this.socket.disconnect();
+    this.socket = null;
+  }
 };
 </script>
 

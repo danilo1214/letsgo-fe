@@ -12,8 +12,6 @@ export const plan = {
       state.plans = plans;
     },
     UPDATE_PLAN(state, { id, data }) {
-      console.log('updating plan:: ### ' + id);
-      console.log(state.plans.find((p) => p._id === id));
       state.plans = state.plans.map((obj) => (obj._id === id ? data : obj));
     },
     ADD_PLAN(state, plan) {

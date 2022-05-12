@@ -13,7 +13,7 @@ export default (Vue) => {
       request,
     },
     actions: {
-      newSocket: (store, { id }) => {
+      newSocket: (store) => {
         const { token } = store.state.auth;
         const url =
           process.env.NODE_ENV === 'development'
@@ -22,7 +22,6 @@ export default (Vue) => {
         return io(url, {
           transports: ['websocket'],
           query: {
-            plan: id,
             token,
           },
         });
