@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app :value="value" @input="(v) => $emit('input', v)">
+  <v-navigation-drawer app :value="value" @input="(v) => $emit('input', v)" mobile-breakpoint='xs'>
     <template v-if="signedIn">
       <v-list-item class="px-2">
         <Avatar :user="user" />
@@ -64,11 +64,6 @@ export default {
       items: [
         { title: 'Home', icon: 'mdi-home-city', link: '/' },
         { title: 'My Account', icon: 'mdi-account', link: '/account' },
-        {
-          title: 'Friends',
-          icon: 'mdi-account-group-outline',
-          link: '/friends',
-        },
         { title: 'My Plans', icon: 'mdi-calendar', link: '/my-plans' },
         { title: 'Sign out', icon: 'mdi-logout', link: '/sign-out' },
       ],

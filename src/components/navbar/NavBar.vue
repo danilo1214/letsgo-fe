@@ -48,13 +48,15 @@
       </v-card>
     </v-menu>
 
-    <Button
+    <v-btn
       :disabled="!isChanged"
-      icon-left="mdi-magnify"
       @click="onSearch"
-      label="Search"
+      fab
+      small
       color="primary darken-1"
-    />
+    >
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
   </v-app-bar>
 </template>
 
@@ -62,12 +64,11 @@
 import { mapGetters } from 'vuex';
 import DatePicker from '@/components/generic/DatePicker';
 import Slider from '@/components/generic/Slider';
-import Button from '@/components/generic/Button';
 import lodash from 'lodash';
 
 export default {
   name: 'NavBar',
-  components: { Button, Slider, DatePicker },
+  components: { Slider, DatePicker },
   data() {
     return {
       menu: false,
