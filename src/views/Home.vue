@@ -1,16 +1,17 @@
 <template>
   <v-container fluid>
     <landing v-if='!user'/>
-    <div v-else> signed in</div>
+    <welcome v-else> signed in</welcome>
   </v-container>
 </template>
 
 <script>
 import Landing from './Landing';
 import { mapState } from 'vuex';
+import Welcome from './Welcome';
 export default {
   name: 'HelloWorld',
-  components: { Landing },
+  components: { Welcome, Landing },
   data() {
     return {};
   },

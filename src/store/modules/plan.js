@@ -61,6 +61,9 @@ export const plan = {
           return data;
         });
     },
+    getMyPlans: () => {
+      return axios.getUrl('/plan/my');
+    },
     deletePlan: ({ commit }, { id }) => {
       return axios.deleteUrl(`/plan/${id}`).then(() => {
         commit('DELETE_PLAN', id);

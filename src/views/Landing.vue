@@ -7,7 +7,7 @@
         <Button
           class="mt-12"
           rounded
-          to="/plans"
+          to="/plans/"
           text
           label="What's popular?"
         />
