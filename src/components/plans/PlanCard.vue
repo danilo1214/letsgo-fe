@@ -92,6 +92,7 @@
       <plan-form
         :initial="plan"
         :error="error"
+        ok-label='Update Plan'
         @cancel="onCancelEdit"
         @submit="onEdit"
       />

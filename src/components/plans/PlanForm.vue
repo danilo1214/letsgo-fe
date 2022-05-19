@@ -69,7 +69,7 @@
       <Button
         :disabled="!valid"
         @click="onSubmit"
-        label="Make Plan"
+        :label="okLabel"
         icon-left="mdi-calendar-plus"
       />
     </div>
@@ -90,6 +90,10 @@ export default {
     error: {
       type: String,
       required: true,
+    },
+    okLabel: {
+      type: String,
+      default: 'Make Plan',
     },
     isLoading: {
       type: Boolean,
