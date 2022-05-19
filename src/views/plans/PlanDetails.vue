@@ -1,5 +1,9 @@
 <template>
   <v-container fluid v-if="plan._id">
+    <v-alert class='mt-10' dark text type="warning" v-if='!isMember'>
+      You can view sensitive information such as names and location once you're a member.
+    </v-alert>
+
     <plan-card class="mt-10" :plan="plan" @join="init" />
 
     <plan-details-tabs
