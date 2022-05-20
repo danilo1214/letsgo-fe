@@ -2,7 +2,7 @@
   <div class='pa-10'>
     <v-alert v-if='query.keywords' type='info'>Searching for keywords {{query.keywords}}</v-alert>
     <v-alert v-if='priceRange' type='info'>{{priceRange}}</v-alert>
-    <v-alert v-if='query.dates.length' type='info'>Searching for dates between ${{query.dates[0]}} ${{query.dates[1]}}</v-alert>
+    <v-alert v-if='query.dates.length' type='info'>Searching for dates between {{query.dates[0]}} - {{query.dates[1]}}</v-alert>
     <v-subheader>Results</v-subheader>
     <Plans :plans="plans" />
   </div>
