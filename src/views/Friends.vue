@@ -6,7 +6,7 @@
       <Button
         label="Remove friend"
         icon-left="mdi-account-minus"
-        @click="removeFriend({ user: user._id })"
+        @click="onRemove(user)"
       />
     </user-card>
 
@@ -23,14 +23,14 @@
           label="Accept"
           color="success"
           icon-left="mdi-check"
-          @click="acceptFriendRequest({ user: user._id })"
+          @click="onAccept(user)"
         />
         <Button
           label="Decline"
           color="error"
           icon-left="mdi-cancel"
           text
-          @click="declineFriendRequest({ user: user._id })"
+          @click="onDecline(user)"
         />
       </v-card-actions>
     </user-card>
@@ -69,6 +69,18 @@ export default {
       'declineFriendRequest',
       'removeFriend',
     ]),
+    async onAccept(user) {
+      await this.acceptFriendRequest({ user: user._id });
+      this.init();
+    },
+    async onDecline(user) {
+      await this.declineFriendRequest({ user: user._id });
+      this.init();
+    },
+    async onRemove(user) {
+      await this.removeFriend({ user: user._id });
+      this.init();
+    },
     init() {
       this.getFriendsList().then((result) => {
         this.user = getData(result);

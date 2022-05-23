@@ -44,7 +44,7 @@
       <v-col>
         <v-col>
           <Button
-            v-if="showAddFriend && !friendRequestSent && !isFriend"
+            v-if="showAddFriend && !friendRequestSent && !friendRequestRecieved && !isFriend"
             @click="$emit('add-friend', user._id)"
             label="Add friend"
             icon-left="mdi-account-plus"
@@ -133,6 +133,13 @@ export default {
         this.currentUser &&
         this.user.friend_requests &&
         this.user.friend_requests.includes(this.currentUser._id)
+      );
+    },
+    friendRequestRecieved() {
+      return (
+        this.currentUser &&
+        this.currentUser.friend_requests &&
+        this.currentUser.friend_requests.includes(this.user._id)
       );
     },
     isFriend() {
