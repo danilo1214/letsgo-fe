@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import modules from './modules';
 import io from 'socket.io-client';
-const { plan, auth, request } = modules;
+const { plan, auth, request, friend } = modules;
 
 export default (Vue) => {
   Vue.use(Vuex);
@@ -11,6 +11,7 @@ export default (Vue) => {
       auth,
       plan,
       request,
+      friend,
     },
     actions: {
       newSocket: (store) => {

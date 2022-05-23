@@ -12,6 +12,7 @@ import NewPlan from '@/views/plans/NewPlan';
 import Account from '@/views/account/Account';
 import Verify from '@/views/account/Verify';
 import PlanDetails from '@/views/plans/PlanDetails';
+import Friends from '../views/Friends';
 
 Vue.use(VueRouter);
 
@@ -75,6 +76,11 @@ const routes = [
     path: '/new',
     name: 'new-plan',
     component: NewPlan,
+  },
+  {
+    path: '/friends',
+    name: 'friends',
+    component: Friends,
   },
 ];
 

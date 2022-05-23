@@ -44,8 +44,8 @@
       <v-col>
         <v-col>
           <Button
-            v-if="showAddFriend && !friendRequestSent"
-            @click="$emit('add-friend')"
+            v-if="showAddFriend && !friendRequestSent && !isFriend"
+            @click="$emit('add-friend', user._id)"
             label="Add friend"
             icon-left="mdi-account-plus"
           />
@@ -105,11 +105,17 @@ export default {
       type: Object,
       required: true,
     },
+    showLike: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
     likedMessage() {
-      return this.currentUser._id === this.user._id? "liked you." : "liked this user.";
+      return this.currentUser._id === this.user._id
+        ? 'liked you.'
+        : 'liked this user.';
     },
     likedAmount() {
       if (!this.user._id) return 0;
@@ -123,14 +129,25 @@ export default {
       return (100 * thumbsUp) / (thumbsUp + thumbsDown);
     },
     friendRequestSent() {
-      return this.currentUser &&
+      return (
+        this.currentUser &&
+        this.user.friend_requests &&
+        this.user.friend_requests.includes(this.currentUser._id)
+      );
+    },
+    isFriend() {
+      return (
+        this.currentUser &&
         this.user.friends &&
-      !this.user.friends.includes(this.currentUser._id);
+        this.user.friends.includes(this.currentUser._id)
+      );
     },
     showAddFriend() {
-      return this.currentUser &&
-      this.user._id &&
-      this.user._id !== this.currentUser._id;
+      return (
+        this.currentUser &&
+        this.user._id &&
+        this.user._id !== this.currentUser._id
+      );
     },
     showThumbOptions() {
       return (
@@ -138,7 +155,8 @@ export default {
         this.user._id &&
         this.user._id !== this.currentUser._id &&
         !this.user.thumbsUp.includes(this.currentUser._id) &&
-        !this.user.thumbsDown.includes(this.currentUser._id)
+        !this.user.thumbsDown.includes(this.currentUser._id) &&
+        this.showLike
       );
     },
     userHidden() {

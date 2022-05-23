@@ -32,6 +32,7 @@
           class="mt-8"
           @thumb-up="(user) => $emit('thumb-up', user)"
           @thumb-down="(user) => $emit('thumb-down', user)"
+          @add-friend="(user) => $emit('add-friend', user)"
           v-for="member in plan.members"
           :key="member._id"
           :user="member"

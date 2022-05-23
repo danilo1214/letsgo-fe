@@ -19,6 +19,7 @@
       @accept="onAccept"
       @thumb-up="onThumbUp"
       @thumb-down="onThumbDown"
+      @add-friend="onAddFriend"
       @decline="onDecline"
       :plan="plan"
       @send="send"
@@ -68,7 +69,24 @@ export default {
       'thumbUp',
       'thumbDown',
       'updatePlanLocal',
+      'sendFriendRequest',
     ]),
+    onAddFriend(user) {
+      this.sendFriendRequest({
+        user,
+      })
+        .then(() => {
+          this.init();
+        })
+        .catch((err) => {
+          this.$notify({
+            group: 'main',
+            title: 'Failed sending friend request .',
+            text: getError(err),
+            type: 'error',
+          });
+        });
+    },
     onThumbUp(user) {
       this.thumbUp({
         user,
