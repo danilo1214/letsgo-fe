@@ -52,7 +52,13 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['checkAuth', 'signOut', 'newSocket', 'updatePlanLocal', 'addMessage']),
+    ...mapActions([
+      'checkAuth',
+      'signOut',
+      'newSocket',
+      'updatePlanLocal',
+      'addMessage',
+    ]),
     onToggle() {
       this.showSideBar = !this.showSideBar;
     },
@@ -72,7 +78,7 @@ export default {
         this.addMessage({ id, message });
       });
       this.socket.on('plan-update', ({ id, plan }) => {
-        this.updatePlanLocal({id, plan})
+        this.updatePlanLocal({ id, plan });
       });
     },
     async init() {
@@ -87,7 +93,7 @@ export default {
         this.showSignOut = true;
       }
 
-      if(this.user && this.socket === null) {
+      if (this.user && this.socket === null) {
         await this.initSocket();
       }
 
@@ -105,7 +111,7 @@ export default {
   beforeDestroy() {
     this.socket.disconnect();
     this.socket = null;
-  }
+  },
 };
 </script>
 

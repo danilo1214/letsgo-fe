@@ -1,14 +1,6 @@
 <template>
-  <v-card
-    v-bind="$attrs"
-    :color="color"
-    dark
-    max-width="400"
-    height='250'
-  >
-    <v-card-text class="text-h5 font-weight-bold">
-      "{{text}}"
-    </v-card-text>
+  <v-card v-bind="$attrs" :color="color" dark max-width="400" height="250">
+    <v-card-text class="text-h5 font-weight-bold"> "{{ text }}" </v-card-text>
     <v-spacer></v-spacer>
     <v-card-actions>
       <v-list-item class="grow">
@@ -34,17 +26,17 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'primary lighten-1'
+      default: 'primary lighten-1',
     },
     text: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
@@ -53,5 +45,4 @@ export default {
   position: absolute;
   bottom: 0;
 }
-
 </style>

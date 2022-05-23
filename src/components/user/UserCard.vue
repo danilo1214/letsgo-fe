@@ -33,7 +33,7 @@
       >
         {{ likedPercentage }}%
         <span class="font-weight-light ml-2"
-          >liked this user</span
+          >{{ likedMessage }}</span
         ></v-progress-linear
       >
     </v-row>
@@ -102,6 +102,9 @@ export default {
   },
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
+    likedMessage() {
+      return this.currentUser._id === this.user._id? "liked you." : "liked this user.";
+    },
     likedPercentage() {
       if (!this.user._id) return 0;
       const thumbsUp = this.user.thumbsUp.length;

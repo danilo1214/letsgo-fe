@@ -1,8 +1,13 @@
 <template>
-  <div class='pa-10'>
-    <v-alert v-if='query.keywords' type='info'>Searching for keywords {{query.keywords}}</v-alert>
-    <v-alert v-if='priceRange' type='info'>{{priceRange}}</v-alert>
-    <v-alert v-if='query.dates.length' type='info'>Searching for dates between {{query.dates[0]}} - {{query.dates[1]}}</v-alert>
+  <div class="pa-10">
+    <v-alert v-if="query.keywords" type="info"
+      >Searching for keywords {{ query.keywords }}</v-alert
+    >
+    <v-alert v-if="priceRange" type="info">{{ priceRange }}</v-alert>
+    <v-alert v-if="query.dates.length" type="info"
+      >Searching for dates between {{ query.dates[0] }} -
+      {{ query.dates[1] }}</v-alert
+    >
     <v-subheader>Results</v-subheader>
     <Plans :plans="plans" />
   </div>
@@ -19,28 +24,28 @@ export default {
     return {
       query: {
         keywords: '',
-        dates: []
-      }
-    }
+        dates: [],
+      },
+    };
   },
   computed: {
     ...mapGetters(['plans']),
     priceRange() {
-      const {costFrom, costTo} = this.$route.query;
+      const { costFrom, costTo } = this.$route.query;
 
-      if(costFrom === undefined && costTo === undefined) {
+      if (costFrom === undefined && costTo === undefined) {
         return '';
       }
 
-      if(costFrom === 0 && costTo === 0) {
+      if (costFrom === 0 && costTo === 0) {
         return 'Searching for free plans';
       }
 
-      if(costFrom && !costTo) {
+      if (costFrom && !costTo) {
         return `Searching for price below $${costFrom}.`;
       }
 
-      if(costFrom && !costTo) {
+      if (costFrom && !costTo) {
         return `Searching for price above $${costFrom}.`;
       }
 
@@ -57,9 +62,8 @@ export default {
         query,
       });
 
-      this.query.keywords = search? search.split(' ').join(', ') : '';
+      this.query.keywords = search ? search.split(' ').join(', ') : '';
       this.query.dates = dateFrom && dateTo ? [dateFrom, dateTo] : [];
-
     },
   },
   created() {

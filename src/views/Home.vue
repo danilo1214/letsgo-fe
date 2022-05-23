@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <landing v-if='!user'/>
+    <landing v-if="!user" />
     <welcome v-else> signed in</welcome>
   </v-container>
 </template>
@@ -17,6 +17,6 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
-  }
+  },
 };
 </script>

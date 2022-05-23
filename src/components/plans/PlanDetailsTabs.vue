@@ -52,10 +52,7 @@
       </v-tab-item>
 
       <v-tab-item value="3" class="fill-height" v-if="isMember">
-        <chat
-          :plan="plan"
-          @send="(e) => $emit('send', e)"
-        />
+        <chat :plan="plan" @send="(e) => $emit('send', e)" />
       </v-tab-item>
     </v-tabs-items>
   </div>

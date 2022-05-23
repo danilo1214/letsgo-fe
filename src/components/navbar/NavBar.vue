@@ -2,15 +2,7 @@
   <v-app-bar app>
     <v-app-bar-nav-icon @click="$emit('toggle')"></v-app-bar-nav-icon>
 
-    <v-text-field
-      rounded
-      filled
-      dense
-      clearable
-      class="mt-5 search-text"
-      v-model.lazy="form.search"
-      placeholder="Search Plans..."
-    ></v-text-field>
+    <combo-box class='mt-5 search-text' label="Search by keywords..." :items="keywords" v-model="form.search" />
 
     <v-menu v-model="menu" :close-on-content-click="false" left bottom>
       <template v-slot:activator="{ on, attrs }">
@@ -65,16 +57,18 @@ import { mapGetters } from 'vuex';
 import DatePicker from '@/components/generic/DatePicker';
 import Slider from '@/components/generic/Slider';
 import lodash from 'lodash';
+import ComboBox from '../generic/ComboBox';
 
 export default {
   name: 'NavBar',
-  components: { Slider, DatePicker },
+  components: { ComboBox, Slider, DatePicker },
   data() {
     return {
       menu: false,
+      keywords:  ["Party", "Dance", "Drinking", "Sport"],
       form: {
         dates: ['1', '2'],
-        search: '',
+        search: [],
         priceRange: [0, 0],
       },
       isChanged: false,
@@ -90,7 +84,7 @@ export default {
     init() {
       const { search, costFrom, costTo, dateFrom, dateTo } = this.$route.query;
 
-      this.form.search = search || '';
+      this.form.search = search? search.split(' ') : '';
       this.form.priceRange = [costFrom || 0, costTo || costFrom || 0];
       this.form.dates = dateFrom && dateTo ? [dateFrom, dateTo] : [];
     },
@@ -116,7 +110,7 @@ export default {
       }
 
       if (search && search.length !== 0) {
-        query.search = search;
+        query.search = search.join(' ');
       }
 
       return query;

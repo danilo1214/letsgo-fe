@@ -1,7 +1,7 @@
 <template>
   <v-slide-group show-arrows>
-    <v-slide-item v-for='plan in plans' :key='plan._id' class='mx-8'>
-      <plan-card :plan='plan' />
+    <v-slide-item v-for="plan in plans" :key="plan._id" class="mx-8">
+      <plan-card :plan="plan" />
     </v-slide-item>
   </v-slide-group>
 </template>
@@ -14,12 +14,10 @@ export default {
   props: {
     plans: {
       type: Array,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

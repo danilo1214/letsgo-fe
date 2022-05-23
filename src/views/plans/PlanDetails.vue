@@ -1,7 +1,15 @@
 <template>
   <v-container fluid v-if="plan._id">
-    <v-alert class='mt-10' dark text type="warning" color='warning darken-4' v-if='!isMember'>
-      You can view sensitive information such as names and location once you're a member.
+    <v-alert
+      class="mt-10"
+      dark
+      text
+      type="warning"
+      color="warning darken-4"
+      v-if="!isMember"
+    >
+      You can view sensitive information such as names and location once you're
+      a member.
     </v-alert>
 
     <plan-card class="mt-10" :plan="plan" @join="init" />
@@ -28,8 +36,7 @@ export default {
   name: 'PlanDetails',
   components: { PlanDetailsTabs, PlanCard },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
@@ -38,7 +45,7 @@ export default {
       return this.$route.params.id;
     },
     plan() {
-      return this.plans? this.plans.find(p => p._id === this.id) || {} : {};
+      return this.plans ? this.plans.find((p) => p._id === this.id) || {} : {};
     },
     isMember() {
       return (
@@ -60,49 +67,46 @@ export default {
       'sendMessage',
       'thumbUp',
       'thumbDown',
-      'updatePlanLocal'
+      'updatePlanLocal',
     ]),
     onThumbUp(user) {
       this.thumbUp({
         user,
         plan: this.id,
-      })
-        .catch((err) => {
-          this.$notify({
-            group: 'main',
-            title: 'Failed thumbs up.',
-            text: getError(err),
-            type: 'error',
-          });
+      }).catch((err) => {
+        this.$notify({
+          group: 'main',
+          title: 'Failed thumbs up.',
+          text: getError(err),
+          type: 'error',
         });
+      });
     },
     onThumbDown(user) {
       this.thumbDown({
         user,
         plan: this.id,
-      })
-        .catch((err) => {
-          this.$notify({
-            group: 'main',
-            title: 'Failed thumbs down.',
-            text: getError(err),
-            type: 'error',
-          });
+      }).catch((err) => {
+        this.$notify({
+          group: 'main',
+          title: 'Failed thumbs down.',
+          text: getError(err),
+          type: 'error',
         });
+      });
     },
     send(text) {
       this.sendMessage({
         id: this.id,
         text,
-      })
-        .catch((err) => {
-          this.$notify({
-            group: 'main',
-            title: 'Failed to update plan',
-            text: getError(err),
-            type: 'error',
-          });
+      }).catch((err) => {
+        this.$notify({
+          group: 'main',
+          title: 'Failed to update plan',
+          text: getError(err),
+          type: 'error',
         });
+      });
     },
     init() {
       this.getPlan({ id: this.id });
@@ -161,7 +165,7 @@ export default {
   },
   mounted() {
     this.init();
-  }
+  },
 };
 </script>
 

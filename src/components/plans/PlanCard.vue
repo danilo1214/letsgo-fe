@@ -86,13 +86,13 @@
     <Dialog
       v-model="showEdit"
       v-if="isAdmin"
-      title="Edit plan"
+      title="Edit Plan"
       icon="mdi-pencil"
     >
       <plan-form
         :initial="plan"
         :error="error"
-        ok-label='Update Plan'
+        ok-label="Update Plan"
         @cancel="onCancelEdit"
         @submit="onEdit"
       />
