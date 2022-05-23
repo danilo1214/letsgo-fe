@@ -26,15 +26,15 @@
         class="liked-percentage"
         rounded
         color="success"
-        background-color="error"
+        background-color="info"
         :value="likedPercentage"
         height="25"
         dark
       >
-        {{ likedPercentage }}%
-        <span class="font-weight-light ml-2"
-          >{{ likedMessage }}</span
-        ></v-progress-linear
+        {{ likedAmount }} people
+        <span class="font-weight-light ml-2">{{
+          likedMessage
+        }}</span></v-progress-linear
       >
     </v-row>
     <v-row>
@@ -43,6 +43,12 @@
       </v-col>
       <v-col>
         <v-col>
+          <Button
+            v-if="showAddFriend && !friendRequestSent"
+            @click="$emit('add-friend')"
+            label="Add friend"
+            icon-left="mdi-account-plus"
+          />
           <slot />
         </v-col>
       </v-col>
@@ -55,7 +61,7 @@
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title>
-            {{ user.email || '?' }}
+            {{ user.email || 'Hidden' }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -105,12 +111,26 @@ export default {
     likedMessage() {
       return this.currentUser._id === this.user._id? "liked you." : "liked this user.";
     },
+    likedAmount() {
+      if (!this.user._id) return 0;
+      return this.user.thumbsUp.length;
+    },
     likedPercentage() {
       if (!this.user._id) return 0;
       const thumbsUp = this.user.thumbsUp.length;
       const thumbsDown = this.user.thumbsDown.length;
       if (thumbsUp === 0 && thumbsDown === 0) return 0;
       return (100 * thumbsUp) / (thumbsUp + thumbsDown);
+    },
+    friendRequestSent() {
+      return this.currentUser &&
+        this.user.friends &&
+      !this.user.friends.includes(this.currentUser._id);
+    },
+    showAddFriend() {
+      return this.currentUser &&
+      this.user._id &&
+      this.user._id !== this.currentUser._id;
     },
     showThumbOptions() {
       return (
@@ -122,7 +142,7 @@ export default {
       );
     },
     userHidden() {
-      return !this.user._id;
+      return !this.user.birth_date;
     },
     name() {
       return this.userHidden
@@ -130,13 +150,13 @@ export default {
         : `${this.user.first_name} ${this.user.last_name}`;
     },
     age() {
-      return this.userHidden
-        ? '?'
+      return !this.user.birth_date
+        ? 'Hidden'
         : moment().diff(moment(this.user.birth_date), 'years');
     },
     date() {
-      return this.userHidden
-        ? '?'
+      return !this.user.birth_date
+        ? 'Hidden'
         : moment(this.user.birth_date).format('YYYY-MM-DD');
     },
     photo() {

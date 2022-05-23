@@ -2,7 +2,12 @@
   <v-app-bar app>
     <v-app-bar-nav-icon @click="$emit('toggle')"></v-app-bar-nav-icon>
 
-    <combo-box class='mt-5 search-text' label="Search by keywords..." :items="keywords" v-model="form.search" />
+    <combo-box
+      class="mt-5 search-text"
+      label="Search by keywords..."
+      :items="keywords"
+      v-model="form.search"
+    />
 
     <v-menu v-model="menu" :close-on-content-click="false" left bottom>
       <template v-slot:activator="{ on, attrs }">
@@ -65,7 +70,7 @@ export default {
   data() {
     return {
       menu: false,
-      keywords:  ["Party", "Dance", "Drinking", "Sport"],
+      keywords: ['Party', 'Dance', 'Drinking', 'Sport'],
       form: {
         dates: ['1', '2'],
         search: [],
@@ -84,7 +89,7 @@ export default {
     init() {
       const { search, costFrom, costTo, dateFrom, dateTo } = this.$route.query;
 
-      this.form.search = search? search.split(' ') : '';
+      this.form.search = search ? search.split(' ') : '';
       this.form.priceRange = [costFrom || 0, costTo || costFrom || 0];
       this.form.dates = dateFrom && dateTo ? [dateFrom, dateTo] : [];
     },

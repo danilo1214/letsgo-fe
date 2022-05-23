@@ -48,7 +48,7 @@
       </date-picker>
 
       <v-time-picker
-        class='time-picker'
+        class="time-picker"
         format="ampm"
         v-model="plan.time"
         :rules="required('time')"
@@ -156,10 +156,10 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-  .time-picker {
-    .v-picker__title__btn {
-      font-size: 20px;
-    }
+<style lang="scss">
+.time-picker {
+  .v-picker__title__btn {
+    font-size: 20px;
   }
+}
 </style>
