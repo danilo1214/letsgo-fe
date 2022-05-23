@@ -22,6 +22,7 @@
     <v-date-picker
       ref="picker"
       :value="value"
+      :allowed-dates='disablePastDates'
       :range="range"
       min="1950-01-01"
       @input="setDate"
@@ -59,6 +60,9 @@ export default {
     },
   },
   methods: {
+    disablePastDates(val) {
+      return val >= new Date().toISOString().substr(0, 10)
+    },
     setDate(date) {
       this.$emit('input', date);
     },
