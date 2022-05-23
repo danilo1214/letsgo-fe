@@ -70,6 +70,7 @@ export default {
         { title: 'Home', icon: 'mdi-home-city', link: '/' },
         { title: 'My Account', icon: 'mdi-account', link: '/account' },
         { title: 'My Plans', icon: 'mdi-calendar', link: '/my-plans' },
+        { title: 'Friends', icon: 'mdi-account-group', link: '/friends' },
         { title: 'Sign Out', icon: 'mdi-logout', link: '/sign-out' },
       ],
     };
