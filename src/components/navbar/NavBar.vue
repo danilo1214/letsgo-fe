@@ -150,8 +150,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .search-text {
   min-width: 100px;
 }
+
+.v-select__selections {
+  overflow: scroll;
+  flex-wrap: nowrap;
+}
+.v-chip {
+  overflow: initial;
+}
+
 </style>
