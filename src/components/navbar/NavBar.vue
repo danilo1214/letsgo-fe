@@ -7,7 +7,7 @@
       label="Search by keywords..."
       :items="keywords"
       v-model="form.search"
-      @keyup.enter='onSearch'
+      @keyup.enter.native='onSearch'
     />
 
     <v-menu v-model="menu" :close-on-content-click="false" left bottom>
