@@ -64,6 +64,7 @@ export const auth = {
       return axios.postUrl('/user/photo', formData);
     },
     sendThumbsUp: (commit, { user }) => {
+      console.log(user);
       return axios.postUrl(`/user/down/${user}`);
     },
     sendThumbsDown: (commit, { user }) => {
