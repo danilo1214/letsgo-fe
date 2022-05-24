@@ -23,6 +23,7 @@
       <v-img
         v-if="isAdmin && !isLoading"
         :src="getPlanImage"
+        height='200'
         @mouseenter="hover = true"
         @mouseleave="hover = false"
       >
@@ -38,7 +39,7 @@
           />
         </div>
       </v-img>
-      <v-img v-else-if="!isAdmin" :src="getPlanImage" />
+      <v-img v-else-if="!isAdmin" :src="getPlanImage" max-height='300'/>
       <v-card-text>
         {{ plan.description }}
       </v-card-text>
