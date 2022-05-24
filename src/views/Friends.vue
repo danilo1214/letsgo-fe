@@ -16,10 +16,10 @@
       />
     </user-card>
 
-    <v-subheader class="mt-16">Requests({{ requests.length }})</v-subheader>
+    <v-subheader class="mt-16">Requests({{ friendRequests.length }})</v-subheader>
     <v-divider></v-divider>
     <user-card
-      v-for="user in requests"
+      v-for="user in friendRequests"
       :key="user._id"
       :user="user"
       :show-like="false"
@@ -44,8 +44,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import { getData } from '@/helpers/requests';
+import { mapActions, mapGetters } from 'vuex';
 import UserCard from '../components/user/UserCard';
 import Button from '../components/generic/Button';
 
@@ -54,19 +53,11 @@ export default {
   components: { Button, UserCard },
   data() {
     return {
-      user: {
-        friends: [],
-        friend_requests: [],
-      },
+
     };
   },
   computed: {
-    friends() {
-      return this.user.friends;
-    },
-    requests() {
-      return this.user.friend_requests;
-    },
+    ...mapGetters(['friends', 'friendRequests'])
   },
   methods: {
     ...mapActions([
@@ -98,9 +89,7 @@ export default {
       this.init();
     },
     init() {
-      this.getFriendsList().then((result) => {
-        this.user = getData(result);
-      });
+      this.getFriendsList();
     },
   },
   mounted() {

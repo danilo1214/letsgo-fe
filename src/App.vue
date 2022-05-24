@@ -58,6 +58,7 @@ export default {
       'newSocket',
       'updatePlanLocal',
       'addMessage',
+      'newFriendRequest'
     ]),
     onToggle() {
       this.showSideBar = !this.showSideBar;
@@ -79,6 +80,9 @@ export default {
       });
       this.socket.on('plan-update', ({ id, plan }) => {
         this.updatePlanLocal({ id, plan });
+      });
+      this.socket.on('friend-request', (request) => {
+        this.newFriendRequest({ request});
       });
     },
     async init() {
