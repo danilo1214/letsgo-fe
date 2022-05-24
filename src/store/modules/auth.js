@@ -64,11 +64,10 @@ export const auth = {
       return axios.postUrl('/user/photo', formData);
     },
     sendThumbsUp: (commit, { user }) => {
-      console.log(user);
-      return axios.postUrl(`/user/down/${user}`);
+      return axios.postUrl(`/user/up/${user}`);
     },
     sendThumbsDown: (commit, { user }) => {
-      return axios.postUrl(`/user/up/${user}`);
+      return axios.postUrl(`/user/down/${user}`);
     },
     checkAuth: ({ commit }) => {
       const token = localStorage.getItem('letsgo-jwt');
