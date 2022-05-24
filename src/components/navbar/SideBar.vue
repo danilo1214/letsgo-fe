@@ -21,7 +21,12 @@
           link
         >
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon v-if="item.title !== 'Friends' || !friendRequests.length">{{ item.icon }}</v-icon>
+            <v-badge v-else :content='friendRequests.length'>
+              <v-icon>
+                {{item.icon}}
+              </v-icon>
+            </v-badge>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -77,7 +82,7 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
-    ...mapGetters(['signedIn']),
+    ...mapGetters(['signedIn', 'friendRequests']),
     name() {
       const { user } = this;
       return `${user.first_name} ${user.last_name}`;
