@@ -157,9 +157,4 @@ export default {
 </script>
 
 <style lang="scss">
-.time-picker {
-  .v-picker__title__btn {
-    font-size: 20px;
-  }
-}
 </style>
