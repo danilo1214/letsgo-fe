@@ -63,6 +63,12 @@ export const auth = {
     verifySelfie: (commit, { formData }) => {
       return axios.postUrl('/user/photo', formData);
     },
+    sendThumbsUp: (commit, { user }) => {
+      return axios.postUrl(`/user/down/${user}`);
+    },
+    sendThumbsDown: (commit, { user }) => {
+      return axios.postUrl(`/user/up/${user}`);
+    },
     checkAuth: ({ commit }) => {
       const token = localStorage.getItem('letsgo-jwt');
       axios.setToken(token);
