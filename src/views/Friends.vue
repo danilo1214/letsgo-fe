@@ -2,7 +2,13 @@
   <div class="pa-10">
     <v-subheader>Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
-    <user-card v-for="user in friends" :key="user._id" :user="user" @thumb-up='onThumbUp' @thumbDown='onThumbDown'>
+    <user-card
+      v-for="user in friends"
+      :key="user._id"
+      :user="user"
+      @thumb-up="onThumbUp(user)"
+      @thumbDown="onThumbDown(user)"
+    >
       <Button
         label="Remove friend"
         icon-left="mdi-account-minus"
@@ -69,7 +75,7 @@ export default {
       'declineFriendRequest',
       'removeFriend',
       'sendThumbsUp',
-      'sendThumbsDown'
+      'sendThumbsDown',
     ]),
     async onThumbUp(user) {
       await this.sendThumbsUp({ user: user._id });

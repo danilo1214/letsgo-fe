@@ -7,7 +7,7 @@
       label="Search by keywords..."
       :items="keywords"
       v-model="form.search"
-      @keyup.enter.native='onSearch'
+      @keyup.enter.native="onSearch"
     />
 
     <v-menu v-model="menu" :close-on-content-click="false" left bottom>
@@ -162,5 +162,4 @@ export default {
 .v-chip {
   overflow: initial;
 }
-
 </style>
