@@ -12,7 +12,7 @@
           rounded
           to="/plans/"
           text
-          label="What's popular?"
+          label="What's Popular?"
         />
         <Button class="ml-3 mt-12" rounded to="/sign-in" label="Get Started" />
       </v-col>
@@ -38,7 +38,7 @@
         />
       </v-col>
       <v-col>
-        <Testimonial name="Kendrick Auston" text="Damn, no cap it is lit" />
+        <Testimonial name="Kendrick Auston" text="Damn, I love it!" />
       </v-col>
     </v-row>
   </div>

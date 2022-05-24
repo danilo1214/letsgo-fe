@@ -50,7 +50,7 @@ export default {
     return {
       user: {
         friends: [],
-        friend_requests: []
+        friend_requests: [],
       },
     };
   },
@@ -89,7 +89,7 @@ export default {
   },
   mounted() {
     this.init();
-  }
+  },
 };
 </script>
 

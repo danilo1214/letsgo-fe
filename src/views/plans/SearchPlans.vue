@@ -10,8 +10,8 @@
     >
     <v-subheader>Results</v-subheader>
     <v-divider></v-divider>
-    <Plans v-if='plans && plans.length' :plans="plans" />
-    <h1 class='text-center mt-15' v-else>Sorry, no plans were found</h1>
+    <Plans v-if="plans && plans.length" :plans="plans" />
+    <h1 class="text-center mt-15" v-else>Sorry, no plans were found</h1>
   </div>
 </template>
 

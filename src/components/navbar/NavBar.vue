@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       menu: false,
-      keywords: ['Party', 'Dance', 'Drinking', 'Sport'],
+      keywords: ['Party', 'Dance', 'Drinking', 'Sport', 'Coffee', 'Nature'],
       form: {
         dates: ['1', '2'],
         search: [],

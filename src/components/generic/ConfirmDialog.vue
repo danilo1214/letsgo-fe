@@ -7,12 +7,14 @@
             icon
           }}</v-icon></v-toolbar-title
         >
-        <v-toolbar-title>{{ capitalize(action) }} {{ entity }}</v-toolbar-title>
+        <v-toolbar-title
+          >{{ capitalize(action) }} {{ capitalize(entity) }}</v-toolbar-title
+        >
       </v-toolbar>
       <v-card-title class="text-center" v-if="icon"> </v-card-title>
 
       <v-card-text>
-        Are you sure you want to {{ action }} the {{ entity }} '{{ name }}'?
+        Are you sure you want to {{ action }} the {{ entity }} {{ name }}?
       </v-card-text>
 
       <v-card-actions>

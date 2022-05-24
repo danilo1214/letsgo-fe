@@ -4,7 +4,16 @@
 
     <v-subheader>Your upcoming plans</v-subheader>
     <v-divider></v-divider>
-    <plan-slide :plans="myPlans" />
+    <plan-slide v-if="myPlans && myPlans.length" :plans="myPlans" />
+    <template v-else>
+      <h1 class="mt-10">You do not have any upcoming plans</h1>
+      <Button
+        class="ml-auto mt-12 text-center"
+        rounded
+        to="/plans/"
+        label="What's Popular?"
+      />
+    </template>
   </div>
 </template>
 
@@ -12,10 +21,11 @@
 import { mapActions, mapState } from 'vuex';
 import { getError, getData } from '@/helpers/requests';
 import PlanSlide from '../components/plans/PlanSlide';
+import Button from '../components/generic/Button';
 
 export default {
   name: 'Welcome',
-  components: { PlanSlide },
+  components: { Button, PlanSlide },
   data() {
     return {
       myPlans: [],

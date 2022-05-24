@@ -44,7 +44,12 @@
       <v-col>
         <v-col>
           <Button
-            v-if="showAddFriend && !friendRequestSent && !friendRequestRecieved && !isFriend"
+            v-if="
+              showAddFriend &&
+              !friendRequestSent &&
+              !friendRequestRecieved &&
+              !isFriend
+            "
             @click="$emit('add-friend', user._id)"
             label="Add friend"
             icon-left="mdi-account-plus"
