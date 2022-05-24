@@ -34,7 +34,7 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     name() {
-      return this.user.first_name + this.user.last_name;
+      return `${this.user.first_name} ${this.user.last_name}`;
     },
   },
   methods: {

@@ -139,6 +139,11 @@ export default {
         });
     },
   },
+  watch: {
+    file() {
+      this.error = '';
+    }
+  }
 };
 </script>
 
