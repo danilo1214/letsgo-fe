@@ -26,7 +26,16 @@
       :range="range"
       min="1950-01-01"
       @input="setDate"
-    ></v-date-picker>
+    >
+      <v-spacer></v-spacer>
+      <v-btn
+        text
+        color="primary"
+        @click="$refs.menu.save(date)"
+      >
+        OK
+      </v-btn>
+    </v-date-picker>
   </v-menu>
 </template>
 
