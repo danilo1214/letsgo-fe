@@ -1,29 +1,34 @@
 <template>
   <div class="pa-10">
-    <v-alert v-if="query.keywords" type="info"
+    <Loader v-if='isLoading' />
+    <template v-else>
+      <v-alert v-if="query.keywords" type="info"
       >Searching for keywords {{ query.keywords }}</v-alert
-    >
-    <v-alert v-if="priceRange" type="info">{{ priceRange }}</v-alert>
-    <v-alert v-if="query.dates.length" type="info"
+      >
+      <v-alert v-if="priceRange" type="info">{{ priceRange }}</v-alert>
+      <v-alert v-if="query.dates.length" type="info"
       >Searching for dates between {{ query.dates[0] }} -
-      {{ query.dates[1] }}</v-alert
-    >
-    <v-subheader>Results</v-subheader>
-    <v-divider></v-divider>
-    <Plans v-if="plans && plans.length" :plans="plans" />
-    <h1 class="text-center mt-15" v-else>Sorry, no plans were found</h1>
+        {{ query.dates[1] }}</v-alert
+      >
+      <v-subheader>Results</v-subheader>
+      <v-divider></v-divider>
+      <Plans v-if="plans && plans.length" :plans="plans" />
+      <h1 class="text-center mt-15" v-else>Sorry, no plans were found</h1>
+    </template>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import Plans from '@/components/plans/Plans';
+import Loader from '../../components/generic/Loader';
 
 export default {
   name: 'search-plans',
-  components: { Plans },
+  components: { Loader, Plans },
   data() {
     return {
+      isLoading: false,
       query: {
         keywords: '',
         dates: [],
@@ -56,13 +61,14 @@ export default {
   },
   methods: {
     ...mapActions(['loadPlans']),
-    init() {
+    async init() {
       const { query } = this.$route;
       const { search, dateFrom, dateTo } = query;
-
-      this.loadPlans({
+      this.isLoading = true;
+      await this.loadPlans({
         query,
       });
+      this.isLoading = false;
 
       this.query.keywords = search ? search.split(' ').join(', ') : '';
       this.query.dates = dateFrom && dateTo ? [dateFrom, dateTo] : [];

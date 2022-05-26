@@ -106,8 +106,6 @@ export default {
         return {
           time: '',
           date: null,
-          longitude: 0,
-          latitude: 0,
         };
       },
     },

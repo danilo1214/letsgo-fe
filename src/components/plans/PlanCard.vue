@@ -81,6 +81,14 @@
           @click.stop.prevent="showDelete = true"
           label="Delete"
         />
+        <Button
+          rounded
+          color="info"
+          text
+          v-if="isAdmin"
+          @click.stop.prevent="showDuplicate = true"
+          label="Duplicate"
+        />
       </v-card-actions>
     </v-card>
 
@@ -96,6 +104,21 @@
         ok-label="Update Plan"
         @cancel="onCancelEdit"
         @submit="onEdit"
+      />
+    </Dialog>
+
+    <Dialog
+      v-model="showDuplicate"
+      v-if="isAdmin"
+      title="Duplicate Plan"
+      icon="mdi-content-duplicate"
+    >
+      <plan-form
+        :initial="duplicatePlanInitial"
+        :error="duplicateError"
+        ok-label="Duplicate Plan"
+        @cancel="onCancelDuplicate"
+        @submit="onDuplicate"
       />
     </Dialog>
     <confirm-dialog
@@ -133,8 +156,10 @@ export default {
   data() {
     return {
       error: '',
+      duplicateError: '',
       showDelete: false,
       showEdit: false,
+      showDuplicate: false,
       image: null,
       isLoading: false,
       hover: false,
@@ -142,6 +167,20 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
+    duplicatePlanInitial() {
+      const {plan} = this;
+      return {
+        date: plan.date,
+        time: plan.time,
+        cost_upper: plan.cost_upper,
+        cost_lower: plan.cost_lower,
+        caption: plan.caption,
+        description: plan.description,
+        address: plan.address,
+        admin: plan.admin._id || plan.admin,
+        photo_url: plan.photo_url
+      }
+    },
     isAdmin() {
       return (
         this.plan &&
@@ -211,6 +250,7 @@ export default {
       'updatePlan',
       'uploadPlanImage',
       'createRequest',
+      'createPlan'
     ]),
     onRequestJoin() {
       this.createRequest({ plan: this.plan._id })
@@ -244,6 +284,27 @@ export default {
       await this.uploadPlanImage({ id: this.plan._id, formData });
       this.image = null;
       this.isLoading = false;
+    },
+    onDuplicate(plan) {
+      this.createPlan({
+        plan: {
+          ...plan,
+        },
+      })
+        .then(() => {
+          this.isLoading = false;
+          this.$router.replace({ name: 'my-plans' });
+          this.$notify({
+            group: 'main',
+            title: 'Success',
+            text: 'Successfully created plan',
+            type: 'success',
+          });
+        })
+        .catch((err) => {
+          this.isLoading = false;
+          this.duplicateError = getError(err);
+        });
     },
     onEdit(plan) {
       const { _id: id } = plan;
@@ -285,6 +346,9 @@ export default {
     },
     onCancelEdit() {
       this.showEdit = false;
+    },
+    onCancelDuplicate() {
+      this.showDuplicate = false;
     },
   },
 };
