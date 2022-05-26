@@ -6,7 +6,7 @@
     max-width="600"
   >
     <v-card>
-      <v-toolbar color="warning" dark
+      <v-toolbar color="warning darken-1" dark
         ><v-icon class="mr-5">mdi-account-plus</v-icon>You are not signed in
       </v-toolbar>
       <v-card-text>

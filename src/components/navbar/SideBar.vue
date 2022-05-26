@@ -21,10 +21,12 @@
           link
         >
           <v-list-item-icon>
-            <v-icon v-if="item.title !== 'Friends' || !friendRequests.length">{{ item.icon }}</v-icon>
-            <v-badge v-else :content='friendRequests.length'>
+            <v-icon v-if="item.title !== 'Friends' || !friendRequests.length">{{
+              item.icon
+            }}</v-icon>
+            <v-badge v-else :content="friendRequests.length">
               <v-icon>
-                {{item.icon}}
+                {{ item.icon }}
               </v-icon>
             </v-badge>
           </v-list-item-icon>

@@ -16,7 +16,9 @@
       />
     </user-card>
 
-    <v-subheader class="mt-16">Requests({{ friendRequests.length }})</v-subheader>
+    <v-subheader class="mt-16"
+      >Requests({{ friendRequests.length }})</v-subheader
+    >
     <v-divider></v-divider>
     <user-card
       v-for="user in friendRequests"
@@ -52,12 +54,10 @@ export default {
   name: 'Friends',
   components: { Button, UserCard },
   data() {
-    return {
-
-    };
+    return {};
   },
   computed: {
-    ...mapGetters(['friends', 'friendRequests'])
+    ...mapGetters(['friends', 'friendRequests']),
   },
   methods: {
     ...mapActions([

@@ -1,8 +1,8 @@
 <template>
   <div class="pa-10">
-    <v-subheader>You are organizing</v-subheader>
+    <v-subheader>You are organizing these upcoming plans</v-subheader>
     <v-divider></v-divider>
-    <Plans v-if="plans && plans.length" :plans="plans"> </Plans>
+    <Plans v-if="upcomingPlans && upcomingPlans.length" :plans="upcomingPlans"> </Plans>
     <template v-else>
       <h1 class="mt-10">You are not hosting any upcoming plans</h1>
       <Button
@@ -13,6 +13,13 @@
         icon-left="mdi-plus"
       />
     </template>
+
+    <v-spacer class='mt-15'></v-spacer>
+
+    <v-subheader>Past plans you've organized</v-subheader>
+    <v-divider></v-divider>
+    <Plans v-if="oldPlans && oldPlans.length" :plans="oldPlans"> </Plans>
+    <h1 v-else class="mt-10">You haven't organized any plans.</h1>
   </div>
 </template>
 
@@ -20,6 +27,7 @@
 import { mapActions, mapGetters, mapState } from 'vuex';
 import Plans from '@/components/plans/Plans';
 import Button from '../../components/generic/Button';
+import moment from 'moment';
 
 export default {
   name: 'my-plans',
@@ -27,6 +35,12 @@ export default {
   computed: {
     ...mapGetters(['plans']),
     ...mapState({ user: (state) => state.auth.user }),
+    oldPlans() {
+      return this.plans.filter(plan => !moment().isBefore(moment(plan.date)));
+    },
+    upcomingPlans() {
+      return this.plans.filter(plan => moment().isBefore(moment(plan.date)));
+    }
   },
   methods: {
     ...mapActions(['loadPlans']),
@@ -34,6 +48,7 @@ export default {
       const { user } = this;
       const query = {
         admin: user._id,
+        old: true
       };
       this.loadPlans({
         query,

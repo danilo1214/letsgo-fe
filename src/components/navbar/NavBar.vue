@@ -55,6 +55,8 @@
     >
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
+
+    <Button label="🔥 Hot" small color="error darken-1" class='mx-5' @click="onSearchEmpty" />
   </v-app-bar>
 </template>
 
@@ -64,10 +66,11 @@ import DatePicker from '@/components/generic/DatePicker';
 import Slider from '@/components/generic/Slider';
 import lodash from 'lodash';
 import ComboBox from '../generic/ComboBox';
+import Button from '../generic/Button';
 
 export default {
   name: 'NavBar',
-  components: { ComboBox, Slider, DatePicker },
+  components: { Button, ComboBox, Slider, DatePicker },
   data() {
     return {
       menu: false,
@@ -96,6 +99,11 @@ export default {
     },
     formatPrice(value) {
       return `$${value}`;
+    },
+    onSearchEmpty() {
+      this.$router.push({
+        name: 'plans'
+      })
     },
     constructQuery() {
       const { dates, priceRange, search } = this.form;
