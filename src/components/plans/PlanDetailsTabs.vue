@@ -45,6 +45,7 @@
             class="mt-8"
             @accept="(user) => $emit('accept', user)"
             @decline="(user) => $emit('decline', user)"
+            @add-friend="(user) => $emit('add-friend', user)"
             v-for="request in plan.requests"
             :key="request._id"
             :user="request"

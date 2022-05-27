@@ -293,7 +293,11 @@ export default {
       })
         .then(() => {
           this.isLoading = false;
-          this.$router.replace({ name: 'my-plans' });
+          if(this.$route.name === 'my-plans') {
+            this.$router.go();
+          } else {
+            this.$router.replace({ name: 'my-plans' });
+          }
           this.$notify({
             group: 'main',
             title: 'Success',

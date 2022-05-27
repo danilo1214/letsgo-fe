@@ -28,20 +28,26 @@
       @input="setDate"
     >
       <v-spacer></v-spacer>
-      <v-btn
+      <Button
+        label='Cancel'
         text
-        color="primary"
-        @click="$refs.menu.save(date)"
-      >
-        OK
-      </v-btn>
+        color='info'
+        @click="$refs.menu.save(null)"
+      />
+      <Button
+        label='OK'
+        text
+        @click="$refs.menu.save(value)"
+      />
     </v-date-picker>
   </v-menu>
 </template>
 
 <script>
+import Button from './Button';
 export default {
   name: 'DatePicker',
+  components: { Button },
   props: {
     value: {
       type: [Date, String, Array],
