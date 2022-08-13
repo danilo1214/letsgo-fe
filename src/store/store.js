@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 import modules from './modules';
 import io from 'socket.io-client';
+
 const { plan, auth, request, friend } = modules;
 
 export default (Vue) => {

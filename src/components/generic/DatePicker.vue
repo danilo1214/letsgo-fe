@@ -28,17 +28,8 @@
       @input="setDate"
     >
       <v-spacer></v-spacer>
-      <Button
-        label='Cancel'
-        text
-        color='info'
-        @click="$refs.menu.save(null)"
-      />
-      <Button
-        label='OK'
-        text
-        @click="$refs.menu.save(value)"
-      />
+      <Button label="Cancel" text color="info" @click="$refs.menu.save(null)" />
+      <Button label="OK" text @click="$refs.menu.save(value)" />
     </v-date-picker>
   </v-menu>
 </template>

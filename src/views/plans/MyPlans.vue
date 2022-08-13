@@ -1,10 +1,14 @@
 <template>
   <div class="pa-10">
-    <Loader v-if='isLoading' />
+    <Loader v-if="isLoading" />
     <template v-else>
       <v-subheader>You are organizing these upcoming plans</v-subheader>
       <v-divider></v-divider>
-      <Plans v-if="upcomingPlans && upcomingPlans.length" :plans="upcomingPlans"> </Plans>
+      <Plans
+        v-if="upcomingPlans && upcomingPlans.length"
+        :plans="upcomingPlans"
+      >
+      </Plans>
       <template v-else>
         <h1 class="mt-10">You are not hosting any upcoming plans</h1>
         <Button
@@ -16,7 +20,7 @@
         />
       </template>
 
-      <v-spacer class='mt-15'></v-spacer>
+      <v-spacer class="mt-15"></v-spacer>
 
       <v-subheader>Past plans you've organized</v-subheader>
       <v-divider></v-divider>
@@ -38,18 +42,18 @@ export default {
   components: { Loader, Button, Plans },
   data() {
     return {
-      isLoading: false
-    }
+      isLoading: false,
+    };
   },
   computed: {
     ...mapGetters(['plans']),
     ...mapState({ user: (state) => state.auth.user }),
     oldPlans() {
-      return this.plans.filter(plan => !moment().isBefore(moment(plan.date)));
+      return this.plans.filter((plan) => !moment().isBefore(moment(plan.date)));
     },
     upcomingPlans() {
-      return this.plans.filter(plan => moment().isBefore(moment(plan.date)));
-    }
+      return this.plans.filter((plan) => moment().isBefore(moment(plan.date)));
+    },
   },
   methods: {
     ...mapActions(['loadPlans']),
@@ -57,7 +61,7 @@ export default {
       const { user } = this;
       const query = {
         admin: user._id,
-        old: true
+        old: true,
       };
       this.isLoading = true;
       await this.loadPlans({

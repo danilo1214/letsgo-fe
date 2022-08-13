@@ -16,9 +16,9 @@
       />
     </user-card>
 
-    <v-subheader class="mt-16"
-      >Friend Requests({{ friendRequests.length }})</v-subheader
-    >
+    <v-subheader class="mt-16">
+      Friend Requests({{ friendRequests.length }})
+    </v-subheader>
     <v-divider></v-divider>
     <user-card
       v-for="user in friendRequests"

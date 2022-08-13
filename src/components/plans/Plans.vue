@@ -1,12 +1,10 @@
 <template>
   <v-container fluid>
-    <plan-card
-      v-for="plan in plans"
-      :key="plan._id"
-      :plan="plan"
-      @join="onPlanJoin"
-    >
-    </plan-card>
+    <v-row>
+      <v-col v-for="plan in plans" :key="plan._id" sm="12" md="6">
+        <plan-card :plan="plan" @join="onPlanJoin"> </plan-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

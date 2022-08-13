@@ -1,5 +1,10 @@
 <template>
-  <user-card :show-like='false' class="mt-8" :user="user" @add-friend="(user) => $emit('add-friend', user)">
+  <user-card
+    :show-like="false"
+    class="mt-8"
+    :user="user"
+    @add-friend="(user) => $emit('add-friend', user)"
+  >
     <v-card-actions>
       <Button
         label="Accept"

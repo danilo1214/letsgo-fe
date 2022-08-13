@@ -70,10 +70,10 @@
       type="password"
       required
     ></v-text-field>
+
     <v-alert type="error" v-if="error">
       {{ error }}
     </v-alert>
-
     <Button
       :disabled="!valid"
       class="mr-4 mt-10"
@@ -123,12 +123,11 @@ export default {
     },
     onSubmit() {
       const valid = this.$refs.form.validate();
-      const { user } = this;
-
       if (!valid) {
         return;
       }
 
+      const { user } = this;
       this.signUp({ user })
         .then(() => {
           this.$router.replace({ name: 'home' });

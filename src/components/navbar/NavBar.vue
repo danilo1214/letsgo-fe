@@ -56,7 +56,13 @@
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
 
-    <Button label="🔥 Hot" small color="error darken-1" class='mx-5' @click="onSearchEmpty" />
+    <Button
+      label="🔥 Hot"
+      small
+      color="error darken-1"
+      class="mx-5"
+      @click="onSearchEmpty"
+    />
   </v-app-bar>
 </template>
 
@@ -102,8 +108,8 @@ export default {
     },
     onSearchEmpty() {
       this.$router.push({
-        name: 'plans'
-      })
+        name: 'plans',
+      });
     },
     constructQuery() {
       const { dates, priceRange, search } = this.form;

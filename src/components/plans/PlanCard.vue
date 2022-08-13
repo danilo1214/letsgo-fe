@@ -168,7 +168,7 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     duplicatePlanInitial() {
-      const {plan} = this;
+      const { plan } = this;
       return {
         date: plan.date,
         time: plan.time,
@@ -178,8 +178,8 @@ export default {
         description: plan.description,
         address: plan.address,
         admin: plan.admin._id || plan.admin,
-        photo_url: plan.photo_url
-      }
+        photo_url: plan.photo_url,
+      };
     },
     isAdmin() {
       return (
@@ -250,7 +250,7 @@ export default {
       'updatePlan',
       'uploadPlanImage',
       'createRequest',
-      'createPlan'
+      'createPlan',
     ]),
     onRequestJoin() {
       this.createRequest({ plan: this.plan._id })
@@ -293,7 +293,7 @@ export default {
       })
         .then(() => {
           this.isLoading = false;
-          if(this.$route.name === 'my-plans') {
+          if (this.$route.name === 'my-plans') {
             this.$router.go();
           } else {
             this.$router.replace({ name: 'my-plans' });

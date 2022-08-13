@@ -5,3 +5,7 @@ export const capitalize = (s) => {
     .map((c) => c.charAt(0).toUpperCase() + c.slice(1));
   return capitalized.join(' ');
 };
+
+export const fullName = (user) => {
+  return `${user.first_name} ${user.last_name}`;
+};

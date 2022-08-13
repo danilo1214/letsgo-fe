@@ -56,7 +56,6 @@ export const plan = {
         })
         .then((result) => {
           const { data } = result;
-
           commit('SET_PLANS', data);
           return data;
         });

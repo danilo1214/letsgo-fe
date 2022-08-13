@@ -39,7 +39,6 @@ export default {
       loaded: false,
       socket: null,
       showSideBar: true,
-      showSignOut: false,
       publicRoutes: ['home', 'sign-in', 'sign-up', 'plans'],
     };
   },
@@ -48,7 +47,10 @@ export default {
     ...mapGetters(['signedIn']),
     isPublicRoute() {
       const { name } = this.$route;
-      return name ? this.publicRoutes.includes(name) : false;
+      return name && this.publicRoutes.includes(name);
+    },
+    showSignOut() {
+      return this.$route.name === 'sign-out';
     },
   },
   methods: {
@@ -64,17 +66,20 @@ export default {
       this.showSideBar = !this.showSideBar;
     },
     onCancelSignOut() {
-      this.showSignOut = false;
       this.$router.go(-1);
     },
     onSignOut() {
       this.signOut();
-      this.showSignOut = false;
       this.$router.replace({ name: 'home' });
     },
     async initSocket() {
-      console.log(this.user);
+      // Set the socket, check if it exists.
       this.socket = await this.newSocket();
+      if (!this.socket) {
+        return;
+      }
+
+      // Set socket event listeners;
       this.socket.on('plan-message', ({ id, message }) => {
         this.addMessage({ id, message });
       });
@@ -87,17 +92,14 @@ export default {
     },
     async init() {
       await this.checkAuth();
-      const { signedIn, isPublicRoute, $route } = this;
+      const { signedIn, isPublicRoute, user, socket } = this;
 
+      // Users can not access a private route unless signed in.
       if (!signedIn && !isPublicRoute) {
         await this.$router.replace({ name: 'sign-in-banner' });
       }
-
-      if ($route.name === 'sign-out') {
-        this.showSignOut = true;
-      }
-
-      if (this.user && this.socket === null) {
+      // Socket only works when signed in.
+      if (user && socket === null) {
         await this.initSocket();
       }
 
