@@ -99,7 +99,7 @@ export default {
     init() {
       const { search, costFrom, costTo, dateFrom, dateTo } = this.$route.query;
 
-      this.form.search = search ? search.split(' ') : '';
+      this.form.search = search ? search.split(' ') : [];
       this.form.priceRange = [costFrom || 0, costTo || costFrom || 0];
       this.form.dates = dateFrom && dateTo ? [dateFrom, dateTo] : [];
     },

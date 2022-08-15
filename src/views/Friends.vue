@@ -24,7 +24,7 @@
       v-for="user in friendRequests"
       :key="user._id"
       :user="user"
-      :show-like="false"
+      :show-thumb="false"
     >
       <v-card-actions>
         <Button

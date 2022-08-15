@@ -1,6 +1,6 @@
 <template>
   <user-card
-    :show-like="false"
+    :show-thumb="false"
     class="mt-8"
     :user="user"
     @add-friend="(user) => $emit('add-friend', user)"

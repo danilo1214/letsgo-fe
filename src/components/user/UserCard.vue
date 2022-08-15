@@ -1,8 +1,8 @@
 <template>
   <v-card class="mx-auto">
-    <v-subheader class="title text-right"
-      >{{ name }} <span class="font-italic pl-2">({{ age }})</span></v-subheader
-    >
+    <v-subheader class="title text-right">
+      {{ name }} <span class="font-italic pl-2">({{ age }})</span>
+    </v-subheader>
     <v-row class="pl-6 pt-3" v-if="showThumbOptions">
       <Button
         color="success"
@@ -32,10 +32,8 @@
         dark
       >
         {{ likedAmount }} people
-        <span class="font-weight-light ml-2">{{
-          likedMessage
-        }}</span></v-progress-linear
-      >
+        <span class="font-weight-light ml-2">{{ likedMessage }}</span>
+      </v-progress-linear>
     </v-row>
     <v-row>
       <v-col>
@@ -44,12 +42,7 @@
       <v-col>
         <v-col>
           <Button
-            v-if="
-              showAddFriend &&
-              !friendRequestSent &&
-              !friendRequestRecieved &&
-              !isFriend
-            "
+            v-if="showAddFriend"
             @click="$emit('add-friend', user._id)"
             label="Add friend"
             icon-left="mdi-account-plus"
@@ -110,7 +103,7 @@ export default {
       type: Object,
       required: true,
     },
-    showLike: {
+    showThumb: {
       type: Boolean,
       default: true,
     },
@@ -118,13 +111,23 @@ export default {
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
     likedMessage() {
-      return this.currentUser._id === this.user._id
-        ? 'liked you.'
-        : 'liked this user.';
+      const sufix =
+        this.currentUser._id === this.user._id ? ' you.' : ' this user.';
+      let prefix = '';
+      if (this.likedAmount >= 0) {
+        prefix = ' liked';
+      } else {
+        prefix = ' disliked';
+      }
+      return prefix + sufix;
     },
     likedAmount() {
-      if (!this.user._id) return 0;
-      return this.user.thumbsUp.length;
+      const { user } = this;
+      if (!user._id) return 0;
+      if (user.thumbsUp.length) {
+        return user.thumbsUp.length;
+      }
+      return user.thumbsDown.length ? -user.thumbsDown.length : 0;
     },
     likedPercentage() {
       if (!this.user._id) return 0;
@@ -158,7 +161,10 @@ export default {
       return (
         this.currentUser &&
         this.user._id &&
-        this.user._id !== this.currentUser._id
+        this.user._id !== this.currentUser._id &&
+        !this.friendRequestSent &&
+        !this.friendRequestRecieved &&
+        !this.isFriend
       );
     },
     showThumbOptions() {
@@ -168,7 +174,7 @@ export default {
         this.user._id !== this.currentUser._id &&
         !this.user.thumbsUp.includes(this.currentUser._id) &&
         !this.user.thumbsDown.includes(this.currentUser._id) &&
-        this.showLike
+        this.showThumb
       );
     },
     userHidden() {
@@ -180,12 +186,12 @@ export default {
         : `${this.user.first_name} ${this.user.last_name}`;
     },
     age() {
-      return !this.user.birth_date
+      return this.userHidden
         ? 'Hidden'
         : moment().diff(moment(this.user.birth_date), 'years');
     },
     date() {
-      return !this.user.birth_date
+      return this.userHidden
         ? 'Hidden'
         : moment(this.user.birth_date).format('YYYY-MM-DD');
     },
