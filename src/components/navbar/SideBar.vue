@@ -5,7 +5,7 @@
     @input="(v) => $emit('input', v)"
     mobile-breakpoint="xs"
   >
-    <v-list-item class="px-2" v-if='signedIn'>
+    <v-list-item class="px-2" v-if="signedIn">
       <Avatar :user="user" />
       <v-list-item-title>{{ name }}</v-list-item-title>
     </v-list-item>
@@ -20,14 +20,14 @@
         link
       >
         <v-list-item-icon>
-          <v-icon v-if="item.title !== 'Friends' || !friendRequests.length">{{
-              item.icon
-            }}</v-icon>
-          <v-badge v-else :content="friendRequests.length">
+          <v-badge v-if='item.notifications' :content="item.notifications">
             <v-icon>
               {{ item.icon }}
             </v-icon>
           </v-badge>
+          <v-icon v-else>
+            {{item.icon }}
+          </v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>
@@ -36,21 +36,9 @@
       </v-list-item>
     </v-list>
 
-    <div class="mt-5">
-      <Button
-        v-if="signedIn"
-        class="ml-5"
-        label="Plan"
-        icon-left="mdi-plus"
-        to="/new"
-      />
-      <Button
-        v-else
-        class="ml-5"
-        to="/sign-in"
-        label="Sign in"
-        icon-left="mdi-import"
-      />
+    <div class="mt-5 ml-5">
+      <Button v-if="signedIn" label="Plan" icon-left="mdi-plus" to="/new" />
+      <Button v-else to="/sign-in" label="Sign in" icon-left="mdi-import" />
     </div>
   </v-navigation-drawer>
 </template>
@@ -71,23 +59,47 @@ export default {
   },
   data() {
     return {
-      items: [
-        { title: 'Home', icon: 'mdi-home-city', link: '/', isPublic: true},
-        { title: 'My Account', icon: 'mdi-account', link: '/account', isPublic: false},
-        { title: 'My Plans', icon: 'mdi-calendar', link: '/my-plans', isPublic: false },
-        { title: 'Friends', icon: 'mdi-account-group', link: '/friends', isPublic: false },
-        { title: 'Sign Out', icon: 'mdi-logout', link: '/sign-out', isPublic: false },
-      ],
     };
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['signedIn', 'friendRequests']),
+    items() {
+      return [
+        { title: 'Home', icon: 'mdi-home-city', link: '/', isPublic: true },
+        {
+          title: 'My Account',
+          icon: 'mdi-account',
+          link: '/account',
+          isPublic: false,
+          notifications: this.user && this.user.email_verified && this.user.photo_verified? 0 : 1
+        },
+        {
+          title: 'My Plans',
+          icon: 'mdi-calendar',
+          link: '/my-plans',
+          isPublic: false,
+        },
+        {
+          title: 'Friends',
+          icon: 'mdi-account-group',
+          link: '/friends',
+          isPublic: false,
+          notifications: this.friendRequests.length
+        },
+        {
+          title: 'Sign Out',
+          icon: 'mdi-logout',
+          link: '/sign-out',
+          isPublic: false,
+        },
+      ]
+    },
     availableRoutes() {
-      if(this.signedIn) {
+      if (this.signedIn) {
         return this.items;
       }
-      return this.items.filter(item => item.isPublic);
+      return this.items.filter((item) => item.isPublic);
     },
     name() {
       return `${this.user.first_name} ${this.user.last_name}`;

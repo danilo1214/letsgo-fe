@@ -38,14 +38,13 @@ export default {
   name: 'Avatar',
   computed: {
     isVerified() {
-      const { user } = this;
-      return user.email_verified && user.photo_verified;
+      return this.user && this.user.email_verified && this.user.photo_verified;
     },
     verifiedColor() {
       return this.isVerified ? 'primary' : 'error';
     },
     verifiedText() {
-      return this.isVerified ? 'Account verified' : 'Account not verified';
+      return this.isVerified ? 'Verified' : 'Unverified';
     },
     photo() {
       return this.user.photo_url || '../../../assets/default-profile.png';

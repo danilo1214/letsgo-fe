@@ -53,35 +53,13 @@
     </v-row>
     <v-divider class="mt-2"></v-divider>
     <v-list>
-      <v-list-item>
+      <v-list-item v-for="item in userDataList" :key="item.label">
         <v-list-item-action>
-          <v-icon color="primary darken-1">mdi-email</v-icon>
+          <v-icon color="primary darken-1">{{ item.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title>
-            {{ user.email || 'Hidden' }}
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-list-item>
-        <v-list-item-action>
-          <v-icon color="primary darken-1">mdi-gender-male-female</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ user.sex || '?' }}
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-list-item>
-        <v-list-item-action>
-          <v-icon color="primary darken-1">mdi-cake-variant</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ date }}
+            {{ item.value }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -110,6 +88,25 @@ export default {
   },
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
+    userDataList() {
+      return [
+        {
+          label: 'Email',
+          icon: 'mdi-email',
+          value: this.user.email || 'Hidden',
+        },
+        {
+          label: 'Sex',
+          icon: 'mdi-gender-male-female',
+          value: this.user.sex || 'Hidden',
+        },
+        {
+          label: 'Birthday',
+          icon: 'mdi-cake-variant',
+          value: this.date,
+        },
+      ];
+    },
     likedMessage() {
       const sufix =
         this.currentUser._id === this.user._id ? ' you.' : ' this user.';

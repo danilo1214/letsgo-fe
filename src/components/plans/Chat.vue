@@ -25,24 +25,22 @@
       </template>
     </div>
     <v-row class="pa-5">
-      <template v-if="plan.messages">
-        <v-text-field
-          rounded
-          filled
-          dense
-          clearable
-          class="mt-5 search-text"
-          v-model.lazy="currentMessage"
-          placeholder="Send message..."
-        ></v-text-field>
-        <Button
-          class="mt-5 ml-5"
-          label="Send"
-          rounded
-          @click="onSend"
-          :disabled="!currentMessage"
-        />
-      </template>
+      <v-text-field
+        rounded
+        filled
+        dense
+        clearable
+        class="mt-5 search-text"
+        v-model.lazy="currentMessage"
+        placeholder="Send message..."
+      ></v-text-field>
+      <Button
+        class="mt-5 ml-5"
+        label="Send"
+        rounded
+        @click="onSend"
+        :disabled="!currentMessage"
+      />
     </v-row>
   </v-card>
 </template>
@@ -81,14 +79,16 @@ export default {
     formatDate(message) {
       return message.date ? moment(message.date).fromNow() : 'No date';
     },
+    scrollTop() {
+      this.$refs.chat.scrollTop =
+        this.$refs.chat.scrollHeight + this.$refs.chat.offsetHeight;
+    },
   },
   mounted() {
-    this.$refs.chat.scrollTop =
-      this.$refs.chat.scrollHeight + this.$refs.chat.offsetHeight;
+    this.scrollTop();
   },
   updated() {
-    this.$refs.chat.scrollTop =
-      this.$refs.chat.scrollHeight + this.$refs.chat.offsetHeight;
+    this.scrollTop();
   },
 };
 </script>
