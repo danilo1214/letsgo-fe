@@ -2,7 +2,7 @@
   <div class="pa-10">
     <Loader v-if="isLoading" />
     <template v-else>
-      <v-subheader>You are hosting these upcoming plans</v-subheader>
+      <v-subheader>You are attending these upcoming plans</v-subheader>
       <v-divider></v-divider>
       <Plans
         v-if="upcomingPlans && upcomingPlans.length"
@@ -10,43 +10,45 @@
       >
       </Plans>
       <template v-else>
-        <h1 class="mt-10">You are not hosting any upcoming plans</h1>
+        <h1 class="mt-10">You are not attending any upcoming plans</h1>
         <Button
-          class="ml-auto mt-12 text-center"
+          class="mt-12"
           rounded
-          to="/new"
-          label="New Plan"
-          icon-left="mdi-plus"
+          to="/plans/"
+          text
+          label="What's Popular?"
         />
       </template>
 
       <v-spacer class="mt-15"></v-spacer>
 
-      <v-subheader>Past plans you've hosted</v-subheader>
+      <v-subheader>Past plans you've attended</v-subheader>
       <v-divider></v-divider>
       <Plans v-if="oldPlans && oldPlans.length" :plans="oldPlans"> </Plans>
-      <h1 v-else class="mt-10">You haven't hosted any plans.</h1>
+      <h1 v-else class="mt-10">You haven't attended any plans.</h1>
     </template>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
+import { getError, getData } from '@/helpers/requests';
+
 import Plans from '@/components/plans/Plans';
 import Button from '../../components/generic/Button';
 import moment from 'moment';
 import Loader from '../../components/generic/Loader';
 
 export default {
-  name: 'my-plans',
+  name: 'attending-plans',
   components: { Loader, Button, Plans },
   data() {
     return {
       isLoading: false,
+      plans: []
     };
   },
   computed: {
-    ...mapGetters(['plans']),
     ...mapState({ user: (state) => state.auth.user }),
     oldPlans() {
       return this.plans.filter((plan) => !moment().isBefore(moment(plan.date)));
@@ -56,19 +58,25 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['loadPlans']),
-    async init() {
-      const { user } = this;
-      const query = {
-        admin: user._id,
-        old: true,
-      };
+    ...mapActions(['getMyPlans']),
+    init() {
       this.isLoading = true;
-      await this.loadPlans({
-        query,
-      });
-      this.isLoading = false;
+      this.getMyPlans({old: true})
+        .then((res) => {
+          this.plans = getData(res);
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.$notify({
+            group: 'main',
+            title: 'Failed to load plans',
+            text: getError(err),
+            type: 'error',
+          });
+          this.isLoading = false;
+        });
     },
+    ...mapActions(['loadPlans']),
   },
   created() {
     this.init();

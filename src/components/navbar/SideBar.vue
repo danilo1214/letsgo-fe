@@ -13,27 +13,29 @@
     <v-divider></v-divider>
 
     <v-list dense>
-      <v-list-item
-        v-for="item in availableRoutes"
-        :key="item.title"
-        :to="item.link"
-        link
-      >
-        <v-list-item-icon>
-          <v-badge v-if='item.notifications' :content="item.notifications">
-            <v-icon>
-              {{ item.icon }}
-            </v-icon>
-          </v-badge>
-          <v-icon v-else>
-            {{item.icon }}
-          </v-icon>
-        </v-list-item-icon>
+      <template v-for="item in availableRoutes">
+        <side-bar-item v-if='!item.children' :item='item' :key='item.title'/>
+        <v-list-group
+          :key='item.title'
+          v-else
+          no-action
+        >
+          <template v-slot:activator>
+            <v-list-item class='pa-0 ma-0'>
+              <v-list-item-icon>
+                <v-icon>
+                  {{ item.icon }}
+                </v-icon>
+              </v-list-item-icon>
 
-        <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <side-bar-item :item='child' v-for='child in item.children' :key='child.title'/>
+        </v-list-group>
+      </template>
     </v-list>
 
     <div class="mt-5 ml-5">
@@ -47,10 +49,11 @@
 import { mapGetters, mapState } from 'vuex';
 import Button from '@/components/generic/Button';
 import Avatar from '@/components/user/Avatar';
+import SideBarItem from '../generic/SideBarItem';
 
 export default {
   name: 'SideBar',
-  components: { Avatar, Button },
+  components: { SideBarItem, Avatar, Button },
   props: {
     value: {
       type: Boolean,
@@ -58,8 +61,7 @@ export default {
     },
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
@@ -72,20 +74,35 @@ export default {
           icon: 'mdi-account',
           link: '/account',
           isPublic: false,
-          notifications: this.user && this.user.email_verified && this.user.photo_verified? 0 : 1
+          notifications:
+            this.user && this.user.email_verified && this.user.photo_verified
+              ? 0
+              : 1,
         },
         {
           title: 'My Plans',
           icon: 'mdi-calendar',
-          link: '/my-plans',
-          isPublic: false,
+          children: [
+            {
+              title: 'Hosting',
+              icon: 'mdi-calendar-edit',
+              link: '/my-plans',
+              isPublic: false,
+            },
+            {
+              title: 'Attending',
+              icon: 'mdi-calendar-clock',
+              link: '/attending-plans',
+              isPublic: false,
+            }
+          ]
         },
         {
           title: 'Friends',
           icon: 'mdi-account-group',
           link: '/friends',
           isPublic: false,
-          notifications: this.friendRequests.length
+          notifications: this.friendRequests.length,
         },
         {
           title: 'Sign Out',
@@ -93,7 +110,7 @@ export default {
           link: '/sign-out',
           isPublic: false,
         },
-      ]
+      ];
     },
     availableRoutes() {
       if (this.signedIn) {

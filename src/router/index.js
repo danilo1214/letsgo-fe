@@ -13,6 +13,7 @@ import Account from '@/views/account/Account';
 import Verify from '@/views/account/Verify';
 import PlanDetails from '@/views/plans/PlanDetails';
 import Friends from '../views/Friends';
+import AttendingPlans from '../views/plans/AttendingPlans';
 
 Vue.use(VueRouter);
 
@@ -71,6 +72,11 @@ const routes = [
     path: '/my-plans',
     name: 'my-plans',
     component: MyPlans,
+  },
+  {
+    path: '/attending-plans',
+    name: 'attending-plans',
+    component: AttendingPlans,
   },
   {
     path: '/new',

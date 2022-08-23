@@ -60,7 +60,14 @@ export const plan = {
           return data;
         });
     },
-    getMyPlans: () => {
+    getMyPlans: (state, options) => {
+      if (options && options.old) {
+        return axios.getUrl('/plan/my', {
+          params: {
+            old: options.old,
+          },
+        });
+      }
       return axios.getUrl('/plan/my');
     },
     deletePlan: ({ commit }, { id }) => {
