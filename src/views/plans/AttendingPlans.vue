@@ -31,12 +31,11 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import { getError, getData } from '@/helpers/requests';
+import { mapActions, mapState, mapGetters } from 'vuex';
+import { getError } from '@/helpers/requests';
 
 import Plans from '@/components/plans/Plans';
 import Button from '../../components/generic/Button';
-import moment from 'moment';
 import Loader from '../../components/generic/Loader';
 
 export default {
@@ -50,20 +49,14 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
-    oldPlans() {
-      return this.plans.filter((plan) => !moment().isBefore(moment(plan.date)));
-    },
-    upcomingPlans() {
-      return this.plans.filter((plan) => moment().isBefore(moment(plan.date)));
-    },
+    ...mapGetters(['oldPlans', 'upcomingPlans']),
   },
   methods: {
     ...mapActions(['getMyPlans']),
     init() {
       this.isLoading = true;
-      this.getMyPlans({old: true})
-        .then((res) => {
-          this.plans = getData(res);
+      this.getMyPlans()
+        .then(() => {
           this.isLoading = false;
         })
         .catch((err) => {
@@ -76,7 +69,6 @@ export default {
           this.isLoading = false;
         });
     },
-    ...mapActions(['loadPlans']),
   },
   created() {
     this.init();

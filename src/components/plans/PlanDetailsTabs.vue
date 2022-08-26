@@ -54,7 +54,7 @@
       </v-tab-item>
 
       <v-tab-item value="3" class="fill-height" v-if="isMember">
-        <chat :plan="plan" @send="(e) => $emit('send', e)" />
+        <chat :plan="plan" @send="(e) => $emit('send', e)"/>
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -64,6 +64,7 @@
 import UserCard from '../user/UserCard';
 import Request from '../user/Request';
 import Chat from './Chat';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'PlanDetailsTabs',
@@ -83,6 +84,27 @@ export default {
       tab: '#2',
     };
   },
+  methods: {
+    ...mapActions(['seenMessage']),
+    onSeenMessage(){
+      const id = this.plan._id;
+      if(this.plan.messages.length) {
+        console.log(this.plan.messages, this.plan.messages.length - 1);
+        const messageId = this.plan.messages[this.plan.messages.length - 1]._id;
+        this.seenMessage({
+          id,
+          messageId
+        });
+      }
+    }
+  },
+  watch: {
+    tab(val){
+      if(val === "3") {
+        this.onSeenMessage();
+      }
+    }
+  }
 };
 </script>
 

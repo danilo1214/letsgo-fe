@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Plans from '@/components/plans/Plans';
 import Button from '../../components/generic/Button';
 import moment from 'moment';
@@ -46,27 +46,19 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['plans']),
-    ...mapState({ user: (state) => state.auth.user }),
+    ...mapGetters(['adminPlans']),
     oldPlans() {
-      return this.plans.filter((plan) => !moment().isBefore(moment(plan.date)));
+      return this.adminPlans.filter((plan) => !moment().isBefore(moment(plan.date)));
     },
     upcomingPlans() {
-      return this.plans.filter((plan) => moment().isBefore(moment(plan.date)));
+      return this.adminPlans.filter((plan) => moment().isBefore(moment(plan.date)));
     },
   },
   methods: {
-    ...mapActions(['loadPlans']),
+    ...mapActions(['getMyPlans']),
     async init() {
-      const { user } = this;
-      const query = {
-        admin: user._id,
-        old: true,
-      };
       this.isLoading = true;
-      await this.loadPlans({
-        query,
-      });
+      await this.getMyPlans();
       this.isLoading = false;
     },
   },

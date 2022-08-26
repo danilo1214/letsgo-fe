@@ -5,7 +5,7 @@
     <v-subheader>Your upcoming plans</v-subheader>
     <v-divider></v-divider>
     <Loader v-if="isLoading" />
-    <plan-slide v-else-if="myPlans && myPlans.length" :plans="myPlans" />
+    <plan-slide v-else-if="upcomingPlans && upcomingPlans.length" :plans="upcomingPlans" />
     <template v-else>
       <h1 class="mt-10">You do not have any upcoming plans</h1>
       <Button
@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import { getError, getData } from '@/helpers/requests';
+import { mapActions, mapState, mapGetters } from 'vuex';
+import { getError } from '@/helpers/requests';
 import { fullName } from '@/helpers/format';
 
 import PlanSlide from '../components/plans/PlanSlide';
@@ -32,11 +32,11 @@ export default {
   components: { Loader, Button, PlanSlide },
   data() {
     return {
-      myPlans: [],
       isLoading: false,
     };
   },
   computed: {
+    ...mapGetters(['upcomingPlans']),
     ...mapState({ user: (state) => state.auth.user }),
     name() {
       return fullName(this.user);
@@ -47,8 +47,7 @@ export default {
     init() {
       this.isLoading = true;
       this.getMyPlans()
-        .then((res) => {
-          this.myPlans = getData(res);
+        .then(() => {
           this.isLoading = false;
         })
         .catch((err) => {

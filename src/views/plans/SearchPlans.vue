@@ -19,9 +19,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import Plans from '@/components/plans/Plans';
 import Loader from '../../components/generic/Loader';
+import { getData } from '../../helpers/requests';
 
 export default {
   name: 'search-plans',
@@ -29,6 +30,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      plans: [],
       query: {
         keywords: '',
         dates: [],
@@ -36,7 +38,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['plans']),
     priceRange() {
       const { costFrom, costTo } = this.$route.query;
 
@@ -65,8 +66,10 @@ export default {
       const { query } = this.$route;
       const { search, dateFrom, dateTo } = query;
       this.isLoading = true;
-      await this.loadPlans({
+      this.loadPlans({
         query,
+      }).then(result => {
+        this.plans = getData(result);
       });
       this.isLoading = false;
 

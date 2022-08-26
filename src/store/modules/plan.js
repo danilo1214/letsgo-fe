@@ -12,6 +12,7 @@ export const plan = {
       state.plans = plans;
     },
     UPDATE_PLAN(state, { id, data }) {
+      console.log(`updatin plan ${id}`);
       state.plans = state.plans.map((obj) => (obj._id === id ? data : obj));
     },
     ADD_PLAN(state, plan) {
@@ -31,6 +32,13 @@ export const plan = {
         commit('ADD_PLAN', result.data);
       });
     },
+    seenMessage: ({ commit }, { id, messageId }) => {
+      return axios
+        .postUrl(`plan/${id}/message/${messageId}/seen`)
+        .then((result) => {
+          commit('UPDATE_PLAN', { id: result.data._id, data: result.data });
+        });
+    },
     sendMessage: (store, { id, text }) => {
       const date = moment().format('YYYY-MM-DD HH:mm');
       return axios.postUrl(`plan/${id}/message`, {
@@ -49,26 +57,23 @@ export const plan = {
         },
       });
     },
-    loadPlans: ({ commit }, { query }) => {
+    loadPlans: (state, { query }) => {
+      return axios.getUrl('/plan', {
+        params: query,
+      });
+    },
+    getMyPlans: ({ commit }) => {
       return axios
-        .getUrl('/plan', {
-          params: query,
+        .getUrl('/plan/my', {
+          params: {
+            old: true,
+          },
         })
         .then((result) => {
           const { data } = result;
           commit('SET_PLANS', data);
           return data;
         });
-    },
-    getMyPlans: (state, options) => {
-      if (options && options.old) {
-        return axios.getUrl('/plan/my', {
-          params: {
-            old: options.old,
-          },
-        });
-      }
-      return axios.getUrl('/plan/my');
     },
     deletePlan: ({ commit }, { id }) => {
       return axios.deleteUrl(`/plan/${id}`).then(() => {
@@ -100,6 +105,38 @@ export const plan = {
     },
   },
   getters: {
+    newMessages: (state, getters, rootState) => {
+      const { plans } = state;
+      const { user } = rootState.auth;
+
+      let uniqueMessages = 0;
+
+      for (const plan of plans) {
+        if (!plan.messages.length) {
+          continue;
+        }
+        const lastMessage = plan.messages[plan.messages.length - 1];
+        const lastMessageUserId = lastMessage.user._id || lastMessage.user;
+        if (
+          !lastMessage.seen.includes(user._id) &&
+          !(lastMessageUserId === user._id)
+        ) {
+          uniqueMessages += 1;
+        }
+      }
+
+      return uniqueMessages;
+    },
     plans: (state) => state.plans,
+    oldPlans: (state) =>
+      state.plans.filter((plan) => !moment().isBefore(moment(plan.date))),
+    upcomingPlans: (state) =>
+      state.plans.filter((plan) => moment().isBefore(moment(plan.date))),
+    adminPlans: (state, getters, rootState) =>
+      state.user
+        ? state.plans.filter(
+            (plan) => plan.admin._id === rootState.auth.user._id
+          )
+        : [],
   },
 };
