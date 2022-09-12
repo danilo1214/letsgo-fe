@@ -14,6 +14,7 @@ import Verify from '@/views/account/Verify';
 import PlanDetails from '@/views/plans/PlanDetails';
 import Friends from '../views/Friends';
 import AttendingPlans from '../views/plans/AttendingPlans';
+import AddFriendsModal from '../views/plans/AddFriendsModal';
 
 Vue.use(VueRouter);
 
@@ -67,6 +68,13 @@ const routes = [
     path: '/plan/:id',
     name: 'plan-details',
     component: PlanDetails,
+    children: [
+      {
+        path: '/plan/:id/invite-friends',
+        name: 'invite-friends',
+        component: AddFriendsModal,
+      },
+    ],
   },
   {
     path: '/my-plans',

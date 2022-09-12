@@ -1,5 +1,20 @@
 <template>
   <v-container fluid v-if="plan._id">
+    <v-fab-transition>
+      <Button
+        @click='onInviteFriends'
+        label=''
+        color='info'
+        fab
+        large
+        dark
+        bottom
+        right
+        class='invite-friends'
+      >
+        <v-icon>mdi-account-multiple-plus</v-icon>
+      </Button>
+    </v-fab-transition>
     <v-alert
       class="mt-10"
       dark
@@ -24,6 +39,8 @@
       :plan="plan"
       @send="send"
     />
+
+    <router-view></router-view>
   </v-container>
 </template>
 
@@ -32,10 +49,11 @@ import PlanCard from '../../components/plans/PlanCard';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import PlanDetailsTabs from '../../components/plans/PlanDetailsTabs';
 import { getError } from '../../helpers/requests';
+import Button from '../../components/generic/Button';
 
 export default {
   name: 'PlanDetails',
-  components: { PlanDetailsTabs, PlanCard },
+  components: { Button, PlanDetailsTabs, PlanCard },
   data() {
     return {};
   },
@@ -129,6 +147,9 @@ export default {
     init() {
       this.getPlan({ id: this.id });
     },
+    onInviteFriends() {
+      this.$router.push(`${this.id}/invite-friends`)
+    },
     onAccept(user) {
       this.acceptRequest({
         plan: this.id,
@@ -187,4 +208,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.invite-friends{
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 10;
+}
+</style>

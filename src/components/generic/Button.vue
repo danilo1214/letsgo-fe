@@ -8,6 +8,7 @@
     <v-icon v-if="iconLeft" dark left>{{ iconLeft }}</v-icon>
     {{ label }}
     <v-icon v-if="iconRight" dark left>{{ iconRight }}</v-icon>
+    <slot></slot>
   </v-btn>
 </template>
 
