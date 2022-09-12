@@ -1,20 +1,24 @@
 import axios from '@/axios';
-import { getData } from '../../helpers/requests';
 
 export const friend = {
   state() {
     return {
       friends: [],
+      invites: [],
       friend_requests: [],
     };
   },
   getters: {
     friends: (state) => state.friends,
+    invites: (state) => state.invites,
     friendRequests: (state) => state.friend_requests,
   },
   mutations: {
     SET_FRIENDS(state, friends) {
       state.friends = friends;
+    },
+    SET_INVITES(state, invites) {
+      state.invites = invites;
     },
     SET_FRIEND_REQUESTS(state, friendRequests) {
       state.friend_requests = friendRequests;
@@ -24,13 +28,6 @@ export const friend = {
     },
   },
   actions: {
-    getFriendsList: ({ commit }) => {
-      return axios.getUrl('user/friends').then((result) => {
-        const user = getData(result);
-        commit('SET_FRIENDS', user.friends);
-        commit('SET_FRIEND_REQUESTS', user.friend_requests);
-      });
-    },
     sendFriendRequest: (store, { user }) => {
       return axios.postUrl(`user/${user}/friend/request`);
     },

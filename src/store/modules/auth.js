@@ -78,6 +78,9 @@ export const auth = {
           const { data } = result;
 
           commit('SET_USER', data);
+          commit('SET_FRIENDS', data.friends);
+          commit('SET_FRIEND_REQUESTS', data.friend_requests);
+          commit('SET_INVITES', data.invites);
           commit('SET_TOKEN', token);
         })
         .catch((err) => {
