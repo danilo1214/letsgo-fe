@@ -7,16 +7,19 @@
   >
     <v-card>
       <v-toolbar color="info darken-1" dark>
-        <v-icon class="mr-5">mdi-account-multiple-plus</v-icon>Invite friends to plan
+        <v-icon class="mr-5">mdi-account-multiple-plus</v-icon>Invite friends to
+        plan
       </v-toolbar>
       <v-card-text>
-        <div class="body-1 pa-12">HERE SELECT</div>
+        <div class="body-1 pa-12">
+          <user-select v-model="invited" :users="user.friends" />
+        </div>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
         <Button color="secondary" text @click="goBack" label="Go back" />
-        <Button color='info' text @click="onSend" label="Send" />
+        <Button text @click="onSend" label="Send" />
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -24,9 +27,11 @@
 
 <script>
 import Button from '@/components/generic/Button';
+import UserSelect from '../../components/user/UserSelect';
+import { mapState } from 'vuex';
 export default {
   name: 'AddFriendsModal',
-  components: { Button },
+  components: { UserSelect, Button },
   methods: {
     goBack() {
       this.$router.go(-1);
@@ -35,6 +40,14 @@ export default {
       this.$router.go(-1);
     },
   },
+  data() {
+    return {
+      invited: []
+    }
+  },
+  computed: {
+    ...mapState({ user: (state) => state.auth.user }),
+  }
 };
 </script>
 

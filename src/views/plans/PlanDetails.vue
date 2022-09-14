@@ -2,15 +2,15 @@
   <v-container fluid v-if="plan._id">
     <v-fab-transition>
       <Button
-        @click='onInviteFriends'
-        label=''
-        color='info'
+        @click="onInviteFriends"
+        label=""
+        color="info"
         fab
         large
         dark
         bottom
         right
-        class='invite-friends'
+        class="invite-friends"
       >
         <v-icon>mdi-account-multiple-plus</v-icon>
       </Button>
@@ -148,7 +148,7 @@ export default {
       this.getPlan({ id: this.id });
     },
     onInviteFriends() {
-      this.$router.push(`${this.id}/invite-friends`)
+      this.$router.push(`${this.id}/invite-friends`);
     },
     onAccept(user) {
       this.acceptRequest({
@@ -209,7 +209,7 @@ export default {
 </script>
 
 <style scoped>
-.invite-friends{
+.invite-friends {
   position: fixed;
   bottom: 25px;
   right: 25px;

@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      plans: []
+      plans: [],
     };
   },
   computed: {

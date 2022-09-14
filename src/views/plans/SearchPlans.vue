@@ -68,7 +68,7 @@ export default {
       this.isLoading = true;
       this.loadPlans({
         query,
-      }).then(result => {
+      }).then((result) => {
         this.plans = getData(result);
       });
       this.isLoading = false;

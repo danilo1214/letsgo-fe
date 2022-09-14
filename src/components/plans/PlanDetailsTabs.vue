@@ -54,7 +54,7 @@
       </v-tab-item>
 
       <v-tab-item value="3" class="fill-height" v-if="isMember">
-        <chat :plan="plan" @send="(e) => $emit('send', e)"/>
+        <chat :plan="plan" @send="(e) => $emit('send', e)" />
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -86,25 +86,25 @@ export default {
   },
   methods: {
     ...mapActions(['seenMessage']),
-    onSeenMessage(){
+    onSeenMessage() {
       const id = this.plan._id;
-      if(this.plan.messages.length) {
+      if (this.plan.messages.length) {
         console.log(this.plan.messages, this.plan.messages.length - 1);
         const messageId = this.plan.messages[this.plan.messages.length - 1]._id;
         this.seenMessage({
           id,
-          messageId
+          messageId,
         });
       }
-    }
+    },
   },
   watch: {
-    tab(val){
-      if(val === "3") {
+    tab(val) {
+      if (val === '3') {
         this.onSeenMessage();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

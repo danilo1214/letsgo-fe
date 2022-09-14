@@ -14,14 +14,10 @@
 
     <v-list dense>
       <template v-for="item in availableRoutes">
-        <side-bar-item v-if='!item.children' :item='item' :key='item.title'/>
-        <v-list-group
-          :key='item.title'
-          v-else
-          no-action
-        >
+        <side-bar-item v-if="!item.children" :item="item" :key="item.title" />
+        <v-list-group :key="item.title" v-else no-action>
           <template v-slot:activator>
-            <v-list-item class='pa-0 ma-0'>
+            <v-list-item class="pa-0 ma-0">
               <v-list-item-icon>
                 <v-icon>
                   {{ item.icon }}
@@ -33,7 +29,11 @@
               </v-list-item-content>
             </v-list-item>
           </template>
-          <side-bar-item :item='child' v-for='child in item.children' :key='child.title'/>
+          <side-bar-item
+            :item="child"
+            v-for="child in item.children"
+            :key="child.title"
+          />
         </v-list-group>
       </template>
     </v-list>
@@ -94,9 +94,9 @@ export default {
               icon: 'mdi-calendar-clock',
               link: '/attending-plans',
               isPublic: false,
-              notifications: this.newMessages
-            }
-          ]
+              notifications: this.newMessages,
+            },
+          ],
         },
         {
           title: 'Friends',

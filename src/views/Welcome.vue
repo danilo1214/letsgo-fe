@@ -5,7 +5,10 @@
     <v-subheader>Your upcoming plans</v-subheader>
     <v-divider></v-divider>
     <Loader v-if="isLoading" />
-    <plan-slide v-else-if="upcomingPlans && upcomingPlans.length" :plans="upcomingPlans" />
+    <plan-slide
+      v-else-if="upcomingPlans && upcomingPlans.length"
+      :plans="upcomingPlans"
+    />
     <template v-else>
       <h1 class="mt-10">You do not have any upcoming plans</h1>
       <Button
