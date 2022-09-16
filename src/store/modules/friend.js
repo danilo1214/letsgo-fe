@@ -18,6 +18,7 @@ export const friend = {
       state.friends = friends;
     },
     SET_INVITES(state, invites) {
+      console.log('settin invites', invites);
       state.invites = invites;
     },
     SET_FRIEND_REQUESTS(state, friendRequests) {

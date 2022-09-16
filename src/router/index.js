@@ -15,6 +15,7 @@ import PlanDetails from '@/views/plans/PlanDetails';
 import Friends from '../views/Friends';
 import AttendingPlans from '../views/plans/AttendingPlans';
 import AddFriendsModal from '../views/plans/AddFriendsModal';
+import Invites from '../views/plans/Invites';
 
 Vue.use(VueRouter);
 
@@ -80,6 +81,11 @@ const routes = [
     path: '/my-plans',
     name: 'my-plans',
     component: MyPlans,
+  },
+  {
+    path: '/invites',
+    name: 'invites',
+    component: Invites,
   },
   {
     path: '/attending-plans',
