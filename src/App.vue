@@ -61,6 +61,7 @@ export default {
       'updatePlanLocal',
       'addMessage',
       'newFriendRequest',
+      'newPlanInvite',
     ]),
     onToggle() {
       this.showSideBar = !this.showSideBar;
@@ -88,6 +89,9 @@ export default {
       });
       this.socket.on('friend-request', (request) => {
         this.newFriendRequest({ request });
+      });
+      this.socket.on('plan-invite', (invite) => {
+        this.newPlanInvite({ invite });
       });
     },
     async init() {

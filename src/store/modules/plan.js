@@ -93,6 +93,9 @@ export const plan = {
         commit('UPDATE_PLAN', { id, data: result.data });
       });
     },
+    inviteFriend: (store, { plan, user }) => {
+      return axios.postUrl(`plan/${plan}/invite/${user}`);
+    },
     thumbUp: ({ commit }, { plan, user }) => {
       return axios.postUrl(`plan/${plan}/thumb/up/${user}`).then((result) => {
         commit('UPDATE_PLAN', { id: result.data._id, data: result.data });
@@ -133,9 +136,11 @@ export const plan = {
     upcomingPlans: (state) =>
       state.plans.filter((plan) => moment().isBefore(moment(plan.date))),
     adminPlans: (state, getters, rootState) =>
-      state.user
+      rootState.auth.user
         ? state.plans.filter(
-            (plan) => plan.admin._id === rootState.auth.user._id
+            (plan) =>
+              plan.admin === rootState.auth.user._id ||
+              plan.admin._id === rootState.auth.user._id
           )
         : [],
   },

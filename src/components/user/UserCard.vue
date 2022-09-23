@@ -31,7 +31,7 @@
         height="25"
         dark
       >
-        {{ likedAmount }} people
+        {{ Math.abs(likedAmount) }}
         <span class="font-weight-light ml-2">{{ likedMessage }}</span>
       </v-progress-linear>
     </v-row>
@@ -108,14 +108,14 @@ export default {
       ];
     },
     likedMessage() {
+      let prefix = Math.abs(this.likedAmount) === 1? 'person' : 'people';
+      if (this.likedAmount >= 0) {
+        prefix += ' liked';
+      } else {
+        prefix += ' disliked';
+      }
       const sufix =
         this.currentUser._id === this.user._id ? ' you.' : ' this user.';
-      let prefix = '';
-      if (this.likedAmount >= 0) {
-        prefix = ' liked';
-      } else {
-        prefix = ' disliked';
-      }
       return prefix + sufix;
     },
     likedAmount() {

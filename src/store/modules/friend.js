@@ -18,7 +18,6 @@ export const friend = {
       state.friends = friends;
     },
     SET_INVITES(state, invites) {
-      console.log('settin invites', invites);
       state.invites = invites;
     },
     SET_FRIEND_REQUESTS(state, friendRequests) {
@@ -26,6 +25,9 @@ export const friend = {
     },
     NEW_FRIEND_REQUEST(state, friendRequest) {
       state.friend_requests = [...state.friend_requests, friendRequest];
+    },
+    NEW_PLAN_INVITE(state, invite) {
+      state.invites = [...state.invites, invite];
     },
   },
   actions: {
@@ -43,6 +45,9 @@ export const friend = {
     },
     newFriendRequest: ({ commit }, { request }) => {
       commit('NEW_FRIEND_REQUEST', request);
+    },
+    newPlanInvite: ({ commit }, { invite }) => {
+      commit('NEW_PLAN_INVITE', invite);
     },
   },
 };

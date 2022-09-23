@@ -28,26 +28,36 @@
 <script>
 import Button from '@/components/generic/Button';
 import UserSelect from '../../components/user/UserSelect';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'AddFriendsModal',
   components: { UserSelect, Button },
-  methods: {
-    goBack() {
-      this.$router.go(-1);
-    },
-    onSend() {
-      this.$router.go(-1);
-    },
-  },
   data() {
     return {
-      invited: []
-    }
+      invited: [],
+    };
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
-  }
+    id() {
+      return this.$route.params.id;
+    },
+  },
+  methods: {
+    ...mapActions(['inviteFriend']),
+    goBack() {
+      this.$router.go(-1);
+    },
+    async onSend() {
+      for (const user of this.invited) {
+        await this.inviteFriend({
+          plan: this.id,
+          user,
+        });
+      }
+      this.$router.go(-1);
+    },
+  },
 };
 </script>
 

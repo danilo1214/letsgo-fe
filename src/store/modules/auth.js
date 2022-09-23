@@ -26,6 +26,10 @@ export const auth = {
       localStorage.setItem('letsgo-jwt', null);
       commit('SET_TOKEN', '');
       commit('SET_USER', null);
+      commit('SET_PLANS', []);
+      commit('SET_FRIENDS', []);
+      commit('SET_FRIEND_REQUESTS', []);
+      commit('SET_INVITES', []);
     },
     signUp: ({ commit }, { user }) => {
       return axios
