@@ -33,6 +33,7 @@
           @thumb-up="(user) => $emit('thumb-up', user)"
           @thumb-down="(user) => $emit('thumb-down', user)"
           @add-friend="(user) => $emit('add-friend', user)"
+          :show-kick='isAdmin && !isMe(member._id)'
           v-for="member in plan.members"
           :key="member._id"
           :user="member"
@@ -64,7 +65,7 @@
 import UserCard from '../user/UserCard';
 import Request from '../user/Request';
 import Chat from './Chat';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'PlanDetailsTabs',
@@ -84,8 +85,19 @@ export default {
       tab: '#2',
     };
   },
+  computed: {
+    ...mapState({ currentUser: (state) => state.auth.user }),
+    isAdmin() {
+      const userId = this.currentUser._id;
+      const planAdminId = this.plan.admin._id || this.plan.admin;
+      return userId === planAdminId;
+    }
+  },
   methods: {
     ...mapActions(['seenMessage']),
+    isMe(id){
+      return this.currentUser && this.currentUser._id === id;
+    },
     onSeenMessage() {
       const id = this.plan._id;
       if (this.plan.messages.length) {

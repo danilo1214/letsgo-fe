@@ -40,7 +40,6 @@
         <Avatar class="ml-5" :size="150" :user="user" />
       </v-col>
       <v-col>
-        <v-col>
           <Button
             v-if="showAddFriend"
             @click="$emit('add-friend', user._id)"
@@ -48,7 +47,16 @@
             icon-left="mdi-account-plus"
           />
           <slot />
-        </v-col>
+      </v-col>
+      <v-col>
+        <Button
+          v-if='showKick'
+          class='ml-2'
+          label="Remove"
+          color="error"
+          icon-left="mdi-cancel"
+          text
+        ></Button>
       </v-col>
     </v-row>
     <v-divider class="mt-2"></v-divider>
@@ -84,6 +92,10 @@ export default {
     showThumb: {
       type: Boolean,
       default: true,
+    },
+    showKick: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

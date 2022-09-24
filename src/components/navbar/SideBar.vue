@@ -19,7 +19,10 @@
           <template v-slot:activator>
             <v-list-item class="pa-0 ma-0">
               <v-list-item-icon>
-                <v-badge v-if="item.notifications" :content="item.notifications">
+                <v-badge
+                  v-if="item.notifications"
+                  :content="item.notifications"
+                >
                   <v-icon>
                     {{ item.icon }}
                   </v-icon>

@@ -31,6 +31,11 @@ export const plan = {
         commit('ADD_PLAN', result.data);
       });
     },
+    leavePlan: ({ commit }, { id }) => {
+      return axios.postUrl(`plan/${id}/leave`).then((result) => {
+        commit('UPDATE_PLAN', { id: result.data._id, data: result.data });
+      });
+    },
     seenMessage: ({ commit }, { id, messageId }) => {
       return axios
         .postUrl(`plan/${id}/message/${messageId}/seen`)

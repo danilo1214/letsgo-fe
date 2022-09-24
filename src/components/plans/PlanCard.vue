@@ -18,6 +18,16 @@
         </template>
       </v-banner>
 
+      <Button
+        v-if='isMember'
+        @click.stop='onLeave'
+        class='mb-5'
+        label="Leave"
+        color="error"
+        icon-left="mdi-cancel"
+        text
+      ></Button>
+
       <v-skeleton-loader v-if="isLoading" type="image"> </v-skeleton-loader>
 
       <v-img
@@ -251,7 +261,11 @@ export default {
       'uploadPlanImage',
       'createRequest',
       'createPlan',
+      'leavePlan'
     ]),
+    onLeave() {
+      this.leavePlan({id: this.plan._id});
+    },
     onRequestJoin() {
       this.createRequest({ plan: this.plan._id })
         .then(() => {
