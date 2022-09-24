@@ -19,7 +19,12 @@
           <template v-slot:activator>
             <v-list-item class="pa-0 ma-0">
               <v-list-item-icon>
-                <v-icon>
+                <v-badge v-if="item.notifications" :content="item.notifications">
+                  <v-icon>
+                    {{ item.icon }}
+                  </v-icon>
+                </v-badge>
+                <v-icon v-else>
                   {{ item.icon }}
                 </v-icon>
               </v-list-item-icon>
@@ -82,6 +87,7 @@ export default {
         {
           title: 'My Plans',
           icon: 'mdi-calendar',
+          notifications: this.invites.length + this.newMessages,
           children: [
             {
               title: 'Hosting',

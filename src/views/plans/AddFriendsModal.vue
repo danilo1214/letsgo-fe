@@ -40,18 +40,20 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['plans']),
-    plan(){
-      return this.plans.find(plan => plan._id === this.id);
+    plan() {
+      return this.plans.find((plan) => plan._id === this.id);
     },
     id() {
       return this.$route.params.id;
     },
     planMembers() {
-      return this.plan.members.map(member => member._id || member);
+      return this.plan.members.map((member) => member._id || member);
     },
     friends() {
-      return this.user.friends.filter(friend => !this.planMembers.includes(friend._id));
-    }
+      return this.user.friends.filter(
+        (friend) => !this.planMembers.includes(friend._id)
+      );
+    },
   },
   methods: {
     ...mapActions(['inviteFriend']),
