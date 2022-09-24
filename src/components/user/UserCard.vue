@@ -108,7 +108,7 @@ export default {
       ];
     },
     likedMessage() {
-      let prefix = Math.abs(this.likedAmount) === 1? 'person' : 'people';
+      let prefix = Math.abs(this.likedAmount) === 1 ? 'person' : 'people';
       if (this.likedAmount >= 0) {
         prefix += ' liked';
       } else {

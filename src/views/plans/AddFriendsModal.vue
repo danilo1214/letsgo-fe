@@ -12,7 +12,7 @@
       </v-toolbar>
       <v-card-text>
         <div class="body-1 pa-12">
-          <user-select v-model="invited" :users="user.friends" />
+          <user-select v-model="invited" :users="friends" />
         </div>
       </v-card-text>
 
@@ -28,7 +28,7 @@
 <script>
 import Button from '@/components/generic/Button';
 import UserSelect from '../../components/user/UserSelect';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 export default {
   name: 'AddFriendsModal',
   components: { UserSelect, Button },
@@ -39,9 +39,19 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
+    ...mapGetters(['plans']),
+    plan(){
+      return this.plans.find(plan => plan._id === this.id);
+    },
     id() {
       return this.$route.params.id;
     },
+    planMembers() {
+      return this.plan.members.map(member => member._id || member);
+    },
+    friends() {
+      return this.user.friends.filter(friend => !this.planMembers.includes(friend._id));
+    }
   },
   methods: {
     ...mapActions(['inviteFriend']),

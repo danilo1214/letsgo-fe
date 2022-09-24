@@ -12,7 +12,6 @@ export const plan = {
       state.plans = plans;
     },
     UPDATE_PLAN(state, { id, data }) {
-      console.log(`updatin plan ${id}`);
       state.plans = state.plans.map((obj) => (obj._id === id ? data : obj));
     },
     ADD_PLAN(state, plan) {
@@ -95,6 +94,12 @@ export const plan = {
     },
     inviteFriend: (store, { plan, user }) => {
       return axios.postUrl(`plan/${plan}/invite/${user}`);
+    },
+    acceptInvite: (store, { plan }) => {
+      return axios.postUrl(`plan/${plan}/invite/accept`);
+    },
+    declineInvite: (store, { plan }) => {
+      return axios.postUrl(`user/invites/${plan}/decline`);
     },
     thumbUp: ({ commit }, { plan, user }) => {
       return axios.postUrl(`plan/${plan}/thumb/up/${user}`).then((result) => {

@@ -89,7 +89,6 @@ export default {
     onSeenMessage() {
       const id = this.plan._id;
       if (this.plan.messages.length) {
-        console.log(this.plan.messages, this.plan.messages.length - 1);
         const messageId = this.plan.messages[this.plan.messages.length - 1]._id;
         this.seenMessage({
           id,
