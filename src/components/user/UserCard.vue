@@ -51,6 +51,7 @@
       <v-col>
         <Button
           v-if='showKick'
+          @click="$emit('kick', user._id)"
           class='ml-2'
           label="Remove"
           color="error"

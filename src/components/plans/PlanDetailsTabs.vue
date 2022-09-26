@@ -33,6 +33,7 @@
           @thumb-up="(user) => $emit('thumb-up', user)"
           @thumb-down="(user) => $emit('thumb-down', user)"
           @add-friend="(user) => $emit('add-friend', user)"
+          @kick="(user) => $emit('kick', user)"
           :show-kick='isAdmin && !isMe(member._id)'
           v-for="member in plan.members"
           :key="member._id"

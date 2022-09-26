@@ -36,6 +36,11 @@ export const plan = {
         commit('UPDATE_PLAN', { id: result.data._id, data: result.data });
       });
     },
+    kickUser: ({ commit }, { id, user }) => {
+      return axios.postUrl(`plan/${id}/remove/${user}`).then((result) => {
+        commit('UPDATE_PLAN', { id: result.data._id, data: result.data });
+      });
+    },
     seenMessage: ({ commit }, { id, messageId }) => {
       return axios
         .postUrl(`plan/${id}/message/${messageId}/seen`)

@@ -36,6 +36,7 @@
       @thumb-down="onThumbDown"
       @add-friend="onAddFriend"
       @decline="onDecline"
+      @kick="onKick"
       :plan="plan"
       @send="send"
     />
@@ -85,6 +86,7 @@ export default {
       'addMessage',
       'sendMessage',
       'thumbUp',
+      'kickUser',
       'thumbDown',
       'updatePlanLocal',
       'sendFriendRequest',
@@ -191,6 +193,29 @@ export default {
           this.$notify({
             group: 'main',
             title: 'Failed to update plan',
+            text: this.error,
+            type: 'error',
+          });
+        });
+    },
+    onKick(user) {
+      this.kickUser({
+        id: this.id,
+        user,
+      })
+        .then(() => {
+          this.$notify({
+            group: 'main',
+            title: 'Success',
+            text: 'Successfully removed user',
+            type: 'success',
+          });
+        })
+        .catch((error) => {
+          this.error = getError(error);
+          this.$notify({
+            group: 'main',
+            title: 'Failed to remove user',
             text: this.error,
             type: 'error',
           });
