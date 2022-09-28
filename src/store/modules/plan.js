@@ -145,6 +145,16 @@ export const plan = {
 
       return uniqueMessages;
     },
+    newRequests: (state, getters) => {
+      const { adminPlans } = getters;
+      let requests = 0;
+
+      for (const plan of adminPlans) {
+        requests += plan.requests.length;
+      }
+
+      return requests;
+    },
     plans: (state) => state.plans,
     oldPlans: (state) =>
       state.plans.filter((plan) => !moment().isBefore(moment(plan.date))),

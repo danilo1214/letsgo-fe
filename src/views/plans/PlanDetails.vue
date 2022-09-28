@@ -47,7 +47,7 @@
       name-key="first_name"
       icon="mdi-exit-to-app"
       action="remove"
-      :data="user"
+      :data="kickUserData"
       @ok="onKickConfirm"
       @cancel="onKickCancel"
     ></confirm-dialog>
@@ -76,6 +76,14 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['plans']),
+    kickUserData() {
+      const {plan} = this;
+      if(plan) {
+        return plan.members.find(member => member._id === this.kickUserId) || {};
+      }
+
+      return {};
+    },
     id() {
       return this.$route.params.id;
     },
@@ -222,7 +230,9 @@ export default {
       this.kickUserId = '';
     },
     onKickConfirm() {
-      this.kick(this.kickUserId)
+      this.kick(this.kickUserId);
+      this.kickUserId = '';
+      this.showKick = false;
     },
     kick(user) {
       this.kickUser({

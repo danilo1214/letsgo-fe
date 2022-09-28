@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
-    ...mapGetters(['signedIn', 'friendRequests', 'newMessages', 'invites']),
+    ...mapGetters(['signedIn', 'friendRequests', 'newMessages', 'newRequests', 'invites']),
     items() {
       return [
         { title: 'Home', icon: 'mdi-home-city', link: '/', isPublic: true },
@@ -90,13 +90,14 @@ export default {
         {
           title: 'My Plans',
           icon: 'mdi-calendar',
-          notifications: this.invites.length + this.newMessages,
+          notifications: this.invites.length + this.newMessages + this.newRequests,
           children: [
             {
               title: 'Hosting',
               icon: 'mdi-calendar-edit',
               link: '/my-plans',
               isPublic: false,
+              notifications: this.newRequests
             },
             {
               title: 'Attending',
