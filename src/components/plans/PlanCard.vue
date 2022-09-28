@@ -24,7 +24,7 @@
         class='mb-5'
         label="Leave"
         color="error"
-        icon-left="mdi-cancel"
+        icon-left="mdi-exit-to-app"
         text
       ></Button>
 
@@ -141,6 +141,17 @@
       @ok="onDelete"
       @cancel="onCancelDelete"
     ></confirm-dialog>
+
+    <confirm-dialog
+      :dialog="showLeave"
+      entity="plan"
+      name-key="caption"
+      icon="mdi-exit-to-app"
+      action="leave"
+      :data="plan"
+      @ok="onLeaveConfirm"
+      @cancel="onLeaveCancel"
+    ></confirm-dialog>
   </div>
 </template>
 
@@ -169,6 +180,7 @@ export default {
       duplicateError: '',
       showDelete: false,
       showEdit: false,
+      showLeave: false,
       showDuplicate: false,
       image: null,
       isLoading: false,
@@ -264,6 +276,16 @@ export default {
       'leavePlan'
     ]),
     onLeave() {
+      this.showLeave = true;
+    },
+    onLeaveConfirm() {
+      this.showLeave = false;
+      this.leave();
+    },
+    onLeaveCancel() {
+      this.showLeave = false;
+    },
+    leave() {
       this.leavePlan({id: this.plan._id});
     },
     onRequestJoin() {

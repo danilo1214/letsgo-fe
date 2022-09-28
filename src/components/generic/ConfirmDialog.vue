@@ -2,14 +2,15 @@
   <v-dialog persistent :value="dialog" max-width="290">
     <v-card>
       <v-toolbar color="primary" dark class="text-center">
-        <v-toolbar-title
-          ><v-icon light color="white" x-large class="ml-auto mr-auto">{{
-            icon
-          }}</v-icon></v-toolbar-title
-        >
-        <v-toolbar-title
+        <v-banner two-line>
+          <v-avatar slot="icon" color="primary darken-1" size="40">
+            <v-icon icon="mdi-lock" color="white" class="ml-auto mr-auto p-5"> {{ icon }} </v-icon>
+          </v-avatar>
+
+          <v-toolbar-title
           >{{ capitalize(action) }} {{ capitalize(entity) }}</v-toolbar-title
-        >
+          >
+        </v-banner>
       </v-toolbar>
       <v-card-title class="text-center" v-if="icon"> </v-card-title>
 

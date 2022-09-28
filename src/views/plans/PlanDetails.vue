@@ -41,6 +41,17 @@
       @send="send"
     />
 
+    <confirm-dialog
+      :dialog="showKick"
+      entity="user"
+      name-key="first_name"
+      icon="mdi-exit-to-app"
+      action="remove"
+      :data="user"
+      @ok="onKickConfirm"
+      @cancel="onKickCancel"
+    ></confirm-dialog>
+
     <router-view></router-view>
   </v-container>
 </template>
@@ -51,12 +62,16 @@ import { mapState, mapActions, mapGetters } from 'vuex';
 import PlanDetailsTabs from '../../components/plans/PlanDetailsTabs';
 import { getError } from '../../helpers/requests';
 import Button from '../../components/generic/Button';
+import ConfirmDialog from '../../components/generic/ConfirmDialog';
 
 export default {
   name: 'PlanDetails',
-  components: { Button, PlanDetailsTabs, PlanCard },
+  components: { ConfirmDialog, Button, PlanDetailsTabs, PlanCard },
   data() {
-    return {};
+    return {
+      kickUserId: '',
+      showKick: false
+    };
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
@@ -199,6 +214,17 @@ export default {
         });
     },
     onKick(user) {
+      this.showKick = true;
+      this.kickUserId = user;
+    },
+    onKickCancel() {
+      this.showKick = false;
+      this.kickUserId = '';
+    },
+    onKickConfirm() {
+      this.kick(this.kickUserId)
+    },
+    kick(user) {
       this.kickUser({
         id: this.id,
         user,
