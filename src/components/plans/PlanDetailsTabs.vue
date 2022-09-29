@@ -16,12 +16,22 @@
       </v-tab>
 
       <v-tab href="#2" v-if="isMember">
-        Requests ({{ plan.requests.length }})
+        <v-badge v-if='plan.requests.length' color='error' :content='plan.requests.length'>
+          Requests
+        </v-badge>
+        <template v-else>
+          Requests
+        </template>
         <v-icon>mdi-account-alert</v-icon>
       </v-tab>
 
       <v-tab href="#3" v-if="isMember">
-        Chat
+        <v-badge v-if='unreadMessages' color='error' :content='unreadMessages'>
+          Chat
+        </v-badge>
+        <template v-else>
+          Chat
+        </template>
         <v-icon>mdi-chat</v-icon>
       </v-tab>
     </v-tabs>
@@ -92,6 +102,29 @@ export default {
       const userId = this.currentUser._id;
       const planAdminId = this.plan.admin._id || this.plan.admin;
       return userId === planAdminId;
+    },
+    unreadMessages() {
+      const {plan, currentUser} = this;
+
+      if (!plan.messages.length) {
+        return 0;
+      }
+
+      let lastRead = plan.messages.length - 1;
+
+      for(let i =  0; i < plan.messages.length; i++) {
+        const message = plan.messages[i];
+        const messageUserId = message.user._id || message.user;
+
+        if (
+          message.seen.includes(currentUser._id) ||
+          messageUserId === currentUser._id
+        ) {
+          lastRead = i;
+        }
+      }
+
+      return plan.messages.length - (lastRead + 1);
     }
   },
   methods: {

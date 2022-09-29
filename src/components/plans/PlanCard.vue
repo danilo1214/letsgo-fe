@@ -18,10 +18,24 @@
         </template>
       </v-banner>
 
+      <v-banner two-line v-if="isMember && newMessages.includes(plan._id)">
+        <v-avatar slot="icon" color="error darken-1" size="40">
+          <v-icon icon="mdi-lock" color="white"> mdi-message-plus </v-icon>
+        </v-avatar>
+        This plan has new messages.
+      </v-banner>
+
+      <v-banner two-line v-if="isMember && plan.requests.length">
+        <v-avatar slot="icon" color="error darken-1" size="40">
+          <v-icon icon="mdi-lock" color="white"> mdi-account-plus </v-icon>
+        </v-avatar>
+        This plan has new requests.
+      </v-banner>
+
       <Button
         v-if='isMember'
         @click.stop='onLeave'
-        class='mb-5'
+        class='mb-5 mt-5'
         label="Leave"
         color="error"
         icon-left="mdi-exit-to-app"
@@ -157,7 +171,7 @@
 
 <script>
 import moment from 'moment';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 
 import { getError } from '@/helpers/requests';
 import ConfirmDialog from '@/components/generic/ConfirmDialog';
@@ -189,6 +203,7 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
+    ...mapGetters(['newMessages']),
     duplicatePlanInitial() {
       const { plan } = this;
       return {

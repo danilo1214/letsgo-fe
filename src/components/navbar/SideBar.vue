@@ -90,7 +90,7 @@ export default {
         {
           title: 'My Plans',
           icon: 'mdi-calendar',
-          notifications: this.invites.length + this.newMessages + this.newRequests,
+          notifications: this.invites.length + this.newMessages.length + this.newRequests,
           children: [
             {
               title: 'Hosting',
@@ -104,7 +104,7 @@ export default {
               icon: 'mdi-calendar-clock',
               link: '/attending-plans',
               isPublic: false,
-              notifications: this.newMessages,
+              notifications: this.newMessages.length,
             },
             {
               title: 'Invites',

@@ -1,6 +1,6 @@
 <template>
   <div class="pa-5">
-    <h2 class="mt-10 mb-10 text-center">Make a new plan.</h2>
+    <h2 class="mt-10 mb-10 text-center">Make a new plan</h2>
     <plan-form
       :error="error"
       :is-loading="isLoading"

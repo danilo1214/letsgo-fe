@@ -127,7 +127,7 @@ export const plan = {
       const { plans } = state;
       const { user } = rootState.auth;
 
-      let uniqueMessages = 0;
+      let uniqueMessages = [];
 
       for (const plan of plans) {
         if (!plan.messages.length) {
@@ -139,7 +139,7 @@ export const plan = {
           !lastMessage.seen.includes(user._id) &&
           !(lastMessageUserId === user._id)
         ) {
-          uniqueMessages += 1;
+          uniqueMessages.push(plan._id);
         }
       }
 
