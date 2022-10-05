@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if='!isMini || !showMini'>
     <v-card class="mx-auto ma-10 plan-card" :to="`/plan/${plan._id}`">
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
@@ -167,6 +167,9 @@
       @cancel="onLeaveCancel"
     ></confirm-dialog>
   </div>
+  <plan-card-mini v-else :plan='plan'>
+
+  </plan-card-mini>
 </template>
 
 <script>
@@ -178,14 +181,19 @@ import ConfirmDialog from '@/components/generic/ConfirmDialog';
 import Button from '@/components/generic/Button';
 import Dialog from '@/components/generic/Dialog';
 import PlanForm from './PlanForm';
+import PlanCardMini from './PlanCardMini';
 
 export default {
   name: 'PlanCard',
-  components: { PlanForm, Dialog, Button, ConfirmDialog },
+  components: { PlanCardMini, PlanForm, Dialog, Button, ConfirmDialog },
   props: {
     plan: {
       type: Object,
       required: true,
+    },
+    showMini: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -204,6 +212,9 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['newMessages']),
+    isMini() {
+      return this.$vuetify.breakpoint.name === 'sm' || this.$vuetify.breakpoint.name === 'xs';
+    },
     duplicatePlanInitial() {
       const { plan } = this;
       return {

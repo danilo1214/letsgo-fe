@@ -1,7 +1,7 @@
 <template>
   <v-slide-group show-arrows>
     <v-slide-item v-for="plan in plans" :key="plan._id" class="mx-8">
-      <plan-card :plan="plan" />
+      <plan-card show-mini :plan="plan" />
     </v-slide-item>
   </v-slide-group>
 </template>

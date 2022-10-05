@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-10">
+  <div class="pa-sm-5 pa-md-10">
     <h2>Welcome {{ name }}</h2>
 
     <v-subheader>Your upcoming plans</v-subheader>
