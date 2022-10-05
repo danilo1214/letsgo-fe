@@ -5,10 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "sync": "npx  cap sync",
     "lint": "vue-cli-service lint",
     "prettier": "npx prettier --write src"
   },
   "dependencies": {
+    "@capacitor/android": "^4.3.0",
+    "@capacitor/core": "^4.3.0",
+    "@capacitor/ios": "^4.3.0",
     "@kugatsu/vuenotification": "^1.1.4",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
@@ -24,6 +28,7 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
+    "@capacitor/cli": "^4.3.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "^4.5.12",

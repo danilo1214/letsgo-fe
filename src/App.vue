@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class='app mt-10'>
     <notifications group="main" />
     <nav-bar @toggle="onToggle" />
 
@@ -125,7 +125,21 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss'>
+body, header, nav, main {
+  margin: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) !important;
+}
+
+.v-application {
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  overflow: hidden;
+}
+
+.v-application--wrap {
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
 .v-progress-circular > svg {
   width: 100px !important;
   height: 100px !important;

@@ -3,6 +3,7 @@
     <v-subheader>Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
     <user-card
+      class='mt-6'
       v-for="user in friends"
       :key="user._id"
       :user="user"
@@ -10,6 +11,7 @@
       @thumbDown="onThumbDown(user)"
     >
       <Button
+        class='ml-5 mb-3'
         label="Remove friend"
         icon-left="mdi-account-minus"
         @click="onRemove(user)"

@@ -1,7 +1,7 @@
 <template>
   <v-list-item class="pt-2 pb-2" :to="item.link" link>
     <v-list-item-icon>
-      <v-badge v-if="item.notifications" :content="item.notifications">
+      <v-badge v-if="item.notifications" color='error' :content="item.notifications">
         <v-icon>
           {{ item.icon }}
         </v-icon>

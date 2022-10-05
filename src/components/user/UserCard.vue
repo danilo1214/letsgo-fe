@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto">
     <v-subheader class="title text-right">
-      {{ name }} <span class="font-italic pl-2">({{ age }})</span>
+      {{ name }},  <span class="font-italic pl-2">{{ age }}</span>
     </v-subheader>
     <v-row class="pl-6 pt-3" v-if="showThumbOptions">
       <Button
@@ -62,16 +62,19 @@
     </v-row>
     <v-divider class="mt-2"></v-divider>
     <v-list>
-      <v-list-item v-for="item in userDataList" :key="item.label">
-        <v-list-item-action>
-          <v-icon color="primary darken-1">{{ item.icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ item.value }}
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+      <template v-for="item in userDataList">
+        <v-list-item v-if='item.show' :key="item.label">
+          <v-list-item-action>
+            <v-icon color="primary darken-1">{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ item.value }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+
     </v-list>
   </v-card>
 </template>
@@ -107,18 +110,24 @@ export default {
           label: 'Email',
           icon: 'mdi-email',
           value: this.user.email || 'Hidden',
+          show: this.isMe,
         },
         {
           label: 'Sex',
           icon: 'mdi-gender-male-female',
           value: this.user.sex || 'Hidden',
+          show: this.isMe,
         },
         {
           label: 'Birthday',
           icon: 'mdi-cake-variant',
           value: this.date,
+          show: true,
         },
       ];
+    },
+    isMe() {
+      return this.currentUser._id === this.user._id
     },
     likedMessage() {
       let prefix = Math.abs(this.likedAmount) === 1 ? 'person' : 'people';
@@ -128,7 +137,7 @@ export default {
         prefix += ' disliked';
       }
       const sufix =
-        this.currentUser._id === this.user._id ? ' you.' : ' this user.';
+        this.isMe ? ' you.' : ' this user.';
       return prefix + sufix;
     },
     likedAmount() {

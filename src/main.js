@@ -6,7 +6,8 @@ import router from './router';
 import Notifications from 'vue-notification';
 
 Vue.config.productionTip = false;
-const store = new Store(Vue);
+console.log(Store(Vue));
+const store = Store(Vue);
 Vue.use(Notifications);
 
 new Vue({

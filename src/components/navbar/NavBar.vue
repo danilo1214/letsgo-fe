@@ -1,6 +1,12 @@
 <template>
   <v-app-bar app>
-    <v-app-bar-nav-icon @click="$emit('toggle')"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="$emit('toggle')">
+      <v-badge dot color='error' v-if='showNotification'>
+        <v-icon>mdi-menu</v-icon>
+      </v-badge>
+
+      <v-icon v-else>mdi-menu</v-icon>
+    </v-app-bar-nav-icon>
 
     <combo-box
       class="mt-5 search-text"
@@ -67,7 +73,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import DatePicker from '@/components/generic/DatePicker';
 import Slider from '@/components/generic/Slider';
 import lodash from 'lodash';
@@ -90,7 +96,18 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['signedIn']),
+    ...mapGetters(['signedIn', 'friendRequests', 'newMessages', 'newRequests', 'invites']),
+    ...mapState({ user: (state) => state.auth.user }),
+    showNotification() {
+      if(!this.user) {
+        return false;
+      }
+
+      const notVerified = !this.user.email_verified || !this.user.photo_verified;
+      const notifications = this.invites.length + this.newMessages.length + this.newRequests + this.friendRequests.length;
+
+      return notVerified || notifications;
+    }
   },
   methods: {
     formatDates(dates) {

@@ -22,7 +22,7 @@ export default (Vue) => {
             ? 'http://localhost:3003'
             : 'https://letsgo-backend-v1.herokuapp.com';
         return io(url, {
-          transports: ['websocket'],
+          transports: ['websocket', 'polling', 'flashsocket'],
           query: {
             token,
           },
