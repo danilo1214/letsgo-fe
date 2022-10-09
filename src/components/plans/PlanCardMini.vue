@@ -5,7 +5,15 @@
     </v-card-title>
 
     <v-card-text>
-      {{ plan.description }}
+      <v-row>
+        <v-col cols='2'>
+          <v-img :src="getPlanImage" height='50' width='50'></v-img>
+        </v-col>
+
+        <v-col cols='10'>
+          {{ plan.description }}
+        </v-col>
+      </v-row>
     </v-card-text>
 
     <v-card-text>

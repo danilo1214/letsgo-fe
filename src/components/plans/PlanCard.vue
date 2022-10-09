@@ -1,5 +1,5 @@
 <template>
-  <div v-if='!isMini || !showMini'>
+  <div class='card-container' v-if='!isMini || !showMini'>
     <v-card class="mx-auto ma-10 plan-card" :to="`/plan/${plan._id}`">
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
@@ -35,7 +35,7 @@
       <Button
         v-if='isMember'
         @click.stop='onLeave'
-        class='mb-5 mt-5'
+        class='mt-2 mb-5'
         label="Leave"
         color="error"
         icon-left="mdi-exit-to-app"
@@ -47,7 +47,7 @@
       <v-img
         v-if="isAdmin && !isLoading"
         :src="getPlanImage"
-        height="400"
+        height="200"
         @mouseenter="hover = true"
         @mouseleave="hover = false"
       >
@@ -416,7 +416,7 @@ export default {
     onCancelDuplicate() {
       this.showDuplicate = false;
     },
-  },
+  }
 };
 </script>
 

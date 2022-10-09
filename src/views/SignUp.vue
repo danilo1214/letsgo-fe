@@ -59,6 +59,7 @@
     <v-text-field
       v-model="user.email"
       :rules="rules.emailRules"
+      type='email'
       label="E-mail"
       required
     ></v-text-field>

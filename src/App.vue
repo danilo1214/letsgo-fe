@@ -5,7 +5,7 @@
 
     <side-bar v-model="showSideBar" />
 
-    <v-main>
+    <v-main id='main'>
       <Loader v-if="!loaded" />
 
       <router-view v-if="loaded"></router-view>
@@ -95,6 +95,7 @@ export default {
       });
     },
     async init() {
+      document.getElementById('main').scrollIntoView({behavior: "smooth"});
       await this.checkAuth();
       const { signedIn, isPublicRoute, user, socket } = this;
 
@@ -110,7 +111,7 @@ export default {
       this.loaded = true;
     },
   },
-  created() {
+  mounted() {
     this.init();
   },
   watch: {
