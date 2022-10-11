@@ -48,8 +48,8 @@
     </v-list>
 
     <div class="mt-5 ml-5">
-      <Button v-if="signedIn" label="Plan" icon-left="mdi-plus" to="/new" />
-      <Button v-else to="/sign-in" label="Sign in" icon-left="mdi-import" />
+      <Button v-if="signedIn" rounded label="Plan" icon-left="mdi-plus" to="/new" />
+      <Button v-else to="/sign-in" rounded label="Sign in" icon-left="mdi-import" />
     </div>
   </v-navigation-drawer>
 </template>

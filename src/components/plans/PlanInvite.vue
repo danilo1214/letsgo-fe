@@ -10,6 +10,7 @@
     />
     <template v-slot:actions>
       <Button
+        rounded
         label="Decline"
         color="info"
         icon-left="mdi-cancel"
@@ -17,6 +18,7 @@
         @click="$emit('decline', invite.plan._id)"
       />
       <Button
+        rounded
         label="Accept"
         color="success"
         icon-left="mdi-check"

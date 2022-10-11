@@ -3,23 +3,25 @@
     <v-subheader class="title text-right">
       {{ name }},  <span class="font-italic pl-2">{{ age }}</span>
     </v-subheader>
-    <v-row class="pl-6 pt-3" v-if="showThumbOptions">
+    <v-row class="pl-6 pt-3" v-if='showThumbOptions'>
       <Button
         color="success"
         rounded
-        prepe
-        label="Good"
-        icon-left="mdi-thumb-up"
+        fab
+        icon-left=""
         @click="$emit('thumb-up', user._id)"
-      />
+      >
+        <v-icon sm>mdi-thumb-up</v-icon>
+      </Button>
       <Button
         color="error lighten-2"
         rounded
+        fab
         class="ml-3"
-        label="Bad"
-        icon-left="mdi-thumb-down"
         @click="$emit('thumb-down', user._id)"
-      />
+      >
+        <v-icon sm>mdi-thumb-down</v-icon>
+      </Button>
     </v-row>
     <v-row class="pt-3 pl-6">
       <v-progress-linear
@@ -42,6 +44,7 @@
       <v-col>
           <Button
             v-if="showAddFriend"
+            rounded
             @click="$emit('add-friend', user._id)"
             label="Add friend"
             icon-left="mdi-account-plus"
@@ -51,6 +54,7 @@
       <v-col>
         <Button
           v-if='showKick'
+          rounded
           @click="$emit('kick', user._id)"
           class='ml-2'
           label="Remove"
@@ -163,11 +167,12 @@ export default {
       );
     },
     friendRequestRecieved() {
-      return (
-        this.currentUser &&
-        this.currentUser.friend_requests &&
-        this.currentUser.friend_requests.includes(this.user._id)
-      );
+      if(!this.currentUser || !this.currentUser.friend_requests) {
+        return false;
+      }
+
+      const requests = this.currentUser.friend_requests.map(request => request._id || request);
+      return requests.includes(this.user._id)
     },
     isFriend() {
       return (

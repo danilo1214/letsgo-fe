@@ -12,8 +12,8 @@
         Request to join this plan.
 
         <template v-slot:actions>
-          <v-btn text color="primary" @click.stop.prevent="onRequestJoin">
-            Request Join
+          <v-btn text color="primary" @click.stop.prevent="onRequestJoin" rounded>
+            Join
           </v-btn>
         </template>
       </v-banner>
@@ -25,7 +25,7 @@
         This plan has new messages.
       </v-banner>
 
-      <v-banner two-line v-if="isMember && plan.requests.length">
+      <v-banner v-if="isMember && plan.requests.length">
         <v-avatar slot="icon" color="error darken-1" size="40">
           <v-icon icon="mdi-lock" color="white"> mdi-account-plus </v-icon>
         </v-avatar>
@@ -34,10 +34,11 @@
 
       <Button
         v-if='isMember'
-        @click.stop='onLeave'
-        class='mt-2 mb-5'
+        @click.stop.prevent='onLeave'
+        class='mt-2 mb-5 ml-3'
         label="Leave"
         color="error"
+        rounded
         icon-left="mdi-exit-to-app"
         text
       ></Button>

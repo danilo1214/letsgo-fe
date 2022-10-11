@@ -23,11 +23,12 @@
 
         <Button
           text
+          rounded
           @click="$emit('cancel')"
           label="Cancel"
           color="secondary"
         />
-        <Button text @click="$emit('ok')" :label="capitalize(action)" />
+        <Button rounded text @click="$emit('ok')" :label="capitalize(action)" />
       </v-card-actions>
     </v-card>
   </v-dialog>

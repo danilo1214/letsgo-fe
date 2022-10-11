@@ -18,7 +18,7 @@
 
     <v-menu v-model="menu" :close-on-content-click="false" left bottom>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn icon v-bind="attrs" v-on="on">
+        <v-btn class='ml-3' small icon v-bind="attrs" v-on="on">
           <v-icon>mdi-filter-variant</v-icon>
         </v-btn>
       </template>
@@ -54,9 +54,10 @@
 
     <v-btn
       :disabled="!isChanged"
+      class='ml-3'
       @click="onSearch"
       fab
-      small
+      x-small
       color="primary darken-1"
     >
       <v-icon>mdi-magnify</v-icon>
@@ -65,8 +66,9 @@
     <Button
       label="🔥 Hot"
       small
+      rounded
       color="error darken-1"
-      class="mx-5"
+      class="ml-3"
       @click="onSearchEmpty"
     />
   </v-app-bar>
@@ -183,7 +185,7 @@ export default {
 
 <style>
 .search-text {
-  min-width: 100px;
+  min-width: 140px;
 }
 
 .v-select__selections {

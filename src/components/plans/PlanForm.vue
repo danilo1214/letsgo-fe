@@ -61,6 +61,7 @@
 
     <div class="mt-15">
       <Button
+        rounded
         class="mr-4"
         @click="$emit('cancel')"
         label="Cancel"
@@ -68,6 +69,7 @@
         color="secondary"
       />
       <Button
+        rounded
         :disabled="!valid"
         @click="onSubmit"
         :label="okLabel"

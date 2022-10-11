@@ -28,16 +28,16 @@
         color="primary lighten-2"
         :input-value="selected"
         label
-        small
+        x-small
       >
         <span class="pr-2">
           {{ item }}
         </span>
-        <v-icon small @click="parent.selectItem(item)"> $delete </v-icon>
+        <v-icon x-small @click="parent.selectItem(item)"> $delete </v-icon>
       </v-chip>
     </template>
     <template v-slot:item="{ index, item }">
-      <v-chip color="primary lighten-3`" dark label small>
+      <v-chip color="primary lighten-3`" dark label x-small>
         {{ item }}
       </v-chip>
     </template>

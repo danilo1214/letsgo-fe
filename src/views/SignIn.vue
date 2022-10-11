@@ -12,12 +12,13 @@
       {{ error }}
     </v-alert>
 
-    <v-alert dark text type="info">
-      Don't have an account?<Button plain small to="/sign-up" label="Sign Up" />
+    <v-alert rounded dark text type="info">
+      Don't have an account? <Button class='ml-5' color='info' rounded small to="/sign-up" label="Sign Up" light/>
     </v-alert>
 
     <Button
-      class="mr-4 mt-10"
+      rounded
+      class="mx-auto mt-10"
       icon-left="mdi-import"
       label="Sign in"
       @click="onSignIn"

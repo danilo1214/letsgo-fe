@@ -11,8 +11,9 @@
       @thumbDown="onThumbDown(user)"
     >
       <Button
-        class='ml-5 mb-3'
-        label="Remove friend"
+        rounded
+        class='ml-10 mb-3'
+        label="Remove"
         icon-left="mdi-account-minus"
         @click="onRemove(user)"
       />
@@ -30,12 +31,14 @@
     >
       <v-card-actions>
         <Button
+          rounded
           label="Accept"
           color="success"
           icon-left="mdi-check"
           @click="onAccept(user)"
         />
         <Button
+          rounded
           label="Decline"
           color="error"
           icon-left="mdi-cancel"
@@ -87,7 +90,16 @@ export default {
       this.init();
     },
     async onRemove(user) {
-      await this.removeFriend({ user: user._id });
+      await this.removeFriend({ user: user._id }).then(
+        () => {
+          this.$notify({
+            group: 'main',
+            title: 'Removed friend',
+            text: 'Successfully removed friend.',
+            type: 'success',
+          })
+        }
+      );
       this.init();
     },
     init() {

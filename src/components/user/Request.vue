@@ -7,17 +7,19 @@
   >
     <v-card-actions>
       <Button
-        label="Accept"
-        color="success"
-        icon-left="mdi-check"
-        @click="$emit('accept', user._id)"
-      />
-      <Button
+        rounded
         label="Decline"
         color="error"
         icon-left="mdi-cancel"
         text
         @click="$emit('decline', user._id)"
+      />
+      <Button
+        rounded
+        label="Accept"
+        color="success"
+        icon-left="mdi-check"
+        @click="$emit('accept', user._id)"
       />
     </v-card-actions>
   </user-card>

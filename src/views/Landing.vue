@@ -7,13 +7,6 @@
           Make social plans with strangers or friends on
           <strong>your</strong> terms!
         </p>
-        <Button
-          class="mt-12"
-          rounded
-          to="/plans/"
-          text
-          label="What's Popular?"
-        />
         <Button class="ml-3 mt-12" rounded to="/sign-in" label="Get Started" />
       </v-col>
 
