@@ -24,23 +24,22 @@
         </v-banner>
       </template>
     </div>
-    <v-row class="pa-10 mb-10">
-      <v-text-field
-        rounded
-        filled
-        dense
-        clearable
-        class="mt-5 search-text"
-        v-model.lazy="currentMessage"
-        placeholder="Send message..."
-      ></v-text-field>
-      <Button
-        class="mt-5 ml-5"
-        label="Send"
-        rounded
-        @click="onSend"
-        :disabled="!currentMessage"
-      />
+    <v-row class="pa-10 mb-10 mt-5">
+        <v-text-field
+          rounded
+          filled
+          dense
+          clearable
+          v-model.lazy="currentMessage"
+          placeholder="Send message..."
+        ></v-text-field>
+        <Button
+          class='ml-auto'
+          label="Send"
+          rounded
+          @click="onSend"
+          :disabled="!currentMessage"
+        />
     </v-row>
   </v-card>
 </template>
