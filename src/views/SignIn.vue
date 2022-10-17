@@ -13,7 +13,16 @@
     </v-alert>
 
     <v-alert rounded dark text type="info">
-      Don't have an account? <Button class='ml-5' color='info' rounded small to="/sign-up" label="Sign Up" light/>
+      Don't have an account?
+      <Button
+        class="ml-5"
+        color="info"
+        rounded
+        small
+        to="/sign-up"
+        label="Sign Up"
+        light
+      />
     </v-alert>
 
     <Button

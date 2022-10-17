@@ -3,8 +3,6 @@
     :value="value"
     @input="(v) => $emit('input', v)"
     :items="users"
-    rounded
-    filled
     chips
     color="blue-grey lighten-2"
     label="Friends"

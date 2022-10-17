@@ -2,7 +2,9 @@
   <v-badge :color="verifiedColor" avatar bottom bordered overlap>
     <template v-slot:badge>
       <v-avatar>
-        <v-icon color='primary lighten-4' v-if="isVerified">mdi-checkbox-marked-circle</v-icon>
+        <v-icon color="primary lighten-4" v-if="isVerified"
+          >mdi-checkbox-marked-circle</v-icon
+        >
         <v-icon v-else>mdi-alert-circle</v-icon>
       </v-avatar>
     </template>

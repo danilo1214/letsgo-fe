@@ -15,7 +15,13 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <Button rounded color="secondary" text @click="goBack" label="Go back" />
+        <Button
+          rounded
+          color="secondary"
+          text
+          @click="goBack"
+          label="Back"
+        />
         <Button rounded text @click="onSignIn" label="Sign in" />
       </v-card-actions>
     </v-card>

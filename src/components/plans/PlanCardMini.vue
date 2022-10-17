@@ -6,20 +6,18 @@
 
     <v-card-text>
       <v-row>
-        <v-col cols='2'>
-          <v-img :src="getPlanImage" height='50' width='50'></v-img>
+        <v-col cols="2">
+          <v-img :src="getPlanImage" height="50" width="50"></v-img>
         </v-col>
 
-        <v-col cols='10'>
+        <v-col cols="10">
           {{ plan.description }}
         </v-col>
       </v-row>
     </v-card-text>
 
     <v-card-text>
-      <v-icon class="mr-1" dark color="primary darken-2">
-        mdi-calendar</v-icon
-      >
+      <v-icon class="mr-1" dark color="primary darken-2"> mdi-calendar</v-icon>
       <span class="subheading mr-2">{{ formatDate }}</span>
     </v-card-text>
 
@@ -47,10 +45,10 @@ export default {
   props: {
     plan: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  computed:  {
+  computed: {
     formatDate() {
       const { date, time } = this.plan;
       return `${moment(date).format('DD.MM.YYYY')} ${time || ''}`;
@@ -67,10 +65,8 @@ export default {
       else if (cost_upper === cost_lower) return `$${cost_upper}`;
       return `$${cost_lower} - $${cost_upper}`;
     },
-  }
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

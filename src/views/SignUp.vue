@@ -56,10 +56,12 @@
       ></v-date-picker>
     </v-menu>
 
+    <Select :rules="required('Country')" v-model='user.country' :items='countries' label='Country' />
+
     <v-text-field
       v-model="user.email"
       :rules="rules.emailRules"
-      type='email'
+      type="email"
       label="E-mail"
       required
     ></v-text-field>
@@ -71,6 +73,7 @@
       type="password"
       required
     ></v-text-field>
+
 
     <v-alert type="error" v-if="error">
       {{ error }}
@@ -89,10 +92,12 @@
 import { mapActions } from 'vuex';
 import Button from '@/components/generic/Button';
 import { getError } from '@/helpers/requests';
+import country from 'country-list-js';
+import Select from '../components/generic/Select';
 
 export default {
   name: 'SignUp',
-  components: { Button },
+  components: { Select, Button },
   data() {
     return {
       error: '',
@@ -105,6 +110,7 @@ export default {
         birth_date: '',
         email: '',
         password: '',
+        country: '',
       },
       rules: {
         emailRules: [
@@ -112,6 +118,7 @@ export default {
           (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
       },
+      countries: country.names(),
     };
   },
   methods: {

@@ -1,5 +1,29 @@
 <template>
   <v-container fluid v-if="plan._id">
+    <v-alert
+      class="mt-10"
+      dark
+      text
+      type="warning"
+      color="warning darken-4"
+      v-if="!isMember"
+    >
+      You can view sensitive information such as names and location once you're
+      a member.
+    </v-alert>
+
+    <plan-details-tabs
+      :is-member="isMember"
+      @accept="onAccept"
+      @thumb-up="onThumbUp"
+      @thumb-down="onThumbDown"
+      @add-friend="onAddFriend"
+      @decline="onDecline"
+      @kick="onKick"
+      @join='init'
+      :plan="plan"
+      @send="send"
+    />
     <v-fab-transition>
       <Button
         @click="onInviteFriends"
@@ -15,31 +39,6 @@
         <v-icon>mdi-account-multiple-plus</v-icon>
       </Button>
     </v-fab-transition>
-    <v-alert
-      class="mt-10"
-      dark
-      text
-      type="warning"
-      color="warning darken-4"
-      v-if="!isMember"
-    >
-      You can view sensitive information such as names and location once you're
-      a member.
-    </v-alert>
-
-    <plan-card class="mt-10" :plan="plan" @join="init" />
-
-    <plan-details-tabs
-      :is-member="isMember"
-      @accept="onAccept"
-      @thumb-up="onThumbUp"
-      @thumb-down="onThumbDown"
-      @add-friend="onAddFriend"
-      @decline="onDecline"
-      @kick="onKick"
-      :plan="plan"
-      @send="send"
-    />
 
     <confirm-dialog
       :dialog="showKick"
@@ -57,7 +56,6 @@
 </template>
 
 <script>
-import PlanCard from '../../components/plans/PlanCard';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import PlanDetailsTabs from '../../components/plans/PlanDetailsTabs';
 import { getError } from '../../helpers/requests';
@@ -66,20 +64,22 @@ import ConfirmDialog from '../../components/generic/ConfirmDialog';
 
 export default {
   name: 'PlanDetails',
-  components: { ConfirmDialog, Button, PlanDetailsTabs, PlanCard },
+  components: { ConfirmDialog, Button, PlanDetailsTabs },
   data() {
     return {
       kickUserId: '',
-      showKick: false
+      showKick: false,
     };
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['plans']),
     kickUserData() {
-      const {plan} = this;
-      if(plan) {
-        return plan.members.find(member => member._id === this.kickUserId) || {};
+      const { plan } = this;
+      if (plan) {
+        return (
+          plan.members.find((member) => member._id === this.kickUserId) || {}
+        );
       }
 
       return {};
@@ -272,7 +272,7 @@ export default {
 <style scoped>
 .invite-friends {
   position: fixed;
-  bottom: 25px;
+  bottom: 14vh;
   right: 25px;
   z-index: 10;
 }

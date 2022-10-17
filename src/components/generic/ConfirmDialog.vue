@@ -3,19 +3,21 @@
     <v-card>
       <v-toolbar color="primary" dark class="text-center">
         <v-banner two-line>
-          <v-avatar slot="icon" color="primary darken-1" size="40">
-            <v-icon icon="mdi-lock" color="white" class="ml-auto mr-auto p-5"> {{ icon }} </v-icon>
+          <v-avatar slot="icon" color="primary" size="40">
+            <v-icon icon="mdi-lock" color="white" class="ml-auto mr-auto p-5">
+              {{ icon }}
+            </v-icon>
           </v-avatar>
 
           <v-toolbar-title
-          >{{ capitalize(action) }} {{ capitalize(entity) }}</v-toolbar-title
+            >{{ capitalize(action) }} {{ entity? capitalize(entity) : '' }}</v-toolbar-title
           >
         </v-banner>
       </v-toolbar>
       <v-card-title class="text-center" v-if="icon"> </v-card-title>
 
       <v-card-text>
-        Are you sure you want to {{ action }} the {{ entity }} {{ name }}?
+        Are you sure you want to {{ action }} {{entity? `the ${ entity } ${ name }` : ''}}
       </v-card-text>
 
       <v-card-actions>

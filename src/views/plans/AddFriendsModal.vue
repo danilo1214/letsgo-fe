@@ -18,8 +18,8 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <Button color="secondary" text @click="goBack" label="Go back" />
-        <Button text @click="onSend" label="Send" />
+        <Button rounded color="secondary" text @click="goBack" label="Back" />
+        <Button rounded text @click="onSend" label="Send" />
       </v-card-actions>
     </v-card>
   </v-dialog>

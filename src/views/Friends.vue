@@ -3,7 +3,7 @@
     <v-subheader>Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
     <user-card
-      class='mt-6'
+      class="mt-6"
       v-for="user in friends"
       :key="user._id"
       :user="user"
@@ -12,7 +12,7 @@
     >
       <Button
         rounded
-        class='ml-10 mb-3'
+        class="ml-10 mb-3"
         label="Remove"
         icon-left="mdi-account-minus"
         @click="onRemove(user)"
@@ -90,16 +90,14 @@ export default {
       this.init();
     },
     async onRemove(user) {
-      await this.removeFriend({ user: user._id }).then(
-        () => {
-          this.$notify({
-            group: 'main',
-            title: 'Removed friend',
-            text: 'Successfully removed friend.',
-            type: 'success',
-          })
-        }
-      );
+      await this.removeFriend({ user: user._id }).then(() => {
+        this.$notify({
+          group: 'main',
+          title: 'Removed friend',
+          text: 'Successfully removed friend.',
+          type: 'success',
+        });
+      });
       this.init();
     },
     init() {

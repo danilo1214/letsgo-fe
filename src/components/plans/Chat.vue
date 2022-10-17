@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="fill-height">
+  <v-card flat class="plan-chat">
     <div class="plan-messages" ref="chat">
       <template v-for="(message, id) in plan.messages">
         <v-banner v-if="!myMessage(message)" class="message-banner" :key="id">
@@ -24,7 +24,7 @@
         </v-banner>
       </template>
     </div>
-    <v-row class="pa-5">
+    <v-row class="pa-10 mb-10">
       <v-text-field
         rounded
         filled
@@ -94,8 +94,10 @@ export default {
 </script>
 
 <style lang="scss">
+
+
 .plan-messages {
-  height: 70%;
+  max-height: 35vh;
   overflow-y: scroll;
 }
 .picture-wrapper {

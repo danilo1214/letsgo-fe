@@ -1,57 +1,26 @@
 <template>
   <div class="mt-10">
-    <v-tabs
-      v-model="tab"
-      class="rounded"
-      background-color="primary accent-4"
-      centered
-      dark
-      icons-and-text
-    >
-      <v-tabs-slider></v-tabs-slider>
-
-      <v-tab href="#1">
-        Members ({{ plan.members.length }})
-        <v-icon>mdi-account-supervisor</v-icon>
-      </v-tab>
-
-      <v-tab href="#2" v-if="isMember">
-        <v-badge v-if='plan.requests.length' color='error' :content='plan.requests.length'>
-          Requests
-        </v-badge>
-        <template v-else>
-          Requests
-        </template>
-        <v-icon>mdi-account-alert</v-icon>
-      </v-tab>
-
-      <v-tab href="#3" v-if="isMember">
-        <v-badge v-if='unreadMessages' color='error' :content='unreadMessages'>
-          Chat
-        </v-badge>
-        <template v-else>
-          Chat
-        </template>
-        <v-icon>mdi-chat</v-icon>
-      </v-tab>
-    </v-tabs>
 
     <v-tabs-items v-model="tab" class="tab-items">
       <v-tab-item value="1">
+        <plan-card class="mt-10" :plan="plan" @join="$emit('join')" />
+      </v-tab-item>
+
+      <v-tab-item value="2">
         <user-card
           class="mt-8"
           @thumb-up="(user) => $emit('thumb-up', user)"
           @thumb-down="(user) => $emit('thumb-down', user)"
           @add-friend="(user) => $emit('add-friend', user)"
           @kick="(user) => $emit('kick', user)"
-          :show-kick='isAdmin && !isMe(member._id)'
+          :show-kick="isAdmin && !isMe(member._id)"
           v-for="member in plan.members"
           :key="member._id"
           :user="member"
         />
       </v-tab-item>
 
-      <v-tab-item value="2" v-if="isMember">
+      <v-tab-item value="3" v-if="isMember">
         <v-card flat>
           <request
             class="mt-8"
@@ -65,10 +34,48 @@
         </v-card>
       </v-tab-item>
 
-      <v-tab-item value="3" class="fill-height" v-if="isMember">
+      <v-tab-item value="4" class="fill-height" v-if="isMember">
         <chat :plan="plan" @send="(e) => $emit('send', e)" />
       </v-tab-item>
     </v-tabs-items>
+    <v-tabs
+      v-model="tab"
+      class="rounded"
+      background-color="primary accent-4"
+      centered
+      dark
+      icons-and-text
+    >
+      <v-tabs-slider></v-tabs-slider>
+
+      <v-tab href="#1">
+        <v-icon>mdi-calendar</v-icon>
+      </v-tab>
+
+      <v-tab href="#2">
+
+        <v-icon>mdi-account-supervisor</v-icon>
+      </v-tab>
+
+      <v-tab href="#3" v-if="isMember">
+        <v-badge
+          v-if="plan.requests.length"
+          color="error"
+          :content="plan.requests.length"
+        >
+          Requests
+        </v-badge>
+        <template v-else> </template>
+        <v-icon>mdi-account-alert</v-icon>
+      </v-tab>
+
+      <v-tab href="#4" v-if="isMember">
+        <v-badge v-if="unreadMessages" color="error" :content="unreadMessages">
+
+        </v-badge>
+        <v-icon>mdi-chat</v-icon>
+      </v-tab>
+    </v-tabs>
   </div>
 </template>
 
@@ -77,10 +84,11 @@ import UserCard from '../user/UserCard';
 import Request from '../user/Request';
 import Chat from './Chat';
 import { mapActions, mapState } from 'vuex';
+import PlanCard from './PlanCard';
 
 export default {
   name: 'PlanDetailsTabs',
-  components: { Chat, Request, UserCard },
+  components: { PlanCard, Chat, Request, UserCard },
   props: {
     isMember: {
       type: Boolean,
@@ -104,7 +112,7 @@ export default {
       return userId === planAdminId;
     },
     unreadMessages() {
-      const {plan, currentUser} = this;
+      const { plan, currentUser } = this;
 
       if (!plan.messages.length) {
         return 0;
@@ -112,7 +120,7 @@ export default {
 
       let lastRead = plan.messages.length - 1;
 
-      for(let i =  0; i < plan.messages.length; i++) {
+      for (let i = 0; i < plan.messages.length; i++) {
         const message = plan.messages[i];
         const messageUserId = message.user._id || message.user;
 
@@ -125,11 +133,11 @@ export default {
       }
 
       return plan.messages.length - (lastRead + 1);
-    }
+    },
   },
   methods: {
     ...mapActions(['seenMessage']),
-    isMe(id){
+    isMe(id) {
       return this.currentUser && this.currentUser._id === id;
     },
     onSeenMessage() {
@@ -145,7 +153,7 @@ export default {
   },
   watch: {
     tab(val) {
-      if (val === '3') {
+      if (val === '4') {
         this.onSeenMessage();
       }
     },
@@ -155,7 +163,8 @@ export default {
 
 <style scoped>
 .tab-items {
-  height: 500px;
+  max-height: 70vh;
+  min-height: 70vh;
   overflow-y: scroll;
 }
 </style>

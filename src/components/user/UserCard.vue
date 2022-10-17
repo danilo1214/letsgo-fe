@@ -1,9 +1,9 @@
 <template>
   <v-card class="mx-auto">
     <v-subheader class="title text-right">
-      {{ name }},  <span class="font-italic pl-2">{{ age }}</span>
+      {{ name }}, <span class="font-italic pl-2">{{ age }}</span>
     </v-subheader>
-    <v-row class="pl-6 pt-3" v-if='showThumbOptions'>
+    <v-row class="pl-6 pt-3" v-if="showThumbOptions">
       <Button
         color="success"
         rounded
@@ -42,21 +42,21 @@
         <Avatar class="ml-5" :size="150" :user="user" />
       </v-col>
       <v-col>
-          <Button
-            v-if="showAddFriend"
-            rounded
-            @click="$emit('add-friend', user._id)"
-            label="Add friend"
-            icon-left="mdi-account-plus"
-          />
-          <slot />
+        <Button
+          v-if="showAddFriend"
+          rounded
+          @click="$emit('add-friend', user._id)"
+          label="Add friend"
+          icon-left="mdi-account-plus"
+        />
+        <slot />
       </v-col>
       <v-col>
         <Button
-          v-if='showKick'
+          v-if="showKick"
           rounded
           @click="$emit('kick', user._id)"
-          class='ml-2'
+          class="ml-2"
           label="Remove"
           color="error"
           icon-left="mdi-cancel"
@@ -67,7 +67,7 @@
     <v-divider class="mt-2"></v-divider>
     <v-list>
       <template v-for="item in userDataList">
-        <v-list-item v-if='item.show' :key="item.label">
+        <v-list-item v-if="item.show" :key="item.label">
           <v-list-item-action>
             <v-icon color="primary darken-1">{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -78,7 +78,6 @@
           </v-list-item-content>
         </v-list-item>
       </template>
-
     </v-list>
   </v-card>
 </template>
@@ -131,7 +130,7 @@ export default {
       ];
     },
     isMe() {
-      return this.currentUser._id === this.user._id
+      return this.currentUser._id === this.user._id;
     },
     likedMessage() {
       let prefix = Math.abs(this.likedAmount) === 1 ? 'person' : 'people';
@@ -140,8 +139,7 @@ export default {
       } else {
         prefix += ' disliked';
       }
-      const sufix =
-        this.isMe ? ' you.' : ' this user.';
+      const sufix = this.isMe ? ' you.' : ' this user.';
       return prefix + sufix;
     },
     likedAmount() {
@@ -167,12 +165,14 @@ export default {
       );
     },
     friendRequestRecieved() {
-      if(!this.currentUser || !this.currentUser.friend_requests) {
+      if (!this.currentUser || !this.currentUser.friend_requests) {
         return false;
       }
 
-      const requests = this.currentUser.friend_requests.map(request => request._id || request);
-      return requests.includes(this.user._id)
+      const requests = this.currentUser.friend_requests.map(
+        (request) => request._id || request
+      );
+      return requests.includes(this.user._id);
     },
     isFriend() {
       return (

@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app>
     <v-app-bar-nav-icon @click="$emit('toggle')">
-      <v-badge dot color='error' v-if='showNotification'>
+      <v-badge dot color="error" v-if="showNotification">
         <v-icon>mdi-menu</v-icon>
       </v-badge>
 
@@ -18,7 +18,7 @@
 
     <v-menu v-model="menu" :close-on-content-click="false" left bottom>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn class='ml-3' small icon v-bind="attrs" v-on="on">
+        <v-btn class="ml-3" small icon v-bind="attrs" v-on="on">
           <v-icon>mdi-filter-variant</v-icon>
         </v-btn>
       </template>
@@ -54,7 +54,7 @@
 
     <v-btn
       :disabled="!isChanged"
-      class='ml-3'
+      class="ml-3"
       @click="onSearch"
       fab
       x-small
@@ -98,18 +98,29 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['signedIn', 'friendRequests', 'newMessages', 'newRequests', 'invites']),
+    ...mapGetters([
+      'signedIn',
+      'friendRequests',
+      'newMessages',
+      'newRequests',
+      'invites',
+    ]),
     ...mapState({ user: (state) => state.auth.user }),
     showNotification() {
-      if(!this.user) {
+      if (!this.user) {
         return false;
       }
 
-      const notVerified = !this.user.email_verified || !this.user.photo_verified;
-      const notifications = this.invites.length + this.newMessages.length + this.newRequests + this.friendRequests.length;
+      const notVerified =
+        !this.user.email_verified || !this.user.photo_verified;
+      const notifications =
+        this.invites.length +
+        this.newMessages.length +
+        this.newRequests +
+        this.friendRequests.length;
 
       return notVerified || notifications;
-    }
+    },
   },
   methods: {
     formatDates(dates) {

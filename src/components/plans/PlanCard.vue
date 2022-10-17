@@ -1,5 +1,5 @@
 <template>
-  <div class='card-container' v-if='!isMini || !showMini'>
+  <div class="card-container" v-if="!isMini || !showMini">
     <v-card class="mx-auto ma-10 plan-card" :to="`/plan/${plan._id}`">
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
@@ -12,7 +12,12 @@
         Request to join this plan.
 
         <template v-slot:actions>
-          <v-btn text color="primary" @click.stop.prevent="onRequestJoin" rounded>
+          <v-btn
+            text
+            color="primary"
+            @click.stop.prevent="onRequestJoin"
+            rounded
+          >
             Join
           </v-btn>
         </template>
@@ -33,9 +38,9 @@
       </v-banner>
 
       <Button
-        v-if='isMember'
-        @click.stop.prevent='onLeave'
-        class='mt-2 mb-5 ml-3'
+        v-if="isMember"
+        @click.stop.prevent="onLeave"
+        class="mt-2 mb-5 ml-3"
         label="Leave"
         color="error"
         rounded
@@ -168,9 +173,7 @@
       @cancel="onLeaveCancel"
     ></confirm-dialog>
   </div>
-  <plan-card-mini v-else :plan='plan'>
-
-  </plan-card-mini>
+  <plan-card-mini v-else :plan="plan"> </plan-card-mini>
 </template>
 
 <script>
@@ -214,7 +217,10 @@ export default {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['newMessages']),
     isMini() {
-      return this.$vuetify.breakpoint.name === 'sm' || this.$vuetify.breakpoint.name === 'xs';
+      return (
+        this.$vuetify.breakpoint.name === 'sm' ||
+        this.$vuetify.breakpoint.name === 'xs'
+      );
     },
     duplicatePlanInitial() {
       const { plan } = this;
@@ -300,7 +306,7 @@ export default {
       'uploadPlanImage',
       'createRequest',
       'createPlan',
-      'leavePlan'
+      'leavePlan',
     ]),
     onLeave() {
       this.showLeave = true;
@@ -313,7 +319,7 @@ export default {
       this.showLeave = false;
     },
     leave() {
-      this.leavePlan({id: this.plan._id});
+      this.leavePlan({ id: this.plan._id });
     },
     onRequestJoin() {
       this.createRequest({ plan: this.plan._id })
@@ -417,7 +423,7 @@ export default {
     onCancelDuplicate() {
       this.showDuplicate = false;
     },
-  }
+  },
 };
 </script>
 

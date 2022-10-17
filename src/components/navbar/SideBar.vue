@@ -20,7 +20,7 @@
             <v-list-item class="pa-0 ma-0">
               <v-list-item-icon>
                 <v-badge
-                  color='error'
+                  color="error"
                   v-if="item.notifications"
                   :content="item.notifications"
                 >
@@ -48,8 +48,20 @@
     </v-list>
 
     <div class="mt-5 ml-5">
-      <Button v-if="signedIn" rounded label="Plan" icon-left="mdi-plus" to="/new" />
-      <Button v-else to="/sign-in" rounded label="Sign in" icon-left="mdi-import" />
+      <Button
+        v-if="signedIn"
+        rounded
+        label="Plan"
+        icon-left="mdi-plus"
+        to="/new"
+      />
+      <Button
+        v-else
+        to="/sign-in"
+        rounded
+        label="Sign in"
+        icon-left="mdi-import"
+      />
     </div>
   </v-navigation-drawer>
 </template>
@@ -74,7 +86,13 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
-    ...mapGetters(['signedIn', 'friendRequests', 'newMessages', 'newRequests', 'invites']),
+    ...mapGetters([
+      'signedIn',
+      'friendRequests',
+      'newMessages',
+      'newRequests',
+      'invites',
+    ]),
     items() {
       return [
         { title: 'Home', icon: 'mdi-home-city', link: '/', isPublic: true },
@@ -91,14 +109,15 @@ export default {
         {
           title: 'My Plans',
           icon: 'mdi-calendar',
-          notifications: this.invites.length + this.newMessages.length + this.newRequests,
+          notifications:
+            this.invites.length + this.newMessages.length + this.newRequests,
           children: [
             {
               title: 'Hosting',
               icon: 'mdi-calendar-edit',
               link: '/my-plans',
               isPublic: false,
-              notifications: this.newRequests
+              notifications: this.newRequests,
             },
             {
               title: 'Attending',

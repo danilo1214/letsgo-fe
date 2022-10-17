@@ -1,11 +1,11 @@
 <template>
-  <v-app class='app mt-10'>
+  <v-app class="app mt-10">
     <notifications group="main" />
     <nav-bar @toggle="onToggle" />
 
     <side-bar v-model="showSideBar" />
 
-    <v-main id='main'>
+    <v-main id="main">
       <Loader v-if="!loaded" />
 
       <router-view v-if="loaded"></router-view>
@@ -14,8 +14,6 @@
     <confirm-dialog
       v-if="signedIn"
       :dialog="showSignOut"
-      entity="user"
-      name-key="email"
       icon="mdi-export"
       action="sign out"
       :data="user"
@@ -95,7 +93,7 @@ export default {
       });
     },
     async init() {
-      document.getElementById('main').scrollIntoView({behavior: "smooth"});
+      document.getElementById('main').scrollIntoView({ behavior: 'smooth' });
       await this.checkAuth();
       const { signedIn, isPublicRoute, user, socket } = this;
 
@@ -126,9 +124,13 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-body, header, nav, main {
-  margin: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) !important;
+<style lang="scss">
+body,
+header,
+nav,
+main {
+  margin: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left) !important;
 }
 
 .v-application {
