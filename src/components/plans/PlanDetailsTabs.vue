@@ -163,8 +163,8 @@ export default {
 
 <style scoped>
 .tab-items {
-  max-height: 70vh;
-  min-height: 70vh;
+  max-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  min-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   overflow-y: scroll;
 }
 </style>
