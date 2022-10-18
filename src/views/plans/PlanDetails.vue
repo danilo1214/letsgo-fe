@@ -270,9 +270,10 @@ export default {
 </script>
 
 <style scoped>
+
 .invite-friends {
   position: fixed;
-  bottom: 14vh;
+  bottom: 10vh;
   right: 25px;
   z-index: 10;
 }

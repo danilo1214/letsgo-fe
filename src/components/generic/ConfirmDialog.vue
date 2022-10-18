@@ -58,11 +58,11 @@ export default {
     },
     entity: {
       type: String,
-      required: true,
+      default: '',
     },
     nameKey: {
       type: String,
-      required: true,
+      default: '',
     },
     data: {
       type: Object,

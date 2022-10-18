@@ -40,7 +40,7 @@
     </v-tabs-items>
     <v-tabs
       v-model="tab"
-      class="rounded"
+      class="tab-bar rounded"
       background-color="primary accent-4"
       centered
       dark
@@ -166,5 +166,12 @@ export default {
   max-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   min-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   overflow-y: scroll;
+}
+
+.tab-bar {
+  position: fixed;
+  bottom: env(safe-area-inset-bottom);
+  left: 0;
+  width: 100vw;
 }
 </style>

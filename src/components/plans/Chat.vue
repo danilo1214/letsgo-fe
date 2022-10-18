@@ -34,7 +34,7 @@
           placeholder="Send message..."
         ></v-text-field>
         <Button
-          class='ml-auto'
+          class='ml-5'
           label="Send"
           rounded
           @click="onSend"
@@ -96,7 +96,7 @@ export default {
 
 
 .plan-messages {
-  max-height: 35vh;
+  max-height: 40vh;
   overflow-y: scroll;
 }
 .picture-wrapper {
