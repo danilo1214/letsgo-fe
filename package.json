@@ -13,6 +13,7 @@
     "@capacitor/android": "^4.3.0",
     "@capacitor/core": "^4.3.0",
     "@capacitor/ios": "^4.3.0",
+    "@capacitor/push-notifications": "^4.1.0",
     "@kugatsu/vuenotification": "^1.1.4",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",

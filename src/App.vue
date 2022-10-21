@@ -28,6 +28,9 @@ import SideBar from '@/components/navbar/SideBar';
 import NavBar from '@/components/navbar/NavBar';
 import Loader from './components/generic/Loader';
 import ConfirmDialog from './components/generic/ConfirmDialog';
+import {
+  PushNotifications,
+} from '@capacitor/push-notifications';
 
 export default {
   name: 'App',
@@ -92,6 +95,44 @@ export default {
         this.newPlanInvite({ invite });
       });
     },
+    initPushNotifications() {
+      PushNotifications.requestPermissions().then(result => {
+        if (result.receive === 'granted') {
+          // Register with Apple / Google to receive push via APNS/FCM
+          PushNotifications.register();
+        } else {
+          // Show some error
+        }
+      });
+
+      // On success, we should be able to receive notifications
+      PushNotifications.addListener('registration',
+        (token) => {
+          console.log('Push registration success, token: ' + token.value);
+        }
+      );
+
+      // Some issue with our setup and push will not work
+      PushNotifications.addListener('registrationError',
+        (error) => {
+          console.log('Error on registration: ' + JSON.stringify(error));
+        }
+      );
+
+      // Show us the notification payload if the app is open on our device
+      PushNotifications.addListener('pushNotificationReceived',
+        (notification) => {
+          console.log('Push received: ' + JSON.stringify(notification));
+        }
+      );
+
+      // Method called when tapping on a notification
+      PushNotifications.addListener('pushNotificationActionPerformed',
+        (notification) => {
+          console.log('Push action performed: ' + JSON.stringify(notification));
+        }
+      );
+    },
     async init() {
       document.getElementById('main').scrollIntoView({ behavior: 'smooth' });
       await this.checkAuth();
@@ -105,6 +146,8 @@ export default {
       if (user && socket === null) {
         await this.initSocket();
       }
+
+      this.initPushNotifications();
 
       this.loaded = true;
     },

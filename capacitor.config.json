@@ -1,5 +1,5 @@
 {
-  "appId": "com.example.app",
+  "appId": "com.letsgo.app",
   "appName": "letsgo-fe",
   "webDir": "dist",
   "bundledWebRuntime": false

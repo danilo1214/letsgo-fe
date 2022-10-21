@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "271448297108",
+    "project_id": "letsgo-notifications",
+    "storage_bucket": "letsgo-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271448297108:android:5821085ba66b63ea3a2e81",
+        "android_client_info": {
+          "package_name": "com.letsgo.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271448297108-rfvjdedp5pedl9oihcios2u3v20lbbvj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPaLJ4F-ZZOY0jXqUzqq1ZShIsL2LDoFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271448297108-rfvjdedp5pedl9oihcios2u3v20lbbvj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
