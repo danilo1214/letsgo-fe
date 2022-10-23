@@ -1,5 +1,6 @@
 <template>
   <div class="pa-10">
+    <search-users />
     <v-subheader>Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
     <user-card
@@ -54,10 +55,11 @@
 import { mapActions, mapGetters } from 'vuex';
 import UserCard from '../components/user/UserCard';
 import Button from '../components/generic/Button';
+import SearchUsers from '../components/user/SearchUsers';
 
 export default {
   name: 'Friends',
-  components: { Button, UserCard },
+  components: { SearchUsers, Button, UserCard },
   data() {
     return {};
   },

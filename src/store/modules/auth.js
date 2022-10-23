@@ -64,6 +64,13 @@ export const auth = {
           throw err;
         });
     },
+    searchUsers: (commit, { name }) => {
+      return axios.getUrl(`/user`, {
+        params: {
+          name
+        }
+      });
+    },
     verifySelfie: (commit, { formData }) => {
       return axios.postUrl('/user/photo', formData);
     },
