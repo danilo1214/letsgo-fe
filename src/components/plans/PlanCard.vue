@@ -1,6 +1,6 @@
 <template>
   <div class="card-container" v-if="!isMini || !showMini">
-    <v-card class="mx-auto ma-10 plan-card" :to="`/plan/${plan._id}`">
+    <v-card class="mx-auto ma-10 plan-card" :to="link">
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
       </v-card-title>
@@ -199,6 +199,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    showLink: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -216,6 +220,9 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['newMessages']),
+    link() {
+      return this.showLink? `/plan/${this.plan._id}` : null;
+    },
     isMini() {
       return (
         this.$vuetify.breakpoint.name === 'sm' ||

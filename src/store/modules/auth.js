@@ -67,8 +67,13 @@ export const auth = {
     searchUsers: (commit, { name }) => {
       return axios.getUrl(`/user`, {
         params: {
-          name
-        }
+          name,
+        },
+      });
+    },
+    setFirebaseToken: (commit, { token }) => {
+      return axios.postUrl('user/firebase-token', {
+        token,
       });
     },
     verifySelfie: (commit, { formData }) => {

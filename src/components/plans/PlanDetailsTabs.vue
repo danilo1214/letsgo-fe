@@ -3,7 +3,7 @@
 
     <v-tabs-items v-model="tab" class="tab-items">
       <v-tab-item value="1">
-        <plan-card class="mt-10" :plan="plan" @join="$emit('join')" />
+        <plan-card class="mt-10" :plan="plan" @join="$emit('join')" :show-link='false'/>
       </v-tab-item>
 
       <v-tab-item value="2">
@@ -163,8 +163,8 @@ export default {
 
 <style scoped>
 .tab-items {
-  max-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-  min-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  max-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
+  min-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
   overflow-y: scroll;
 }
 

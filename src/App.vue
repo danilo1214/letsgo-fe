@@ -63,6 +63,7 @@ export default {
       'addMessage',
       'newFriendRequest',
       'newPlanInvite',
+      'setFirebaseToken'
     ]),
     onToggle() {
       this.showSideBar = !this.showSideBar;
@@ -109,6 +110,7 @@ export default {
       PushNotifications.addListener('registration',
         (token) => {
           console.log('Push registration success, token: ' + token.value);
+          this.setFirebaseToken({token: token.value})
         }
       );
 
