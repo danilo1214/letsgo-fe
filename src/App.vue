@@ -132,8 +132,23 @@ export default {
       PushNotifications.addListener('pushNotificationActionPerformed',
         (notification) => {
           console.log('Push action performed: ' + JSON.stringify(notification));
+          this.handlePushNotificationAction(notification);
         }
       );
+    },
+    handlePushNotificationAction(notification) {
+      if(!notification || !notification['data'] || !notification["data"]["type"]){
+        return;
+      }
+
+      const type = notification.data.type;
+      if(type === 'plan_invite') {
+        this.$router.replace({name: 'invites'});
+      } else if (type === 'friend_request') {
+        this.$router.replace({name: 'friends'});
+      } else if(notification.data.id){
+        this.$router.push(`/plan/${notification.data.id}`);
+      }
     },
     async init() {
       document.getElementById('main').scrollIntoView({ behavior: 'smooth' });
