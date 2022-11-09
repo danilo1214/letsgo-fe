@@ -24,7 +24,7 @@
         </v-banner>
       </template>
     </div>
-    <v-row class="pa-5 pa-md-10 mb-10 mt-5">
+    <v-row class="pa-5 pa-md-10" :style='getChatFooterStyle'>
         <v-col cols='8' md='9'>
           <v-text-field
             rounded
@@ -52,7 +52,8 @@
 import Avatar from '../user/Avatar';
 import Button from '../generic/Button';
 import moment from 'moment';
-import { mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
+import { Keyboard } from '@capacitor/keyboard';
 
 export default {
   name: 'Chat',
@@ -70,8 +71,13 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
+    ...mapGetters(['keyboardActive']),
+    getChatFooterStyle() {
+      return this.keyboardActive? `position: fixed; bottom: 0; z-index: 9999999999` : '';
+    }
   },
   methods: {
+    ...mapActions(['setKeyboardActive']),
     myMessage(message) {
       return message.user._id === this.user._id;
     },
@@ -86,13 +92,25 @@ export default {
       this.$refs.chat.scrollTop =
         this.$refs.chat.scrollHeight + this.$refs.chat.offsetHeight;
     },
+    init() {
+      Keyboard.addListener('keyboardWillShow', () => {
+        this.setKeyboardActive({shown: true});
+      });
+      Keyboard.addListener('keyboardWillHide', () => {
+        this.setKeyboardActive({shown: false});
+      });
+    }
   },
   mounted() {
     this.scrollTop();
+    this.init();
   },
   updated() {
     this.scrollTop();
   },
+  beforeDestroy() {
+    Keyboard.removeAllListeners();
+  }
 };
 </script>
 
@@ -100,7 +118,7 @@ export default {
 
 
 .plan-messages {
-  max-height: 40vh;
+  max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px - 8.5vh - 75px - 12px - 40*2px - 90px);
   overflow-y: scroll;
 }
 .picture-wrapper {
@@ -108,7 +126,7 @@ export default {
 }
 
 .message-banner {
-  width: 40%;
+  width: 80%;
   .v-banner__wrapper {
     border: none !important;
   }

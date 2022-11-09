@@ -34,7 +34,10 @@
         dark
         bottom
         right
-        class="invite-friends"
+        :class="{
+          'invite-friends': true,
+          'hidden': keyboardActive
+        }"
       >
         <v-icon>mdi-account-multiple-plus</v-icon>
       </Button>
@@ -73,7 +76,7 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
-    ...mapGetters(['plans']),
+    ...mapGetters(['plans', 'keyboardActive']),
     kickUserData() {
       const { plan } = this;
       if (plan) {
@@ -269,12 +272,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 
 .invite-friends {
   position: fixed;
   bottom: 10vh;
   right: 25px;
   z-index: 10;
+  &.hidden  {
+    opacity: 0;
+  }
 }
 </style>

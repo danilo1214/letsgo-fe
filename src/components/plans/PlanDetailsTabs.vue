@@ -40,7 +40,11 @@
     </v-tabs-items>
     <v-tabs
       v-model="tab"
-      class="tab-bar rounded"
+      :class="{
+        'tab-bar': true,
+        'rounded': true,
+        'hidden': keyboardActive
+      }"
       background-color="primary accent-4"
       centered
       dark
@@ -83,7 +87,7 @@
 import UserCard from '../user/UserCard';
 import Request from '../user/Request';
 import Chat from './Chat';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import PlanCard from './PlanCard';
 
 export default {
@@ -106,6 +110,7 @@ export default {
   },
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
+    ...mapGetters(['keyboardActive']),
     isAdmin() {
       const userId = this.currentUser._id;
       const planAdminId = this.plan.admin._id || this.plan.admin;
@@ -161,10 +166,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 .tab-items {
-  max-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
-  min-height: calc(70vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
+  max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px - 8.5vh - 75px - 12px);
+  min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px - 8.5vh - 75px - 12px);
   overflow-y: scroll;
 }
 
@@ -173,5 +178,8 @@ export default {
   bottom: env(safe-area-inset-bottom);
   left: 0;
   width: 100vw;
+  &.hidden {
+    opacity: 0;
+  }
 }
 </style>

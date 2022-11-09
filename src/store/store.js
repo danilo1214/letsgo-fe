@@ -14,7 +14,25 @@ export default (Vue) => {
       request,
       friend,
     },
+    state() {
+      return {
+        keyboardActive: false,
+      };
+    },
+    mutations: {
+      SET_KEYBOARD_ACTIVE(state, shown) {
+        state.keyboardActive = shown;
+      },
+    },
+    getters: {
+      keyboardActive: (state) => {
+        return state.keyboardActive;
+      },
+    },
     actions: {
+      setKeyboardActive: ({ commit }, { shown }) => {
+        commit('SET_KEYBOARD_ACTIVE', shown);
+      },
       newSocket: (store) => {
         const { token } = store.state.auth;
         const url =
