@@ -89,7 +89,7 @@ export const auth = {
       const token = localStorage.getItem('letsgo-jwt');
       axios.setToken(token);
       return axios
-        .getUrl('/user/authenticate')
+        .getUrl('/user/me')
         .then((result) => {
           const { data } = result;
 

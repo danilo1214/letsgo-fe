@@ -4,7 +4,7 @@
       <template v-for="(message, id) in plan.messages">
         <v-banner v-if="!myMessage(message)" class="message-banner" :key="id">
           <div class="ml-auto">
-            <Avatar :user="message.user" :size="70" />
+            <Avatar :user="getUser(message.user)" :size="70" />
           </div>
           <v-alert dark color="primary lighten-2" rounded class="mt-1">
             {{ message.text }}
@@ -13,7 +13,7 @@
         </v-banner>
         <v-banner v-else class="message-banner ml-auto" :key="id">
           <div class="ml-auto picture-wrapper">
-            <Avatar :user="message.user" :size="70" />
+            <Avatar :user="getUser(message.user)" :size="70" />
           </div>
           <v-alert dark color="success" rounded class="mt-3">
             {{ message.text }}
@@ -74,12 +74,24 @@ export default {
     ...mapGetters(['keyboardActive']),
     getChatFooterStyle() {
       return this.keyboardActive? `position: fixed; bottom: 0; z-index: 9999999999` : '';
+    },
+    userMap() {
+      let map = {};
+
+      this.plan.members.forEach(member => {
+        map[member._id] = member;
+      });
+
+      return map;
     }
   },
   methods: {
     ...mapActions(['setKeyboardActive']),
+    getUser(id) {
+      return this.userMap[id] || {};
+    },
     myMessage(message) {
-      return message.user._id === this.user._id;
+      return message.user === this.user._id;
     },
     onSend() {
       this.$emit('send', this.currentMessage);

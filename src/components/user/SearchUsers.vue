@@ -58,9 +58,6 @@ export default {
       selected: {}
     }
   },
-  computed: {
-
-  },
   methods: {
     ...mapActions(['searchUsers', 'sendFriendRequest']),
     reset() {
