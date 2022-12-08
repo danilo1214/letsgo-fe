@@ -116,6 +116,7 @@ export default {
       'thumbDown',
       'updatePlanLocal',
       'sendFriendRequest',
+      'loadFriendsList'
     ]),
     onAddFriend(user) {
       this.sendFriendRequest({
@@ -174,6 +175,7 @@ export default {
     },
     init() {
       this.getPlan({ id: this.id });
+      this.loadFriendsList();
     },
     onInviteFriends() {
       this.$router.push(`${this.id}/invite-friends`);

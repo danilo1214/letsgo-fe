@@ -2,6 +2,14 @@
   <div class="pa-sm-5 pa-md-10">
     <h2>Welcome {{ name }}</h2>
 
+    <Button
+      color='primary lighten-1'
+      class="ma-12"
+      rounded
+      to="/plans/"
+      label="🔥 What's Popular?"
+    />
+
     <v-subheader>Your upcoming plans</v-subheader>
     <v-divider></v-divider>
     <Loader v-if="isLoading" />
@@ -11,12 +19,6 @@
     />
     <template v-else>
       <h1 class="mt-10">You do not have any upcoming plans</h1>
-      <Button
-        class="ml-auto mt-12 text-center"
-        rounded
-        to="/plans/"
-        label="What's Popular?"
-      />
     </template>
   </div>
 </template>

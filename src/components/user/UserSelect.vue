@@ -4,6 +4,8 @@
     @input="(v) => $emit('input', v)"
     :items="users"
     chips
+    rounded
+    filled
     color="blue-grey lighten-2"
     label="Friends"
     item-text="name"

@@ -1,11 +1,13 @@
 <template>
   <v-form @submit.prevent='onSignIn' class="sign-in-form mx-auto mt-15" ref="form" lazy-validation>
-    <v-text-field @keydown.enter.prevent="onSignIn" v-model="email" label="Email" type='email' required></v-text-field>
+    <v-text-field rounded filled @keydown.enter.prevent="onSignIn" v-model="email" placeholder="Email" type='email' required></v-text-field>
     <v-text-field
       @keydown.enter.prevent="onSignIn"
       v-model="password"
-      label="Password"
+      placeholder="Password"
       type="password"
+      rounded
+      filled
       required
     ></v-text-field>
 

@@ -12,7 +12,7 @@
       </v-toolbar>
       <v-card-text>
         <div class="body-1 pa-12">
-          <user-select v-model="invited" :users="friendsListf" />
+          <user-select v-model="invited" :users="friendsList" />
         </div>
       </v-card-text>
 

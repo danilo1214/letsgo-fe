@@ -3,18 +3,23 @@
     <v-text-field
       v-model="user.first_name"
       :rules="required('First name')"
-      label="First Name"
+      placeholder="First Name"
+      rounded
+      filled
       required
     ></v-text-field>
 
     <v-text-field
       v-model="user.last_name"
       :rules="required('Last name')"
-      label="Last Name"
+      placeholder="Last Name"
+      rounded
+      filled
       required
     ></v-text-field>
 
     <v-radio-group
+      class='mt-0'
       label="Sex"
       v-model="user.sex"
       :rules="required('Sex')"
@@ -40,9 +45,11 @@
           required
           :rules="required('Birthday')"
           v-model="user.birth_date"
-          label="Birthday"
-          prepend-icon="mdi-calendar"
+          placeholder="Birthday"
+          prepend-inner-icon="mdi-calendar"
           readonly
+          rounded
+          filled
           v-bind="attrs"
           v-on="on"
         ></v-text-field>
@@ -56,13 +63,15 @@
       ></v-date-picker>
     </v-menu>
 
-    <Select :rules="required('Country')" v-model='user.country' :items='countries' label='Country' />
+    <Select rounded filled :rules="required('Country')" v-model='user.country' :items='countries' placeholder='Country' />
 
     <v-text-field
       v-model="user.email"
       :rules="rules.emailRules"
       type="email"
-      label="E-mail"
+      rounded
+      filled
+      placeholder="E-mail"
       required
     ></v-text-field>
 
@@ -71,6 +80,8 @@
       :rules="required('Password')"
       label="Password"
       type="password"
+      rounded
+      filled
       required
     ></v-text-field>
 
