@@ -6,20 +6,20 @@
     max-width="600"
   >
     <v-card>
-      <v-toolbar color="info darken-1" dark>
+      <v-toolbar color="primary" dark>
         <v-icon class="mr-5">mdi-account-multiple-plus</v-icon>Invite friends to
         plan
       </v-toolbar>
       <v-card-text>
         <div class="body-1 pa-12">
-          <user-select v-model="invited" :users="friends" />
+          <user-select v-model="invited" :users="friendsListf" />
         </div>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
         <Button rounded color="secondary" text @click="goBack" label="Back" />
-        <Button rounded text @click="onSend" label="Send" />
+        <Button rounded text @click="onSend" label="Invite" />
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
-    ...mapGetters(['plans']),
+    ...mapGetters(['plans', 'friends']),
     plan() {
       return this.plans.find((plan) => plan._id === this.id);
     },
@@ -49,10 +49,15 @@ export default {
     planMembers() {
       return this.plan.members.map((member) => member._id || member);
     },
-    friends() {
-      return this.user.friends.filter(
+    friendsList() {
+      return this.friends.filter(
         (friend) => !this.planMembers.includes(friend._id)
-      );
+      ).map(friend=> {
+        return {
+          ...friend,
+          name: `${friend.first_name} ${friend.last_name}`
+        }
+      });
     },
   },
   methods: {

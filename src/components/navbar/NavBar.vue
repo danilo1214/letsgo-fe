@@ -8,6 +8,11 @@
       <v-icon v-else>mdi-menu</v-icon>
     </v-app-bar-nav-icon>
 
+    <v-avatar rounded size='60' class='logo ma-2' @click='onHome'>
+      <img src="../../../public/assets/logo.png" alt="logo">
+    </v-avatar>
+
+
     <combo-box
       class="mt-5 search-text"
       label="Search by keywords..."
@@ -23,7 +28,7 @@
         </v-btn>
       </template>
 
-      <v-card class="pa-3">
+      <v-card class="pa-3 filter-menu">
         <v-list>
           <v-list-item-title> Filters </v-list-item-title>
         </v-list>
@@ -49,6 +54,11 @@
           >
           </date-picker>
         </v-list>
+
+        <v-card-actions>
+          <Button color='info' text label='Reset' @click='onResetFilter' />
+          <Button text label='Ok' @click='onOkFilter'/>
+        </v-card-actions>
       </v-card>
     </v-menu>
 
@@ -63,6 +73,7 @@
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
 
+    <!--
     <Button
       label="🔥 Hot"
       small
@@ -71,6 +82,7 @@
       class="ml-3"
       @click="onSearchEmpty"
     />
+    -->
   </v-app-bar>
 </template>
 
@@ -123,6 +135,20 @@ export default {
     },
   },
   methods: {
+    onResetFilter() {
+      this.form = {
+        dates: [],
+        search: [],
+        priceRange: [0, 0],
+      }
+      this.isChanged = true;
+    },
+    onOkFilter() {
+      this.menu = false;
+    },
+    onHome() {
+      this.$router.push('/');
+    },
     formatDates(dates) {
       return dates.join(' - ');
     },
@@ -135,11 +161,6 @@ export default {
     },
     formatPrice(value) {
       return `$${value}`;
-    },
-    onSearchEmpty() {
-      this.$router.push({
-        name: 'plans',
-      });
     },
     constructQuery() {
       const { dates, priceRange, search } = this.form;
@@ -195,8 +216,23 @@ export default {
 </script>
 
 <style>
+
+.logo {
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+
+.logo:hover {
+  opacity: 0.7;
+  transition: 0.1s ease-in-out;
+}
+
 .search-text {
   min-width: 140px;
+}
+
+.filter-menu {
+  min-width: 300px;
 }
 
 .v-select__selections {

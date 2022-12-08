@@ -28,7 +28,7 @@
       <Button
         @click="onInviteFriends"
         label=""
-        color="info"
+        color="primary"
         fab
         large
         dark

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card class="mx-auto" max-width='700'>
     <v-subheader class="title text-right">
       {{ name }}, <span class="font-italic pl-2">{{ age }}</span>
     </v-subheader>

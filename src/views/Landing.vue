@@ -11,38 +11,18 @@
       </v-col>
 
       <v-col sm="12" md="6">
-        <v-img src="../../public/assets/default.jpg" height="400" />
+        <v-img src="../../public/assets/page.png" />
       </v-col>
     </v-row>
 
-    <h1 class="mt-16">What do people think?</h1>
-
-    <v-row class="mt-12">
-      <v-col>
-        <Testimonial
-          name="John Doe"
-          text="LetsGo makes me feel safe when going out with strangers!"
-        />
-      </v-col>
-      <v-col>
-        <Testimonial
-          name="Mr. Bean"
-          text="Finally I can find someone with my super specific interests."
-        />
-      </v-col>
-      <v-col>
-        <Testimonial name="Kendrick Auston" text="Damn, I love it!" />
-      </v-col>
-    </v-row>
   </div>
 </template>
 
 <script>
 import Button from '../components/generic/Button';
-import Testimonial from '../components/generic/Testimonial';
 export default {
   name: 'Landing',
-  components: { Testimonial, Button },
+  components: { Button },
 };
 </script>
 

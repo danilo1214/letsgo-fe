@@ -1,8 +1,54 @@
 <template>
   <div class="card-container" v-if="!isMini || !showMini">
+
     <v-card class="mx-auto ma-10 plan-card" :to="link">
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
+        <v-spacer></v-spacer>
+        <v-menu v-if='isAdmin'>
+          <template v-slot:activator="{ on, attrs }">
+            <Button
+              icon
+              color='info'
+              v-bind="attrs"
+              v-on='on'
+              @click.stop.prevent
+            >
+              <v-icon>mdi-dots-vertical</v-icon>
+            </Button>
+          </template>
+
+          <v-list>
+            <v-list-item>
+              <Button
+                rounded
+                text
+                label="Edit"
+                @click.stop.prevent="showEdit = true"
+              />
+            </v-list-item>
+
+            <v-list-item>
+              <Button
+                rounded
+                color="error"
+                text
+                @click.stop.prevent="showDelete = true"
+                label="Delete"
+              />
+            </v-list-item>
+
+            <v-list-item>
+              <Button
+                rounded
+                color="info"
+                text
+                @click.stop.prevent="showDuplicate = true"
+                label="Duplicate"
+              />
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-card-title>
       <v-banner two-line v-if="showJoinBanner">
         <v-avatar slot="icon" color="primary darken-1" size="40">
@@ -94,32 +140,6 @@
         >
         <span class="subheading">{{ address }}</span>
       </v-card-text>
-
-      <v-card-actions>
-        <Button
-          rounded
-          text
-          v-if="isAdmin"
-          label="Edit"
-          @click.stop.prevent="showEdit = true"
-        />
-        <Button
-          rounded
-          color="error"
-          text
-          v-if="isAdmin"
-          @click.stop.prevent="showDelete = true"
-          label="Delete"
-        />
-        <Button
-          rounded
-          color="info"
-          text
-          v-if="isAdmin"
-          @click.stop.prevent="showDuplicate = true"
-          label="Duplicate"
-        />
-      </v-card-actions>
     </v-card>
 
     <Dialog

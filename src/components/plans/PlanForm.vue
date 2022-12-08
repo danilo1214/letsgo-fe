@@ -10,16 +10,20 @@
       <v-text-field
         v-model="plan.caption"
         :rules="required('Caption')"
-        label="Caption"
+        placeholder="Caption"
+        rounded
         prepend-icon="mdi-format-quote-open"
+        filled
         required
       ></v-text-field>
       <v-textarea
         v-model="plan.description"
         :rules="required('Description')"
-        label="Description"
+        placeholder="Description"
         clearable
         auto-grow
+        filled
+        rounded
         prepend-icon="mdi-comment"
       ></v-textarea>
 
@@ -27,15 +31,18 @@
         prepend-icon="mdi-map-marker"
         v-model="plan.address"
         :rules="required('Address')"
-        label="Address"
+        placeholder="Address"
+        filled
+        rounded
         required
       ></v-text-field>
 
       <Slider
         v-model="costRange"
         :rules="required('Cost')"
-        label="Cost"
+        placeholder="Cost"
         class="mr-5"
+        filled
         prepend-icon="mdi-cash-multiple"
         :formatter="formatCost"
       />
@@ -44,6 +51,7 @@
         placeholder="Select Date..."
         v-model="plan.date"
         :rules="required('Date')"
+        filled
       >
       </date-picker>
 

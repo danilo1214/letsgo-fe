@@ -1,7 +1,8 @@
 <template>
-  <v-form class="ma-10 w-200" ref="form" lazy-validation>
-    <v-text-field v-model="email" label="Email" required></v-text-field>
+  <v-form @submit.prevent='onSignIn' class="sign-in-form mx-auto mt-15" ref="form" lazy-validation>
+    <v-text-field @keydown.enter.prevent="onSignIn" v-model="email" label="Email" type='email' required></v-text-field>
     <v-text-field
+      @keydown.enter.prevent="onSignIn"
       v-model="password"
       label="Password"
       type="password"
@@ -14,8 +15,8 @@
 
     <v-alert rounded dark text type="info">
       Don't have an account?
+      <v-spacer></v-spacer>
       <Button
-        class="ml-5"
         color="info"
         rounded
         small
@@ -30,7 +31,8 @@
       class="mx-auto mt-10"
       icon-left="mdi-import"
       label="Sign in"
-      @click="onSignIn"
+      :disabled='isLoading'
+     type='submit'
     />
   </v-form>
 </template>
@@ -49,22 +51,31 @@ export default {
       email: '',
       password: '',
       error: '',
+      isLoading: false
     };
   },
   methods: {
     ...mapActions(['signIn']),
     async onSignIn() {
       const { email, password } = this;
+      this.isLoading = true;
+
       this.signIn({ email, password })
         .then(() => {
           this.$router.replace({ name: 'home' });
+          this.isLoading = false;
         })
         .catch((err) => {
           this.error = getError(err);
+          this.isLoading = false;
         });
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.sign-in-form {
+  max-width: 300px;
+}
+</style>

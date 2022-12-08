@@ -26,7 +26,7 @@ export default {
     ...mapGetters(['invites']),
   },
   methods: {
-    ...mapActions(['acceptInvite', 'checkAuth', 'declineInvite']),
+    ...mapActions(['acceptInvite', 'loadFriendsList', 'declineInvite']),
     async onAcceptInvite(plan) {
       await this.acceptInvite({ plan });
       this.init();
@@ -36,7 +36,7 @@ export default {
       this.init();
     },
     init() {
-      this.checkAuth();
+      this.loadFriendsList();
     },
   },
 };

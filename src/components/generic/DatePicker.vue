@@ -14,6 +14,8 @@
         prepend-icon="mdi-calendar"
         :placeholder="placeholder"
         readonly
+        rounded
+        filled
         v-bind="attrs"
         v-on="on"
       ></v-text-field>

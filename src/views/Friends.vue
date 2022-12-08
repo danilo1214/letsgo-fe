@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'checkAuth',
+      'loadFriendsList',
       'acceptFriendRequest',
       'declineFriendRequest',
       'removeFriend',
@@ -103,7 +103,7 @@ export default {
       this.init();
     },
     init() {
-      this.checkAuth();
+      this.loadFriendsList();
     },
   },
   mounted() {

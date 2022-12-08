@@ -45,9 +45,7 @@
         'rounded': true,
         'hidden': keyboardActive
       }"
-      background-color="primary accent-4"
       centered
-      dark
       icons-and-text
     >
       <v-tabs-slider></v-tabs-slider>
@@ -178,6 +176,7 @@ export default {
   bottom: env(safe-area-inset-bottom);
   left: 0;
   width: 100vw;
+  border-top: 1px solid  rgba(0, 0, 0, 0.12);
   &.hidden {
     opacity: 0;
   }

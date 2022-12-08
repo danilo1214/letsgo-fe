@@ -11,15 +11,14 @@
       </Plans>
       <template v-else>
         <h1 class="mt-10">You are not attending any upcoming plans</h1>
-        <Button
-          class="mt-12"
-          rounded
-          to="/plans/"
-          text
-          label="What's Popular?"
-        />
       </template>
-
+      <Button
+        class="mt-12"
+        rounded
+        to="/plans/"
+        text
+        label="What's Popular?"
+      />
       <v-spacer class="mt-15"></v-spacer>
 
       <v-subheader>Past plans you've attended</v-subheader>

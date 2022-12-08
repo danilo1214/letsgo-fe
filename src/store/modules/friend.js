@@ -49,5 +49,14 @@ export const friend = {
     newPlanInvite: ({ commit }, { invite }) => {
       commit('NEW_PLAN_INVITE', invite);
     },
+    loadFriendsList: ({ commit }) => {
+      axios.getUrl('user/friends').then((result) => {
+        const { data } = result;
+
+        commit('SET_FRIENDS', data.friends);
+        commit('SET_FRIEND_REQUESTS', data.friend_requests);
+        commit('SET_INVITES', data.invites);
+      });
+    },
   },
 };

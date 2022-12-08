@@ -6,9 +6,11 @@
     :search-input.sync="search"
     item-text="name"
     item-value="_id"
-    label="Add friends"
-    placeholder="Start typing to Search"
+    placeholder="Search for friends"
     prepend-icon="mdi-account-plus"
+    dense
+    rounded
+    filled
     return-object
   >
     <template v-slot:selection="data">
@@ -37,7 +39,7 @@
       </template>
     </template>
     <template v-slot:append-outer>
-        <Button :disabled='!selected || !selected._id' rounded color='primary darken-2' label='Add' @click='onAddFriend'> </Button>
+        <Button :disabled='!selected || !selected._id' rounded color='primary' label='Add' @click='onAddFriend'> </Button>
     </template>
   </v-autocomplete>
 </template>
