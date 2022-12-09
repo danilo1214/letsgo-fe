@@ -9,7 +9,7 @@
       :key="user._id"
       :user="user"
       @thumb-up="onThumbUp(user)"
-      @thumbDown="onThumbDown(user)"
+      @thumb-down="onThumbDown(user)"
     >
       <Button
         rounded

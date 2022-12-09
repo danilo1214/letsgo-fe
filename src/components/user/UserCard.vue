@@ -1,46 +1,10 @@
 <template>
   <v-card class="mx-auto" max-width='700'>
-    <v-subheader class="title text-right">
-      {{ name }}, <span class="font-italic pl-2">{{ age }}</span>
-    </v-subheader>
-    <v-row class="pl-6 pt-3" v-if="showThumbOptions">
-      <Button
-        color="success"
-        rounded
-        fab
-        icon-left=""
-        @click="$emit('thumb-up', user._id)"
-      >
-        <v-icon sm>mdi-thumb-up</v-icon>
-      </Button>
-      <Button
-        color="error lighten-2"
-        rounded
-        fab
-        class="ml-3"
-        @click="$emit('thumb-down', user._id)"
-      >
-        <v-icon sm>mdi-thumb-down</v-icon>
-      </Button>
-    </v-row>
-    <v-row class="pt-3 pl-6">
-      <v-progress-linear
-        class="liked-percentage"
-        rounded
-        color="success"
-        background-color="info"
-        :value="likedPercentage"
-        height="25"
-        dark
-      >
-        {{ Math.abs(likedAmount) }}
-        <span class="font-weight-light ml-2">{{ likedMessage }}</span>
-      </v-progress-linear>
-    </v-row>
-    <v-row>
+    <v-row class='mt-6'>
       <v-col>
-        <Avatar class="ml-5" :size="150" :user="user" />
+        <Avatar class="ml-2" :size="150" :user="user" />
       </v-col>
+      <v-spacer/>
       <v-col>
         <Button
           v-if="showAddFriend"
@@ -64,7 +28,47 @@
         ></Button>
       </v-col>
     </v-row>
-    <v-divider class="mt-2"></v-divider>
+    <v-subheader class="title">
+      {{ name }}, <span class="v-size--small pl-3">{{ age }}</span>
+    </v-subheader>
+    <div class='mt-5'>
+      <v-row class="pl-6" v-if="showThumbOptions">
+        <Button
+          color="success"
+          rounded
+          small
+          fab
+          icon-left=""
+          @click="$emit('thumb-up', user._id)"
+        >
+          <v-icon sm>mdi-thumb-up</v-icon>
+        </Button>
+        <Button
+          color="info"
+          rounded
+          small
+          fab
+          class="ml-3"
+          @click="$emit('thumb-down', user._id)"
+        >
+          <v-icon sm>mdi-thumb-down</v-icon>
+        </Button>
+      </v-row>
+      <v-row class="pt-2 pl-6">
+        <v-progress-linear
+          class="liked-percentage"
+          rounded
+          color="success"
+          background-color="info"
+          :value="likedPercentage"
+          height="25"
+          dark
+        >
+          {{ Math.abs(likedAmount) }}  {{likedMessage}}
+        </v-progress-linear>
+      </v-row>
+    </div>
+    <v-divider class="mt-10"></v-divider>
     <v-list>
       <template v-for="item in userDataList">
         <v-list-item v-if="item.show" :key="item.label">
@@ -86,7 +90,7 @@
 import Avatar from './Avatar';
 import moment from 'moment';
 import Button from '../generic/Button';
-import { mapState } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'UserCard',
@@ -107,6 +111,7 @@ export default {
   },
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
+    ...mapGetters(['friendRequests']),
     userDataList() {
       return [
         {
@@ -133,14 +138,11 @@ export default {
       return this.currentUser._id === this.user._id;
     },
     likedMessage() {
-      let prefix = Math.abs(this.likedAmount) === 1 ? 'person' : 'people';
       if (this.likedAmount >= 0) {
-        prefix += ' liked';
+        return '👍🏻';
       } else {
-        prefix += ' disliked';
+        return '👎🏻'
       }
-      const sufix = this.isMe ? ' you.' : ' this user.';
-      return prefix + sufix;
     },
     likedAmount() {
       const { user } = this;
@@ -165,11 +167,11 @@ export default {
       );
     },
     friendRequestRecieved() {
-      if (!this.currentUser || !this.currentUser.friend_requests) {
+      if (!this.friendRequests) {
         return false;
       }
 
-      const requests = this.currentUser.friend_requests.map(
+      const requests = this.friendRequests.map(
         (request) => request._id || request
       );
       return requests.includes(this.user._id);

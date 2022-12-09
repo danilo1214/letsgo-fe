@@ -39,6 +39,9 @@ export default {
       this.loadFriendsList();
     },
   },
+  created() {
+    this.init();
+  }
 };
 </script>
 
