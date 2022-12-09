@@ -56,7 +56,7 @@
       </date-picker>
 
       <v-time-picker
-        class="time-picker"
+        class="time-picker mx-auto"
         format="ampm"
         v-model="plan.time"
         :rules="required('time')"
@@ -164,4 +164,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.time-picker {
+  display: flex;
+}
+</style>

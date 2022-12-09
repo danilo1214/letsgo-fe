@@ -21,7 +21,7 @@
       </v-tab-item>
 
       <v-tab-item value="3" v-if="isMember">
-        <v-card flat>
+        <v-card flat v-if='plan.requests.length'>
           <request
             class="mt-8"
             @accept="(user) => $emit('accept', user)"
@@ -32,6 +32,8 @@
             :user="request"
           />
         </v-card>
+        <h1 v-else class="mt-10 text-center">No new requests</h1>
+
       </v-tab-item>
 
       <v-tab-item value="4" class="fill-height" v-if="isMember">
