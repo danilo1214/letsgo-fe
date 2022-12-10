@@ -1,17 +1,16 @@
 <template>
   <div class="card-container" v-if="!isMini || !showMini">
-
     <v-card class="mx-auto ma-10 plan-card" :to="link">
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
         <v-spacer></v-spacer>
-        <v-menu v-if='isAdmin'>
+        <v-menu v-if="isAdmin">
           <template v-slot:activator="{ on, attrs }">
             <Button
               icon
-              color='info'
+              color="info"
               v-bind="attrs"
-              v-on='on'
+              v-on="on"
               @click.stop.prevent
             >
               <v-icon>mdi-dots-vertical</v-icon>
@@ -221,8 +220,8 @@ export default {
     },
     showLink: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return {
@@ -241,7 +240,7 @@ export default {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['newMessages']),
     link() {
-      return this.showLink? `/plan/${this.plan._id}` : null;
+      return this.showLink ? `/plan/${this.plan._id}` : null;
     },
     isMini() {
       return (

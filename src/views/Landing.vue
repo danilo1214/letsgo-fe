@@ -14,7 +14,6 @@
         <v-img src="../../public/assets/page.png" />
       </v-col>
     </v-row>
-
   </div>
 </template>
 

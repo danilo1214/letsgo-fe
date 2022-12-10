@@ -1,10 +1,10 @@
 <template>
-  <div class="pa-sm-5 pa-md-10">
+  <div class="pa-6 pa-md-10">
     <h2>Welcome {{ name }}</h2>
 
     <Button
-      color='primary lighten-1'
-      class="ma-12"
+      color="primary lighten-1"
+      class="ml-5 mt-10 mb-10"
       rounded
       to="/plans/"
       label="🔥 What's Popular?"

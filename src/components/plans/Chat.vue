@@ -24,27 +24,27 @@
         </v-banner>
       </template>
     </div>
-    <v-row class="pa-5 pa-md-10" :style='getChatFooterStyle'>
-        <v-col cols='8' md='9'>
-          <v-text-field
-            @keydown.enter.prevent='onSend'
-            rounded
-            filled
-            dense
-            clearable
-            v-model.lazy="currentMessage"
-            placeholder="Send message..."
-          ></v-text-field>
-        </v-col>
-        <v-col cols='4' md='3'>
-          <Button
-            class='ml-5'
-            label="Send"
-            rounded
-            @click="onSend"
-            :disabled="!currentMessage"
-          />
-        </v-col>
+    <v-row class="pa-5 pa-md-10" :style="getChatFooterStyle">
+      <v-col cols="8" md="9">
+        <v-text-field
+          @keydown.enter.prevent="onSend"
+          rounded
+          filled
+          dense
+          clearable
+          v-model.lazy="currentMessage"
+          placeholder="Send message..."
+        ></v-text-field>
+      </v-col>
+      <v-col cols="4" md="3">
+        <Button
+          class="ml-5"
+          label="Send"
+          rounded
+          @click="onSend"
+          :disabled="!currentMessage"
+        />
+      </v-col>
     </v-row>
   </v-card>
 </template>
@@ -74,17 +74,19 @@ export default {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['keyboardActive']),
     getChatFooterStyle() {
-      return this.keyboardActive? `position: fixed; bottom: 0; z-index: 9999999999` : '';
+      return this.keyboardActive
+        ? `position: fixed; bottom: 0; z-index: 9999999999`
+        : '';
     },
     userMap() {
       let map = {};
 
-      this.plan.members.forEach(member => {
+      this.plan.members.forEach((member) => {
         map[member._id] = member;
       });
 
       return map;
-    }
+    },
   },
   methods: {
     ...mapActions(['setKeyboardActive']),
@@ -107,12 +109,12 @@ export default {
     },
     init() {
       Keyboard.addListener('keyboardWillShow', () => {
-        this.setKeyboardActive({shown: true});
+        this.setKeyboardActive({ shown: true });
       });
       Keyboard.addListener('keyboardWillHide', () => {
-        this.setKeyboardActive({shown: false});
+        this.setKeyboardActive({ shown: false });
       });
-    }
+    },
   },
   mounted() {
     this.scrollTop();
@@ -123,16 +125,20 @@ export default {
   },
   beforeDestroy() {
     Keyboard.removeAllListeners();
-  }
+  },
 };
 </script>
 
 <style lang="scss">
-
-
 .plan-messages {
-  max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px - 8.5vh - 75px - 12px - 40*2px - 90px);
-  min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px - 8.5vh - 75px - 12px - 40*2px - 90px);
+  max-height: calc(
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
+      8.5vh - 75px - 12px - 40 * 2px - 90px
+  );
+  min-height: calc(
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
+      8.5vh - 75px - 12px - 40 * 2px - 90px
+  );
   overflow-y: scroll;
 }
 .picture-wrapper {

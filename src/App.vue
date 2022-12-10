@@ -28,9 +28,7 @@ import SideBar from '@/components/navbar/SideBar';
 import NavBar from '@/components/navbar/NavBar';
 import Loader from './components/generic/Loader';
 import ConfirmDialog from './components/generic/ConfirmDialog';
-import {
-  PushNotifications,
-} from '@capacitor/push-notifications';
+import { PushNotifications } from '@capacitor/push-notifications';
 
 export default {
   name: 'App',
@@ -63,7 +61,7 @@ export default {
       'addMessage',
       'newFriendRequest',
       'newPlanInvite',
-      'setFirebaseToken'
+      'setFirebaseToken',
     ]),
     onToggle() {
       this.showSideBar = !this.showSideBar;
@@ -97,7 +95,7 @@ export default {
       });
     },
     initPushNotifications() {
-      PushNotifications.requestPermissions().then(result => {
+      PushNotifications.requestPermissions().then((result) => {
         if (result.receive === 'granted') {
           // Register with Apple / Google to receive push via APNS/FCM
           PushNotifications.register();
@@ -107,45 +105,47 @@ export default {
       });
 
       // On success, we should be able to receive notifications
-      PushNotifications.addListener('registration',
-        (token) => {
-          console.log('Push registration success, token: ' + token.value);
-          this.setFirebaseToken({token: token.value})
-        }
-      );
+      PushNotifications.addListener('registration', (token) => {
+        console.log('Push registration success, token: ' + token.value);
+        this.setFirebaseToken({ token: token.value });
+      });
 
       // Some issue with our setup and push will not work
-      PushNotifications.addListener('registrationError',
-        (error) => {
-          console.log('Error on registration: ' + JSON.stringify(error));
-        }
-      );
+      PushNotifications.addListener('registrationError', (error) => {
+        console.log('Error on registration: ' + JSON.stringify(error));
+      });
 
       // Show us the notification payload if the app is open on our device
-      PushNotifications.addListener('pushNotificationReceived',
+      PushNotifications.addListener(
+        'pushNotificationReceived',
         (notification) => {
           console.log('Push received: ' + JSON.stringify(notification));
         }
       );
 
       // Method called when tapping on a notification
-      PushNotifications.addListener('pushNotificationActionPerformed',
+      PushNotifications.addListener(
+        'pushNotificationActionPerformed',
         (action) => {
           this.handlePushNotificationAction(action.notification);
         }
       );
     },
     handlePushNotificationAction(notification) {
-      if(!notification || !notification['data'] || !notification["data"]["type"]){
+      if (
+        !notification ||
+        !notification['data'] ||
+        !notification['data']['type']
+      ) {
         return;
       }
 
       const type = notification.data.type;
-      if(type === 'plan_invite') {
-        this.$router.replace({name: 'invites'});
+      if (type === 'plan_invite') {
+        this.$router.replace({ name: 'invites' });
       } else if (type === 'friend_request') {
-        this.$router.replace({name: 'friends'});
-      } else if(notification.data.id){
+        this.$router.replace({ name: 'friends' });
+      } else if (notification.data.id) {
         this.$router.push(`/plan/${notification.data.id}`);
       }
     },

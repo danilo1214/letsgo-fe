@@ -20,7 +20,7 @@
       @add-friend="onAddFriend"
       @decline="onDecline"
       @kick="onKick"
-      @join='init'
+      @join="init"
       :plan="plan"
       @send="send"
     />
@@ -36,7 +36,7 @@
         right
         :class="{
           'invite-friends': true,
-          'hidden': keyboardActive
+          hidden: keyboardActive,
         }"
       >
         <v-icon>mdi-account-multiple-plus</v-icon>
@@ -116,7 +116,7 @@ export default {
       'thumbDown',
       'updatePlanLocal',
       'sendFriendRequest',
-      'loadFriendsList'
+      'loadFriendsList',
     ]),
     onAddFriend(user) {
       this.sendFriendRequest({
@@ -274,14 +274,13 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-
+<style lang="scss" scoped>
 .invite-friends {
   position: fixed;
   bottom: 10vh;
   right: 25px;
   z-index: 10;
-  &.hidden  {
+  &.hidden {
     opacity: 0;
   }
 }

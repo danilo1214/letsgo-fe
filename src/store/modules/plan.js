@@ -1,5 +1,6 @@
 import axios from '@/axios';
 import moment from 'moment';
+import { dateTime } from '../../helpers/date';
 
 export const plan = {
   state() {
@@ -156,10 +157,18 @@ export const plan = {
       return requests;
     },
     plans: (state) => state.plans,
-    oldPlans: (state) =>
-      state.plans.filter((plan) => !moment().isBefore(moment(plan.date))),
-    upcomingPlans: (state) =>
-      state.plans.filter((plan) => moment().isBefore(moment(plan.date))),
+    oldPlans: (state) => {
+      return state.plans.filter((plan) => {
+        const planDate = dateTime(moment(plan.date), plan.time);
+        return !moment().isBefore(planDate);
+      });
+    },
+    upcomingPlans: (state) => {
+      return state.plans.filter((plan) => {
+        const planDate = dateTime(moment(plan.date), plan.time);
+        return moment().isBefore(planDate);
+      });
+    },
     adminPlans: (state, getters, rootState) =>
       rootState.auth.user
         ? state.plans.filter(

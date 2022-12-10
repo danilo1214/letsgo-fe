@@ -8,10 +8,9 @@
       <v-icon v-else>mdi-menu</v-icon>
     </v-app-bar-nav-icon>
 
-    <v-avatar rounded size='60' class='logo ma-2' @click='onHome'>
-      <img src="../../../public/assets/logo.png" alt="logo">
+    <v-avatar rounded size="60" class="logo ma-2" @click="onHome">
+      <img src="../../../public/assets/logo.png" alt="logo" />
     </v-avatar>
-
 
     <combo-box
       class="mt-5 search-text"
@@ -56,8 +55,8 @@
         </v-list>
 
         <v-card-actions>
-          <Button color='info' text label='Reset' @click='onResetFilter' />
-          <Button text label='Ok' @click='onOkFilter'/>
+          <Button color="info" text label="Reset" @click="onResetFilter" />
+          <Button text label="Ok" @click="onOkFilter" />
         </v-card-actions>
       </v-card>
     </v-menu>
@@ -140,7 +139,7 @@ export default {
         dates: [],
         search: [],
         priceRange: [0, 0],
-      }
+      };
       this.isChanged = true;
     },
     onOkFilter() {
@@ -216,7 +215,6 @@ export default {
 </script>
 
 <style>
-
 .logo {
   cursor: pointer;
   transition: 0.1s ease-in-out;

@@ -10,14 +10,16 @@
           </v-avatar>
 
           <v-toolbar-title
-            >{{ capitalize(action) }} {{ entity? capitalize(entity) : '' }}</v-toolbar-title
+            >{{ capitalize(action) }}
+            {{ entity ? capitalize(entity) : '' }}</v-toolbar-title
           >
         </v-banner>
       </v-toolbar>
       <v-card-title class="text-center" v-if="icon"> </v-card-title>
 
       <v-card-text>
-        Are you sure you want to {{ action }} {{entity? `the ${ entity } ${ name }` : ''}}
+        Are you sure you want to {{ action }}
+        {{ entity ? `the ${entity} ${name}` : '' }}
       </v-card-text>
 
       <v-card-actions>

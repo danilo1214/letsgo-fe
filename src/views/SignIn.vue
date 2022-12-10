@@ -1,6 +1,19 @@
 <template>
-  <v-form @submit.prevent='onSignIn' class="sign-in-form mx-auto mt-15" ref="form" lazy-validation>
-    <v-text-field rounded filled @keydown.enter.prevent="onSignIn" v-model="email" placeholder="Email" type='email' required></v-text-field>
+  <v-form
+    @submit.prevent="onSignIn"
+    class="sign-in-form mx-auto mt-15"
+    ref="form"
+    lazy-validation
+  >
+    <v-text-field
+      rounded
+      filled
+      @keydown.enter.prevent="onSignIn"
+      v-model="email"
+      placeholder="Email"
+      type="email"
+      required
+    ></v-text-field>
     <v-text-field
       @keydown.enter.prevent="onSignIn"
       v-model="password"
@@ -18,14 +31,7 @@
     <v-alert rounded dark text type="info">
       Don't have an account?
       <v-spacer></v-spacer>
-      <Button
-        color="info"
-        rounded
-        small
-        to="/sign-up"
-        label="Sign Up"
-        light
-      />
+      <Button color="info" rounded small to="/sign-up" label="Sign Up" light />
     </v-alert>
 
     <Button
@@ -33,8 +39,8 @@
       class="mx-auto mt-10"
       icon-left="mdi-import"
       label="Sign in"
-      :disabled='isLoading'
-     type='submit'
+      :disabled="isLoading"
+      type="submit"
     />
   </v-form>
 </template>
@@ -53,7 +59,7 @@ export default {
       email: '',
       password: '',
       error: '',
-      isLoading: false
+      isLoading: false,
     };
   },
   methods: {

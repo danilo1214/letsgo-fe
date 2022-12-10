@@ -1,9 +1,13 @@
 <template>
   <div class="mt-10">
-
     <v-tabs-items v-model="tab" class="tab-items">
       <v-tab-item value="1">
-        <plan-card class="mt-10" :plan="plan" @join="$emit('join')" :show-link='false'/>
+        <plan-card
+          class="mt-10"
+          :plan="plan"
+          @join="$emit('join')"
+          :show-link="false"
+        />
       </v-tab-item>
 
       <v-tab-item value="2">
@@ -21,7 +25,7 @@
       </v-tab-item>
 
       <v-tab-item value="3" v-if="isMember">
-        <v-card flat v-if='plan.requests.length'>
+        <v-card flat v-if="plan.requests.length">
           <request
             class="mt-8"
             @accept="(user) => $emit('accept', user)"
@@ -33,7 +37,6 @@
           />
         </v-card>
         <h1 v-else class="mt-10 text-center">No new requests</h1>
-
       </v-tab-item>
 
       <v-tab-item value="4" class="fill-height" v-if="isMember">
@@ -44,8 +47,8 @@
       v-model="tab"
       :class="{
         'tab-bar': true,
-        'rounded': true,
-        'hidden': keyboardActive
+        rounded: true,
+        hidden: keyboardActive,
       }"
       centered
       icons-and-text
@@ -57,7 +60,6 @@
       </v-tab>
 
       <v-tab href="#2">
-
         <v-icon>mdi-account-supervisor</v-icon>
       </v-tab>
 
@@ -74,8 +76,11 @@
       </v-tab>
 
       <v-tab href="#4" v-if="isMember">
-        <v-badge v-if="unreadMessages" color="error" :content="unreadMessages">
-
+        <v-badge
+          v-if="newMessages.includes(plan._id)"
+          color="error"
+          content="!"
+        >
         </v-badge>
         <v-icon>mdi-chat</v-icon>
       </v-tab>
@@ -110,34 +115,11 @@ export default {
   },
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
-    ...mapGetters(['keyboardActive']),
+    ...mapGetters(['keyboardActive', 'newMessages']),
     isAdmin() {
       const userId = this.currentUser._id;
       const planAdminId = this.plan.admin._id || this.plan.admin;
       return userId === planAdminId;
-    },
-    unreadMessages() {
-      const { plan, currentUser } = this;
-
-      if (!plan.messages.length) {
-        return 0;
-      }
-
-      let lastRead = plan.messages.length - 1;
-
-      for (let i = 0; i < plan.messages.length; i++) {
-        const message = plan.messages[i];
-        const messageUserId = message.user._id || message.user;
-
-        if (
-          message.seen.includes(currentUser._id) ||
-          messageUserId === currentUser._id
-        ) {
-          lastRead = i;
-        }
-      }
-
-      return plan.messages.length - (lastRead + 1);
     },
   },
   methods: {
@@ -166,10 +148,16 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .tab-items {
-  max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px - 8.5vh - 75px - 12px);
-  min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px - 8.5vh - 75px - 12px);
+  max-height: calc(
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
+      8.5vh - 75px - 12px
+  );
+  min-height: calc(
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
+      8.5vh - 75px - 12px
+  );
   overflow-y: scroll;
 }
 
@@ -178,7 +166,7 @@ export default {
   bottom: env(safe-area-inset-bottom);
   left: 0;
   width: 100vw;
-  border-top: 1px solid  rgba(0, 0, 0, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
   &.hidden {
     opacity: 0;
   }

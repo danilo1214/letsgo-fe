@@ -1,37 +1,56 @@
 <template>
-  <v-card class="mx-auto" max-width='700'>
-    <v-row class='mt-6'>
+  <v-card class="mx-auto" max-width="700">
+    <v-row class="mt-6">
       <v-col>
         <Avatar class="ml-2" :size="150" :user="user" />
       </v-col>
-      <v-spacer/>
+      <v-spacer />
       <v-col>
-        <Button
-          v-if="showAddFriend"
-          rounded
-          @click="$emit('add-friend', user._id)"
-          label="Add friend"
-          icon-left="mdi-account-plus"
-        />
         <slot />
       </v-col>
-      <v-col>
-        <Button
-          v-if="showKick"
-          rounded
-          @click="$emit('kick', user._id)"
-          class="ml-2"
-          label="Remove"
-          color="error"
-          icon-left="mdi-cancel"
-          text
-        ></Button>
+      <v-col v-if="showMenu" class="pl-15">
+        <v-menu>
+          <template v-slot:activator="{ on, attrs }">
+            <Button
+              icon
+              color="info"
+              v-bind="attrs"
+              v-on="on"
+              @click.stop.prevent
+            >
+              <v-icon>mdi-dots-vertical</v-icon>
+            </Button>
+          </template>
+
+          <v-list>
+            <v-list-item v-if="showAddFriend">
+              <Button
+                rounded
+                icon-left="mdi-account-plus"
+                label="Add Friend"
+                @click="$emit('add-friend', user._id)"
+              >
+              </Button>
+            </v-list-item>
+
+            <v-list-item v-if="showKick">
+              <Button
+                rounded
+                @click="$emit('kick', user._id)"
+                label="Remove"
+                color="error"
+                icon-left="mdi-cancel"
+                text
+              ></Button>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-col>
     </v-row>
     <v-subheader class="title">
       {{ name }}, <span class="v-size--small pl-3">{{ age }}</span>
     </v-subheader>
-    <div class='mt-5'>
+    <div class="mt-5">
       <v-row class="pl-6" v-if="showThumbOptions">
         <Button
           color="success"
@@ -64,7 +83,7 @@
           height="25"
           dark
         >
-          {{ Math.abs(likedAmount) }}  {{likedMessage}}
+          {{ Math.abs(likedAmount) }} {{ likedMessage }}
         </v-progress-linear>
       </v-row>
     </div>
@@ -112,6 +131,9 @@ export default {
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
     ...mapGetters(['friendRequests']),
+    showMenu() {
+      return this.showAddFriend || this.showKick;
+    },
     userDataList() {
       return [
         {
@@ -141,7 +163,7 @@ export default {
       if (this.likedAmount >= 0) {
         return '👍🏻';
       } else {
-        return '👎🏻'
+        return '👎🏻';
       }
     },
     likedAmount() {

@@ -19,7 +19,7 @@
     ></v-text-field>
 
     <v-radio-group
-      class='mt-0'
+      class="mt-0"
       label="Sex"
       v-model="user.sex"
       :rules="required('Sex')"
@@ -63,7 +63,14 @@
       ></v-date-picker>
     </v-menu>
 
-    <Select rounded filled :rules="required('Country')" v-model='user.country' :items='countries' placeholder='Country' />
+    <Select
+      rounded
+      filled
+      :rules="required('Country')"
+      v-model="user.country"
+      :items="countries"
+      placeholder="Country"
+    />
 
     <v-text-field
       v-model="user.email"
@@ -84,7 +91,6 @@
       filled
       required
     ></v-text-field>
-
 
     <v-alert type="error" v-if="error">
       {{ error }}

@@ -50,14 +50,14 @@ export default {
       return this.plan.members.map((member) => member._id || member);
     },
     friendsList() {
-      return this.friends.filter(
-        (friend) => !this.planMembers.includes(friend._id)
-      ).map(friend=> {
-        return {
-          ...friend,
-          name: `${friend.first_name} ${friend.last_name}`
-        }
-      });
+      return this.friends
+        .filter((friend) => !this.planMembers.includes(friend._id))
+        .map((friend) => {
+          return {
+            ...friend,
+            name: `${friend.first_name} ${friend.last_name}`,
+          };
+        });
     },
   },
   methods: {

@@ -3,7 +3,7 @@
     :items="items"
     :value="value"
     @input="(v) => $emit('input', v)"
-    v-bind='$attrs'
+    v-bind="$attrs"
   ></v-autocomplete>
 </template>
 

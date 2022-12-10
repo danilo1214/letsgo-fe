@@ -39,7 +39,14 @@
       </template>
     </template>
     <template v-slot:append-outer>
-        <Button :disabled='!selected || !selected._id' rounded color='primary' label='Add' @click='onAddFriend'> </Button>
+      <Button
+        :disabled="!selected || !selected._id"
+        rounded
+        color="primary"
+        label="Add"
+        @click="onAddFriend"
+      >
+      </Button>
     </template>
   </v-autocomplete>
 </template>
@@ -57,53 +64,54 @@ export default {
       isLoading: false,
       users: [],
       search: '',
-      selected: {}
-    }
+      selected: {},
+    };
   },
   methods: {
     ...mapActions(['searchUsers', 'sendFriendRequest']),
     reset() {
       this.selected = {};
       this.search = '';
-      this.users = []
+      this.users = [];
     },
     onAddFriend() {
-      this.sendFriendRequest({user: this.selected._id}).then(() => {
-        this.$notify({
-          group: 'main',
-          title: 'Success',
-          text: 'Successfully sent friend request',
-          type: 'success',
+      this.sendFriendRequest({ user: this.selected._id })
+        .then(() => {
+          this.$notify({
+            group: 'main',
+            title: 'Success',
+            text: 'Successfully sent friend request',
+            type: 'success',
+          });
+          this.reset();
+        })
+        .catch((e) => {
+          const err = getError(e);
+          console.log(err);
+          this.$notify({
+            group: 'main',
+            title: 'Error',
+            text: err,
+            type: 'error',
+          });
         });
-        this.reset();
-      }).catch(e => {
-        const err = getError(e);
-        console.log(err);
-        this.$notify({
-          group: 'main',
-          title: 'Error',
-          text: err,
-          type: 'error',
-        });
-      })
     },
   },
   watch: {
     search(name) {
       this.isLoading = true;
-      this.searchUsers({name}).then(res => {
-        this.users = getData(res);
-        this.isLoading = false;
-      }).catch(err => {
-        console.log(err)
-        this.isLoading = false;
-      })
-
-    }
-  }
+      this.searchUsers({ name })
+        .then((res) => {
+          this.users = getData(res);
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.isLoading = false;
+        });
+    },
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
