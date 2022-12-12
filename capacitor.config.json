@@ -1,6 +1,6 @@
 {
   "appId": "com.letsgo.app",
-  "appName": "letsgo-fe",
+  "appName": "LetsGo",
   "webDir": "dist",
   "bundledWebRuntime": false
 }
