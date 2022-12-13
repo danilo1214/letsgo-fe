@@ -16,6 +16,7 @@ import Friends from '../views/Friends';
 import AttendingPlans from '../views/plans/AttendingPlans';
 import AddFriendsModal from '../views/plans/AddFriendsModal';
 import Invites from '../views/plans/Invites';
+import EmailVerify from '../components/user/EmailVerify';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [
     path: '/verify',
     name: 'verify',
     component: Verify,
+  },
+  {
+    path: '/email-verify/:token',
+    name: 'email-verify',
+    component: EmailVerify,
   },
   {
     path: '/about',

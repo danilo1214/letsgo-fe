@@ -31,6 +31,14 @@ export const auth = {
       commit('SET_FRIEND_REQUESTS', []);
       commit('SET_INVITES', []);
     },
+    verifyEmail: ({ commit }, { token }) => {
+      return axios.getUrl(`/user/verify/${token}`).then((response) => {
+        const { token } = response.data;
+        commit('SET_TOKEN', token);
+        localStorage.setItem('letsgo-jwt', token);
+        axios.setToken(token);
+      });
+    },
     signUp: ({ commit }, { user }) => {
       return axios
         .postUrl('/user', user)
