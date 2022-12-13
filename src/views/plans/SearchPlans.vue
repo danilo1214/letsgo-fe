@@ -39,11 +39,13 @@ export default {
   },
   computed: {
     priceRange() {
-      const { costFrom, costTo } = this.$route.query;
-
+      let { costFrom, costTo } = this.$route.query;
       if (costFrom === undefined && costTo === undefined) {
         return '';
       }
+
+      costFrom = Number(costFrom);
+      costTo = Number(costTo);
 
       if (costFrom === 0 && costTo === 0) {
         return 'Searching for free plans';

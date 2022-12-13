@@ -1,8 +1,8 @@
 <template>
   <v-form>
     <Loader v-if="isLoading" />
-    <v-subheader class="title">Finish setting up your account!</v-subheader>
-    <v-timeline v-if="!isVerified" class="mt-10 mx-5" dense clipped>
+    <v-subheader class="title mt-10">Finish setting up your account!</v-subheader>
+    <v-timeline v-if="!isVerified" class="mt-10 verify-steps" dense clipped>
       <v-timeline-item
         class="mb-4"
         color="success"
@@ -38,6 +38,7 @@
           <v-row justify="space-between">
             <v-col cols="12">
               <v-file-input
+                v-if='isMobile'
                 rounded
                 label="Verify selfie"
                 v-model="file"
@@ -46,6 +47,7 @@
                 accept="image/*"
                 prepend-icon="mdi-camera"
               ></v-file-input>
+              <span v-else>Uploading selfie only allowed on mobile app</span>
             </v-col>
           </v-row>
         </v-timeline-item>
@@ -54,19 +56,21 @@
     <v-alert type="error" v-if="error" class="mt-10 mx-5">
       {{ error }}
     </v-alert>
-    <v-alert type="success" class="mt-10 mx-5" v-if="isVerified">
+    <v-alert type="success" class="mt-6 mx-5" v-if="isVerified">
       Successfully verified account
     </v-alert>
 
-    <Button class="mt-10 ml-10" label="Back" color="secondary" @click="back" />
-    <Button
-      v-if="!isVerified"
-      class="mt-10 ml-10"
-      right
-      label="Next"
-      :disabled="nextDisabled"
-      @click="next"
-    />
+    <v-row>
+      <Button class="mt-10 ml-10" label="Back" color="secondary" @click="back" />
+      <Button
+        v-if="!isVerified"
+        class="mt-10 ml-10"
+        right
+        label="Next"
+        :disabled="nextDisabled"
+        @click="next"
+      />
+    </v-row>
   </v-form>
 </template>
 
@@ -78,6 +82,8 @@ import { getError } from '@/helpers/requests';
 import Button from '@/components/generic/Button';
 import Loader from '@/components/generic/Loader';
 
+import { Camera } from '@capacitor/camera';
+
 export default {
   name: 'Verify',
   components: { Loader, Button },
@@ -86,6 +92,7 @@ export default {
       isLoading: false,
       file: null,
       error: '',
+      isMobile: false
     };
   },
   computed: {
@@ -144,7 +151,16 @@ export default {
       this.error = '';
     },
   },
+  created() {
+    Camera.requestPermissions().then(()=> {
+      this.isMobile = true;
+    })
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.verify-steps {
+  max-width: 400px;
+}
+</style>

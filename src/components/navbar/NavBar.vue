@@ -172,8 +172,7 @@ export default {
       }
 
       if (
-        priceRange.length !== 0 &&
-        !(priceRange[0] === 0 && priceRange[1] === 0)
+        priceRange.length !== 0
       ) {
         query.costFrom = priceRange[0];
         query.costTo = priceRange[1];

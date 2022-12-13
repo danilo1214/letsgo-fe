@@ -19,7 +19,7 @@
     ></v-text-field>
 
     <v-radio-group
-      class="mt-0"
+      class="mt-0 ml-2"
       label="Sex"
       v-model="user.sex"
       :rules="required('Sex')"
@@ -34,6 +34,7 @@
     </v-radio-group>
 
     <v-menu
+      v-model="menu"
       ref="menu"
       :close-on-content-click="false"
       transition="scale-transition"
@@ -56,6 +57,7 @@
       </template>
       <v-date-picker
         ref="picker"
+        :active-picker.sync="activePicker"
         v-model="user.birth_date"
         :max="new Date().toISOString().substr(0, 10)"
         min="1950-01-01"
@@ -98,6 +100,7 @@
     <Button
       :disabled="!valid"
       class="mr-4 mt-10"
+      rounded
       @click="onSubmit"
       icon-left="mdi-account-plus-outline"
       label="Sign Up"
@@ -117,7 +120,10 @@ export default {
   components: { Select, Button },
   data() {
     return {
+      c: country,
+      activePicker: 'YEAR',
       error: '',
+      menu: false,
       valid: false,
       sexes: ['Male', 'Female'],
       user: {
@@ -138,10 +144,17 @@ export default {
       countries: country.names(),
     };
   },
+  watch: {
+    menu (val) {
+      val && setTimeout(() => (this.activePicker = 'YEAR'))
+    },
+  },
+
   methods: {
     ...mapActions(['signUp']),
     setDate(date) {
       this.$refs.menu.save(date);
+      setTimeout(() => (this.activePicker = 'YEAR'));
     },
     required(field) {
       return [(v) => !!v || `${field} is required`];
@@ -155,7 +168,7 @@ export default {
       const { user } = this;
       this.signUp({ user })
         .then(() => {
-          this.$router.replace({ name: 'home' });
+          this.$router.replace({ name: 'sign-in' });
           this.$notify({
             group: 'main',
             title: 'Signed up',

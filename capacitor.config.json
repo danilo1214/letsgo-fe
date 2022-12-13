@@ -2,5 +2,6 @@
   "appId": "com.letsgo.app",
   "appName": "LetsGo",
   "webDir": "dist",
+  "androidScaleType": "FIT_XY",
   "bundledWebRuntime": false
 }
