@@ -98,11 +98,11 @@
       {{ error }}
     </v-alert>
     <Button
-      :disabled="!valid"
+      :disabled="!valid || isLoading"
       class="mr-4 mt-10"
       rounded
       @click="onSubmit"
-      icon-left="mdi-account-plus-outline"
+      icon-left="mdi-account-plus"
       label="Sign Up"
     />
   </v-form>
@@ -125,6 +125,7 @@ export default {
       error: '',
       menu: false,
       valid: false,
+      isLoading: false,
       sexes: ['Male', 'Female'],
       user: {
         first_name: '',
@@ -165,6 +166,8 @@ export default {
         return;
       }
 
+      this.isLoading = true;
+
       const { user } = this;
       this.signUp({ user })
         .then(() => {
@@ -175,9 +178,11 @@ export default {
             text: 'You have successfully signed up to Letsgo',
             type: 'success',
           });
+          this.isLoading = false;
         })
         .catch((err) => {
           this.error = getError(err);
+          this.isLoading = false;
         });
     },
   },
