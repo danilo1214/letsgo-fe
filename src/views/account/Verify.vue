@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form  class='pa-5'>
     <Loader v-if="isLoading" />
     <v-subheader class="title mt-10">Finish setting up your account!</v-subheader>
     <v-timeline v-if="!isVerified" class="mt-10 verify-steps" dense clipped>

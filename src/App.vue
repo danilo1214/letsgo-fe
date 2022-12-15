@@ -202,6 +202,10 @@ main {
   overflow-y: scroll;
 }
 
+.width100 {
+  width: 100%;
+}
+
 .v-progress-circular > svg {
   width: 100px !important;
   height: 100px !important;

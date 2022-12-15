@@ -29,6 +29,7 @@
 import Button from '@/components/generic/Button';
 import UserSelect from '../../components/user/UserSelect';
 import { mapState, mapActions, mapGetters } from 'vuex';
+import { getError } from '../../helpers/requests';
 export default {
   name: 'AddFriendsModal',
   components: { UserSelect, Button },
@@ -70,6 +71,13 @@ export default {
         await this.inviteFriend({
           plan: this.id,
           user,
+        }).catch(err => {
+          this.$notify({
+            group: 'main',
+            title: 'Failed to invite user',
+            text: getError(err),
+            type: 'error',
+          });
         });
       }
       this.$router.go(-1);

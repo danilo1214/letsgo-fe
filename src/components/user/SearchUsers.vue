@@ -62,17 +62,25 @@ export default {
   data() {
     return {
       isLoading: false,
-      users: [],
+      results: [],
       search: '',
       selected: {},
     };
+  },
+  computed: {
+    users() {
+      return this.results.map(result=> {
+        result['name'] = result.first_name + " " + result.last_name;
+        return result;
+      });
+    }
   },
   methods: {
     ...mapActions(['searchUsers', 'sendFriendRequest']),
     reset() {
       this.selected = {};
       this.search = '';
-      this.users = [];
+      this.results = [];
     },
     onAddFriend() {
       this.sendFriendRequest({ user: this.selected._id })
@@ -102,7 +110,7 @@ export default {
       this.isLoading = true;
       this.searchUsers({ name })
         .then((res) => {
-          this.users = getData(res);
+          this.results = getData(res);
           this.isLoading = false;
         })
         .catch((err) => {

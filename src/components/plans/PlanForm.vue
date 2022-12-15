@@ -5,7 +5,6 @@
     v-model="valid"
     lazy-validation
   >
-    <Loader v-if="isLoading" />
     <div>
       <v-text-field
         v-model="plan.caption"
@@ -78,7 +77,7 @@
       />
       <Button
         rounded
-        :disabled="!valid"
+        :disabled="!valid || isLoading"
         @click="onSubmit"
         :label="okLabel"
         icon-left="mdi-calendar-plus"
@@ -91,12 +90,11 @@
 import Button from '@/components/generic/Button';
 import DatePicker from '@/components/generic/DatePicker';
 import Slider from '@/components/generic/Slider';
-import Loader from '@/components/generic/Loader';
 import moment from 'moment';
 
 export default {
   name: 'PlanForm',
-  components: { Loader, Slider, DatePicker, Button },
+  components: { Slider, DatePicker, Button },
   props: {
     error: {
       type: String,

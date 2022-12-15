@@ -15,6 +15,7 @@
       required
     ></v-text-field>
     <v-text-field
+      class='mb-0 pb-0 password-input'
       @keydown.enter.prevent="onSignIn"
       v-model="password"
       placeholder="Password"
@@ -23,25 +24,27 @@
       filled
       required
     ></v-text-field>
+    <router-link class='mt-0' to='/'> >> Forgot your password? </router-link>
 
     <v-alert type="error" v-if="error">
       {{ error }}
     </v-alert>
 
-    <v-alert rounded dark text type="info">
-      Don't have an account?
-      <v-spacer></v-spacer>
-      <Button color="info" rounded small to="/sign-up" label="Sign Up" light />
-    </v-alert>
-
     <Button
       rounded
-      class="mx-auto mt-10"
+      class="mx-auto mt-10 d-block width100"
       icon-left="mdi-import"
       label="Sign in"
       :disabled="isLoading"
       type="submit"
     />
+
+    <v-alert class='mt-16 pa-4' rounded dark text type="info">
+      Not registered yet?
+      <Button class='ml-2' color="info" rounded small to="/sign-up" label="Sign Up" light />
+    </v-alert>
+
+
   </v-form>
 </template>
 
@@ -85,5 +88,13 @@ export default {
 <style scoped>
 .sign-in-form {
   max-width: 300px;
+}
+
+.password-input {
+  height: 60px;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
