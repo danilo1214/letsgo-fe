@@ -38,7 +38,7 @@ export default {
       loaded: false,
       socket: null,
       showSideBar: true,
-      publicRoutes: ['home', 'sign-in', 'sign-up', 'plans', 'email-verify'],
+      publicRoutes: ['home', 'sign-in', 'sign-up', 'plans', 'email-verify', 'password-change'],
     };
   },
   computed: {

@@ -24,7 +24,7 @@
       filled
       required
     ></v-text-field>
-    <router-link class='mt-0' to='/'> >> Forgot your password? </router-link>
+    <Button rounded label='Forgot your password?' text class='mt-0' to='/password-change' />
 
     <v-alert type="error" v-if="error">
       {{ error }}
