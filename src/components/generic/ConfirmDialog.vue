@@ -1,9 +1,9 @@
 <template>
   <v-dialog persistent :value="dialog" max-width="290">
     <v-card>
-      <v-toolbar color="primary" dark class="text-center">
+      <v-toolbar :color="color" dark class="text-center">
         <v-banner two-line>
-          <v-avatar slot="icon" color="primary" size="40">
+          <v-avatar slot="icon" :color="color" size="40">
             <v-icon icon="mdi-lock" color="white" class="ml-auto mr-auto p-5">
               {{ icon }}
             </v-icon>
@@ -46,6 +46,10 @@ export default {
   name: 'ConfirmDialog',
   components: { Button },
   props: {
+    color: {
+      type: String,
+      default: 'primary',
+    },
     icon: {
       type: String,
       default: '',

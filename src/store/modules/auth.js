@@ -45,6 +45,9 @@ export const auth = {
     passwordChange: (store, { password }) => {
       return axios.postUrl(`user/password-change`, { password });
     },
+    reportUser: (store, { report }) => {
+      return axios.postUrl('/report', report);
+    },
     otpLogin: ({ commit }, { otp, email }) => {
       return axios
         .postUrl(`user/otp-login`, { email, otp })

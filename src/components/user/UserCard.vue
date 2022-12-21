@@ -44,6 +44,17 @@
               ></Button>
             </v-list-item>
 
+            <v-list-item v-if='showReport'>
+              <Button
+                rounded
+                @click="reportModal = true"
+                label="Report"
+                color="error"
+                icon-left="mdi-account-alert"
+                text
+              ></Button>
+            </v-list-item>
+
             <slot name="menu" />
           </v-list>
         </v-menu>
@@ -104,6 +115,15 @@
         </v-list-item>
       </template>
     </v-list>
+
+    <Dialog
+      v-model="reportModal"
+      title="Report user"
+      icon="mdi-account-alert"
+      color='error'
+    >
+      <report-user-form @cancel='reportModal = false' @ok='onReport'/>
+    </Dialog>
   </v-card>
 </template>
 
@@ -111,11 +131,13 @@
 import Avatar from './Avatar';
 import moment from 'moment';
 import Button from '../generic/Button';
-import { mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
+import Dialog from '../generic/Dialog';
+import ReportUserForm from './ReportUserForm';
 
 export default {
   name: 'UserCard',
-  components: { Button, Avatar },
+  components: { ReportUserForm, Dialog, Button, Avatar },
   props: {
     user: {
       type: Object,
@@ -130,11 +152,16 @@ export default {
       default: false,
     },
   },
+  data() {
+    return {
+      reportModal: false
+    }
+  },
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
     ...mapGetters(['friendRequests']),
     showMenu() {
-      return this.showAddFriend || this.showKick || !!this.$slots.menu;
+      return this.showAddFriend || this.showKick || !!this.$slots.menu || this.showReport;
     },
     userDataList() {
       return [
@@ -157,6 +184,9 @@ export default {
           show: true,
         },
       ];
+    },
+    showReport() {
+      return !!this.currentUser  && !this.isMe;
     },
     isMe() {
       return this.currentUser._id === this.user._id;
@@ -249,6 +279,18 @@ export default {
       return this.user.photo_url || '../../assets/default.jpg';
     },
   },
+  methods: {
+    ...mapActions(['reportUser']),
+    onReport(description) {
+      this.reportModal = false;
+      this.reportUser({
+        report: {
+          description,
+          user: this.user._id
+        }
+      })
+    }
+  }
 };
 </script>
 
