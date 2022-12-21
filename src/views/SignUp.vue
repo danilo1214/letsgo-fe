@@ -146,8 +146,8 @@ export default {
     };
   },
   watch: {
-    menu (val) {
-      val && setTimeout(() => (this.activePicker = 'YEAR'))
+    menu(val) {
+      val && setTimeout(() => (this.activePicker = 'YEAR'));
     },
   },
 

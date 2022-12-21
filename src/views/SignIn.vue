@@ -15,7 +15,7 @@
       required
     ></v-text-field>
     <v-text-field
-      class='mb-0 pb-0 password-input'
+      class="mb-0 pb-0 password-input"
       @keydown.enter.prevent="onSignIn"
       v-model="password"
       placeholder="Password"
@@ -24,7 +24,13 @@
       filled
       required
     ></v-text-field>
-    <Button rounded label='Forgot your password?' text class='mt-0' to='/password-change' />
+    <Button
+      rounded
+      label="Forgot your password?"
+      text
+      class="mt-0"
+      to="/forgot-password"
+    />
 
     <v-alert type="error" v-if="error">
       {{ error }}
@@ -39,12 +45,18 @@
       type="submit"
     />
 
-    <v-alert class='mt-16 pa-4' rounded dark text type="info">
+    <v-alert class="mt-16 pa-4" rounded dark text type="info">
       Not registered yet?
-      <Button class='ml-2' color="info" rounded small to="/sign-up" label="Sign Up" light />
+      <Button
+        class="ml-2"
+        color="info"
+        rounded
+        small
+        to="/sign-up"
+        label="Sign Up"
+        light
+      />
     </v-alert>
-
-
   </v-form>
 </template>
 

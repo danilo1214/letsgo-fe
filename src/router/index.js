@@ -17,6 +17,7 @@ import AttendingPlans from '../views/plans/AttendingPlans';
 import AddFriendsModal from '../views/plans/AddFriendsModal';
 import Invites from '../views/plans/Invites';
 import EmailVerify from '../components/user/EmailVerify';
+import ForgotPassword from '../views/account/ForgotPassword';
 import PasswordChange from '../views/account/PasswordChange';
 
 Vue.use(VueRouter);
@@ -108,6 +109,11 @@ const routes = [
     path: '/friends',
     name: 'friends',
     component: Friends,
+  },
+  {
+    path: '/forgot-password',
+    name: 'forgot-password',
+    component: ForgotPassword,
   },
   {
     path: '/password-change',

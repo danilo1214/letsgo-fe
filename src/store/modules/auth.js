@@ -39,6 +39,22 @@ export const auth = {
         axios.setToken(token);
       });
     },
+    forgotPassword: (store, { email }) => {
+      return axios.postUrl(`user/password-forget`, { email });
+    },
+    passwordChange: (store, { password }) => {
+      return axios.postUrl(`user/password-change`, { password });
+    },
+    otpLogin: ({ commit }, { otp, email }) => {
+      return axios
+        .postUrl(`user/otp-login`, { email, otp })
+        .then((response) => {
+          const { token } = response.data;
+          commit('SET_TOKEN', token);
+          localStorage.setItem('letsgo-jwt', token);
+          axios.setToken(token);
+        });
+    },
     signUp: ({ commit }, { user }) => {
       return axios
         .postUrl('/user', user)

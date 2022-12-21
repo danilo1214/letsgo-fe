@@ -71,7 +71,7 @@ export default {
         await this.inviteFriend({
           plan: this.id,
           user,
-        }).catch(err => {
+        }).catch((err) => {
           this.$notify({
             group: 'main',
             title: 'Failed to invite user',

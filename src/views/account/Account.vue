@@ -1,7 +1,20 @@
 <template>
   <div class="pa-10">
     <UserCard :user="user">
-      <Button color="error" label="Delete" icon-left="mdi-trash-can" />
+      <template v-slot:menu>
+        <v-list-item>
+          <Button text color="error" label="Delete" icon-left="mdi-trash-can" />
+        </v-list-item>
+        <v-list-item>
+          <Button
+            to="/password-change"
+            text
+            color="info"
+            label="Change password"
+            icon-left="mdi-key"
+          />
+        </v-list-item>
+      </template>
     </UserCard>
     <VerifyBanner class="mx-auto mt-10" v-if="!isVerified" @verify="onVerify" />
   </div>

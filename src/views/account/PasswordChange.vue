@@ -1,39 +1,96 @@
 <template>
- <v-form class='pa-10 password-change-form'>
-   <template v-if='step === 1'>
-     <h1>Reset your password</h1>
-     <p class='mt-4'>We will send you a unique code to verify your email address</p>
-     <v-text-field v-model='email' class='mt-10' rounded dense filled placeholder='Email'></v-text-field>
-     <Button class='mx-auto' rounded label='Send' @click='onSend'/>
-   </template>
- </v-form>
+  <v-form ref='form' v-model="valid" @submit.prevent="onChange" class="pa-10 forgot-password-form">
+    <h1>Change your password</h1>
+    <v-text-field
+      :rules="[required]"
+      type="password"
+      v-model="password"
+      class="mt-10"
+      rounded
+      dense
+      filled
+      @change='$refs.form.validate()'
+      placeholder="New password"
+    ></v-text-field>
+    <v-text-field
+      :rules="[required, matchingPasswords]"
+      type="password"
+      @change='$refs.form.validate()'
+      v-model="confirmPassword"
+      class="mt-10"
+      rounded
+      dense
+      filled
+      placeholder="Enter again"
+    ></v-text-field>
+    <Button
+      :disabled="loading || !valid"
+      class="mx-auto"
+      rounded
+      label="Change"
+      @click="onChange"
+    />
+  </v-form>
 </template>
 
 <script>
 import Button from '../../components/generic/Button';
 import { mapActions } from 'vuex';
+import { getError } from '../../helpers/requests';
 export default {
   name: 'PasswordChange',
   components: { Button },
   data() {
     return {
-      step: 1,
-      email: ""
-    }
+      valid: false,
+      password: '',
+      confirmPassword: '',
+      loading: false,
+    };
   },
   methods: {
-    ...mapActions(['requestPasswordChange']),
-    onSend() {
-      console.log(this.email);
-      this.step = 2;
-    }
-  }
+    ...mapActions(['passwordChange']),
+    required(field) {
+      return [(v) => !!v || `${field} is required`];
+    },
+    matchingPasswords() {
+      if (this.password === this.confirmPassword) {
+        return true;
+      }
+
+      return 'Passwords does not match.';
+    },
+    onChange() {
+      const valid = this.$refs.form.validate();
+      if (!valid) {
+        return;
+      }
+
+      this.loading = true;
+
+      this.passwordChange({ password: this.password })
+        .then(() => {
+          this.$notify({
+            group: 'main',
+            title: 'Success',
+            text: 'Successfully changed password',
+            type: 'success',
+          });
+          this.loading = false;
+          this.$router.replace({ name: 'account' });
+        })
+        .catch((err) => {
+          this.$notify({
+            group: 'main',
+            title: 'Failed',
+            text: getError(err),
+            type: 'error',
+          });
+          this.loading = false;
+        });
+    },
+  },
 };
 </script>
 
-<style scoped>
-.password-change-form {
-  width: 400px;
-  margin: 100px auto;
-}
-</style>
+<style scoped></style>

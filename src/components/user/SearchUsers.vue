@@ -69,11 +69,11 @@ export default {
   },
   computed: {
     users() {
-      return this.results.map(result=> {
-        result['name'] = result.first_name + " " + result.last_name;
+      return this.results.map((result) => {
+        result['name'] = result.first_name + ' ' + result.last_name;
         return result;
       });
-    }
+    },
   },
   methods: {
     ...mapActions(['searchUsers', 'sendFriendRequest']),

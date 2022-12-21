@@ -3,24 +3,24 @@
     <search-users />
     <v-subheader>Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
-   <template v-if='friends.length'>
-     <user-card
-       class="mt-6"
-       v-for="user in friends"
-       :key="user._id"
-       :user="user"
-       @thumb-up="onThumbUp(user)"
-       @thumb-down="onThumbDown(user)"
-     >
-       <Button
-         rounded
-         class="ml-10 mb-3"
-         label="Remove"
-         icon-left="mdi-account-minus"
-         @click="onRemove(user)"
-       />
-     </user-card>
-   </template>
+    <template v-if="friends.length">
+      <user-card
+        class="mt-6"
+        v-for="user in friends"
+        :key="user._id"
+        :user="user"
+        @thumb-up="onThumbUp(user)"
+        @thumb-down="onThumbDown(user)"
+      >
+        <Button
+          rounded
+          class="ml-10 mb-3"
+          label="Remove"
+          icon-left="mdi-account-minus"
+          @click="onRemove(user)"
+        />
+      </user-card>
+    </template>
 
     <h1 v-else class="text-center mt-10">No new friend requests</h1>
 
@@ -28,7 +28,7 @@
       Friend Requests({{ friendRequests.length }})
     </v-subheader>
     <v-divider></v-divider>
-    <template v-if='friendRequests.length'>
+    <template v-if="friendRequests.length">
       <user-card
         v-for="user in friendRequests"
         :key="user._id"

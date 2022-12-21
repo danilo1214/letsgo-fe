@@ -43,6 +43,8 @@
                 text
               ></Button>
             </v-list-item>
+
+            <slot name="menu" />
           </v-list>
         </v-menu>
       </v-col>
@@ -132,7 +134,7 @@ export default {
     ...mapState({ currentUser: (state) => state.auth.user }),
     ...mapGetters(['friendRequests']),
     showMenu() {
-      return this.showAddFriend || this.showKick;
+      return this.showAddFriend || this.showKick || !!this.$slots.menu;
     },
     userDataList() {
       return [

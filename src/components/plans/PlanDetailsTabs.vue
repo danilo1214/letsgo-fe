@@ -13,7 +13,7 @@
       <v-tab-item value="2">
         <user-card
           class="mt-8"
-          :show-thumb='isMember'
+          :show-thumb="isMember"
           @thumb-up="(user) => $emit('thumb-up', user)"
           @thumb-down="(user) => $emit('thumb-down', user)"
           @add-friend="(user) => $emit('add-friend', user)"

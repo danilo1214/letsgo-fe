@@ -1,7 +1,9 @@
 <template>
-  <v-form  class='pa-5'>
+  <v-form class="pa-5">
     <Loader v-if="isLoading" />
-    <v-subheader class="title mt-10">Finish setting up your account!</v-subheader>
+    <v-subheader class="title mt-10"
+      >Finish setting up your account!</v-subheader
+    >
     <v-timeline v-if="!isVerified" class="mt-10 verify-steps" dense clipped>
       <v-timeline-item
         class="mb-4"
@@ -38,7 +40,7 @@
           <v-row justify="space-between">
             <v-col cols="12">
               <v-file-input
-                v-if='isMobile'
+                v-if="isMobile"
                 rounded
                 label="Verify selfie"
                 v-model="file"
@@ -61,7 +63,12 @@
     </v-alert>
 
     <v-row>
-      <Button class="mt-10 ml-10" label="Back" color="secondary" @click="back" />
+      <Button
+        class="mt-10 ml-10"
+        label="Back"
+        color="secondary"
+        @click="back"
+      />
       <Button
         v-if="!isVerified"
         class="mt-10 ml-10"
@@ -92,7 +99,7 @@ export default {
       isLoading: false,
       file: null,
       error: '',
-      isMobile: false
+      isMobile: false,
     };
   },
   computed: {
@@ -152,10 +159,10 @@ export default {
     },
   },
   created() {
-    Camera.requestPermissions().then(()=> {
+    Camera.requestPermissions().then(() => {
       this.isMobile = true;
-    })
-  }
+    });
+  },
 };
 </script>
 

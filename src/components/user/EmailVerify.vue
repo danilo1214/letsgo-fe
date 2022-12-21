@@ -1,5 +1,5 @@
 <template>
-  <Loader/>
+  <Loader />
 </template>
 
 <script>
@@ -9,16 +9,14 @@ export default {
   name: 'EmailVerify',
   components: { Loader },
   methods: {
-    ...mapActions(['verifyEmail'])
+    ...mapActions(['verifyEmail']),
   },
   created() {
-    this.verifyEmail({token: this.$route.params.token}).then(() => {
-      this.$router.replace({name: 'home'});
+    this.verifyEmail({ token: this.$route.params.token }).then(() => {
+      this.$router.replace({ name: 'home' });
     });
-  }
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

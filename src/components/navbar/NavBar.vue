@@ -171,9 +171,7 @@ export default {
         query.dateTo = dates[1];
       }
 
-      if (
-        priceRange.length !== 0
-      ) {
+      if (priceRange.length !== 0) {
         query.costFrom = priceRange[0];
         query.costTo = priceRange[1];
       }
