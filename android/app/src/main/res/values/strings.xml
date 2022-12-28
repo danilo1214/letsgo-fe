@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">letsgo-fe</string>
-    <string name="title_activity_main">letsgo-fe</string>
+    <string name="app_name">LetsGo</string>
+    <string name="title_activity_main">LetsGo</string>
     <string name="package_name">com.letsgo.app</string>
     <string name="custom_url_scheme">com.letsgo.app</string>
 </resources>

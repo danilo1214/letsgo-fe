@@ -37,7 +37,7 @@ export default (Vue) => {
         const { token } = store.state.auth;
         const url =
           process.env.NODE_ENV === 'development'
-            ? 'https://letsgo-api.com'
+            ? 'http://localhost:3003'
             : 'https://letsgo-api.com';
         return io(url, {
           transports: ['websocket', 'polling', 'flashsocket'],
