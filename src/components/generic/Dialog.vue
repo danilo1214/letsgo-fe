@@ -7,7 +7,7 @@
             icon
           }}</v-icon></v-toolbar-title
         >
-        <v-toolbar-title class='ml-10'>{{ title }}</v-toolbar-title>
+        <v-toolbar-title class="ml-10">{{ title }}</v-toolbar-title>
       </v-toolbar>
       <slot />
     </v-card>
@@ -20,7 +20,7 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     value: {
       type: Boolean,

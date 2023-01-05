@@ -1,13 +1,10 @@
 <template>
   <v-banner class="mt-5" two-line>
-    <avatar class="pa-5" :user="invite.user" :size="60"></avatar>
-    {{ invite.user.first_name }} {{ invite.user.last_name }} has invited you to
-    join
-    <Button
-      :label="invite.plan.caption"
-      text
-      :to="`/plan/${invite.plan._id}`"
-    />
+    <avatar class="mr-2 mt-5 mb-3" :user="invite.user" :size="40"></avatar>
+    {{ invite.user.first_name }} has invited you to join
+    <router-link :to="`/plan/${invite.plan._id}`">{{
+      invite.plan.caption
+    }}</router-link>
     <template v-slot:actions>
       <Button
         rounded
@@ -43,4 +40,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+  color: #6475e0;
+  text-decoration: none;
+}
+</style>

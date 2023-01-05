@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('/Users/danilo/letsgo/KEY-NAME.keystore')
+            keyAlias 'alias'
+            storePassword 'pvwjz8r3gk19'
+            keyPassword 'pvwjz8r3gk19'
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.letsgo.app"

@@ -29,6 +29,7 @@ import NavBar from '@/components/navbar/NavBar';
 import Loader from './components/generic/Loader';
 import ConfirmDialog from './components/generic/ConfirmDialog';
 import { PushNotifications } from '@capacitor/push-notifications';
+import { App } from '@capacitor/app';
 
 export default {
   name: 'App',
@@ -102,6 +103,18 @@ export default {
       });
     },
     initPushNotifications() {
+      App.addListener('appUrlOpen', (event) => {
+        const slug = event.url.split('.com/#').pop();
+
+        console.log(event.url);
+
+        if (slug) {
+          this.$router.push({
+            path: slug,
+          });
+        }
+      });
+
       PushNotifications.requestPermissions().then((result) => {
         if (result.receive === 'granted') {
           // Register with Apple / Google to receive push via APNS/FCM

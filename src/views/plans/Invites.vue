@@ -27,9 +27,11 @@ export default {
   },
   methods: {
     ...mapActions(['acceptInvite', 'loadFriendsList', 'declineInvite']),
-    async onAcceptInvite(plan) {
-      await this.acceptInvite({ plan });
-      this.init();
+    onAcceptInvite(plan) {
+      this.acceptInvite({ plan }).then(() => {
+        this.$router.push(`/plan/${plan}`);
+        this.init();
+      });
     },
     async onDeclineInvite(plan) {
       await this.declineInvite({ plan });

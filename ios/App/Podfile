@@ -25,3 +25,9 @@ end
 post_install do |installer|
   assertDeploymentTarget(installer)
 end
+
+-target 'App' do
++target 'LetsGo' do
+   capacitor_pods
+   # Add your Pods here
+ end

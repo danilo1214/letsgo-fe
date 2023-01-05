@@ -1,5 +1,5 @@
 <template>
-  <v-form class='repoort-form pa-5 pa-md-15'>
+  <v-form class="repoort-form pa-5 pa-md-15">
     <v-textarea
       v-model="description"
       placeholder="Tell us why"
@@ -19,9 +19,14 @@
         label="Cancel"
         color="secondary"
       />
-      <Button color='error' rounded text @click="$emit('ok', description)" label='Report' />
+      <Button
+        color="error"
+        rounded
+        text
+        @click="$emit('ok', description)"
+        label="Report"
+      />
     </v-card-actions>
-
   </v-form>
 </template>
 
@@ -32,12 +37,10 @@ export default {
   components: { Button },
   data() {
     return {
-      description: ''
-    }
-  }
+      description: '',
+    };
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

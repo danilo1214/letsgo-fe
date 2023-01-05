@@ -1,5 +1,10 @@
 <template>
-  <v-form ref='form' v-model="valid" @submit.prevent="onChange" class="pa-10 forgot-password-form">
+  <v-form
+    ref="form"
+    v-model="valid"
+    @submit.prevent="onChange"
+    class="pa-10 forgot-password-form"
+  >
     <h1>Change your password</h1>
     <v-text-field
       :rules="[required]"
@@ -9,13 +14,13 @@
       rounded
       dense
       filled
-      @change='$refs.form.validate()'
+      @change="$refs.form.validate()"
       placeholder="New password"
     ></v-text-field>
     <v-text-field
       :rules="[required, matchingPasswords]"
       type="password"
-      @change='$refs.form.validate()'
+      @change="$refs.form.validate()"
       v-model="confirmPassword"
       class="mt-10"
       rounded

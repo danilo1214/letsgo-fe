@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto ma-10 plan-card" :to="`/plan/${plan._id}`">
+  <v-card class="ma-2 plan-card" :to="`/plan/${plan._id}`">
     <v-card-title>
       <span class="title">{{ plan.caption }}</span>
     </v-card-title>

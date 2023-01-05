@@ -103,7 +103,7 @@ export default {
       form: {
         dates: ['1', '2'],
         search: [],
-        priceRange: [0, 0],
+        priceRange: [0, 100],
       },
       isChanged: false,
     };
@@ -138,7 +138,7 @@ export default {
       this.form = {
         dates: [],
         search: [],
-        priceRange: [0, 0],
+        priceRange: [0, 100],
       };
       this.isChanged = true;
     },
@@ -155,7 +155,7 @@ export default {
       const { search, costFrom, costTo, dateFrom, dateTo } = this.$route.query;
 
       this.form.search = search ? search.split(' ') : [];
-      this.form.priceRange = [costFrom || 0, costTo || costFrom || 0];
+      this.form.priceRange = [costFrom || 0, costTo || costFrom || 100];
       this.form.dates = dateFrom && dateTo ? [dateFrom, dateTo] : [];
     },
     formatPrice(value) {

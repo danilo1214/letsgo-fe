@@ -1,66 +1,66 @@
 <template>
   <v-card class="mx-auto" max-width="700">
     <v-row class="mt-6">
-      <v-col>
-        <Avatar class="ml-2" :size="150" :user="user" />
+      <v-col cols='4'>
+        <Avatar class="ml-2" :size="130" :user="user" />
       </v-col>
-      <v-spacer />
-      <v-col>
-        <slot />
-      </v-col>
-      <v-col v-if="showMenu" class="pl-15">
-        <v-menu>
-          <template v-slot:activator="{ on, attrs }">
-            <Button
-              icon
-              color="info"
-              v-bind="attrs"
-              v-on="on"
-              @click.stop.prevent
-            >
-              <v-icon>mdi-dots-vertical</v-icon>
-            </Button>
-          </template>
-
-          <v-list>
-            <v-list-item v-if="showAddFriend">
+      <v-spacer></v-spacer>
+      <v-col cols='8'>
+        <v-row class='user-right-column'>
+          <slot />
+          <v-menu v-if="showMenu">
+            <template v-slot:activator="{ on, attrs }">
               <Button
-                rounded
-                icon-left="mdi-account-plus"
-                label="Add Friend"
-                @click="$emit('add-friend', user._id)"
+                icon
+                color="info"
+                v-bind="attrs"
+                v-on="on"
+                @click.stop.prevent
               >
+                <v-icon>mdi-dots-vertical</v-icon>
               </Button>
-            </v-list-item>
+            </template>
 
-            <v-list-item v-if="showKick">
-              <Button
-                rounded
-                @click="$emit('kick', user._id)"
-                label="Remove"
-                color="error"
-                icon-left="mdi-cancel"
-                text
-              ></Button>
-            </v-list-item>
+            <v-list>
+              <v-list-item v-if="showAddFriend">
+                <Button
+                  rounded
+                  icon-left="mdi-account-plus"
+                  label="Add Friend"
+                  @click="$emit('add-friend', user._id)"
+                >
+                </Button>
+              </v-list-item>
 
-            <v-list-item v-if='showReport'>
-              <Button
-                rounded
-                @click="reportModal = true"
-                label="Report"
-                color="error"
-                icon-left="mdi-account-alert"
-                text
-              ></Button>
-            </v-list-item>
+              <v-list-item v-if="showKick">
+                <Button
+                  rounded
+                  @click="$emit('kick', user._id)"
+                  label="Remove"
+                  color="error"
+                  icon-left="mdi-cancel"
+                  text
+                ></Button>
+              </v-list-item>
 
-            <slot name="menu" />
-          </v-list>
-        </v-menu>
+              <v-list-item v-if="showReport">
+                <Button
+                  rounded
+                  @click="reportModal = true"
+                  label="Report"
+                  color="error"
+                  icon-left="mdi-account-alert"
+                  text
+                ></Button>
+              </v-list-item>
+
+              <slot name="menu" />
+            </v-list>
+          </v-menu>
+        </v-row>
       </v-col>
     </v-row>
-    <v-subheader class="title">
+    <v-subheader class="title text-center">
       {{ name }}, <span class="v-size--small pl-3">{{ age }}</span>
     </v-subheader>
     <div class="mt-5">
@@ -120,9 +120,9 @@
       v-model="reportModal"
       title="Report user"
       icon="mdi-account-alert"
-      color='error'
+      color="error"
     >
-      <report-user-form @cancel='reportModal = false' @ok='onReport'/>
+      <report-user-form @cancel="reportModal = false" @ok="onReport" />
     </Dialog>
   </v-card>
 </template>
@@ -154,14 +154,19 @@ export default {
   },
   data() {
     return {
-      reportModal: false
-    }
+      reportModal: false,
+    };
   },
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
     ...mapGetters(['friendRequests']),
     showMenu() {
-      return this.showAddFriend || this.showKick || !!this.$slots.menu || this.showReport;
+      return (
+        this.showAddFriend ||
+        this.showKick ||
+        !!this.$slots.menu ||
+        this.showReport
+      );
     },
     userDataList() {
       return [
@@ -186,7 +191,7 @@ export default {
       ];
     },
     showReport() {
-      return !!this.currentUser  && !this.isMe;
+      return !!this.currentUser && !this.isMe;
     },
     isMe() {
       return this.currentUser._id === this.user._id;
@@ -286,16 +291,21 @@ export default {
       this.reportUser({
         report: {
           description,
-          user: this.user._id
-        }
-      })
-    }
-  }
+          user: this.user._id,
+        },
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
 .liked-percentage {
   width: 200px;
+}
+
+.user-right-column {
+  justify-content: right;
+  margin-right: 5px;
 }
 </style>

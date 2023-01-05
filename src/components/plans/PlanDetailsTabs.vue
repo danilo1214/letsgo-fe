@@ -1,6 +1,9 @@
 <template>
   <div class="mt-10">
-    <v-tabs-items v-model="tab" :class="{'tab-items': true, 'is-hidden': !isMember}">
+    <v-tabs-items
+      v-model="tab"
+      :class="{ 'tab-items': true, 'is-hidden': !isMember }"
+    >
       <v-tab-item value="1">
         <plan-card
           class="mt-10"
@@ -163,11 +166,11 @@ export default {
   &.is-hidden {
     max-height: calc(
       100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
-      8.5vh - 75px - 12px - 120px
+        8.5vh - 75px - 12px - 120px
     );
     min-height: calc(
       100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
-      8.5vh - 75px - 12px - 120px
+        8.5vh - 75px - 12px - 120px
     );
   }
 }

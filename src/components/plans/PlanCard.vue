@@ -173,7 +173,7 @@
     <confirm-dialog
       :dialog="showDelete"
       entity="plan"
-      color='error'
+      color="error"
       name-key="caption"
       icon="mdi-delete"
       action="delete"
