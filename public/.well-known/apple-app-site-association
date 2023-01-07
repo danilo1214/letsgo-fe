@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "RAR3427J47.com.example.app.123",
-        "paths": ["*"]
+        "paths": ["/*"]
       }
     ]
   }
