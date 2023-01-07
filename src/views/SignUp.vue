@@ -142,7 +142,7 @@ export default {
           (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
       },
-      countries: country.names(),
+      countries: country.names().sort(),
     };
   },
   watch: {
