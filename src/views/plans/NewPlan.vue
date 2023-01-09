@@ -46,9 +46,9 @@ export default {
           admin,
         },
       })
-        .then(() => {
+        .then((response) => {
           this.isLoading = false;
-          this.$router.replace({ name: 'plans' });
+          this.$router.push(`/plan/${response.data._id}`);
           this.$notify({
             group: 'main',
             title: 'Success',

@@ -1,11 +1,11 @@
 <template>
   <v-card class="mx-auto" max-width="700">
     <v-row class="mt-6">
-      <v-col cols='4'>
-        <Avatar class="ml-2" :size="130" :user="user" />
+      <v-col cols='2'>
+        <Avatar class="ml-2" :size="avatarSize" :user="avatar" />
       </v-col>
       <v-spacer></v-spacer>
-      <v-col cols='8'>
+      <v-col cols='10'>
         <v-row class='user-right-column'>
           <slot />
           <v-menu v-if="showMenu">
@@ -155,11 +155,22 @@ export default {
   data() {
     return {
       reportModal: false,
+      windowWidth: window.innerWidth,
     };
   },
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
     ...mapGetters(['friendRequests']),
+    avatar() {
+      if(this.user._id) {
+        return this.user;
+      }
+
+      return {};
+    },
+    avatarSize() {
+      return  this.windowWidth > 700? 130 : 35;
+    },
     showMenu() {
       return (
         this.showAddFriend ||
@@ -255,7 +266,7 @@ export default {
     showThumbOptions() {
       return (
         this.currentUser &&
-        this.user._id &&
+        this.user._id !== undefined &&
         this.user._id !== this.currentUser._id &&
         !this.user.thumbsUp.includes(this.currentUser._id) &&
         !this.user.thumbsDown.includes(this.currentUser._id) &&
@@ -295,7 +306,17 @@ export default {
         },
       });
     },
+    handleResize() {
+      this.windowWidth = window.innerWidth;
+    }
   },
+  mounted() {
+    window.addEventListener('resize', this.handleResize);
+    console.log(this.user._id)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize);
+  }
 };
 </script>
 

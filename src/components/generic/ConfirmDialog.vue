@@ -32,7 +32,7 @@
           label="Cancel"
           color="secondary"
         />
-        <Button rounded text @click="$emit('ok')" :label="capitalize(action)" />
+        <Button :color='color' rounded text @click="$emit('ok')" :label="capitalize(action)" />
       </v-card-actions>
     </v-card>
   </v-dialog>

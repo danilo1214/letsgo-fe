@@ -226,6 +226,10 @@ main {
   width: 100%;
 }
 
+.vue-notification-group {
+  margin-top: 50px;
+}
+
 .v-progress-circular > svg {
   width: 100px !important;
   height: 100px !important;
