@@ -51,7 +51,7 @@ export default {
     ...mapActions(['getMyPlans']),
     init() {
       this.isLoading = true;
-      this.getMyPlans()
+      this.getMyPlans({limit: 10})
         .then(() => {
           this.isLoading = false;
         })

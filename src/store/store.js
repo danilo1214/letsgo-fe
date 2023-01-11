@@ -17,19 +17,29 @@ export default (Vue) => {
     state() {
       return {
         keyboardActive: false,
+        lastScrollAt: 0,
       };
     },
     mutations: {
       SET_KEYBOARD_ACTIVE(state, shown) {
         state.keyboardActive = shown;
       },
+      SET_LAST_SCROLL_AT(state, lastScrollAt) {
+        state.lastScrollAt = lastScrollAt;
+      },
     },
     getters: {
+      lastScrollAt: (state) => {
+        return state.lastScrollAt;
+      },
       keyboardActive: (state) => {
         return state.keyboardActive;
       },
     },
     actions: {
+      setLastScrollAt: ({ commit }, { lastScrollAt }) => {
+        commit('SET_LAST_SCROLL_AT', lastScrollAt);
+      },
       setKeyboardActive: ({ commit }, { shown }) => {
         commit('SET_KEYBOARD_ACTIVE', shown);
       },

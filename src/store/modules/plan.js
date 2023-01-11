@@ -68,15 +68,17 @@ export const plan = {
       });
     },
     loadPlans: (state, { query }) => {
+      console.log(query);
       return axios.getUrl('/plan', {
         params: query,
       });
     },
-    getMyPlans: ({ commit }) => {
+    getMyPlans: ({ commit }, { limit }) => {
       return axios
         .getUrl('/plan/my', {
           params: {
             old: true,
+            limit,
           },
         })
         .then((result) => {

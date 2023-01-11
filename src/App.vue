@@ -170,6 +170,7 @@ export default {
       }
     },
     async init() {
+      console.log("init?");
       document.getElementById('main').scrollIntoView({ behavior: 'smooth' });
       await this.checkAuth();
       const { signedIn, isPublicRoute, user, socket } = this;

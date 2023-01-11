@@ -1,8 +1,8 @@
 <template>
   <div class="pa-10">
     <Loader v-if="isLoading" />
-    <template v-else>
-      <v-alert v-if="query.keywords" type="info"
+
+    <v-alert v-if="query.keywords" type="info"
         >Searching for keywords {{ query.keywords }}</v-alert
       >
       <v-alert v-if="priceRange" type="info">{{ priceRange }}</v-alert>
@@ -12,9 +12,8 @@
       >
       <v-subheader>Results</v-subheader>
       <v-divider></v-divider>
-      <Plans v-if="plans && plans.length" :plans="plans" />
-      <h1 class="text-center mt-15" v-else>Sorry, no plans were found</h1>
-    </template>
+      <Plans v-if="plans && plans.length" :plans="plans" @load-more='loadMorePlans' :loading='isLoading' />
+    <h1 class="text-center mt-15" v-else>Sorry, no plans were found</h1>
   </div>
 </template>
 
@@ -31,6 +30,7 @@ export default {
     return {
       isLoading: false,
       plans: [],
+      limit: 10,
       query: {
         keywords: '',
         dates: [],
@@ -64,11 +64,19 @@ export default {
   },
   methods: {
     ...mapActions(['loadPlans']),
+    async loadMorePlans(limit) {
+      if(!this.isLoading) {
+        this.limit = limit;
+        this.init();
+      }
+    },
     async init() {
-      const { query } = this.$route;
+      let { query } = this.$route;
       const { search, dateFrom, dateTo } = query;
+      query.limit = this.limit;
       this.isLoading = true;
-      this.loadPlans({
+
+      await this.loadPlans({
         query,
       }).then((result) => {
         this.plans = getData(result);

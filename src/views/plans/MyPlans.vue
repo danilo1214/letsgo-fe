@@ -1,31 +1,36 @@
 <template>
   <div class="pa-10">
     <Loader v-if="isLoading" />
-    <template v-else>
+    <template>
       <v-subheader>You are hosting these upcoming plans</v-subheader>
       <v-divider></v-divider>
-      <Plans
-        v-if="upcomingPlans && upcomingPlans.length"
-        :plans="upcomingPlans"
-      >
-      </Plans>
-      <template v-else>
-        <h1 class="mt-10">You are not hosting any upcoming plans</h1>
-        <Button
-          class="ml-auto mt-12 text-center"
-          rounded
-          to="/new"
-          label="New Plan"
-          icon-left="mdi-plus"
-        />
-      </template>
+      <keep-alive>
+        <Plans
+          v-if="upcomingPlans && upcomingPlans.length"
+          :loading='isLoading'
+          :plans="upcomingPlans"
+          @load-more='loadMore'
+        >
+        </Plans>
+        <template v-else>
+          <h1 class="mt-10">You are not hosting any upcoming plans</h1>
+          <Button
+            class="ml-auto mt-12 text-center"
+            rounded
+            to="/new"
+            label="New Plan"
+            icon-left="mdi-plus"
+          />
+        </template>
+      </keep-alive>
 
       <v-spacer class="mt-15"></v-spacer>
 
-      <v-subheader>Past plans you've hosted</v-subheader>
-      <v-divider></v-divider>
-      <Plans v-if="oldPlans && oldPlans.length" :plans="oldPlans"> </Plans>
-      <h1 v-else class="mt-10">You haven't hosted any plans.</h1>
+      <template  v-if="oldPlans && oldPlans.length">
+        <v-subheader>Past plans you've hosted</v-subheader>
+        <v-divider></v-divider>
+        <Plans :plans="oldPlans" @load-more='loadMore' :loading='isLoading'> </Plans>
+      </template>
     </template>
   </div>
 </template>
@@ -43,6 +48,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      limit: 10,
     };
   },
   computed: {
@@ -62,8 +68,14 @@ export default {
     ...mapActions(['getMyPlans']),
     async init() {
       this.isLoading = true;
-      await this.getMyPlans();
+      await this.getMyPlans({
+        limit: this.limit
+      });
       this.isLoading = false;
+    },
+    loadMore(limit) {
+      this.limit = limit;
+      this.init();
     },
   },
   created() {
