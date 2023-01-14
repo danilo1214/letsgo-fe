@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-6 pa-md-10">
+  <div class="pa-6 pa-md-16 mb-16">
     <h2>Welcome {{ name }}</h2>
 
     <Button

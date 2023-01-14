@@ -41,9 +41,9 @@ export default {
         return;
       }
 
-      this.setLastScrollAt({lastScrollAt: height});
 
-      if(Math.abs(height + e.target.offsetHeight - e.target.scrollHeight) <= 30) {
+      if(Math.abs(height + e.target.offsetHeight - e.target.scrollHeight) <= 120) {
+        this.setLastScrollAt({lastScrollAt: height});
         this.limit += 10;
         this.$emit('load-more', this.limit);
       }
