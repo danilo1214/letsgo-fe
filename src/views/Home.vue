@@ -1,12 +1,11 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class='flex flex-column'>
     <landing v-if="!user" />
     <welcome v-else> signed in</welcome>
 
     <v-spacer></v-spacer>
 
     <v-footer
-      absolute
       inset
       dark
       padless

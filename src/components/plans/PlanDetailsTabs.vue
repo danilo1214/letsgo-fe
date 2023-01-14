@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10">
+  <div>
     <v-tabs-items
       v-model="tab"
       :class="{ 'tab-items': true, 'is-hidden': !isMember }"
@@ -155,22 +155,18 @@ export default {
 <style lang="scss" scoped>
 .tab-items {
   max-height: calc(
-    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
-      8.5vh - 75px - 12px
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px - 24px - 75px
   );
   min-height: calc(
-    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
-      8.5vh - 75px - 12px
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px - 24px - 75px
   );
   overflow-y: scroll;
   &.is-hidden {
     max-height: calc(
-      100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
-        8.5vh - 75px - 12px - 120px
+      100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px  - 24px - 75px - 130px
     );
     min-height: calc(
-      100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
-        8.5vh - 75px - 12px - 120px
+      100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px  - 24px - 75px - 130px
     );
   }
 }

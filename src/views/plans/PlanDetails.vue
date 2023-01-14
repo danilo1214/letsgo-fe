@@ -1,11 +1,11 @@
 <template>
   <v-container fluid v-if="plan._id">
     <v-alert
-      class="mt-5 mt-md-10"
+      class="mt-5"
       dark
       text
       type="warning"
-      color="warning darken-4"
+      color="warning darken-3"
       v-if="!isMember"
     >
       You can view sensitive information such as names and location once you're

@@ -215,7 +215,7 @@ main {
 
 .v-application {
   height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .v-application--wrap {
