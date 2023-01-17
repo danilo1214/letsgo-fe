@@ -50,11 +50,11 @@ export default {
     }
   },
   mounted() {
-    document.getElementsByClassName('v-application--wrap')[0].addEventListener('scroll', this.loadMorePlans);
+    document.getElementsByClassName('v-application')[0].addEventListener('scroll', this.loadMorePlans);
   },
   beforeDestroy() {
     this.setLastScrollAt({lastScrollAt: 0});
-    document.getElementsByClassName('v-application--wrap')[0].removeEventListener('scroll', this.loadMorePlans);
+    document.getElementsByClassName('v-application')[0].removeEventListener('scroll', this.loadMorePlans);
   }
 };
 </script>

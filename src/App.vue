@@ -1,5 +1,5 @@
 <template>
-  <v-app class="app mt-10">
+  <v-app class="app">
     <notifications group="main" />
     <nav-bar @toggle="onToggle" />
 
@@ -212,15 +212,14 @@ main {
   margin: env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left) !important;
 }
-
 .v-application {
   height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   overflow: scroll;
 }
 
 .v-application--wrap {
-  max-height: 100%;
-  overflow-y: scroll;
+  // max-height: 100%;
+  // overflow: hidden;
 }
 
 .width100 {

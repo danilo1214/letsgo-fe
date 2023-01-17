@@ -3,5 +3,10 @@
   "appName": "LetsGo",
   "webDir": "dist",
   "androidScaleType": "FIT_XY",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  }
 }

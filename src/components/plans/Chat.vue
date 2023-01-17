@@ -24,7 +24,7 @@
         </v-banner>
       </template>
     </div>
-    <v-row class="pa-5 pa-md-10" :style="getChatFooterStyle">
+    <v-row class="pa-5" :style="getChatFooterStyle">
       <v-col cols="8" md="9">
         <v-text-field
           @keydown.enter.prevent="onSend"
@@ -132,12 +132,10 @@ export default {
 <style lang="scss">
 .plan-messages {
   max-height: calc(
-    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
-      8.5vh - 75px - 12px - 40 * 2px - 90px
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px - 24px - 75px - 120px
   );
   min-height: calc(
-    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px -
-      8.5vh - 75px - 12px - 40 * 2px - 90px
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px - 24px - 75px - 120px
   );
   overflow-y: scroll;
 }

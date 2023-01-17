@@ -13,6 +13,7 @@
     </v-alert>
 
     <plan-details-tabs
+      @tab-change='onTabChange'
       :is-member="isMember"
       @accept="onAccept"
       @thumb-up="onThumbUp"
@@ -24,7 +25,8 @@
       :plan="plan"
       @send="send"
     />
-    <v-fab-transition>
+
+    <v-fab-transition v-if="tab !== '4'">
       <Button
         @click="onInviteFriends"
         label=""
@@ -72,6 +74,7 @@ export default {
     return {
       kickUserId: '',
       showKick: false,
+      tab: ''
     };
   },
   computed: {
@@ -118,6 +121,9 @@ export default {
       'sendFriendRequest',
       'loadFriendsList',
     ]),
+    onTabChange(tab) {
+      this.tab = tab;
+    },
     onAddFriend(user) {
       this.sendFriendRequest({
         user,
