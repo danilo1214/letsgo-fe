@@ -213,13 +213,13 @@ main {
     env(safe-area-inset-bottom) env(safe-area-inset-left) !important;
 }
 .v-application {
+  overflow-anchor: none;
   height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   overflow: scroll;
 }
 
 .v-application--wrap {
-  // max-height: 100%;
-  // overflow: hidden;
+  min-height: 100px !important;
 }
 
 .width100 {

@@ -1,34 +1,10 @@
 <template>
   <div class="pa-10">
-    <search-users />
-    <v-subheader>Friends({{ friends.length }})</v-subheader>
-    <v-divider></v-divider>
-    <template v-if="friends.length">
-      <user-card
-        class="mt-6"
-        v-for="user in friends"
-        :key="user._id"
-        :user="user"
-        @thumb-up="onThumbUp(user)"
-        @thumb-down="onThumbDown(user)"
-      >
-        <Button
-          rounded
-          class="ml-10 mb-3"
-          label="Remove"
-          icon-left="mdi-account-minus"
-          @click="onRemove(user)"
-        />
-      </user-card>
-    </template>
-
-    <h1 v-else class="text-center mt-10">No new friend requests</h1>
-
-    <v-subheader class="mt-16">
-      Friend Requests({{ friendRequests.length }})
-    </v-subheader>
-    <v-divider></v-divider>
-    <template v-if="friendRequests.length">
+    <template v-if='friendRequests.length'>
+      <v-subheader class="mt-16">
+        Friend Requests <v-badge color='error' :content='friendRequests.length' />
+      </v-subheader>
+      <v-divider></v-divider>
       <user-card
         v-for="user in friendRequests"
         :key="user._id"
@@ -54,7 +30,30 @@
         </v-card-actions>
       </user-card>
     </template>
-    <h1 v-else class="text-center mt-10">No new friend requests</h1>
+
+    <v-subheader class='mt-16'>Friends({{ friends.length }})</v-subheader>
+    <v-divider></v-divider>
+    <search-users class='mt-6' />
+    <template v-if="friends.length">
+      <user-card
+        class="mt-6"
+        v-for="user in friends"
+        :key="user._id"
+        :user="user"
+        @thumb-up="onThumbUp(user)"
+        @thumb-down="onThumbDown(user)"
+      >
+        <Button
+          rounded
+          class="ml-10 mb-3"
+          label="Remove"
+          icon-left="mdi-account-minus"
+          @click="onRemove(user)"
+        />
+      </user-card>
+    </template>
+
+    <h1 v-else class="text-center mt-10">You have no friends</h1>
   </div>
 </template>
 

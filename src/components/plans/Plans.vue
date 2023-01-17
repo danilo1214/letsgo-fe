@@ -37,13 +37,16 @@ export default {
 
       const height = e.target.scrollTop;
 
-      if(height <= this.lastScrollAt) {
+      if(height - 80 <= this.lastScrollAt) {
         return;
       }
+
+      console.log(height);
 
 
       if(Math.abs(height + e.target.offsetHeight - e.target.scrollHeight) <= 120) {
         this.setLastScrollAt({lastScrollAt: height});
+        console.log(`pop at ${height}`);
         this.limit += 10;
         this.$emit('load-more', this.limit);
       }
@@ -54,6 +57,7 @@ export default {
   },
   beforeDestroy() {
     this.setLastScrollAt({lastScrollAt: 0});
+    console.log("destroy init")
     document.getElementsByClassName('v-application')[0].removeEventListener('scroll', this.loadMorePlans);
   }
 };

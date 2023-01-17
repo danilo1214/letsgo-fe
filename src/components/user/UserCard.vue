@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="700">
+  <v-card class="mx-auto" max-width="700" :id='`user-${user._id}`'>
     <v-row class="mt-6">
       <v-col cols='2'>
         <Avatar class="ml-2" :size="avatarSize" :user="avatar" />
@@ -8,7 +8,7 @@
       <v-col cols='10'>
         <v-row class='user-right-column'>
           <slot />
-          <v-menu v-if="showMenu">
+          <v-menu :attach='`#user-${user._id}`' v-if="showMenu" left='200'>
             <template v-slot:activator="{ on, attrs }">
               <Button
                 icon
@@ -169,7 +169,7 @@ export default {
       return {};
     },
     avatarSize() {
-      return  this.windowWidth > 700? 130 : 35;
+      return  this.windowWidth > 700? 130 : 45;
     },
     showMenu() {
       return (

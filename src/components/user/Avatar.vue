@@ -10,7 +10,7 @@
     </template>
 
     <v-avatar :size="size">
-      <Tooltip :text="verifiedText" :color="verifiedColor">
+      <Tooltip fixed :attach='`#user-${user._id}`' :text="verifiedText" :color="verifiedColor">
         <v-img
           :src="photo"
           slot-scope="{ activator }"
