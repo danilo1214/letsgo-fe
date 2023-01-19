@@ -1,26 +1,26 @@
 <template>
-  <v-dialog persistent :value="dialog" max-width="290">
+  <v-dialog persistent :value="dialog" max-width='380px'>
     <v-card>
-      <v-toolbar :color="color" dark class="text-center">
-        <v-banner two-line>
-          <v-avatar slot="icon" :color="color" size="40">
-            <v-icon icon="mdi-lock" color="white" class="ml-auto mr-auto p-5">
+      <v-row class='pa-10'>
+        <v-col cols='12' md='5' class='align-center justify-center'>
+          <v-avatar slot="icon" :color="color" size="80">
+            <v-icon large icon="mdi-lock" color="white" class="ma-10">
               {{ icon }}
             </v-icon>
           </v-avatar>
+        </v-col>
 
-          <v-toolbar-title
-            >{{ capitalize(action) }}
-            {{ entity ? capitalize(entity) : '' }}</v-toolbar-title
-          >
-        </v-banner>
-      </v-toolbar>
-      <v-card-title class="text-center" v-if="icon"> </v-card-title>
+        <v-col cols='12' md='7'>
+          <h1>{{ capitalize(action) }}
+            {{ entity ? capitalize(entity) : '' }}</h1>
+          <v-card-text>
+              Are you sure you want to {{ action }}
+              {{ entity ? `the ${entity} ${name}` : '' }}
+          </v-card-text>
+        </v-col>
+      </v-row>
 
-      <v-card-text>
-        Are you sure you want to {{ action }}
-        {{ entity ? `the ${entity} ${name}` : '' }}
-      </v-card-text>
+
 
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -32,7 +32,7 @@
           label="Cancel"
           color="secondary"
         />
-        <Button :color='color' rounded text @click="$emit('ok')" :label="capitalize(action)" />
+        <Button small :color='color' rounded @click="$emit('ok')" :label="capitalize(action)" />
       </v-card-actions>
     </v-card>
   </v-dialog>

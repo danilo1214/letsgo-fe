@@ -8,7 +8,7 @@
       <v-col cols='10'>
         <v-row class='user-right-column'>
           <slot />
-          <v-menu :attach='`#user-${user._id}`' v-if="showMenu" left='200'>
+          <v-menu :attach='`#user-${user._id}`' v-if="showMenu" :left='true'>
             <template v-slot:activator="{ on, attrs }">
               <Button
                 icon
