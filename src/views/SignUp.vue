@@ -97,6 +97,10 @@
     <v-alert type="error" v-if="error">
       {{ error }}
     </v-alert>
+
+    <v-alert type='warning'>
+      By creating an account you agree to the <a href='https://letsgo-social.com/assets/terms-and-conditions.html'>terms and conditions of LetsGo</a>.
+    </v-alert>
     <Button
       :disabled="!valid || isLoading"
       class="mr-4 mt-10"
@@ -189,4 +193,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+a{
+  text-decoration: none;
+}
+</style>
