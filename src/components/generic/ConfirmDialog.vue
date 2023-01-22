@@ -1,5 +1,5 @@
 <template>
-  <v-dialog persistent :value="dialog" max-width='350'>
+  <v-dialog persistent :value="dialog" max-width='80vh'>
     <v-card>
       <v-row class='max-100 pa-10'>
         <v-col cols='12' md='5' class='align-center justify-center'>

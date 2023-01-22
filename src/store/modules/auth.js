@@ -42,6 +42,9 @@ export const auth = {
     forgotPassword: (store, { email }) => {
       return axios.postUrl(`user/password-forget`, { email });
     },
+    deleteAccount: (store) => {
+      return axios.deleteUrl('/user');
+    },
     passwordChange: (store, { password }) => {
       return axios.postUrl(`user/password-change`, { password });
     },
