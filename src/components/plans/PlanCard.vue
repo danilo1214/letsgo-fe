@@ -49,6 +49,9 @@
           </v-list>
         </v-menu>
       </v-card-title>
+      <v-card-text class='v-subheader mt-0'>
+        <span class="subheading mr-2">{{ formatDate }}</span>
+      </v-card-text>
       <v-banner two-line v-if="showJoinBanner">
         <v-avatar slot="icon" color="primary darken-1" size="40">
           <v-icon icon="mdi-lock" color="white"> mdi-account </v-icon>
@@ -114,16 +117,9 @@
           />
         </div>
       </v-img>
-      <v-img v-else-if="!isAdmin" :src="getPlanImage" height="400" />
+      <v-img v-else-if="!isAdmin" :src="getPlanImage" :height="imageHeight" />
       <v-card-text>
         {{ plan.description }}
-      </v-card-text>
-
-      <v-card-text>
-        <v-icon class="mr-1" dark color="primary darken-2">
-          mdi-calendar</v-icon
-        >
-        <span class="subheading mr-2">{{ formatDate }}</span>
       </v-card-text>
 
       <v-card-text>
@@ -240,6 +236,9 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['newMessages']),
+    imageHeight() {
+      return this.$route.name === 'plan-details'? 400 : 200;
+    },
     link() {
       return this.showLink ? `/plan/${this.plan._id}` : null;
     },
@@ -311,7 +310,7 @@ export default {
     },
     formatDate() {
       const { date, time } = this.plan;
-      return `${moment(date).format('DD.MM.YYYY')} ${time || ''}`;
+      return `${moment(date).format('dddd, MMMM Do YYYY')} at ${time || ''}`;
     },
     getPlanImage() {
       return this.plan.photo_url || '../../../assets/default.jpg';

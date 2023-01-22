@@ -234,4 +234,8 @@ main {
   width: 100px !important;
   height: 100px !important;
 }
+
+.max-100 {
+  max-width: 100%;
+}
 </style>

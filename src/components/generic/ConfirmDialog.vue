@@ -1,7 +1,7 @@
 <template>
-  <v-dialog persistent :value="dialog" max-width='380px'>
+  <v-dialog persistent :value="dialog" max-width='350'>
     <v-card>
-      <v-row class='pa-10'>
+      <v-row class='max-100 pa-10'>
         <v-col cols='12' md='5' class='align-center justify-center'>
           <v-avatar slot="icon" :color="color" size="80">
             <v-icon large icon="mdi-lock" color="white" class="ma-10">
