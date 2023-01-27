@@ -2,7 +2,7 @@
   <v-card class="mx-auto" max-width="700" :id='`user-${user._id}`'>
     <v-row class="mt-6">
       <v-col cols='2'>
-        <Avatar class="ml-2" :size="avatarSize" :user="avatar" />
+        <Avatar :is-me='isMe' class="ml-2" :size="avatarSize" :user="avatar" />
       </v-col>
       <v-spacer></v-spacer>
       <v-col cols='10'>
