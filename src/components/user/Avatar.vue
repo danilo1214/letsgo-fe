@@ -5,11 +5,11 @@
         <v-icon color="primary lighten-4" v-if="isVerified"
           >mdi-checkbox-marked-circle</v-icon
         >
-        <v-icon x-small v-else>mdi-alert-circle</v-icon>
+        <v-icon small v-else>mdi-alert-circle</v-icon>
       </v-avatar>
     </template>
 
-    <template v-if='isMe && isMobile'>
+    <template v-if='isMe && isVerified && isMobile'>
       <v-btn
         class='selfie'
         fab
@@ -108,14 +108,13 @@ export default {
       formData.append('image', file);
       await this.verifySelfie({ formData })
         .then(() => {
-          console.log("ok");
+          this.$router.replace({name: 'home'})
           this.$notify({
             group: 'main',
             title: 'Verified',
-            text: 'Successfully verified selfie',
+            text: 'Successfully uploaded selfie',
             type: 'success',
           });
-          this.loadUser();
         })
         .catch((err) => {
           console.log(err)
@@ -138,21 +137,25 @@ export default {
 
 <style>
 span.v-badge__badge.error {
-  inset: 75% auto auto 75% !important;
+  inset: auto 5% 5% auto !important;
+  z-index: 1;
   position: absolute;
 }
 
 span.v-badge__badge.primary {
-  inset: 75% auto auto 80% !important;
+  inset: auto 5% 5% auto !important;
+  z-index: 1;
   position: absolute;
 }
 
 .selfie {
-  inset: 0 auto auto -5% !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
   position: absolute;
-  max-width: 20px;
-  max-height: 20px;
+  max-width: 35px;
+  max-height: 35px;
 }
 
 </style>

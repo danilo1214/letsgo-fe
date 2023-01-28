@@ -169,7 +169,7 @@ export default {
       return {};
     },
     avatarSize() {
-      return  this.windowWidth > 700? 130 : 45;
+      return  this.windowWidth > 700? 130 : 100;
     },
     showMenu() {
       return (

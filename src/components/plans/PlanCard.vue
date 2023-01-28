@@ -1,12 +1,13 @@
 <template>
-  <div class="card-container" v-if="!isMini || !showMini">
+  <div class="card-container" v-if="!isMini || !showMini" :id='`button-${plan._id}`'>
     <v-card class="mx-auto ma-10 plan-card" :to="link">
       <v-card-title>
         <span class="title">{{ plan.caption }}</span>
         <v-spacer></v-spacer>
-        <v-menu v-if="isAdmin">
+        <v-menu v-if="isAdmin" attach left>
           <template v-slot:activator="{ on, attrs }">
             <Button
+
               icon
               color="info"
               v-bind="attrs"
@@ -17,7 +18,7 @@
             </Button>
           </template>
 
-          <v-list>
+          <v-list >
             <v-list-item>
               <Button
                 rounded
@@ -182,6 +183,7 @@
       :dialog="showLeave"
       entity="plan"
       name-key="caption"
+      color='error'
       icon="mdi-exit-to-app"
       action="leave"
       :data="plan"
@@ -236,6 +238,9 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['newMessages']),
+    planId()  {
+      return `plan-${this.plan._id}`;
+    },
     imageHeight() {
       return this.$route.name === 'plan-details'? 400 : 200;
     },
