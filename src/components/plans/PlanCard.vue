@@ -2,7 +2,7 @@
   <div class="card-container" v-if="!isMini || !showMini" :id='`button-${plan._id}`'>
     <v-card class="mx-auto ma-10 plan-card" :to="link">
       <v-card-title>
-        <span class="title">{{ plan.caption }}</span>
+        <span class="plan-title">{{ plan.caption }}</span>
         <v-spacer></v-spacer>
         <v-menu v-if="isAdmin" attach left>
           <template v-slot:activator="{ on, attrs }">
@@ -49,10 +49,12 @@
             </v-list-item>
           </v-list>
         </v-menu>
+        <br/>
+        <v-card-text class='mt-0 ml-0 pl-0'>
+          <span class="caption">{{ formatDate }}</span>
+        </v-card-text>
       </v-card-title>
-      <v-card-text class='v-subheader mt-0'>
-        <span class="subheading mr-2">{{ formatDate }}</span>
-      </v-card-text>
+
       <v-banner two-line v-if="showJoinBanner">
         <v-avatar slot="icon" color="primary darken-1" size="40">
           <v-icon icon="mdi-lock" color="white"> mdi-account </v-icon>
@@ -459,6 +461,12 @@ export default {
 </script>
 
 <style lang="scss">
+
+.plan-title{
+  overflow:  scroll;
+  white-space: nowrap !important;
+}
+
 .upload-wrapper {
   align-items: center;
   width: 55px;
@@ -493,17 +501,29 @@ export default {
   .plan-card {
     width: 300px;
   }
+
+  .plan-title {
+    max-width: 180px;
+  }
 }
 
 @media screen and (min-width: 600px) {
   .plan-card {
     width: 400px;
   }
+
+  .plan-title {
+    max-width: 320px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
   .plan-card {
     width: 600px;
+  }
+
+  .title{
+    max-width: 500px;
   }
 }
 </style>

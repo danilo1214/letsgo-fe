@@ -1,11 +1,11 @@
 <template>
-  <v-badge :color="verifiedColor" avatar bottom bordered overlap>
+  <v-badge class='avatar-badge' :color="verifiedColor" avatar bottom bordered overlap light>
     <template v-slot:badge>
       <v-avatar>
-        <v-icon color="primary lighten-4" v-if="isVerified"
+        <v-icon color='white' light small v-if="isVerified"
           >mdi-checkbox-marked-circle</v-icon
         >
-        <v-icon small v-else>mdi-alert-circle</v-icon>
+        <v-icon small color='white' v-else>mdi-alert-circle</v-icon>
       </v-avatar>
     </template>
 
@@ -117,7 +117,6 @@ export default {
           });
         })
         .catch((err) => {
-          console.log(err)
           this.$notify({
             group: 'main',
             title: 'Failed to upload selfie',
@@ -135,23 +134,25 @@ export default {
 };
 </script>
 
-<style>
-span.v-badge__badge.error {
-  inset: auto 5% 5% auto !important;
-  z-index: 1;
-  position: absolute;
+<style lang='scss'>
+
+.avatar-badge {
+  span.v-badge__badge.error {
+    inset: auto 5% 5% auto !important;
+    z-index: 1;
+    position: absolute;
+  }
+
+  span.v-badge__badge.primary {
+    inset: auto 5% 5% auto !important;
+    z-index: 1;
+    position: absolute;
+  }
 }
 
-span.v-badge__badge.primary {
-  inset: auto 5% 5% auto !important;
-  z-index: 1;
-  position: absolute;
-}
 
 .selfie {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset:  5% auto 5% auto !important;
   z-index: 1;
   position: absolute;
   max-width: 35px;

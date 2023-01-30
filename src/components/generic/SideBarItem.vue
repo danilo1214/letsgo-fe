@@ -4,6 +4,7 @@
       <v-badge
         v-if="item.notifications"
         color="error"
+        bottom
         :content="item.notifications"
       >
         <v-icon>

@@ -13,10 +13,10 @@
         <v-col cols='12' md='7'>
           <h1>{{ capitalize(action) }}
             {{ entity ? capitalize(entity) : '' }}</h1>
-          <v-card-text>
+          <p class='mt-2'>
               Are you sure you want to {{ action }}
-              {{ entity ? `the ${entity} ${name}` : '' }}
-          </v-card-text>
+              {{ entity ? `the ${entity} ${name}` : '' }}?
+          </p>
         </v-col>
       </v-row>
 

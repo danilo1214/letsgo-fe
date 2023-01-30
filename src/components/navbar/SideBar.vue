@@ -21,6 +21,7 @@
               <v-list-item-icon>
                 <v-badge
                   color="error"
+                  bottom
                   v-if="item.notifications"
                   :content="item.notifications"
                 >
