@@ -226,6 +226,10 @@ main {
   width: 100%;
 }
 
+.width90{
+  width: 90%;
+}
+
 .vue-notification-group {
   margin-top: 50px;
 }

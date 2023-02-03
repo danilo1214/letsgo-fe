@@ -164,10 +164,10 @@ export default {
   overflow-y: scroll;
   &.is-hidden {
     max-height: calc(
-      100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px  - 24px - 75px - 130px
+      100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px  - 24px - 75px - 72px
     );
     min-height: calc(
-      100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px  - 24px - 75px - 130px
+      100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px  - 24px - 75px - 72px
     );
   }
 }

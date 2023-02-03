@@ -1,7 +1,7 @@
 <template>
   <div class="card-container" v-if="!isMini || !showMini" :id='`button-${plan._id}`'>
     <v-card class="mx-auto ma-10 plan-card" :to="link">
-      <v-card-title>
+      <v-card-title class='pa-3'>
         <span class="plan-title">{{ plan.caption }}</span>
         <v-spacer></v-spacer>
         <v-menu v-if="isAdmin" attach left>
@@ -54,25 +54,14 @@
           <span class="caption">{{ formatDate }}</span>
         </v-card-text>
       </v-card-title>
-
-      <v-banner two-line v-if="showJoinBanner">
-        <v-avatar slot="icon" color="primary darken-1" size="40">
-          <v-icon icon="mdi-lock" color="white"> mdi-account </v-icon>
-        </v-avatar>
-
-        Request to join this plan.
-
-        <template v-slot:actions>
-          <v-btn
-            text
-            color="primary"
-            @click.stop.prevent="onRequestJoin"
-            rounded
-          >
-            Join
-          </v-btn>
-        </template>
-      </v-banner>
+      <Button
+        v-if="showJoinBanner && !planInvite"
+        class='width90 d-block mx-auto mt-3 mb-3'
+        color="primary"
+        label='Join'
+        @click.stop.prevent="onRequestJoin"
+        rounded
+      />
 
       <v-banner two-line v-if="isMember && newMessages.includes(plan._id)">
         <v-avatar slot="icon" color="error darken-1" size="40">
@@ -91,13 +80,14 @@
       <Button
         v-if="isMember"
         @click.stop.prevent="onLeave"
-        class="mt-2 mb-5 ml-3"
+        class="mt-2 mb-5 mx-auto width90 d-block"
         label="Leave"
         color="error"
         rounded
         icon-left="mdi-exit-to-app"
-        text
       ></Button>
+
+      <plan-invite v-if='planInvite' :invite='planInvite' />
 
       <v-skeleton-loader v-if="isLoading" type="image"> </v-skeleton-loader>
 
@@ -206,10 +196,11 @@ import Button from '@/components/generic/Button';
 import Dialog from '@/components/generic/Dialog';
 import PlanForm from './PlanForm';
 import PlanCardMini from './PlanCardMini';
+import PlanInvite from './PlanInvite';
 
 export default {
   name: 'PlanCard',
-  components: { PlanCardMini, PlanForm, Dialog, Button, ConfirmDialog },
+  components: { PlanInvite, PlanCardMini, PlanForm, Dialog, Button, ConfirmDialog },
   props: {
     plan: {
       type: Object,
@@ -239,7 +230,7 @@ export default {
   },
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
-    ...mapGetters(['newMessages']),
+    ...mapGetters(['newMessages', 'invites']),
     planId()  {
       return `plan-${this.plan._id}`;
     },
@@ -296,6 +287,17 @@ export default {
             request === this.user._id || request._id === this.user._id
         )
       );
+    },
+    planInvite() {
+      if(this.user) {
+        return this.invites.find(
+          (invite) =>
+            invite.plan._id === this.plan._id
+        )
+      }
+
+      return  null;
+
     },
     showJoinBanner() {
       return (

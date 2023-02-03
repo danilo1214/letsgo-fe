@@ -1,7 +1,7 @@
 <template>
   <v-container fluid v-if="plan._id">
     <v-alert
-      class="mt-5"
+      class='body-2'
       dark
       text
       type="warning"
