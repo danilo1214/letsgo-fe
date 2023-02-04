@@ -4,7 +4,6 @@
     <template>
       <v-subheader>You are hosting these upcoming plans</v-subheader>
       <v-divider></v-divider>
-      <keep-alive>
         <Plans
           v-if="upcomingPlans && upcomingPlans.length"
           :loading='isLoading'
@@ -22,7 +21,6 @@
             icon-left="mdi-plus"
           />
         </template>
-      </keep-alive>
 
       <v-spacer class="mt-15"></v-spacer>
 

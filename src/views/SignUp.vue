@@ -100,7 +100,7 @@
       {{ error }}
     </v-alert>
 
-    <v-alert type='warning'>
+    <v-alert type='warning' color='warning'>
       By creating an account you agree to the <a href='https://letsgo-social.com/assets/terms-and-conditions.html'>terms and conditions of LetsGo</a>
     </v-alert>
     <Button

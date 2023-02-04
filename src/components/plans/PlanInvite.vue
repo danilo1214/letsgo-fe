@@ -56,7 +56,7 @@ export default {
 }
 
 a {
-  color: #6475e0;
+  color: #6474dc;
   text-decoration: none;
 }
 </style>
