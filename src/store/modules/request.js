@@ -25,11 +25,9 @@ export const request = {
         });
     },
     deleteRequest: ({ commit }, { plan }) => {
-      return axios
-        .postUrl(`plan/${plan}/request/delete`, plan)
-        .then((result) => {
-          commit('UPDATE_PLAN', { id: result.data._id, data: result.data });
-        });
+      return axios.deleteUrl(`plan/${plan}/request`, plan).then((result) => {
+        commit('UPDATE_PLAN', { id: result.data._id, data: result.data });
+      });
     },
   },
 };

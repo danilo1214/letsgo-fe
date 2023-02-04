@@ -22,6 +22,7 @@
       @decline="onDecline"
       @kick="onKick"
       @join="init"
+      @deleteRequest="init"
       :plan="plan"
       @send="send"
     />

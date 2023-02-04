@@ -57,9 +57,19 @@
       <Button
         v-if="showJoinBanner && !planInvite"
         class='width90 d-block mx-auto mt-3 mb-3'
-        color="primary"
+        color="primary lighten-1"
         label='Join'
+        icon-left='mdi-account-multiple-plus'
         @click.stop.prevent="onRequestJoin"
+        rounded
+      />
+      <Button
+        v-else-if="hasRequested"
+        class='width90 d-block mx-auto mt-3 mb-3'
+        color='text'
+        label='Requested'
+        icon-left='mdi-cancel'
+        @click.stop.prevent="onRequestDelete"
         rounded
       />
 
@@ -340,6 +350,7 @@ export default {
       'updatePlan',
       'uploadPlanImage',
       'createRequest',
+      'deleteRequest',
       'createPlan',
       'leavePlan',
     ]),
@@ -372,6 +383,21 @@ export default {
           this.$notify({
             group: 'main',
             title: 'Failed to send join request',
+            text: error,
+            type: 'error',
+          });
+        });
+    },
+    onRequestDelete() {
+      this.deleteRequest({ plan: this.plan._id })
+        .then(() => {
+          this.$emit('deleteRequest', this.plan._id);
+        })
+        .catch((err) => {
+          const error = getError(err);
+          this.$notify({
+            group: 'main',
+            title: 'Failed to delete request',
             text: error,
             type: 'error',
           });
