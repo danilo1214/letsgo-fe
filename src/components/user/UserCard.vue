@@ -1,14 +1,14 @@
 <template>
-  <v-card class="mx-auto" max-width="700" :id='`user-${user._id}`'>
+  <v-card class="mx-auto" max-width="700" :id="`user-${user._id}`">
     <v-row class="mt-6">
-      <v-col cols='2'>
-        <Avatar :is-me='isMe' class="ml-2" :size="avatarSize" :user="avatar" />
+      <v-col cols="2">
+        <Avatar :is-me="isMe" class="ml-2" :size="avatarSize" :user="avatar" />
       </v-col>
       <v-spacer></v-spacer>
-      <v-col cols='10'>
-        <v-row class='user-right-column'>
+      <v-col cols="10">
+        <v-row class="user-right-column">
           <slot />
-          <v-menu :attach='`#user-${user._id}`' v-if="showMenu" :left='true'>
+          <v-menu :attach="`#user-${user._id}`" v-if="showMenu" :left="true">
             <template v-slot:activator="{ on, attrs }">
               <Button
                 icon
@@ -37,6 +37,7 @@
                   rounded
                   @click="$emit('kick', user._id)"
                   label="Remove"
+                  small
                   color="error"
                   icon-left="mdi-cancel"
                   text
@@ -63,32 +64,22 @@
     <v-subheader class="title text-center">
       {{ name }}, <span class="v-size--small pl-3">{{ age }}</span>
     </v-subheader>
-    <div class="mt-5">
-      <v-row class="pl-6" v-if="showThumbOptions">
+    <div>
+      <v-row class="pt-2 pl-6">
         <Button
-          color="success"
-          rounded
-          small
-          fab
-          icon-left=""
-          @click="$emit('thumb-up', user._id)"
-        >
-          <v-icon sm>mdi-thumb-up</v-icon>
-        </Button>
-        <Button
+          v-if="showThumbOptions"
           color="info"
           rounded
+          text
           small
           fab
-          class="ml-3"
+          class="ml-2 mr-3"
           @click="$emit('thumb-down', user._id)"
         >
           <v-icon sm>mdi-thumb-down</v-icon>
         </Button>
-      </v-row>
-      <v-row class="pt-2 pl-6">
         <v-progress-linear
-          class="liked-percentage"
+          class="liked-percentage mt-2"
           rounded
           color="success"
           background-color="info"
@@ -98,6 +89,20 @@
         >
           {{ Math.abs(likedAmount) }} {{ likedMessage }}
         </v-progress-linear>
+
+        <Button
+          v-if="showThumbOptions"
+          color="success"
+          rounded
+          text
+          class="ml-2"
+          small
+          fab
+          icon-left=""
+          @click="$emit('thumb-up', user._id)"
+        >
+          <v-icon sm>mdi-thumb-up</v-icon>
+        </Button>
       </v-row>
     </div>
     <v-divider class="mt-10"></v-divider>
@@ -162,14 +167,14 @@ export default {
     ...mapState({ currentUser: (state) => state.auth.user }),
     ...mapGetters(['friendRequests']),
     avatar() {
-      if(this.user._id) {
+      if (this.user._id) {
         return this.user;
       }
 
       return {};
     },
     avatarSize() {
-      return  this.windowWidth > 700? 130 : 100;
+      return this.windowWidth > 700 ? 130 : 70;
     },
     showMenu() {
       return (
@@ -308,15 +313,15 @@ export default {
     },
     handleResize() {
       this.windowWidth = window.innerWidth;
-    }
+    },
   },
   mounted() {
     window.addEventListener('resize', this.handleResize);
-    console.log(this.user._id)
+    console.log(this.user._id);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize);
-  }
+  },
 };
 </script>
 

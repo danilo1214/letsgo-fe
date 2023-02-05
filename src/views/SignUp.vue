@@ -1,8 +1,14 @@
 <template>
   <v-form class="ma-10" ref="form" v-model="valid" lazy-validation>
-      <v-img width='100' height='100' class='ma-auto' src="../../public/assets/logo.png" alt="logo" />
+    <v-img
+      width="100"
+      height="100"
+      class="ma-auto"
+      src="../../public/assets/logo.png"
+      alt="logo"
+    />
     <v-text-field
-      class='mt-10'
+      class="mt-10"
       v-model="user.first_name"
       :rules="required('First name')"
       placeholder="First Name"
@@ -100,8 +106,11 @@
       {{ error }}
     </v-alert>
 
-    <v-alert type='warning' color='warning'>
-      By creating an account you agree to the <a href='https://letsgo-social.com/assets/terms-and-conditions.html'>terms and conditions of LetsGo</a>
+    <v-alert type="warning" color="warning">
+      By creating an account you agree to the
+      <a href="https://letsgo-social.com/assets/terms-and-conditions.html"
+        >terms and conditions of LetsGo</a
+      >
     </v-alert>
     <Button
       :disabled="!valid || isLoading"
@@ -196,7 +205,7 @@ export default {
 </script>
 
 <style scoped>
-a{
+a {
   text-decoration: none;
 }
 </style>

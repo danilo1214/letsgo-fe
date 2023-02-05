@@ -1,7 +1,7 @@
 <template>
   <v-container fluid v-if="plan._id">
     <v-alert
-      class='body-2'
+      class="body-2"
       dark
       text
       type="warning"
@@ -13,7 +13,7 @@
     </v-alert>
 
     <plan-details-tabs
-      @tab-change='onTabChange'
+      @tab-change="onTabChange"
       :is-member="isMember"
       @accept="onAccept"
       @thumb-up="onThumbUp"
@@ -75,7 +75,7 @@ export default {
     return {
       kickUserId: '',
       showKick: false,
-      tab: ''
+      tab: '',
     };
   },
   computed: {

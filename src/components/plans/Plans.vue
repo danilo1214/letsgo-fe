@@ -1,6 +1,6 @@
 <template>
-  <v-container ref='plans'>
-    <v-row v-if='plans.length'>
+  <v-container ref="plans">
+    <v-row v-if="plans.length">
       <v-col v-for="plan in plans" :key="plan._id" sm="12" md="6">
         <plan-card :plan="plan" @join="onPlanJoin"> </plan-card>
       </v-col>
@@ -15,12 +15,12 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'Plans',
   components: { PlanCard },
-  props: ['plans',  'loading'],
+  props: ['plans', 'loading'],
   data() {
     return {
       limit: 10,
-      lastScroll: 0
-    }
+      lastScroll: 0,
+    };
   },
   computed: {
     ...mapGetters(['lastScrollAt']),
@@ -31,35 +31,40 @@ export default {
       this.$router.push(`/plan/${id}`);
     },
     loadMorePlans(e) {
-      if(this.loading) {
+      if (this.loading) {
         return;
       }
 
       const height = e.target.scrollTop;
 
-      if(height - 80 <= this.lastScrollAt) {
+      if (height - 80 <= this.lastScrollAt) {
         return;
       }
 
       console.log(height);
 
-
-      if(Math.abs(height + e.target.offsetHeight - e.target.scrollHeight) <= 120) {
-        this.setLastScrollAt({lastScrollAt: height});
+      if (
+        Math.abs(height + e.target.offsetHeight - e.target.scrollHeight) <= 120
+      ) {
+        this.setLastScrollAt({ lastScrollAt: height });
         console.log(`pop at ${height}`);
         this.limit += 10;
         this.$emit('load-more', this.limit);
       }
-    }
+    },
   },
   mounted() {
-    document.getElementsByClassName('v-application')[0].addEventListener('scroll', this.loadMorePlans);
+    document
+      .getElementsByClassName('v-application')[0]
+      .addEventListener('scroll', this.loadMorePlans);
   },
   beforeDestroy() {
-    this.setLastScrollAt({lastScrollAt: 0});
-    console.log("destroy init")
-    document.getElementsByClassName('v-application')[0].removeEventListener('scroll', this.loadMorePlans);
-  }
+    this.setLastScrollAt({ lastScrollAt: 0 });
+    console.log('destroy init');
+    document
+      .getElementsByClassName('v-application')[0]
+      .removeEventListener('scroll', this.loadMorePlans);
+  },
 };
 </script>
 

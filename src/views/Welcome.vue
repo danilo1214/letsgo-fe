@@ -48,22 +48,23 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['getMyPlans']),
-    init() {
+    ...mapActions(['getMyPlans', 'loadFriendsList']),
+    async init() {
       this.isLoading = true;
-      this.getMyPlans({limit: 10})
-        .then(() => {
-          this.isLoading = false;
-        })
-        .catch((err) => {
-          this.$notify({
-            group: 'main',
-            title: 'Failed to load plans',
-            text: getError(err),
-            type: 'error',
-          });
-          this.isLoading = false;
+
+      try {
+        await this.getMyPlans({ limit: 10 });
+        await this.loadFriendsList();
+        this.isLoading = false;
+      } catch (err) {
+        this.$notify({
+          group: 'main',
+          title: 'Failed to load plans',
+          text: getError(err),
+          type: 'error',
         });
+        this.isLoading = false;
+      }
     },
   },
   mounted() {

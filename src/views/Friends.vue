@@ -1,8 +1,9 @@
 <template>
-  <div class="pa-10">
-    <template v-if='friendRequests.length'>
-      <v-subheader class="mt-16">
-        Friend Requests <v-badge color='error' :content='friendRequests.length' />
+  <div class="pa-8">
+    <template v-if="friendRequests.length">
+      <v-subheader>
+        Friend Requests
+        <v-badge color="error" :content="friendRequests.length" />
       </v-subheader>
       <v-divider></v-divider>
       <user-card
@@ -14,26 +15,28 @@
         <v-card-actions>
           <Button
             rounded
-            label="Accept"
-            color="success"
-            icon-left="mdi-check"
-            @click="onAccept(user)"
-          />
-          <Button
-            rounded
+            x-small
             label="Decline"
             color="error"
             icon-left="mdi-cancel"
             text
             @click="onDecline(user)"
           />
+          <Button
+            rounded
+            x-small
+            label="Accept"
+            color="success"
+            icon-left="mdi-check"
+            @click="onAccept(user)"
+          />
         </v-card-actions>
       </user-card>
     </template>
 
-    <v-subheader class='mt-16'>Friends({{ friends.length }})</v-subheader>
+    <v-subheader class="mt-10">Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
-    <search-users class='mt-6' />
+    <search-users class="mt-6" />
     <template v-if="friends.length">
       <user-card
         class="mt-6"
@@ -44,6 +47,7 @@
         @thumb-down="onThumbDown(user)"
       >
         <Button
+          small
           rounded
           class="ml-10 mb-3"
           label="Remove"
@@ -63,8 +67,6 @@
       ></confirm-dialog>
     </template>
 
-
-
     <h1 v-else class="text-center mt-10">You have no friends</h1>
   </div>
 </template>
@@ -82,7 +84,7 @@ export default {
   data() {
     return {
       showRemove: false,
-      removeUserData: {}
+      removeUserData: {},
     };
   },
   computed: {
@@ -119,7 +121,7 @@ export default {
     },
     onRemoveCancel() {
       this.showRemove = false;
-      this.removeUserData = {  };
+      this.removeUserData = {};
     },
     onRemoveConfirm() {
       this.onRemove(this.removeUserData);

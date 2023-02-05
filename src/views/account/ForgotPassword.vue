@@ -25,7 +25,7 @@
       <h1>Enter code</h1>
       <p class="mt-4">A code has been sent to {{ email }}</p>
       <v-otp-input
-        type='number'
+        type="number"
         class="mt-10"
         hide-spin-buttons
         v-model="otp"

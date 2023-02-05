@@ -12,10 +12,12 @@
         color="error"
         icon-left="mdi-cancel"
         text
+        x-small
         @click="$emit('decline', user._id)"
       />
       <Button
         rounded
+        x-small
         label="Accept"
         color="success"
         icon-left="mdi-check"

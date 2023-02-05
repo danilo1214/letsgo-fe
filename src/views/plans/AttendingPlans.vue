@@ -6,9 +6,9 @@
       <v-divider></v-divider>
       <Plans
         v-if="upcomingPlans && upcomingPlans.length"
-        @load-more='loadMorePlans'
+        @load-more="loadMorePlans"
         :plans="upcomingPlans"
-        :loading='isLoading'
+        :loading="isLoading"
       >
       </Plans>
       <template v-else>
@@ -25,7 +25,13 @@
 
       <v-subheader>Past plans you've attended</v-subheader>
       <v-divider></v-divider>
-      <Plans v-if="oldPlans && oldPlans.length" @load-more='loadMorePlans' :plans="oldPlans" :loading='isLoading'> </Plans>
+      <Plans
+        v-if="oldPlans && oldPlans.length"
+        @load-more="loadMorePlans"
+        :plans="oldPlans"
+        :loading="isLoading"
+      >
+      </Plans>
       <h1 v-else class="mt-10">You haven't attended any plans.</h1>
     </template>
   </div>
@@ -45,7 +51,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      limit: 10
+      limit: 10,
     };
   },
   computed: {
@@ -56,7 +62,7 @@ export default {
     ...mapActions(['getMyPlans']),
     init() {
       this.isLoading = true;
-      this.getMyPlans({limit: this.limit})
+      this.getMyPlans({ limit: this.limit })
         .then(() => {
           this.isLoading = false;
         })

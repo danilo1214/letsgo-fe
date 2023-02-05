@@ -13,6 +13,8 @@
     </v-avatar>
 
     <combo-box
+      transition="slide-x-transition"
+      @click="onOpenSearch"
       class="mt-5 search-text"
       label="Search by keywords..."
       :items="keywords"
@@ -134,6 +136,9 @@ export default {
     },
   },
   methods: {
+    onOpenSearch() {
+      console.log('ok');
+    },
     onResetFilter() {
       this.form = {
         dates: [],
@@ -223,8 +228,18 @@ export default {
 }
 
 .search-text {
+  transition: 0.05s ease-in-out;
   min-width: 140px;
 }
+@media screen and (max-width: 450px) {
+  .search-text.v-input--is-focused {
+    transition: 0.05s ease-in-out;
+    position: fixed;
+    width: 90vw;
+    top: 40px;
+  }
+}
+
 
 .filter-menu {
   min-width: 300px;
@@ -237,4 +252,6 @@ export default {
 .v-chip {
   overflow: initial;
 }
+
+
 </style>

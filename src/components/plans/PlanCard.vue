@@ -1,13 +1,16 @@
 <template>
-  <div class="card-container" v-if="!isMini || !showMini" :id='`button-${plan._id}`'>
+  <div
+    class="card-container"
+    v-if="!isMini || !showMini"
+    :id="`button-${plan._id}`"
+  >
     <v-card class="mx-auto ma-10 plan-card" :to="link">
-      <v-card-title class='pa-3'>
+      <v-card-title class="pa-3">
         <span class="plan-title">{{ plan.caption }}</span>
         <v-spacer></v-spacer>
         <v-menu v-if="isAdmin" attach left>
           <template v-slot:activator="{ on, attrs }">
             <Button
-
               icon
               color="info"
               v-bind="attrs"
@@ -18,7 +21,7 @@
             </Button>
           </template>
 
-          <v-list >
+          <v-list>
             <v-list-item>
               <Button
                 rounded
@@ -49,26 +52,26 @@
             </v-list-item>
           </v-list>
         </v-menu>
-        <br/>
-        <v-card-text class='mt-0 ml-0 pl-0'>
+        <br />
+        <v-card-text class="mt-0 ml-0 pl-0">
           <span class="caption">{{ formatDate }}</span>
         </v-card-text>
       </v-card-title>
       <Button
         v-if="showJoinBanner && !planInvite"
-        class='width90 d-block mx-auto mt-3 mb-3'
+        class="width90 d-block mx-auto mt-3 mb-3"
         color="primary lighten-1"
-        label='Join'
-        icon-left='mdi-account-multiple-plus'
+        label="Join"
+        icon-left="mdi-account-multiple-plus"
         @click.stop.prevent="onRequestJoin"
         rounded
       />
       <Button
         v-else-if="hasRequested"
-        class='width90 d-block mx-auto mt-3 mb-3'
-        color='text'
-        label='Requested'
-        icon-left='mdi-cancel'
+        class="width90 d-block mx-auto mt-3 mb-3"
+        color="text"
+        label="Requested"
+        icon-left="mdi-cancel"
         @click.stop.prevent="onRequestDelete"
         rounded
       />
@@ -97,7 +100,7 @@
         icon-left="mdi-exit-to-app"
       ></Button>
 
-      <plan-invite v-if='planInvite' :invite='planInvite' />
+      <plan-invite v-if="planInvite" :invite="planInvite" />
 
       <v-skeleton-loader v-if="isLoading" type="image"> </v-skeleton-loader>
 
@@ -185,7 +188,7 @@
       :dialog="showLeave"
       entity="plan"
       name-key="caption"
-      color='error'
+      color="error"
       icon="mdi-exit-to-app"
       action="leave"
       :data="plan"
@@ -210,7 +213,14 @@ import PlanInvite from './PlanInvite';
 
 export default {
   name: 'PlanCard',
-  components: { PlanInvite, PlanCardMini, PlanForm, Dialog, Button, ConfirmDialog },
+  components: {
+    PlanInvite,
+    PlanCardMini,
+    PlanForm,
+    Dialog,
+    Button,
+    ConfirmDialog,
+  },
   props: {
     plan: {
       type: Object,
@@ -241,11 +251,11 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     ...mapGetters(['newMessages', 'invites']),
-    planId()  {
+    planId() {
       return `plan-${this.plan._id}`;
     },
     imageHeight() {
-      return this.$route.name === 'plan-details'? 400 : 200;
+      return this.$route.name === 'plan-details' ? 400 : 200;
     },
     link() {
       return this.showLink ? `/plan/${this.plan._id}` : null;
@@ -299,15 +309,11 @@ export default {
       );
     },
     planInvite() {
-      if(this.user) {
-        return this.invites.find(
-          (invite) =>
-            invite.plan._id === this.plan._id
-        )
+      if (this.user) {
+        return this.invites.find((invite) => invite.plan._id === this.plan._id);
       }
 
-      return  null;
-
+      return null;
     },
     showJoinBanner() {
       return (
@@ -364,8 +370,9 @@ export default {
     onLeaveCancel() {
       this.showLeave = false;
     },
-    leave() {
-      this.leavePlan({ id: this.plan._id });
+    async leave() {
+      await this.leavePlan({ id: this.plan._id });
+      this.$router.push(`/plan/${this.plan._id}`);
     },
     onRequestJoin() {
       this.createRequest({ plan: this.plan._id })
@@ -489,9 +496,8 @@ export default {
 </script>
 
 <style lang="scss">
-
-.plan-title{
-  overflow:  scroll;
+.plan-title {
+  overflow: scroll;
   white-space: nowrap !important;
 }
 
@@ -550,7 +556,7 @@ export default {
     width: 600px;
   }
 
-  .title{
+  .title {
     max-width: 500px;
   }
 }

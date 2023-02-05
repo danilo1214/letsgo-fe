@@ -3,7 +3,14 @@
     <UserCard :user="user">
       <template v-slot:menu>
         <v-list-item>
-          <Button rounded text color="error" label="Delete" icon-left="mdi-trash-can" @click='onDeleteAccount' />
+          <Button
+            rounded
+            text
+            color="error"
+            label="Delete"
+            icon-left="mdi-trash-can"
+            @click="onDeleteAccount"
+          />
         </v-list-item>
         <v-list-item>
           <Button
@@ -22,8 +29,8 @@
       :dialog="showDelete"
       icon="mdi-trash-can"
       action="Delete"
-      name-key='email'
-      entity='your account'
+      name-key="email"
+      entity="your account"
       :data="user"
       @ok="onDeleteConfirm"
       @cancel="onDeleteCancel"
@@ -43,8 +50,8 @@ export default {
   components: { ConfirmDialog, Button, UserCard, VerifyBanner },
   data() {
     return {
-      showDelete: false
-    }
+      showDelete: false,
+    };
   },
   computed: {
     ...mapState({
@@ -67,7 +74,7 @@ export default {
       this.deleteAccount().then(() => {
         this.signOut();
         this.$router.push('/');
-      })
+      });
     },
     onVerify() {
       this.$router.push('/verify');

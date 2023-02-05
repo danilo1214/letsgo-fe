@@ -156,18 +156,22 @@ export default {
 <style lang="scss" scoped>
 .tab-items {
   max-height: calc(
-    100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px - 24px - 75px
+    100vh - env(safe-area-inset-top) - 2 * env(safe-area-inset-bottom) - 64px -
+      24px - 75px
   );
   min-height: calc(
-    100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px - 24px - 75px
+    100vh - env(safe-area-inset-top) - 2 * env(safe-area-inset-bottom) - 64px -
+      24px - 75px
   );
   overflow-y: scroll;
   &.is-hidden {
     max-height: calc(
-      100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px  - 24px - 75px - 72px
+      100vh - env(safe-area-inset-top) - 2 * env(safe-area-inset-bottom) - 64px -
+        24px - 75px - 72px
     );
     min-height: calc(
-      100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px  - 24px - 75px - 72px
+      100vh - env(safe-area-inset-top) - 2 * env(safe-area-inset-bottom) - 64px -
+        24px - 75px - 72px
     );
   }
 }

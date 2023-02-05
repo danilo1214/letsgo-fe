@@ -1,5 +1,5 @@
 <template>
-  <v-banner two-line class='banner-invite'>
+  <v-banner two-line class="banner-invite">
     <avatar class="mr-2 mt-5 mb-3" :user="invite.user" :size="40"></avatar>
     {{ invite.user.first_name }} has invited you to join
     <router-link :to="`/plan/${invite.plan._id}`">{{
@@ -43,13 +43,13 @@ export default {
   computed: {
     fromNow() {
       return moment(this.invite.createdAt).fromNow();
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang='scss'>
-.banner-invite{
+<style lang="scss">
+.banner-invite {
   .v-banner__wrapper {
     border: none !important;
   }

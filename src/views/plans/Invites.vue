@@ -4,7 +4,7 @@
     <v-divider></v-divider>
     <template v-if="invites.length">
       <plan-invite
-        class='mt-5'
+        class="mt-5"
         v-for="(invite, key) in invites"
         :key="key"
         :invite="invite"

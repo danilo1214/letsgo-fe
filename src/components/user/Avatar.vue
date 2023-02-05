@@ -1,17 +1,25 @@
 <template>
-  <v-badge class='avatar-badge' :color="verifiedColor" avatar bottom bordered overlap light>
+  <v-badge
+    class="avatar-badge"
+    :color="verifiedColor"
+    avatar
+    bottom
+    bordered
+    overlap
+    light
+  >
     <template v-slot:badge>
       <v-avatar>
-        <v-icon color='white' light small v-if="isVerified"
+        <v-icon color="white" light small v-if="isVerified"
           >mdi-checkbox-marked-circle</v-icon
         >
-        <v-icon small color='white' v-else>mdi-alert-circle</v-icon>
+        <v-icon small color="white" v-else>mdi-alert-circle</v-icon>
       </v-avatar>
     </template>
 
-    <template v-if='isMe && isVerified && isMobile'>
+    <template v-if="isMe && isVerified && isMobile">
       <v-btn
-        class='selfie'
+        class="selfie"
         fab
         x-small
         color="primary lighten-1"
@@ -33,7 +41,12 @@
     </template>
 
     <v-avatar :size="size">
-      <Tooltip fixed :attach='`#user-${user._id}`' :text="verifiedText" :color="verifiedColor">
+      <Tooltip
+        fixed
+        :attach="`#user-${user._id}`"
+        :text="verifiedText"
+        :color="verifiedColor"
+      >
         <v-img
           :src="photo"
           slot-scope="{ activator }"
@@ -51,14 +64,13 @@ import { Camera } from '@capacitor/camera';
 import { mapActions } from 'vuex';
 import { getError } from '../../helpers/requests';
 
-
 export default {
   components: { Tooltip },
   name: 'Avatar',
   props: {
     isMe: {
       type: Boolean,
-      default: false
+      default: false,
     },
     user: {
       type: Object,
@@ -71,10 +83,10 @@ export default {
   },
   data() {
     return {
-      file: "",
+      file: '',
       isMobile: false,
-      isSelecting: false
-    }
+      isSelecting: false,
+    };
   },
   computed: {
     isVerified() {
@@ -94,13 +106,17 @@ export default {
     ...mapActions(['verifySelfie']),
     handleFileImport() {
       this.isSelecting = true;
-      window.addEventListener('focus', () => {
-        this.isSelecting = false
-      }, { once: true });
+      window.addEventListener(
+        'focus',
+        () => {
+          this.isSelecting = false;
+        },
+        { once: true }
+      );
       this.$refs.uploader.$refs.input.click();
     },
     async onFileChanged(file) {
-      if(!file){
+      if (!file) {
         return;
       }
 
@@ -108,7 +124,7 @@ export default {
       formData.append('image', file);
       await this.verifySelfie({ formData })
         .then(() => {
-          this.$router.replace({name: 'home'})
+          this.$router.replace({ name: 'home' });
           this.$notify({
             group: 'main',
             title: 'Verified',
@@ -127,15 +143,14 @@ export default {
     },
   },
   created() {
-      Camera.requestPermissions().then(() => {
-        this.isMobile = true;
-      });
-  }
+    Camera.requestPermissions().then(() => {
+      this.isMobile = true;
+    });
+  },
 };
 </script>
 
-<style lang='scss'>
-
+<style lang="scss">
 .avatar-badge {
   span.v-badge__badge.error {
     inset: auto 5% 5% auto !important;
@@ -150,13 +165,11 @@ export default {
   }
 }
 
-
 .selfie {
-  inset:  5% auto 5% auto !important;
+  inset: 5% auto 5% auto !important;
   z-index: 1;
   position: absolute;
   max-width: 35px;
   max-height: 35px;
 }
-
 </style>

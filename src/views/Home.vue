@@ -1,15 +1,11 @@
 <template>
-  <v-container fluid class='flex flex-column'>
+  <v-container fluid class="flex flex-column">
     <landing v-if="!user" />
     <welcome v-else> signed in</welcome>
 
     <v-spacer></v-spacer>
 
-    <v-footer
-      inset
-      dark
-      padless
-    >
+    <v-footer inset dark padless>
       <v-card
         flat
         tile
@@ -20,7 +16,7 @@
             v-for="icon in icons"
             :key="icon.icon"
             class="mx-4 white--text"
-            :href='icon.link'
+            :href="icon.link"
             icon
           >
             <v-icon size="24px">
@@ -48,22 +44,22 @@ export default {
     return {
       icons: [
         {
-          link: "https://facebook.com",
-          icon: "mdi-facebook"
+          link: 'https://facebook.com',
+          icon: 'mdi-facebook',
         },
         {
-          link: "https://twitter.com",
-          icon: "mdi-twitter"
+          link: 'https://twitter.com',
+          icon: 'mdi-twitter',
         },
         {
-          link: "https://linkedin.com",
-          icon: "mdi-linkedin"
+          link: 'https://linkedin.com',
+          icon: 'mdi-linkedin',
         },
         {
-          link: "https://instagram.com/letsgo.apps",
-          icon: "mdi-instagram"
-        }
-      ]
+          link: 'https://instagram.com/letsgo.apps',
+          icon: 'mdi-instagram',
+        },
+      ],
     };
   },
   computed: {

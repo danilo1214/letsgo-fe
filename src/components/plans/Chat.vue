@@ -132,10 +132,12 @@ export default {
 <style lang="scss">
 .plan-messages {
   max-height: calc(
-    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px - 24px - 75px - 120px
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px - 24px -
+      75px - 120px
   );
   min-height: calc(
-    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px - 24px - 75px - 120px
+    100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 64px - 24px -
+      75px - 120px
   );
   overflow-y: scroll;
 }
