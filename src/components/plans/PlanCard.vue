@@ -167,7 +167,7 @@
       <plan-form
         :initial="duplicatePlanInitial"
         :error="duplicateError"
-        ok-label="Duplicate Plan"
+        ok-label="Duplicate"
         @cancel="onCancelDuplicate"
         @submit="onDuplicate"
       />

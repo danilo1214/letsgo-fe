@@ -27,7 +27,7 @@
       @send="send"
     />
 
-    <v-fab-transition v-if="tab !== '4'">
+    <v-fab-transition v-if="tab !== '4' && isMember">
       <Button
         @click="onInviteFriends"
         label=""

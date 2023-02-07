@@ -1,5 +1,5 @@
 <template>
-  <v-autocomplete
+  <v-row><v-col cols='8'><v-autocomplete
     v-model="selected"
     :items="users"
     :loading="isLoading"
@@ -38,17 +38,16 @@
         </v-list-item-content>
       </template>
     </template>
-    <template v-slot:append-outer>
-      <Button
-        :disabled="!selected || !selected._id"
-        rounded
-        color="primary"
-        label="Add"
-        @click="onAddFriend"
-      >
-      </Button>
-    </template>
-  </v-autocomplete>
+  </v-autocomplete></v-col>
+    <v-col cols='4'><Button
+      :disabled="!selected || !selected._id"
+      rounded
+      class='width100'
+      color="primary"
+      label="Add"
+      @click="onAddFriend"
+    >
+    </Button></v-col></v-row>
 </template>
 
 <script>

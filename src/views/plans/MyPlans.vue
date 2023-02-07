@@ -14,7 +14,7 @@
       <template v-else>
         <h1 class="mt-10">You are not hosting any upcoming plans</h1>
         <Button
-          class="ml-auto mt-12 text-center"
+          class="ml-5 mt-12 text-center"
           rounded
           to="/new"
           label="New Plan"

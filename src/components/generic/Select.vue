@@ -1,5 +1,6 @@
 <template>
   <v-autocomplete
+    attach
     :items="items"
     :value="value"
     @input="(v) => $emit('input', v)"

@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-6 pa-md-16 mb-16">
+  <div class="pa-6 pa-md-16 mb-16 welcome-home">
     <h2>Welcome {{ name }}</h2>
 
     <Button
@@ -73,4 +73,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.welcome-home {
+  min-height: 100vh;
+}
+</style>

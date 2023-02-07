@@ -1,6 +1,5 @@
 <template>
   <v-form
-    class="pa-5 pa-lg-16 ma-lg-16"
     ref="form"
     v-model="valid"
     lazy-validation
@@ -66,7 +65,8 @@
       {{ error }}
     </v-alert>
 
-    <div class="mt-15">
+    <v-card-actions class="mt-15">
+      <v-spacer/>
       <Button
         rounded
         class="mr-4"
@@ -82,7 +82,7 @@
         :label="okLabel"
         icon-left="mdi-calendar-plus"
       />
-    </div>
+    </v-card-actions>
   </v-form>
 </template>
 

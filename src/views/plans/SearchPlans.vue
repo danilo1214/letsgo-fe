@@ -2,11 +2,11 @@
   <div class="pa-10">
     <Loader v-if="isLoading" />
 
-    <v-alert v-if="query.keywords" type="info"
+    <v-alert v-if="query.keywords" type="info" text
       >Searching for keywords {{ query.keywords }}</v-alert
     >
-    <v-alert v-if="priceRange" type="info">{{ priceRange }}</v-alert>
-    <v-alert v-if="query.dates.length" type="info"
+    <v-alert v-if="priceRange" type="info"  text>{{ priceRange }}</v-alert>
+    <v-alert v-if="query.dates.length" type="info" text
       >Searching for dates between {{ query.dates[0] }} -
       {{ query.dates[1] }}</v-alert
     >

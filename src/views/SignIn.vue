@@ -5,6 +5,14 @@
     ref="form"
     lazy-validation
   >
+    <v-img
+      width="100"
+      height="100"
+      class="ma-auto mb-10"
+      src="../../public/assets/logo.png"
+      alt="logo"
+    />
+
     <v-text-field
       rounded
       filled
