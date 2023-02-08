@@ -35,6 +35,16 @@
         required
       ></v-text-field>
 
+      <v-text-field
+        prepend-icon="mdi-city"
+        v-model="plan.city"
+        :rules="required('City')"
+        placeholder="City"
+        filled
+        rounded
+        required
+      ></v-text-field>
+
       <Slider
         v-model="costRange"
         :rules="required('Cost')"

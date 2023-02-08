@@ -139,7 +139,7 @@
         <v-icon class="mr-1" color="primary darken-2" medium>
           mdi-map-marker</v-icon
         >
-        <span class="subheading">{{ address }}</span>
+        <span class="subheading">{{ address }}, {{city}}</span>
       </v-card-text>
     </v-card>
 
@@ -342,6 +342,9 @@ export default {
     },
     address() {
       return this.plan.address || 'Hidden';
+    },
+    city() {
+      return this.plan.city || 'No city specified';
     },
     cost() {
       const { cost_lower, cost_upper } = this.plan;
