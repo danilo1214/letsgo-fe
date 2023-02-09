@@ -139,7 +139,7 @@
         <v-icon class="mr-1" color="primary darken-2" medium>
           mdi-map-marker</v-icon
         >
-        <span class="subheading">{{ address }}, {{city}}</span>
+        <span class="subheading">{{ address }}, {{ city }}</span>
       </v-card-text>
     </v-card>
 

@@ -24,11 +24,12 @@
         </v-list-item>
       </template>
     </UserCard>
-    <VerifyBanner class="mx-auto mt-10" v-if="!isVerified" @verify="onVerify" />
+    <VerifyBanner class="mx-auto mt-15" v-if="!isVerified" @verify="onVerify" />
     <confirm-dialog
       :dialog="showDelete"
       icon="mdi-trash-can"
       action="Delete"
+      color='error'
       name-key="email"
       entity="your account"
       :data="user"

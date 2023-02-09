@@ -1,44 +1,40 @@
 <template>
-  <v-form class="pa-5">
+  <v-form class='verify-steps pa-5'>
     <Loader v-if="isLoading" />
-    <v-subheader class="title mt-10"
-      >Finish setting up your account!</v-subheader
+    <h1 class="title mt-10  text-center"
+      >Finish setting up your account</h1
     >
-    <v-timeline v-if="!isVerified" class="mt-10 verify-steps" dense clipped>
+    <v-timeline v-if="!isVerified" class="mt-10" dense clipped>
       <v-timeline-item
         class="mb-4"
         color="success"
-        icon-color="grey lighten-2"
         small
+        icon='mdi-check'
       >
         <v-row justify="space-between">
-          <v-col cols="5"> The account was created.</v-col>
-          <v-col cols="7" class="text-right"> {{ createdAt }}.</v-col>
+          <v-col> Created  </v-col>
         </v-row>
       </v-timeline-item>
 
       <template v-if="!user.email_verified">
-        <v-timeline-item class="mb-4" small>
+        <v-timeline-item class="mb-4" small color='info'>
           <v-row justify="space-between">
-            <v-col cols="5">
+            <v-col>
               Verification e-mail sent to {{ user.email }}
-            </v-col>
-            <v-col class="text-right" cols="7">
-              {{ createdAt }}
             </v-col>
           </v-row>
         </v-timeline-item>
       </template>
       <template v-else>
-        <v-timeline-item class="mb-4" small color="success">
+        <v-timeline-item class="mb-4" small color="success" icon='mdi-check'>
           <v-row justify="space-between">
-            <v-col cols="5"> E-mail verified</v-col>
+            <v-col> E-mail verified</v-col>
           </v-row>
         </v-timeline-item>
 
-        <v-timeline-item class="mb-4" small>
+        <v-timeline-item class="mb-4" small color='grey'>
           <v-row justify="space-between">
-            <v-col cols="12">
+            <v-col>
               <v-file-input
                 v-if="isMobile"
                 rounded
@@ -49,7 +45,7 @@
                 accept="image/*"
                 prepend-icon="mdi-camera"
               ></v-file-input>
-              <span v-else>Uploading selfie only allowed on mobile app</span>
+              <span v-else>Selfie upload only allowed on app</span>
             </v-col>
           </v-row>
         </v-timeline-item>
@@ -58,23 +54,34 @@
     <v-alert type="error" v-if="error" class="mt-10 mx-5">
       {{ error }}
     </v-alert>
-    <v-alert type="success" class="mt-6 mx-5" v-if="isVerified">
-      Successfully verified account
-    </v-alert>
 
-    <v-row>
+    <template v-if='isVerified'>
+      <v-row class='align-center justify-center'>
+        <v-col cols='5'>
+          <v-avatar color="success" size="100" class='mx-auto'>
+            <v-icon x-large icon="mdi-alert" color="white" class="ma-10">
+              mdi-check
+            </v-icon>
+          </v-avatar>
+        </v-col>
+      </v-row>
+      <h1 class='text-center mt-5'>Successfully verified account</h1>
+    </template>
+
+    <v-row justify='space-between' class='pa-15'>
       <Button
-        class="mt-10 ml-10"
+        rounded
         label="Back"
+        text
         color="secondary"
         @click="back"
       />
       <Button
+        class='ml-2'
         v-if="!isVerified"
-        class="mt-10 ml-10"
         right
+        rounded
         label="Next"
-        :disabled="nextDisabled"
         @click="next"
       />
     </v-row>
@@ -107,7 +114,7 @@ export default {
       user: (state) => state.auth.user,
     }),
     createdAt() {
-      return moment(this.user.createdAt).format('YYYY-MM-DD HH:mm a');
+      return moment(this.user.createdAt).format('dddd, MMMM Do YYYY');
     },
     nextDisabled() {
       return this.user.email_verified && !this.file;
@@ -169,5 +176,6 @@ export default {
 <style scoped>
 .verify-steps {
   max-width: 400px;
+  margin: auto;
 }
 </style>

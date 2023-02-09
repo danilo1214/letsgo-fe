@@ -36,7 +36,7 @@
 
     <v-subheader class="mt-10">Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
-    <search-users class="mt-6" />
+    <search-users class="mt-6 mb-15" />
     <template v-if="friends.length">
       <user-card
         class="mt-6"
@@ -67,7 +67,7 @@
       ></confirm-dialog>
     </template>
 
-    <h1 v-else class="text-center mt-10">You have no friends</h1>
+    <h1 v-else class="text-center">You have no friends</h1>
   </div>
 </template>
 

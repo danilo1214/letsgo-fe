@@ -11,10 +11,10 @@
         </v-col>
 
         <v-col cols="12" md="7">
-          <h1>
+          <h1 class="text-center">
             {{ capitalize(action) }} {{ entity ? capitalize(entity) : '' }}
           </h1>
-          <p class="mt-2">
+          <p class="mt-2 text-center">
             Are you sure you want to {{ action }}
             {{ entity ? `the ${entity} ${name}` : '' }}?
           </p>

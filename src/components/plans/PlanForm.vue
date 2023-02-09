@@ -1,9 +1,5 @@
 <template>
-  <v-form
-    ref="form"
-    v-model="valid"
-    lazy-validation
-  >
+  <v-form ref="form" v-model="valid" lazy-validation>
     <div>
       <v-text-field
         v-model="plan.caption"
@@ -76,7 +72,7 @@
     </v-alert>
 
     <v-card-actions class="mt-15">
-      <v-spacer/>
+      <v-spacer />
       <Button
         rounded
         class="mr-4"

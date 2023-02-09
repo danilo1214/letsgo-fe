@@ -240,7 +240,6 @@ export default {
   }
 }
 
-
 .filter-menu {
   min-width: 300px;
 }
@@ -252,6 +251,4 @@ export default {
 .v-chip {
   overflow: initial;
 }
-
-
 </style>

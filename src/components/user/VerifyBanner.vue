@@ -1,8 +1,8 @@
 <template>
-  <v-banner two-line>
-    <v-avatar slot="icon" color="primary darken-1" size="40">
+  <v-banner two-line class='body-2'>
+    <v-avatar slot="icon" color="error" size="30">
       <v-icon icon="mdi-lock" color="white">
-        mdi-checkbox-marked-circle
+        mdi-alert-circle
       </v-icon>
     </v-avatar>
 
@@ -10,14 +10,16 @@
     making and attending plans.
 
     <template v-slot:actions>
-      <v-btn text color="primary" @click="$emit('verify')"> Verify </v-btn>
+      <Button text rounded color="primary" @click="$emit('verify')" label='Verify' />
     </template>
   </v-banner>
 </template>
 
 <script>
+import Button from '../generic/Button';
 export default {
   name: 'VerifyBanner',
+  components: { Button },
 };
 </script>
 
