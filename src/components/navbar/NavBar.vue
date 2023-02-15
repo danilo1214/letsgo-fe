@@ -22,6 +22,8 @@
       @keyup.enter.native="onSearch"
     />
 
+    <v-spacer />
+
     <v-menu v-model="menu" :close-on-content-click="false" left bottom>
       <template v-slot:activator="{ on, attrs }">
         <v-btn class="ml-3" small icon v-bind="attrs" v-on="on">

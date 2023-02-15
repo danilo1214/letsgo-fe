@@ -344,7 +344,7 @@ export default {
       return this.plan.address || 'Hidden';
     },
     city() {
-      return this.plan.city || 'No city specified';
+      return this.plan.city || 'no city specified';
     },
     cost() {
       const { cost_lower, cost_upper } = this.plan;

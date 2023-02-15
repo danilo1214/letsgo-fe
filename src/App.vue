@@ -77,8 +77,9 @@ export default {
     onCancelSignOut() {
       this.$router.go(-1);
     },
-    onSignOut() {
-      this.signOut();
+    async onSignOut() {
+      await this.setFirebaseToken({token: null})
+      await this.signOut();
       this.$router.replace({ name: 'home' });
     },
     async initSocket() {
@@ -170,7 +171,6 @@ export default {
       }
     },
     async init() {
-      console.log('init?');
       document.getElementById('main').scrollIntoView({ behavior: 'smooth' });
       await this.checkAuth();
       const { signedIn, isPublicRoute, user, socket } = this;
