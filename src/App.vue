@@ -78,6 +78,7 @@ export default {
       this.$router.go(-1);
     },
     async onSignOut() {
+      this.clearSocket();
       await this.setFirebaseToken({ token: null });
       await this.signOut();
       this.$router.replace({ name: 'home' });
@@ -188,6 +189,10 @@ export default {
 
       this.loaded = true;
     },
+    clearSocket() {
+      this.socket.disconnect();
+      this.socket = null;
+    }
   },
   mounted() {
     this.init();
@@ -198,8 +203,7 @@ export default {
     },
   },
   beforeDestroy() {
-    this.socket.disconnect();
-    this.socket = null;
+    this.clearSocket();
   },
 };
 </script>
