@@ -6,12 +6,24 @@
     max-width="600"
   >
     <v-card>
-      <v-toolbar color="warning darken-1" dark>
-        <v-icon class="mr-5">mdi-account-plus</v-icon>You are not signed in
-      </v-toolbar>
-      <v-card-text>
-        <div class="body-1 pa-12">Sign in to fully use Letsgo</div>
-      </v-card-text>
+      <v-row class="max-100 pa-10">
+        <v-col cols="12" md="5" class="align-center justify-center d-flex">
+          <v-avatar slot="icon" color='warning darken-1' size="100">
+            <v-icon large icon="mdi-lock" color="white" class="ma-10">
+              mdi-account-plus
+            </v-icon>
+          </v-avatar>
+        </v-col>
+
+        <v-col cols="12" md="7">
+          <h1 class="text-center">
+            You are not signed in
+          </h1>
+          <p class="mt-2 text-center">
+            Sign in to fully use LetsGo
+          </p>
+        </v-col>
+      </v-row>
 
       <v-card-actions>
         <v-spacer></v-spacer>

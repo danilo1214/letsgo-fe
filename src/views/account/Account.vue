@@ -29,7 +29,7 @@
       :dialog="showDelete"
       icon="mdi-trash-can"
       action="Delete"
-      color='error'
+      color="error"
       name-key="email"
       entity="your account"
       :data="user"

@@ -78,7 +78,7 @@ export default {
       this.$router.go(-1);
     },
     async onSignOut() {
-      await this.setFirebaseToken({token: null})
+      await this.setFirebaseToken({ token: null });
       await this.signOut();
       this.$router.replace({ name: 'home' });
     },

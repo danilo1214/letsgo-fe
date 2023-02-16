@@ -284,7 +284,7 @@ export default {
 <style lang="scss" scoped>
 .invite-friends {
   position: fixed;
-  bottom: 10vh;
+  bottom: calc(10vh + env(safe-area-inset-bottom));
   right: 25px;
   z-index: 10;
   &.hidden {

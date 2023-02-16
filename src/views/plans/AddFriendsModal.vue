@@ -18,7 +18,7 @@
         <v-col cols="12" md="10">
           <h1 class="ml-5 ml-lg-8 text-center">Invite friends to plan</h1>
           <v-card-text>
-            <div class="body-1 pa-12">
+            <div class="body-1 pa-3 pa-md-12">
               <user-select v-model="invited" :users="friendsList" />
             </div>
           </v-card-text>

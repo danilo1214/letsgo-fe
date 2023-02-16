@@ -1,6 +1,6 @@
 <template>
   <v-row
-    ><v-col cols="12" md="8" class='pa-0'
+    ><v-col cols="12" md="8"
       ><v-autocomplete
         class="search-users"
         v-model="selected"
@@ -43,7 +43,7 @@
           </template>
         </template> </v-autocomplete
     ></v-col>
-    <v-col cols="12" md="4" class='pa-0'
+    <v-col cols="12" md="4"
       ><Button
         :disabled="!selected || !selected._id"
         rounded

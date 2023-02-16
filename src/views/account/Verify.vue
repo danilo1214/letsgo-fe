@@ -1,38 +1,29 @@
 <template>
-  <v-form class='verify-steps pa-5'>
+  <v-form class="verify-steps pa-5">
     <Loader v-if="isLoading" />
-    <h1 class="title mt-10  text-center"
-      >Finish setting up your account</h1
-    >
+    <h1 class="title mt-10 text-center">Finish setting up your account</h1>
     <v-timeline v-if="!isVerified" class="mt-10" dense clipped>
-      <v-timeline-item
-        class="mb-4"
-        color="success"
-        small
-        icon='mdi-check'
-      >
+      <v-timeline-item class="mb-4" color="success" small icon="mdi-check">
         <v-row justify="space-between">
-          <v-col> Created  </v-col>
+          <v-col> Created </v-col>
         </v-row>
       </v-timeline-item>
 
       <template v-if="!user.email_verified">
-        <v-timeline-item class="mb-4" small color='info'>
+        <v-timeline-item class="mb-4" small color="info">
           <v-row justify="space-between">
-            <v-col>
-              Verification e-mail sent to {{ user.email }}
-            </v-col>
+            <v-col> Verification e-mail sent to {{ user.email }} </v-col>
           </v-row>
         </v-timeline-item>
       </template>
       <template v-else>
-        <v-timeline-item class="mb-4" small color="success" icon='mdi-check'>
+        <v-timeline-item class="mb-4" small color="success" icon="mdi-check">
           <v-row justify="space-between">
             <v-col> E-mail verified</v-col>
           </v-row>
         </v-timeline-item>
 
-        <v-timeline-item class="mb-4" small color='grey'>
+        <v-timeline-item class="mb-4" small color="grey">
           <v-row justify="space-between">
             <v-col>
               <v-file-input
@@ -55,29 +46,23 @@
       {{ error }}
     </v-alert>
 
-    <template v-if='isVerified'>
-      <v-row class='align-center justify-center'>
-        <v-col cols='5'>
-          <v-avatar color="success" size="100" class='mx-auto'>
+    <template v-if="isVerified">
+      <v-row class="align-center justify-center">
+        <v-col cols="5">
+          <v-avatar color="success" size="100" class="mx-auto">
             <v-icon x-large icon="mdi-alert" color="white" class="ma-10">
               mdi-check
             </v-icon>
           </v-avatar>
         </v-col>
       </v-row>
-      <h1 class='text-center mt-5'>Successfully verified account</h1>
+      <h1 class="text-center mt-5">Successfully verified account</h1>
     </template>
 
-    <v-row justify='space-between' class='pa-15'>
+    <v-row justify="space-between" class="pa-15">
+      <Button rounded label="Back" text color="secondary" @click="back" />
       <Button
-        rounded
-        label="Back"
-        text
-        color="secondary"
-        @click="back"
-      />
-      <Button
-        class='ml-2'
+        class="ml-2"
         v-if="!isVerified"
         right
         rounded
