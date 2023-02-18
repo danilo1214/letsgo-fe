@@ -143,6 +143,7 @@ export default {
     },
   },
   created() {
+    console.log("created")
     Camera.requestPermissions().then(() => {
       this.isMobile = true;
     });

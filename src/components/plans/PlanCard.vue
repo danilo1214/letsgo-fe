@@ -554,7 +554,7 @@ export default {
   }
 
   .plan-title {
-    max-width: 180px;
+    max-width: 210px;
   }
 }
 
