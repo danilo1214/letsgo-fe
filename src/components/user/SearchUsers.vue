@@ -35,7 +35,7 @@
           </template>
           <template v-else>
             <v-list-item-avatar>
-              <img :src="data.item.photo_url" />
+              <v-img :src="data.item.photo_url" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-html="data.item.name"></v-list-item-title>

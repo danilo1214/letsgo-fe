@@ -100,7 +100,8 @@
         icon-left="mdi-exit-to-app"
       ></Button>
 
-      <plan-invite v-if="planInvite" :invite="planInvite" />
+      <plan-invite @decline="onDeclineInvite"
+                   @accept="onAcceptInvite" v-if="planInvite" :invite="planInvite" />
 
       <v-skeleton-loader v-if="isLoading" type="image"> </v-skeleton-loader>
 
@@ -357,12 +358,25 @@ export default {
     ...mapActions([
       'deletePlan',
       'updatePlan',
+      'loadFriendsList',
       'uploadPlanImage',
       'createRequest',
       'deleteRequest',
+      'acceptInvite',
+      'declineInvite',
       'createPlan',
       'leavePlan',
     ]),
+    onAcceptInvite(plan) {
+      this.acceptInvite({ plan }).then(() => {
+        this.$router.push(`/plan/${plan}`);
+        this.loadFriendsList();
+      });
+    },
+    async onDeclineInvite(plan) {
+      await this.declineInvite({ plan });
+      this.loadFriendsList();
+    },
     onLeave() {
       this.showLeave = true;
     },
