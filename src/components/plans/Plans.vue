@@ -31,7 +31,7 @@ export default {
       this.$router.push(`/plan/${id}`);
     },
     loadMorePlans(e) {
-      if (this.loading) {
+      if (this.loading || this.plans.length < 5) {
         return;
       }
 

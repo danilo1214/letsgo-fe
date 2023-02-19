@@ -1,7 +1,9 @@
 <template>
   <v-form class="verify-steps pa-5">
     <Loader v-if="isLoading" />
-    <h1 class="title mt-10 text-center">Finish setting up your account</h1>
+    <h1 class="title mt-10 text-center" v-if="!isVerified">
+      Finish setting up your account
+    </h1>
     <v-timeline v-if="!isVerified" class="mt-10" dense clipped>
       <v-timeline-item class="mb-4" color="success" small icon="mdi-check">
         <v-row justify="space-between">

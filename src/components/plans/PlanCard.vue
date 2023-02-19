@@ -100,8 +100,12 @@
         icon-left="mdi-exit-to-app"
       ></Button>
 
-      <plan-invite @decline="onDeclineInvite"
-                   @accept="onAcceptInvite" v-if="planInvite" :invite="planInvite" />
+      <plan-invite
+        @decline="onDeclineInvite"
+        @accept="onAcceptInvite"
+        v-if="planInvite"
+        :invite="planInvite"
+      />
 
       <v-skeleton-loader v-if="isLoading" type="image"> </v-skeleton-loader>
 
@@ -272,6 +276,7 @@ export default {
       return {
         date: plan.date,
         time: plan.time,
+        city: plan.city,
         cost_upper: plan.cost_upper,
         cost_lower: plan.cost_lower,
         caption: plan.caption,

@@ -1,11 +1,11 @@
 <template>
   <div class="pa-8">
-    <template v-if="friendRequests.length">
+    <div class='mb-10' v-if="friendRequests.length">
       <v-subheader>
         Friend Requests
-        <v-badge color="error" :content="friendRequests.length" />
+        <v-badge class='ma-1' color="error" :content="friendRequests.length" />
       </v-subheader>
-      <v-divider></v-divider>
+       <v-divider></v-divider>
       <user-card
         v-for="user in friendRequests"
         :key="user._id"
@@ -32,11 +32,11 @@
           />
         </v-card-actions>
       </user-card>
-    </template>
+    </div>
 
-    <v-subheader class="mt-10">Friends({{ friends.length }})</v-subheader>
+    <v-subheader>Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
-    <search-users class="mt-6 mb-15" />
+    <search-users class="mt-4 mb-15" />
     <template v-if="friends.length">
       <user-card
         class="mt-6"

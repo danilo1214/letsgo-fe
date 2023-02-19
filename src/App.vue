@@ -192,7 +192,7 @@ export default {
     clearSocket() {
       this.socket.disconnect();
       this.socket = null;
-    }
+    },
   },
   mounted() {
     this.init();

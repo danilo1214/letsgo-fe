@@ -79,7 +79,7 @@
           <v-icon sm>mdi-thumb-down</v-icon>
         </Button>
         <v-progress-linear
-          class="liked-percentage mt-2"
+          class="liked-percentage"
           rounded
           color="success"
           background-color="info"
@@ -105,10 +105,9 @@
         </Button>
       </v-row>
     </div>
-    <v-divider class="mt-10"></v-divider>
-    <v-list>
+    <v-list class='mt-5'>
       <template v-for="item in userDataList">
-        <v-list-item v-if="item.show" :key="item.label">
+        <v-list-item class='mt-0' v-if="item.show" :key="item.label">
           <v-list-item-action>
             <v-icon color="primary darken-1">{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -174,7 +173,7 @@ export default {
       return {};
     },
     avatarSize() {
-      return this.windowWidth > 700 ? 130 : 70;
+      return this.windowWidth > 700 ? 120 : 60;
     },
     showMenu() {
       return (

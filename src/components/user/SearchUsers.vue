@@ -1,7 +1,7 @@
 <template>
-  <v-row
-    ><v-col cols="12" md="8"
-      ><v-autocomplete
+  <v-row class='px-10'>
+    <v-col class='pa-0 pa-md-4' cols="12" md="8">
+      <v-autocomplete
         class="search-users"
         v-model="selected"
         :items="users"
@@ -43,8 +43,8 @@
           </template>
         </template> </v-autocomplete
     ></v-col>
-    <v-col cols="12" md="4"
-      ><Button
+    <v-col class='pa-0 pa-md-4' cols="12" md="4">
+      <Button
         :disabled="!selected || !selected._id"
         rounded
         class="width100"
@@ -52,7 +52,8 @@
         label="Add"
         @click="onAddFriend"
       >
-      </Button></v-col
+      </Button>
+    </v-col
   ></v-row>
 </template>
 

@@ -8,7 +8,7 @@
     <v-card>
       <v-row class="max-100 pa-10">
         <v-col cols="12" md="5" class="align-center justify-center d-flex">
-          <v-avatar slot="icon" color='warning darken-1' size="100">
+          <v-avatar slot="icon" color="warning darken-1" size="100">
             <v-icon large icon="mdi-lock" color="white" class="ma-10">
               mdi-account-plus
             </v-icon>
@@ -16,12 +16,8 @@
         </v-col>
 
         <v-col cols="12" md="7">
-          <h1 class="text-center">
-            You are not signed in
-          </h1>
-          <p class="mt-2 text-center">
-            Sign in to fully use LetsGo
-          </p>
+          <h1 class="text-center">You are not signed in</h1>
+          <p class="mt-2 text-center">Sign in to fully use LetsGo</p>
         </v-col>
       </v-row>
 

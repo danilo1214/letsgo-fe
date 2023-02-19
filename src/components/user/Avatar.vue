@@ -2,19 +2,19 @@
   <v-badge
     class="avatar-badge"
     :color="verifiedColor"
-    avatar
     bottom
     bordered
     overlap
     light
   >
     <template v-slot:badge>
-      <v-avatar>
-        <v-icon color="white" light small v-if="isVerified"
-          >mdi-checkbox-marked-circle</v-icon
+      <div class="d-flex align-center justify-center">
+        <v-icon color="white" small light v-if="isVerified"
+        >mdi-checkbox-marked-circle</v-icon
         >
         <v-icon small color="white" v-else>mdi-alert-circle</v-icon>
-      </v-avatar>
+      </div>
+
     </template>
 
     <template v-if="isMe && isVerified && isMobile">
@@ -143,7 +143,7 @@ export default {
     },
   },
   created() {
-    console.log("created")
+    console.log('created');
     Camera.requestPermissions().then(() => {
       this.isMobile = true;
     });
