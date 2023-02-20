@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-subheader>
+    <v-subheader v-if='label'>
       {{ label }}
     </v-subheader>
 
@@ -38,7 +38,7 @@ export default {
     },
     label: {
       type: String,
-      required: true,
+      default: '',
     },
   },
   methods: {

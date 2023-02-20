@@ -1,7 +1,7 @@
 <template>
   <v-dialog @input="(v) => $emit('input', v)" :value="value">
     <v-card class="mx-auto">
-      <v-row class="max-100 pa-5 pa-lg-10">
+      <v-row class="max-100 pa-5 pa-lg-10 ma-0">
         <v-col cols="12" md="2" class="align-center justify-center d-flex">
           <v-avatar slot="icon" :color="color" size="80">
             <v-icon x-large icon="mdi-lock" color="white">

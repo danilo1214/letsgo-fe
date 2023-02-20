@@ -1,75 +1,85 @@
 <template>
-  <v-row class='px-10'>
-    <v-col class='pa-0 pa-md-4' cols="12" md="8">
-      <v-autocomplete
-        class="search-users"
-        v-model="selected"
-        :items="users"
-        :loading="isLoading"
-        :search-input.sync="search"
-        item-text="name"
-        item-value="_id"
-        placeholder="Search for friends"
-        prepend-icon="mdi-account-plus"
-        dense
-        rounded
-        filled
-        return-object
-      >
-        <template v-slot:selection="data">
-          <v-chip
-            small
-            v-bind="data.attrs"
-            :input-value="data.selected"
-            @click="data.select"
+  <Dialog @input="(v) => $emit('input', v)" :value="value" title='Add friends' icon='mdi-account-plus'>
+      <v-row class='mx-0 mt-9'>
+        <v-col class='pa-0 pa-md-4' cols="12" md="8">
+          <v-autocomplete
+            class="search-users"
+            v-model="selected"
+            :items="users"
+            :loading="isLoading"
+            :search-input.sync="search"
+            item-text="name"
+            item-value="_id"
+            placeholder="Search for friends"
+            prepend-icon="mdi-account-plus"
+            dense
+            rounded
+            filled
+            return-object
           >
-            <v-avatar left>
-              <v-img :src="data.item.photo_url"></v-img>
-            </v-avatar>
-            <span class="text-body-4">{{ data.item.name }}</span>
-          </v-chip>
-        </template>
-        <template v-slot:item="data">
-          <template v-if="typeof data.item !== 'object'">
-            <v-list-item-content v-text="data.item"></v-list-item-content>
-          </template>
-          <template v-else>
-            <v-list-item-avatar>
-              <v-img :src="data.item.photo_url" />
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title v-html="data.item.name"></v-list-item-title>
-            </v-list-item-content>
-          </template>
-        </template> </v-autocomplete
-    ></v-col>
-    <v-col class='pa-0 pa-md-4' cols="12" md="4">
-      <Button
-        :disabled="!selected || !selected._id"
-        rounded
-        class="width100"
-        color="primary"
-        label="Add"
-        @click="onAddFriend"
-      >
-      </Button>
-    </v-col
-  ></v-row>
+            <template v-slot:selection="data">
+              <v-chip
+                small
+                v-bind="data.attrs"
+                :input-value="data.selected"
+                @click="data.select"
+              >
+                <v-avatar left>
+                  <v-img :src="data.item.photo_url"></v-img>
+                </v-avatar>
+                <span class="text-body-4">{{ data.item.name }}</span>
+              </v-chip>
+            </template>
+            <template v-slot:item="data">
+              <template v-if="typeof data.item !== 'object'">
+                <v-list-item-content v-text="data.item"></v-list-item-content>
+              </template>
+              <template v-else>
+                <v-list-item-avatar>
+                  <v-img :src="data.item.photo_url" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title v-html="data.item.name"></v-list-item-title>
+                </v-list-item-content>
+              </template>
+            </template> </v-autocomplete
+          ></v-col>
+        <v-col class='pa-0 pa-md-4' cols="12" md="4">
+          <Button
+            :disabled="!selected || !selected._id"
+            rounded
+            class="width100"
+            color="primary"
+            label="Add"
+            @click="onAddFriend"
+          >
+          </Button>
+        </v-col>
+      </v-row>
+  </Dialog>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import { getData, getError } from '../../helpers/requests';
 import Button from '../generic/Button';
+import Dialog from '../generic/Dialog';
 
 export default {
   name: 'SearchUsers',
-  components: { Button },
+  components: { Dialog, Button },
+  props: {
+    value: {
+      required: true,
+      type: Boolean
+    }
+  },
   data() {
     return {
       isLoading: false,
       results: [],
       search: '',
+      showDialog: true,
       selected: {},
     };
   },
@@ -87,6 +97,7 @@ export default {
       this.selected = {};
       this.search = '';
       this.results = [];
+      this.$emit('input', false);
     },
     onAddFriend() {
       this.sendFriendRequest({ user: this.selected._id })

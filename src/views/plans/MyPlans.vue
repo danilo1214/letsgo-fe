@@ -36,6 +36,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { dateTime } from '../../helpers/date';
 import Plans from '@/components/plans/Plans';
 import Button from '../../components/generic/Button';
 import moment from 'moment';
@@ -54,12 +55,17 @@ export default {
     ...mapGetters(['adminPlans']),
     oldPlans() {
       return this.adminPlans.filter(
-        (plan) => !moment().isBefore(moment(plan.date))
+        (plan) => {
+          const planDate = dateTime(moment(plan.date), plan.time);
+          return !moment().isBefore(planDate)
+        }
       );
     },
     upcomingPlans() {
-      return this.adminPlans.filter((plan) =>
-        moment().isBefore(moment(plan.date))
+      return this.adminPlans.filter((plan) => {
+          const planDate = dateTime(moment(plan.date), plan.time);
+          return moment().isBefore(planDate)
+        }
       );
     },
   },

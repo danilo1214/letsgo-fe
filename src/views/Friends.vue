@@ -36,7 +36,8 @@
 
     <v-subheader>Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
-    <search-users class="mt-4 mb-15" />
+    <Button @click='onAddFriend' rounded class='ml-5 mt-10 mb-5' label='Add friends' icon-left='mdi-account-plus'></Button>
+    <search-users v-model='showAddFriend' class="mt-4 mb-15" />
     <template v-if="friends.length">
       <user-card
         class="mt-6"
@@ -85,6 +86,7 @@ export default {
     return {
       showRemove: false,
       removeUserData: {},
+      showAddFriend: false
     };
   },
   computed: {
@@ -140,6 +142,9 @@ export default {
     },
     init() {
       this.loadFriendsList();
+    },
+    onAddFriend() {
+      this.showAddFriend = true;
     },
   },
   mounted() {
