@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto" max-width="700" :id="`user-${user._id}`">
-    <v-row class="mt-6">
+    <v-row class="pt-6">
       <v-col cols="2">
         <Avatar :is-me="isMe" class="ml-2" :size="avatarSize" :user="avatar" />
       </v-col>

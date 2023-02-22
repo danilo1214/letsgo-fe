@@ -67,7 +67,7 @@
         rounded
       />
       <Button
-        v-else-if="hasRequested"
+        v-else-if="isDetails && hasRequested"
         class="width90 d-block mx-auto mt-3 mb-3"
         color="text"
         label="Requested"
@@ -259,8 +259,11 @@ export default {
     planId() {
       return `plan-${this.plan._id}`;
     },
+    isDetails() {
+      return this.$route.name === 'plan-details'
+    },
     imageHeight() {
-      return this.$route.name === 'plan-details' ? 400 : 200;
+      return this.isDetails ? 400 : 200;
     },
     link() {
       return this.showLink ? `/plan/${this.plan._id}` : null;

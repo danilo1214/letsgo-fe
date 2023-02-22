@@ -28,10 +28,10 @@
     <confirm-dialog
       :dialog="showDelete"
       icon="mdi-trash-can"
-      action="Delete"
+      action="delete"
       color="error"
       name-key="email"
-      entity="your account"
+      entity="account"
       :data="user"
       @ok="onDeleteConfirm"
       @cancel="onDeleteCancel"

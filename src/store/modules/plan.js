@@ -68,7 +68,6 @@ export const plan = {
       });
     },
     loadPlans: (state, { query }) => {
-      console.log(query);
       return axios.getUrl('/plan', {
         params: query,
       });

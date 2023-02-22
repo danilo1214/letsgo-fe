@@ -15,6 +15,7 @@
     <plan-details-tabs
       @tab-change="onTabChange"
       :is-member="isMember"
+      @invites='onInviteFriends'
       @accept="onAccept"
       @thumb-up="onThumbUp"
       @thumb-down="onThumbDown"
@@ -284,7 +285,7 @@ export default {
 <style lang="scss" scoped>
 .invite-friends {
   position: fixed;
-  bottom: calc(10vh + env(safe-area-inset-bottom));
+  bottom: calc(11vh + env(safe-area-inset-bottom));
   right: 25px;
   z-index: 10;
   &.hidden {

@@ -14,6 +14,9 @@
       </v-tab-item>
 
       <v-tab-item value="2">
+        <Button @click='$emit("invites")' v-if='isMember' fab x-smal class='mx-auto d-block'>
+          <v-icon>mdi-plus</v-icon>
+        </Button>
         <user-card
           class="mt-8"
           :show-thumb="isMember"
@@ -98,10 +101,11 @@ import Request from '../user/Request';
 import Chat from './Chat';
 import { mapActions, mapGetters, mapState } from 'vuex';
 import PlanCard from './PlanCard';
+import Button from '../generic/Button';
 
 export default {
   name: 'PlanDetailsTabs',
-  components: { PlanCard, Chat, Request, UserCard },
+  components: { Button, PlanCard, Chat, Request, UserCard },
   props: {
     isMember: {
       type: Boolean,

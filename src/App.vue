@@ -108,8 +108,6 @@ export default {
       App.addListener('appUrlOpen', (event) => {
         const slug = event.url.split('.com/#').pop();
 
-        console.log(event.url);
-
         if (slug) {
           this.$router.push({
             path: slug,

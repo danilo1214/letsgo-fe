@@ -14,7 +14,6 @@
 
     <combo-box
       transition="slide-x-transition"
-      @click="onOpenSearch"
       class="mt-5 search-text"
       label="Search by keywords..."
       :items="keywords"
@@ -138,9 +137,6 @@ export default {
     },
   },
   methods: {
-    onOpenSearch() {
-      console.log('ok');
-    },
     onResetFilter() {
       this.form = {
         dates: [],
