@@ -260,7 +260,7 @@ export default {
       return `plan-${this.plan._id}`;
     },
     isDetails() {
-      return this.$route.name === 'plan-details'
+      return this.$route.name === 'plan-details';
     },
     imageHeight() {
       return this.isDetails ? 400 : 200;

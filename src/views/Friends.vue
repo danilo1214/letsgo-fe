@@ -1,11 +1,11 @@
 <template>
   <div class="pa-8">
-    <div class='mb-10' v-if="friendRequests.length">
+    <div class="mb-10" v-if="friendRequests.length">
       <v-subheader>
         Friend Requests
-        <v-badge class='ma-1' color="error" :content="friendRequests.length" />
+        <v-badge class="ma-1" color="error" :content="friendRequests.length" />
       </v-subheader>
-       <v-divider></v-divider>
+      <v-divider></v-divider>
       <user-card
         v-for="user in friendRequests"
         :key="user._id"
@@ -36,8 +36,14 @@
 
     <v-subheader>Friends({{ friends.length }})</v-subheader>
     <v-divider></v-divider>
-    <Button @click='onAddFriend' rounded class='ml-5 mt-10 mb-5' label='Add friends' icon-left='mdi-account-plus'></Button>
-    <search-users v-model='showAddFriend' class="mt-4 mb-15" />
+    <Button
+      @click="onAddFriend"
+      rounded
+      class="ml-5 mt-10 mb-5"
+      label="Add friends"
+      icon-left="mdi-account-plus"
+    ></Button>
+    <search-users v-model="showAddFriend" class="mt-4 mb-15" />
     <template v-if="friends.length">
       <user-card
         class="mt-6"
@@ -86,7 +92,7 @@ export default {
     return {
       showRemove: false,
       removeUserData: {},
-      showAddFriend: false
+      showAddFriend: false,
     };
   },
   computed: {

@@ -20,7 +20,7 @@ export default {
     return {
       limit: 10,
       lastScroll: 0,
-      buffer: 200
+      buffer: 200,
     };
   },
   computed: {

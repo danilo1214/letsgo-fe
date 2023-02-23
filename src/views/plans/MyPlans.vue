@@ -54,19 +54,16 @@ export default {
   computed: {
     ...mapGetters(['adminPlans']),
     oldPlans() {
-      return this.adminPlans.filter(
-        (plan) => {
-          const planDate = dateTime(moment(plan.date), plan.time);
-          return !moment().isBefore(planDate)
-        }
-      );
+      return this.adminPlans.filter((plan) => {
+        const planDate = dateTime(moment(plan.date), plan.time);
+        return !moment().isBefore(planDate);
+      });
     },
     upcomingPlans() {
       return this.adminPlans.filter((plan) => {
-          const planDate = dateTime(moment(plan.date), plan.time);
-          return moment().isBefore(planDate)
-        }
-      );
+        const planDate = dateTime(moment(plan.date), plan.time);
+        return moment().isBefore(planDate);
+      });
     },
   },
   methods: {

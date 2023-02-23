@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-subheader v-if='label'>
+    <v-subheader v-if="label">
       {{ label }}
     </v-subheader>
 

@@ -15,7 +15,7 @@
     <plan-details-tabs
       @tab-change="onTabChange"
       :is-member="isMember"
-      @invites='onInviteFriends'
+      @invites="onInviteFriends"
       @accept="onAccept"
       @thumb-up="onThumbUp"
       @thumb-down="onThumbDown"

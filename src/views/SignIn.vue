@@ -22,7 +22,7 @@
       type="email"
       required
     ></v-text-field>
-    <v-text-field
+    <password-input
       class="mb-0 pb-0 password-input"
       @keydown.enter.prevent="onSignIn"
       v-model="password"
@@ -31,7 +31,7 @@
       rounded
       filled
       required
-    ></v-text-field>
+    ></password-input>
     <Button
       rounded
       label="Forgot your password?"
@@ -73,10 +73,11 @@ import { mapActions } from 'vuex';
 
 import Button from '@/components/generic/Button';
 import { getError } from '@/helpers/requests';
+import PasswordInput from '../components/generic/PasswordInput';
 
 export default {
   name: 'SignIn',
-  components: { Button },
+  components: { PasswordInput, Button },
   data() {
     return {
       email: '',
@@ -97,6 +98,9 @@ export default {
           this.isLoading = false;
         })
         .catch((err) => {
+          if (err.response.status === 403) {
+            this.$router.replace({ name: 'verify-mail' });
+          }
           this.error = getError(err);
           this.isLoading = false;
         });

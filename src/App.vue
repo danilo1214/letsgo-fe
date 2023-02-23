@@ -45,6 +45,7 @@ export default {
         'sign-up',
         'plans',
         'email-verify',
+        'verify-mail',
         'forgot-password',
       ],
     };

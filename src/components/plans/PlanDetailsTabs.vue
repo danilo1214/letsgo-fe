@@ -14,7 +14,13 @@
       </v-tab-item>
 
       <v-tab-item value="2">
-        <Button @click='$emit("invites")' v-if='isMember' fab x-smal class='mx-auto d-block'>
+        <Button
+          @click="$emit('invites')"
+          v-if="isMember"
+          fab
+          x-smal
+          class="mx-auto d-block"
+        >
           <v-icon>mdi-plus</v-icon>
         </Button>
         <user-card

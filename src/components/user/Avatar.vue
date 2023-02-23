@@ -10,11 +10,10 @@
     <template v-slot:badge>
       <div class="d-flex align-center justify-center">
         <v-icon color="white" small light v-if="isVerified"
-        >mdi-checkbox-marked-circle</v-icon
+          >mdi-checkbox-marked-circle</v-icon
         >
         <v-icon small color="white" v-else>mdi-alert-circle</v-icon>
       </div>
-
     </template>
 
     <template v-if="isMe && isVerified && isMobile">

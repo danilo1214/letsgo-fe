@@ -6,7 +6,7 @@
     class="pa-10 forgot-password-form"
   >
     <h1>Change your password</h1>
-    <v-text-field
+    <password-input
       :rules="[required]"
       type="password"
       v-model="password"
@@ -16,8 +16,8 @@
       filled
       @change="$refs.form.validate()"
       placeholder="New password"
-    ></v-text-field>
-    <v-text-field
+    ></password-input>
+    <password-input
       :rules="[required, matchingPasswords]"
       type="password"
       @change="$refs.form.validate()"
@@ -27,7 +27,7 @@
       dense
       filled
       placeholder="Enter again"
-    ></v-text-field>
+    ></password-input>
     <Button
       :disabled="loading || !valid"
       class="mx-auto"
@@ -42,9 +42,10 @@
 import Button from '../../components/generic/Button';
 import { mapActions } from 'vuex';
 import { getError } from '../../helpers/requests';
+import PasswordInput from '../../components/generic/PasswordInput';
 export default {
   name: 'PasswordChange',
-  components: { Button },
+  components: { PasswordInput, Button },
   data() {
     return {
       valid: false,

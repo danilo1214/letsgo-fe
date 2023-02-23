@@ -7,6 +7,7 @@ import MyPlans from '@/views/plans/MyPlans.vue';
 import About from '@/views/About.vue';
 import SignInBanner from '@/views/SignInBanner';
 import SignIn from '@/views/SignIn';
+import VerifyMail from '@/views/account/VerifyMail';
 import SignUp from '@/views/SignUp';
 import NewPlan from '@/views/plans/NewPlan';
 import Account from '@/views/account/Account';
@@ -57,6 +58,11 @@ const routes = [
     path: '/sign-in',
     name: 'sign-in',
     component: SignIn,
+  },
+  {
+    path: '/verify-mail',
+    name: 'verify-mail',
+    component: VerifyMail,
   },
   {
     path: '/sign-up',

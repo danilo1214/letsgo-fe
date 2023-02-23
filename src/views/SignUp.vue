@@ -92,7 +92,7 @@
       required
     ></v-text-field>
 
-    <v-text-field
+    <password-input
       v-model="user.password"
       :rules="required('Password')"
       label="Password"
@@ -100,7 +100,7 @@
       rounded
       filled
       required
-    ></v-text-field>
+    ></password-input>
 
     <v-alert type="error" v-if="error">
       {{ error }}
@@ -129,10 +129,11 @@ import Button from '@/components/generic/Button';
 import { getError } from '@/helpers/requests';
 import country from 'country-list-js';
 import Select from '../components/generic/Select';
+import PasswordInput from '../components/generic/PasswordInput';
 
 export default {
   name: 'SignUp',
-  components: { Select, Button },
+  components: { PasswordInput, Select, Button },
   data() {
     return {
       c: country,
@@ -186,7 +187,7 @@ export default {
       const { user } = this;
       this.signUp({ user })
         .then(() => {
-          this.$router.replace({ name: 'sign-in' });
+          this.$router.replace({ name: 'verify-mail' });
           this.$notify({
             group: 'main',
             title: 'Signed up',

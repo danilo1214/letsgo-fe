@@ -94,6 +94,9 @@ export const auth = {
           throw err;
         });
     },
+    resendVerify: (store, { email }) => {
+      return axios.postUrl('/user/verification-mail', { email });
+    },
     searchUsers: (commit, { name }) => {
       return axios.getUrl(`/user`, {
         params: {

@@ -105,9 +105,9 @@
         </Button>
       </v-row>
     </div>
-    <v-list class='mt-5'>
+    <v-list class="mt-5">
       <template v-for="item in userDataList">
-        <v-list-item class='mt-0' v-if="item.show" :key="item.label">
+        <v-list-item class="mt-0" v-if="item.show" :key="item.label">
           <v-list-item-action>
             <v-icon color="primary darken-1">{{ item.icon }}</v-icon>
           </v-list-item-action>

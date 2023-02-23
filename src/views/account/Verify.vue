@@ -49,8 +49,8 @@
     </v-alert>
 
     <template v-if="isVerified">
-      <v-row class="align-center justify-center">
-        <v-col cols="5">
+      <v-row class="align-center justify-center mt-16">
+        <v-col cols="4">
           <v-avatar color="success" size="100" class="mx-auto">
             <v-icon x-large icon="mdi-alert" color="white" class="ma-10">
               mdi-check
@@ -61,17 +61,21 @@
       <h1 class="text-center mt-5">Successfully verified account</h1>
     </template>
 
-    <v-row justify="space-between" class="pa-15">
-      <Button rounded label="Back" text color="secondary" @click="back" />
-      <Button
-        class="ml-2"
-        v-if="!isVerified"
-        right
-        rounded
-        label="Next"
-        @click="next"
-      />
-    </v-row>
+    <Button
+      class="mt-10 d-block width100"
+      rounded
+      label="Back"
+      color="text"
+      @click="back"
+    />
+    <Button
+      v-if="!isVerified"
+      class="d-block width100 mt-2"
+      right
+      rounded
+      label="Next"
+      @click="next"
+    />
   </v-form>
 </template>
 
