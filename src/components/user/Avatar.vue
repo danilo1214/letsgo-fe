@@ -23,7 +23,6 @@
         fab
         x-small
         color="primary lighten-1"
-        :disabled="isSelecting"
         @click="handleFileImport"
       >
         <v-icon>mdi-plus</v-icon>
@@ -116,6 +115,7 @@ export default {
       this.$refs.uploader.$refs.input.click();
     },
     async onFileChanged(file) {
+      this.isSelecting = false;
       if (!file) {
         return;
       }

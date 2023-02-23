@@ -133,11 +133,11 @@ export default {
 .plan-messages {
   max-height: calc(
     100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px - 24px -
-      75px - 90px
+      75px - 80px
   );
   min-height: calc(
     100vh - env(safe-area-inset-top) - 2*env(safe-area-inset-bottom) - 64px - 24px -
-      75px - 90px
+      75px - 80px
   );
   overflow-y: scroll;
 }

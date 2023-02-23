@@ -20,6 +20,7 @@ export default {
     return {
       limit: 10,
       lastScroll: 0,
+      buffer: 200
     };
   },
   computed: {
@@ -37,7 +38,7 @@ export default {
 
       const height = e.target.scrollTop;
 
-      if (height - 80 <= this.lastScrollAt) {
+      if (height - this.buffer <= this.lastScrollAt) {
         return;
       }
 
