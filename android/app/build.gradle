@@ -8,10 +8,16 @@ android {
             storePassword 'pvwjz8r3gk19'
             keyPassword 'pvwjz8r3gk19'
         }
+        release {
+            storeFile file('/Users/danilo/letsgo/KEY-NAME.keystore')
+            storePassword 'pvwjz8r3gk19'
+            keyAlias 'alias'
+            keyPassword 'pvwjz8r3gk19'
+        }
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.letsgo.app"
+        applicationId "com.letsgosocialapp.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -27,6 +33,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
