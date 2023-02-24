@@ -6,7 +6,7 @@
     max-width="600"
   >
     <v-card>
-      <v-row class="max-100 pa-7 pa-lg-10">
+      <v-row class="max-100 pa-7 pa-lg-10 ma-0">
         <v-col cols="12" md="2" class="align-center justify-center d-flex">
           <v-avatar slot="icon" color="primary" size="100">
             <v-icon large icon="mdi-lock" color="white" class="ma-10">
