@@ -6,6 +6,7 @@
   {
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target" : { "namespace": "android_app", "package_name": "com.letsgosocialapp.app",
-      "sha256_cert_fingerprints": ["BD:1E:63:29:02:46:CC:52:C6:E3:91:1B:AE:03:BA:B9:0C:10:80:72:7B:B1:E3:62:E9:F4:30:31:7C:64:A5:BA"] }
+      "sha256_cert_fingerprints": ["BD:1E:63:29:02:46:CC:52:C6:E3:91:1B:AE:03:BA:B9:0C:10:80:72:7B:B1:E3:62:E9:F4:30:31:7C:64:A5:BA", 
+"67:EF:D3:35:B8:5C:F8:D9:28:AB:31:C7:88:A7:27:EF:1F:0D:28:A1:E7:47:3F:AB:A9:4E:BF:B0:7A:21:9B:DD"]}
   }
 ]
