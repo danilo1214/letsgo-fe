@@ -8,7 +8,7 @@
       <v-card-title class="pa-3">
         <span class="plan-title">{{ plan.caption }}</span>
         <v-spacer></v-spacer>
-        <v-menu v-if="isAdmin" attach left>
+        <v-menu attach left>
           <template v-slot:activator="{ on, attrs }">
             <Button
               icon
@@ -22,32 +22,44 @@
           </template>
 
           <v-list>
-            <v-list-item>
-              <Button
-                rounded
-                text
-                label="Edit"
-                @click.stop.prevent="showEdit = true"
-              />
-            </v-list-item>
+            <template v-if='isAdmin'>
+              <v-list-item>
+                <Button
+                  rounded
+                  text
+                  label="Edit"
+                  @click.stop.prevent="showEdit = true"
+                />
+              </v-list-item>
+
+              <v-list-item>
+                <Button
+                  rounded
+                  color="error"
+                  text
+                  @click.stop.prevent="showDelete = true"
+                  label="Delete"
+                />
+              </v-list-item>
+
+              <v-list-item>
+                <Button
+                  rounded
+                  color="info"
+                  text
+                  @click.stop.prevent="showDuplicate = true"
+                  label="Duplicate"
+                />
+              </v-list-item>
+            </template>
 
             <v-list-item>
               <Button
                 rounded
                 color="error"
                 text
-                @click.stop.prevent="showDelete = true"
-                label="Delete"
-              />
-            </v-list-item>
-
-            <v-list-item>
-              <Button
-                rounded
-                color="info"
-                text
-                @click.stop.prevent="showDuplicate = true"
-                label="Duplicate"
+                @click.stop.prevent="showReport = true"
+                label="Report"
               />
             </v-list-item>
           </v-list>
@@ -190,6 +202,18 @@
     ></confirm-dialog>
 
     <confirm-dialog
+      :dialog="showReport"
+      entity="plan"
+      color="error"
+      name-key="caption"
+      icon="mdi-alert-circle"
+      action="report"
+      :data="plan"
+      @ok="onReport"
+      @cancel="onCancelReport"
+    ></confirm-dialog>
+
+    <confirm-dialog
       :dialog="showLeave"
       entity="plan"
       name-key="caption"
@@ -215,6 +239,7 @@ import Dialog from '@/components/generic/Dialog';
 import PlanForm from './PlanForm';
 import PlanCardMini from './PlanCardMini';
 import PlanInvite from './PlanInvite';
+import { getData } from '../../helpers/requests';
 
 export default {
   name: 'PlanCard',
@@ -245,6 +270,7 @@ export default {
       error: '',
       duplicateError: '',
       showDelete: false,
+      showReport: false,
       showEdit: false,
       showLeave: false,
       showDuplicate: false,
@@ -366,6 +392,7 @@ export default {
     ...mapActions([
       'deletePlan',
       'updatePlan',
+      'reportPlan',
       'loadFriendsList',
       'uploadPlanImage',
       'createRequest',
@@ -506,6 +533,22 @@ export default {
         this.$router.replace({ name: 'my-plans' });
       });
       this.showDelete = false;
+    },
+    async onReport() {
+      const { _id: id } = this.plan;
+      await this.reportPlan({ id }).then((res) => {
+        const data = getData(res);
+        this.$notify({
+          group: 'main',
+          title: 'Plan reported',
+          text: data.message,
+          type: 'success',
+        });
+      });
+      this.showReport = false;
+    },
+    onCancelReport() {
+      this.showReport = false;
     },
     onCancelDelete() {
       this.showDelete = false;

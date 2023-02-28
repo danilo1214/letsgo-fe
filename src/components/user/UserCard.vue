@@ -50,6 +50,17 @@
                   @click="reportModal = true"
                   label="Report"
                   color="error"
+                  icon-left="mdi-alert-circle"
+                  text
+                ></Button>
+              </v-list-item>
+
+              <v-list-item v-if="showReport">
+                <Button
+                  rounded
+                  @click="blockModal = true"
+                  label="Block"
+                  color="error"
                   icon-left="mdi-account-alert"
                   text
                 ></Button>
@@ -123,11 +134,23 @@
     <Dialog
       v-model="reportModal"
       title="Report user"
-      icon="mdi-account-alert"
+      icon="mdi-alert-circle"
       color="error"
     >
       <report-user-form @cancel="reportModal = false" @ok="onReport" />
     </Dialog>
+
+    <confirm-dialog
+      action='block'
+      entity='user'
+      color='error'
+      :data='user'
+      icon='mdi-account-alert'
+      name-key='first_name'
+      :dialog='blockModal'
+      @cancel='blockModal = false'
+      @ok='onBlock'
+      />
   </v-card>
 </template>
 
@@ -138,10 +161,11 @@ import Button from '../generic/Button';
 import { mapActions, mapGetters, mapState } from 'vuex';
 import Dialog from '../generic/Dialog';
 import ReportUserForm from './ReportUserForm';
+import ConfirmDialog from '../generic/ConfirmDialog';
 
 export default {
   name: 'UserCard',
-  components: { ReportUserForm, Dialog, Button, Avatar },
+  components: { ConfirmDialog, ReportUserForm, Dialog, Button, Avatar },
   props: {
     user: {
       type: Object,
@@ -159,6 +183,7 @@ export default {
   data() {
     return {
       reportModal: false,
+      blockModal: false,
       windowWidth: window.innerWidth,
     };
   },
@@ -300,7 +325,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['reportUser']),
+    ...mapActions(['reportUser', 'blockUser']),
     onReport(description) {
       this.reportModal = false;
       this.reportUser({
@@ -308,6 +333,20 @@ export default {
           description,
           user: this.user._id,
         },
+      });
+    },
+    onBlock() {
+      this.blockModal = false;
+      this.blockUser({
+          user: this.user._id,
+      }).then(() => {
+        this.$notify({
+          group: 'main',
+          title: 'Success',
+          text: 'Successfully blocked user',
+          type: 'success',
+        });
+        this.$router.replace({name: 'home'});
       });
     },
     handleResize() {

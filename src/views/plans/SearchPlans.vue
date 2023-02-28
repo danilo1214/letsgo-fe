@@ -13,8 +13,8 @@
     <v-subheader>Results</v-subheader>
     <v-divider></v-divider>
     <Plans
-      v-if="plans && plans.length"
-      :plans="plans"
+      v-if="filterBlocked && filterBlocked.length"
+      :plans="filterBlocked"
       @load-more="loadMorePlans"
       :loading="isLoading"
     />
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Plans from '@/components/plans/Plans';
 import Loader from '../../components/generic/Loader';
 import { getData } from '../../helpers/requests';
@@ -43,6 +43,17 @@ export default {
     };
   },
   computed: {
+    ...mapState({ user: (state) => state.auth.user }),
+    filterBlocked() {
+      if(!this.user){
+        return this.plans;
+      }
+
+      return this.plans.filter(plan => {
+        const adminId = plan.admin._id || plan.admin;
+        return !(this.user.blocked && this.user.blocked.length && this.user.blocked.includes(adminId))
+      })
+    },
     priceRange() {
       let { costFrom, costTo } = this.$route.query;
       if (costFrom === undefined && costTo === undefined) {

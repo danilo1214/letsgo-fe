@@ -91,6 +91,9 @@ export const plan = {
         commit('DELETE_PLAN', id);
       });
     },
+    reportPlan: (store, { id }) => {
+      return axios.postUrl(`/plan/${id}/report`);
+    },
     uploadPlanImage: ({ commit }, { id, formData }) => {
       return axios.postUrl(`/plan/${id}/photo`, formData).then((result) => {
         commit('UPDATE_PLAN', { id, data: result.data });

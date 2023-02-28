@@ -14,9 +14,9 @@
 		</dict>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>selfie recognition</string>
+	<string>Allow access to photos to be able to upload photos from your library.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>selfie recognition</string>
+	<string>Allow access to camera to be able to upload selfies, that are used for account verification.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

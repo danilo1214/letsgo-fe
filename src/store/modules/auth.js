@@ -51,6 +51,9 @@ export const auth = {
     reportUser: (store, { report }) => {
       return axios.postUrl('/report', report);
     },
+    blockUser: (store, { user }) => {
+      return axios.postUrl(`/user/${user}/block`);
+    },
     otpLogin: ({ commit }, { otp, email }) => {
       return axios
         .postUrl(`user/otp-login`, { email, otp })
