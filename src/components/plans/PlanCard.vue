@@ -22,7 +22,7 @@
           </template>
 
           <v-list>
-            <template v-if='isAdmin'>
+            <template v-if="isAdmin">
               <v-list-item>
                 <Button
                   rounded
@@ -103,7 +103,7 @@
       </v-banner>
 
       <Button
-        v-if="isMember"
+        v-if="isMember && !isAdmin"
         @click.stop.prevent="onLeave"
         class="mt-2 mb-5 mx-auto width90 d-block"
         label="Leave"

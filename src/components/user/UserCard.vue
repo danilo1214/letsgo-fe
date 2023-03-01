@@ -141,16 +141,16 @@
     </Dialog>
 
     <confirm-dialog
-      action='block'
-      entity='user'
-      color='error'
-      :data='user'
-      icon='mdi-account-alert'
-      name-key='first_name'
-      :dialog='blockModal'
-      @cancel='blockModal = false'
-      @ok='onBlock'
-      />
+      action="block"
+      entity="user"
+      color="error"
+      :data="user"
+      icon="mdi-account-alert"
+      name-key="first_name"
+      :dialog="blockModal"
+      @cancel="blockModal = false"
+      @ok="onBlock"
+    />
   </v-card>
 </template>
 
@@ -338,7 +338,7 @@ export default {
     onBlock() {
       this.blockModal = false;
       this.blockUser({
-          user: this.user._id,
+        user: this.user._id,
       }).then(() => {
         this.$notify({
           group: 'main',
@@ -346,7 +346,7 @@ export default {
           text: 'Successfully blocked user',
           type: 'success',
         });
-        this.$router.replace({name: 'home'});
+        this.$router.replace({ name: 'home' });
       });
     },
     handleResize() {

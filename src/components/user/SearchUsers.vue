@@ -6,7 +6,6 @@
     icon="mdi-account-plus"
   >
     <v-row class="mx-0 mt-9">
-      <v-col class="pa-0 pa-md-4" cols="12" md="8">
         <v-autocomplete
           class="search-users"
           v-model="selected"
@@ -47,20 +46,25 @@
                 <v-list-item-title v-html="data.item.name"></v-list-item-title>
               </v-list-item-content>
             </template>
-          </template> </v-autocomplete
-      ></v-col>
-      <v-col class="pa-0 pa-md-4" cols="12" md="4">
-        <Button
-          :disabled="!selected || !selected._id"
-          rounded
-          class="width100"
-          color="primary"
-          label="Add"
-          @click="onAddFriend"
-        >
-        </Button>
-      </v-col>
+          </template> </v-autocomplete>
     </v-row>
+
+    <v-card-actions class='mt-16'>
+      <v-spacer></v-spacer>
+
+      <Button
+        text
+        rounded
+        @click="$emit('input', false)"
+        label="Cancel"
+        color="secondary"
+      />
+      <Button
+        rounded
+        @click="onAddFriend"
+        label='Add'
+      />
+    </v-card-actions>
   </Dialog>
 </template>
 

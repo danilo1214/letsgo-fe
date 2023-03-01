@@ -3,7 +3,7 @@
     v-bind="$attrs"
     :value="value"
     @input="(v) => $emit('input', v)"
-    :type='inputType'
+    :type="inputType"
     :append-icon="appendIcon"
     @click:append="toggleHide"
   >
@@ -29,7 +29,7 @@ export default {
       return this.hidden ? 'mdi-eye' : 'mdi-eye-off';
     },
     inputType() {
-      return this.hidden? 'password' : 'text';
+      return this.hidden ? 'password' : 'text';
     },
   },
   methods: {

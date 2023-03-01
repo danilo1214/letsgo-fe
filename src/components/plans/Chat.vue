@@ -1,6 +1,10 @@
 <template>
   <v-card flat class="plan-chat">
     <div class="plan-messages" ref="chat">
+      <h2 class='mt-10 text-center' v-if="!plan.messages || plan.messages.length === 0">
+        This is the chat for the plan {{ plan.caption }}, please be nice to
+        everyone!
+      </h2>
       <template v-for="(message, id) in plan.messages">
         <v-banner v-if="!myMessage(message)" class="message-banner" :key="id">
           <div class="ml-auto">
@@ -17,7 +21,7 @@
           </div>
           <v-alert dark color="success" rounded class="mt-3">
             {{ message.text }}
-            <div class="font-weight-light mt-3 text-right">
+            <div class="font-weight-light mt-1 text-right body-2">
               {{ formatDate(message) }}
             </div>
           </v-alert>
@@ -125,6 +129,7 @@ export default {
   },
   beforeDestroy() {
     Keyboard.removeAllListeners();
+    this.setKeyboardActive({ shown: false });
   },
 };
 </script>

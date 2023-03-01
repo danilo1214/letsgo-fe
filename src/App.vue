@@ -1,6 +1,6 @@
 <template>
   <v-app class="app">
-    <notifications group="main" />
+    <notifications class='mt-16 px-10' group="main" />
     <nav-bar @toggle="onToggle" />
 
     <side-bar v-model="showSideBar" />
@@ -38,7 +38,7 @@ export default {
     return {
       loaded: false,
       socket: null,
-      showSideBar: true,
+      showSideBar: false,
       publicRoutes: [
         'home',
         'sign-in',
@@ -234,7 +234,7 @@ main {
 }
 
 .vue-notification-group {
-  margin-top: 50px;
+  width: 100% !important;
 }
 
 .v-progress-circular > svg {

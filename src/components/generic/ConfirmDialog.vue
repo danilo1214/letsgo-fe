@@ -32,7 +32,6 @@
           color="secondary"
         />
         <Button
-          small
           :color="color"
           rounded
           @click="$emit('ok')"

@@ -7,7 +7,7 @@
   >
     <v-list-item class="px-2" v-if="signedIn">
       <Avatar :user="user" />
-      <v-list-item-title>{{ name }}</v-list-item-title>
+      <v-list-item-title class="pl-2">{{ name }}</v-list-item-title>
     </v-list-item>
 
     <v-divider></v-divider>

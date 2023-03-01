@@ -45,14 +45,18 @@ export default {
   computed: {
     ...mapState({ user: (state) => state.auth.user }),
     filterBlocked() {
-      if(!this.user){
+      if (!this.user) {
         return this.plans;
       }
 
-      return this.plans.filter(plan => {
+      return this.plans.filter((plan) => {
         const adminId = plan.admin._id || plan.admin;
-        return !(this.user.blocked && this.user.blocked.length && this.user.blocked.includes(adminId))
-      })
+        return !(
+          this.user.blocked &&
+          this.user.blocked.length &&
+          this.user.blocked.includes(adminId)
+        );
+      });
     },
     priceRange() {
       let { costFrom, costTo } = this.$route.query;

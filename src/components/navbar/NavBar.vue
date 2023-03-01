@@ -15,7 +15,7 @@
     <combo-box
       transition="slide-x-transition"
       class="mt-5 search-text"
-      label="Search by keywords..."
+      label="Search"
       :items="keywords"
       v-model="form.search"
       @keyup.enter.native="onSearch"
@@ -147,6 +147,7 @@ export default {
     },
     onOkFilter() {
       this.menu = false;
+      this.onSearch();
     },
     onHome() {
       this.$router.push('/');
