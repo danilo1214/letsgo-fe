@@ -10,7 +10,7 @@
     <v-text-field
       class="mt-10"
       v-model="user.first_name"
-      :rules="required('First name')"
+      :rules="rules.firstNameRules"
       placeholder="First Name"
       rounded
       filled
@@ -19,7 +19,7 @@
 
     <v-text-field
       v-model="user.last_name"
-      :rules="required('Last name')"
+      :rules="rules.lastNameRules"
       placeholder="Last Name"
       rounded
       filled
@@ -94,7 +94,7 @@
 
     <password-input
       v-model="user.password"
-      :rules="required('Password')"
+      :rules="rules.passwordRules"
       label="Password"
       type="password"
       rounded
@@ -157,6 +157,18 @@ export default {
           (v) => !!v || 'E-mail is required',
           (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
+        passwordRules: [
+          (v) => !!v || 'Password is required',
+          (v) => v.length >= 8 || 'Password must be at least 8 characters long',
+        ],
+        firstNameRules: [
+          (v) => !!v || 'First name is required',
+          (v) => /^[a-zA-Z]+$/.test(v) || 'First name can only contain letters',
+        ],
+        lastNameRules: [
+          (v) => !!v || 'Last name is required',
+          (v) => /^[a-zA-Z]+$/.test(v) || 'Last name can only contain letters',
+        ]
       },
       countries: country.names().sort(),
     };
