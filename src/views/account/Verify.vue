@@ -38,7 +38,7 @@
                 accept="image/*"
                 prepend-icon="mdi-camera"
               ></v-file-input>
-              <span v-else>Selfie upload only allowed on app</span>
+              <span v-else>Selfie upload only allowed on mobile app, with camera app enabled.</span>
             </v-col>
           </v-row>
         </v-timeline-item>

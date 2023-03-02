@@ -1,5 +1,5 @@
 <template>
-  <v-tooltip bottom :color="color" v-bind="$attrs">
+  <v-tooltip :color="color" v-bind="$attrs">
     <template v-slot:activator="{ on, attrs }">
       <slot v-bind:activator="{ on, attrs }"></slot>
     </template>

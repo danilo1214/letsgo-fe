@@ -73,9 +73,13 @@
       </v-col>
     </v-row>
     <v-subheader class="title text-center">
-      {{ name }}, <span class="v-size--small pl-3">{{ age }}</span>
+      {{ name }}, <span class="v-size--small pl-2">{{ age }}</span>
     </v-subheader>
-    <div>
+    <Tooltip right attach :color='chipColor' text='Points are earned through making friends and attending plans'>
+      <v-chip slot-scope="{ activator }"
+              v-on="activator.on"
+              v-bind="activator.attrs" dark :color='chipColor' class='mb-5 ml-5'>{{ user.points }} points</v-chip>
+    </Tooltip>
       <v-row class="pt-2 pl-6">
         <Button
           v-if="showThumbOptions"
@@ -115,7 +119,6 @@
           <v-icon sm>mdi-thumb-up</v-icon>
         </Button>
       </v-row>
-    </div>
     <v-list class="mt-5">
       <template v-for="item in userDataList">
         <v-list-item class="mt-0" v-if="item.show" :key="item.label">
@@ -162,10 +165,11 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 import Dialog from '../generic/Dialog';
 import ReportUserForm from './ReportUserForm';
 import ConfirmDialog from '../generic/ConfirmDialog';
+import Tooltip from '../generic/Tooltip';
 
 export default {
   name: 'UserCard',
-  components: { ConfirmDialog, ReportUserForm, Dialog, Button, Avatar },
+  components: { Tooltip, ConfirmDialog, ReportUserForm, Dialog, Button, Avatar },
   props: {
     user: {
       type: Object,
@@ -190,6 +194,31 @@ export default {
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
     ...mapGetters(['friendRequests']),
+    chipColor() {
+      const { points } = this.user;
+
+      if(!points || points < 50) {
+        return 'info lighten-2'
+      }
+
+      if(points < 100) {
+        return 'primary lighten-3'
+      }
+
+      if(points < 200) {
+        return 'primary lighten-2'
+      }
+
+      if(points < 300) {
+        return 'primary lighten-1'
+      }
+
+      if(points < 400) {
+        return 'primary'
+      }
+
+      return 'primary darken-1';
+    },
     avatar() {
       if (this.user._id) {
         return this.user;

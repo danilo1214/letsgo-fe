@@ -40,6 +40,7 @@
 
     <v-avatar :size="size">
       <Tooltip
+        bottom
         fixed
         :attach="`#user-${user._id}`"
         :text="verifiedText"
