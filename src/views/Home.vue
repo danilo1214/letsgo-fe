@@ -44,16 +44,12 @@ export default {
     return {
       icons: [
         {
-          link: 'https://facebook.com',
+          link: 'https://www.facebook.com/profile.php?id=100090449814691',
           icon: 'mdi-facebook',
         },
         {
-          link: 'https://twitter.com',
+          link: 'https://twitter.com/social_letsgo',
           icon: 'mdi-twitter',
-        },
-        {
-          link: 'https://linkedin.com',
-          icon: 'mdi-linkedin',
         },
         {
           link: 'https://instagram.com/letsgo.apps',
