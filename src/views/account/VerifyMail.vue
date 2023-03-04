@@ -17,7 +17,7 @@
       filled
       @keydown.enter.prevent="onSendVerifyMail"
       v-model="email"
-      placeholder="Didn't recieve a mail?"
+      placeholder="Didn't receive a mail?"
       type="email"
       required
     ></v-text-field>
