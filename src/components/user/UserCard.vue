@@ -73,12 +73,12 @@
       </v-col>
     </v-row>
     <v-subheader class="title text-center">
-      {{ name }}, <span class="v-size--small pl-2">{{ age }}</span>
+    <v-icon :color='gender.color'>{{gender.icon}}</v-icon>  {{ name }} | <span class="body-2 pl-2">{{ age }} years old</span>
     </v-subheader>
     <Tooltip right attach :color='chipColor' text='Points are earned through making friends and attending plans'>
       <v-chip slot-scope="{ activator }"
               v-on="activator.on"
-              v-bind="activator.attrs" dark :color='chipColor' class='mb-5 ml-5'>{{ user.points }} points</v-chip>
+              v-bind="activator.attrs" dark :color='chipColor' class='mb-5 ml-5'>{{ user.points }} ⭐</v-chip>
     </Tooltip>
       <v-row class="pt-2 pl-6">
         <Button
@@ -194,6 +194,9 @@ export default {
   computed: {
     ...mapState({ currentUser: (state) => state.auth.user }),
     ...mapGetters(['friendRequests']),
+    gender() {
+      return this.user.sex === 'Male'? {icon: "mdi-gender-male", color: "primary darken-2"} : {icon: "mdi-gender-female", color: "error lighten-2"};
+    },
     chipColor() {
       const { points } = this.user;
 
@@ -255,7 +258,7 @@ export default {
           label: 'Birthday',
           icon: 'mdi-cake-variant',
           value: this.date,
-          show: true,
+          show: this.isMe,
         },
       ];
     },

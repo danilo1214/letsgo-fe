@@ -108,7 +108,7 @@
 
     <v-alert type="warning" color="warning">
       By creating an account you agree to the
-      <a href="https://letsgo-social.com/assets/terms-and-conditions.html"
+      <a href="https://letsgo-api.com/files/terms-and-conditions.html"
         >terms and conditions of LetsGo</a
       >
     </v-alert>
