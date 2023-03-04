@@ -228,7 +228,7 @@ export default {
 
 .search-text {
   transition: 0.05s ease-in-out;
-  min-width: 140px;
+  min-width: 100px;
 }
 @media screen and (max-width: 450px) {
   .search-text.v-input--is-focused {
