@@ -12,7 +12,7 @@
           </div>
           <v-alert dark color="primary lighten-2" rounded class="mt-1">
             {{ message.text }}
-            <div class="font-weight-light mt-1">{{ formatDate(message) }}</div>
+            <div class="font-weight-light mt-1 body-2">{{ formatDate(message) }}</div>
           </v-alert>
         </v-banner>
         <v-banner v-else class="message-banner ml-auto" :key="id">

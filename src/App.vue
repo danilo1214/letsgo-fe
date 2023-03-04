@@ -237,6 +237,10 @@ main {
   width: 100% !important;
 }
 
+.notification-title, .notification-content {
+  text-align: center !important;
+}
+
 .v-progress-circular > svg {
   width: 100px !important;
   height: 100px !important;

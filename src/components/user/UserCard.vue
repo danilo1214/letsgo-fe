@@ -73,7 +73,7 @@
       </v-col>
     </v-row>
     <v-subheader class="title text-center">
-    <v-icon :color='gender.color'>{{gender.icon}}</v-icon>  {{ name }} | <span class="body-2 pl-2">{{ age }} years old</span>
+    <v-icon class='mr-1' small :color='gender.color'>{{gender.icon}}</v-icon>  <span class='body-1 font-weight-bold mr-1'>{{ name }}</span> | <span class="body-2 pl-2">{{ age }}</span>
     </v-subheader>
     <Tooltip right attach :color='chipColor' text='Points are earned through making friends and attending plans'>
       <v-chip slot-scope="{ activator }"
