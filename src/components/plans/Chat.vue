@@ -10,6 +10,7 @@
           <div class="ml-auto">
             <Avatar :user="getUser(message.user)" :size="70" />
           </div>
+          <div class="ml-1 body-2 font-weight-light">{{getUser(message.user)?.first_name}}</div>
           <v-alert dark color="primary lighten-2" rounded class="mt-1">
             {{ message.text }}
             <div class="font-weight-light mt-1 body-2">{{ formatDate(message) }}</div>

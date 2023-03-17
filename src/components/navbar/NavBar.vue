@@ -1,79 +1,87 @@
 <template>
   <v-app-bar app>
-    <v-app-bar-nav-icon @click="$emit('toggle')">
-      <v-badge dot color="error" v-if="showNotification">
-        <v-icon>mdi-menu</v-icon>
-      </v-badge>
+    <template v-if="!planId">
+      <v-app-bar-nav-icon @click="$emit('toggle')">
+        <v-badge dot color="error" v-if="showNotification">
+          <v-icon>mdi-menu</v-icon>
+        </v-badge>
 
-      <v-icon v-else>mdi-menu</v-icon>
-    </v-app-bar-nav-icon>
+        <v-icon v-else>mdi-menu</v-icon>
+      </v-app-bar-nav-icon>
 
-    <v-avatar rounded size="60" class="logo ma-2" @click="onHome">
-      <img src="../../../public/assets/logo.png" alt="logo" />
-    </v-avatar>
+      <v-avatar rounded size="60" class="logo ma-2" @click="onHome">
+        <img src="../../../public/assets/logo.png" alt="logo" />
+      </v-avatar>
 
-    <combo-box
-      transition="slide-x-transition"
-      class="mt-5 search-text"
-      label="Search"
-      :items="keywords"
-      v-model="form.search"
-      @keyup.enter.native="onSearch"
-    />
+      <combo-box
+        transition="slide-x-transition"
+        class="mt-5 search-text"
+        label="Search"
+        :items="keywords"
+        v-model="form.search"
+        @keyup.enter.native="onSearch"
+      />
 
-    <v-spacer />
+      <v-spacer />
 
-    <v-menu v-model="menu" :close-on-content-click="false" left bottom>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn class="ml-3" small icon v-bind="attrs" v-on="on">
-          <v-icon>mdi-filter-variant</v-icon>
-        </v-btn>
-      </template>
+      <v-menu v-model="menu" :close-on-content-click="false" left bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn class="ml-3" small icon v-bind="attrs" v-on="on">
+            <v-icon>mdi-filter-variant</v-icon>
+          </v-btn>
+        </template>
 
-      <v-card class="pa-3 filter-menu">
-        <v-list>
-          <v-list-item-title> Filters </v-list-item-title>
-        </v-list>
+        <v-card class="pa-3 filter-menu">
+          <v-list>
+            <v-list-item-title> Filters </v-list-item-title>
+          </v-list>
 
-        <v-divider></v-divider>
+          <v-divider></v-divider>
 
-        <v-list>
-          <Slider
-            v-model="form.priceRange"
-            label="Cost"
-            class="mr-5"
-            min="0"
-            max="100"
-            prepend-icon="mdi-cash-multiple"
-            :formatter="formatPrice"
-          />
+          <v-list>
+            <Slider
+              v-model="form.priceRange"
+              label="Cost"
+              class="mr-5"
+              min="0"
+              max="100"
+              prepend-icon="mdi-cash-multiple"
+              :formatter="formatPrice"
+            />
 
-          <date-picker
-            range
-            :format-date="formatDates"
-            v-model="form.dates"
-            placeholder="Select dates..."
-          >
-          </date-picker>
-        </v-list>
+            <date-picker
+              range
+              :format-date="formatDates"
+              v-model="form.dates"
+              placeholder="Select dates..."
+            >
+            </date-picker>
+          </v-list>
 
-        <v-card-actions>
-          <Button color="info" text label="Reset" @click="onResetFilter" />
-          <Button text label="Ok" @click="onOkFilter" />
-        </v-card-actions>
-      </v-card>
-    </v-menu>
+          <v-card-actions>
+            <Button color="info" text label="Reset" @click="onResetFilter" />
+            <Button text label="Ok" @click="onOkFilter" />
+          </v-card-actions>
+        </v-card>
+      </v-menu>
 
-    <v-btn
-      :disabled="!isChanged"
-      class="ml-3"
-      @click="onSearch"
-      fab
-      x-small
-      color="primary darken-1"
-    >
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
+      <v-btn
+        :disabled="!isChanged"
+        class="ml-3"
+        @click="onSearch"
+        fab
+        x-small
+        color="primary darken-1"
+      >
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+    </template>
+
+    <template v-else>
+      <v-col cols="1"><Button fab text color="text" @click="goBack"><v-icon>mdi-arrow-left</v-icon> </Button></v-col>
+
+      <v-col cols="10"><h2 class="text-center">{{plan.caption}}</h2></v-col>
+    </template>
 
     <!--
     <Button
@@ -113,12 +121,19 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'plans',
       'signedIn',
       'friendRequests',
       'newMessages',
       'newRequests',
       'invites',
     ]),
+    plan() {
+      return this.plans && this.planId? this.plans.find((p) => p._id === this.planId) || {} : {};
+    },
+    planId() {
+      return this.$route.name === 'plan-details'? this.$route.params.id : "";
+    },
     ...mapState({ user: (state) => state.auth.user }),
     showNotification() {
       if (!this.user) {
@@ -144,6 +159,9 @@ export default {
         priceRange: [0, 100],
       };
       this.isChanged = true;
+    },
+    goBack() {
+      this.$router.go(-1);
     },
     onOkFilter() {
       this.menu = false;
